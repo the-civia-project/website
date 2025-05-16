@@ -1,0 +1,27 @@
+---
+const pathname = Astro.url.pathname;
+
+function isCurrent(path: string): boolean {
+    return pathname !== "/" && pathname.includes(path);
+}
+
+const links: Array<{ path: string; name: string }> = [
+    // { path: "/manifesto", name: "Manifesto" },
+    // {
+    //     path: "/roadmap",
+    //     name: "Roadmap",
+    // },
+];
+---
+
+{
+    links.map((link) => (
+        <a
+            href={link.path}
+            rel="prefetch"
+            class={`uppercase py-4 md:px-12 md:py-4 underline underline-offset-8 decoration-transparent ease-in-out duration-500 opacity-50 hover:opacity-100 hover:bg-white hover:text-black ${isCurrent(link.path) ? "decoration-white opacity-100" : ""}`}
+        >
+            {link.name}
+        </a>
+    ))
+}
