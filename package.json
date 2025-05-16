@@ -1,0 +1,23 @@
+{
+  "name": "civia-presentation",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/solid-js": "^5.0.10",
+    "@fontsource-variable/montserrat": "^5.2.5",
+    "@fontsource/gabriela": "^5.2.5",
+    "@tailwindcss/vite": "^4.1.5",
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
+    "astro": "^5.7.10",
+    "prettier": "^3.5.3",
+    "solid-js": "^1.9.6",
+    "tailwindcss": "^4.1.5"
+  }
+}

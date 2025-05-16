@@ -1,0 +1,21 @@
+---
+import Navigation from "../components/Navigation.astro";
+import BaseLayout from "./BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout>
+  <Fragment slot="header">
+    <slot name="header" />
+  </Fragment>
+
+  <Navigation />
+  <div class="grow" transition:name="content">
+    <slot />
+  </div>
+  <div class="flex justify-center">
+    <div class="w-160">
+      <Footer />
+    </div>
+  </div>
+</BaseLayout>

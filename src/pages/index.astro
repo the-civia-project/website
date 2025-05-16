@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Menu from "../components/Menu.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout>
+  <Fragment slot="header">
+    <title>Civia &mdash; Real People. Real Talk.</title>
+
+    <meta name="description" content="A breath of fresh air in the space of Social Media." />
+  </Fragment>
+
+  <div class="pointer-events-auto w-full h-full overflow-auto flex md:justify-center md:items-center pt-12">
+    <main class="md:w-180 w-full text-center">
+      <div transition:name="title">
+        <h1 class="font-display text-4xl md:text-9xl">Civia</h1>
+        <h2 class="opacity-50 italic">Real People. Real Talk.</h2>
+      </div>
+
+      <p class="text-left py-16 px-8 md:px-0 leading-12 tracking-wider">
+        A next-generation social platform built for <u>free-speech</u>, <u>truth</u>, <u>transparency</u>,
+        and <u>trust</u>. Every user is verified through <strong>secure KYC protocols</strong>, ensuring that
+        <mark class="blue">real people</mark> &mdash;
+        <mark class="amber">not bots</mark>
+        ,
+        <mark class="orange">trolls</mark>
+        , or
+        <mark class="red">anonymous bad actors</mark> &mdash; drive
+        the conversation.
+        <br /><br />
+        Designed to counter
+        <mark class="rose">misinformation</mark>
+        and
+        <mark class="pink">propaganda</mark>
+        ,
+        Civia prioritizes <strong>evidence-based discourse</strong>, <strong>algorithmic transparency</strong>,
+        and <strong>civic responsibility</strong>. Whether you're <u>engaging in public debate</u>,
+        <u>sharing knowledge</u>, or <u>building communities</u>, Civia <strong>empowers</strong> thoughtful
+        expression in a
+        <mark class="lime">safe</mark>
+        and
+        <mark class="green">accountable</mark>
+        environment.
+      </p>
+
+      <div transition:name="navigation"
+           class="pointer-events-auto justify-center flex flex-col md:flex-row md:px-16 mb-8 md:mb-16 flex-wrap">
+        <Menu />
+      </div>
+
+      <Footer />
+    </main>
+  </div>
+</BaseLayout>

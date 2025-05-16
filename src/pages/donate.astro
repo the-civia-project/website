@@ -1,0 +1,18 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const stripe_payment_link = import.meta.env.STRIPE_PAYMENT_LINK;
+---
+<Layout>
+  <Fragment slot="header">
+    <title>Civia &mdash; Donate</title>
+  </Fragment>
+
+  <div class="w-full h-full flex justify-center items-center">
+    <main class="w-180">
+      <h1 class="text-4xl">Donate</h1>
+
+      <a href={stripe_payment_link} target="_blank" class="pointer-events-auto">Donate now</a>
+    </main>
+  </div>
+</Layout>

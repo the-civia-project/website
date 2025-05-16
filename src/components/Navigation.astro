@@ -1,0 +1,59 @@
+---
+import MenuIcon from "./MenuIcon.astro";
+
+import Menu from "./Menu.astro";
+import Messages from "./Messages.tsx";
+---
+<civia-navigation class="ease-in-out duration-300">
+  <div transition:name="navigation"
+       class="h-full px-4 flex flex-col md:flex-row md:gap-16 md:items-center md:justify-center">
+    <a transition:name="title" href="/"
+       class="pointer-events-auto md:w-[150px] md:text-right py-4 md:p-2 ease-in-out duration-500 md:opacity-50 hover:opacity-100">
+      <h1 class="font-display text-xl -md:text-xl">Civia</h1>
+      <h2 class="text-xs opacity-50 italic">Real People. Real Talk.</h2>
+    </a>
+
+    <div
+      class="flex flex-col h-full ease-in-out duration-300 opacity-0 bg-black z-40 w-full pb-4 md:p-4 md:opacity-100 md:pointer-events-auto md:bg-transparent md:flex-row md:w-auto md:gap-16 md:items-center md:justify-center">
+      <div class="border-1 border-white/25 md:h-full"></div>
+
+      <Menu />
+
+      <div class="border-1 border-white/25 md:h-full"></div>
+
+      <div class="md:w-[150px] h-full opacity-50 py-4 md:py-0">
+        <Messages client:only />
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute right-0 top-0 flex justify-end md:hidden z-50">
+    <MenuIcon />
+  </div>
+</civia-navigation>
+
+<script>
+  class Navigation extends HTMLElement {
+    connectedCallback() {
+      const menuIcon = this.querySelector("civia-menu-icon");
+      const menu = this.querySelector("div:nth-child(1) > div");
+
+      if (!menuIcon) {
+        throw new Error("MenuIcon is missing");
+      }
+
+      if (!menu) {
+        throw new Error("Menu HTMLDivElement is missing");
+      }
+
+      menuIcon.addEventListener("click", () => {
+        this.classList.toggle("bg-black");
+
+        menu.classList.toggle("opacity-100");
+        menu.classList.toggle("pointer-events-auto");
+      });
+    }
+  }
+
+  customElements.define("civia-navigation", Navigation);
+</script>

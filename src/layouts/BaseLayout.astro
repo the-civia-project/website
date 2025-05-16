@@ -1,0 +1,40 @@
+---
+import "../styles/global.css";
+
+import "@fontsource/gabriela";
+import "@fontsource-variable/montserrat";
+
+import Posthog from "../3rd-party/posthog.astro";
+import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
+
+import { ClientRouter } from "astro:transitions";
+
+import { BackgroundHeroImage } from "../components/BackgroundHeroImage";
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+
+  <Posthog />
+  <Analytics />
+  <SpeedInsights />
+
+  <slot name="header"></slot>
+
+  <ClientRouter />
+</head>
+<body class="w-screen h-screen text-white">
+<div class="absolute z-0 pointer-events-none w-screen h-screen bg-black">
+  <BackgroundHeroImage client:visible />
+</div>
+<div class="relative z-1 pointer-events-none w-screen h-screen flex flex-col pb-12 overflow-hidden">
+  <slot />
+</div>
+</body>
+</html>
