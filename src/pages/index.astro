@@ -1,6 +1,7 @@
 ---
 import DefaultImage from "../assets/Edwin_Andrade.unsplash.webp";
 import Footer from "../components/Footer.astro";
+import Logo from "../components/Logo.astro";
 import Menu from "../components/Menu.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -43,10 +44,11 @@ const description =
     >
         <main class="md:w-180 w-full text-center">
             <div transition:name="title">
-                <h1 class="font-display inline-flex flex-col">
-                    <span class="text-left pl-2 md:pl-8 text-xs">The</span>
-                    <span class="text-5xl/9 md:text-9xl/24">Civia</span>
-                    <span class="text-right md:pr-1 text-xs">Project</span>
+                <h1
+                    class="font-display text-5xl inline-flex flex items-center gap-2"
+                >
+                    <Logo />
+                    <span>The Civia Project</span>
                 </h1>
                 <h2 class="opacity-50 italic">Real People. Real Talk.</h2>
             </div>

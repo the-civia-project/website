@@ -1,5 +1,6 @@
 ---
 import MenuIcon from "./MenuIcon.astro";
+import Logo from "../components/Logo.astro";
 
 import Messages from "./Messages.tsx";
 ---
@@ -12,10 +13,17 @@ import Messages from "./Messages.tsx";
         <a
             transition:name="title"
             href="/"
-            class="pointer-events-auto md:w-[150px] md:text-right py-4 md:p-2 ease-in-out duration-500 md:opacity-50 hover:opacity-100"
+            class="pointer-events-auto py-4 md:p-2 ease-in-out duration-500 md:opacity-50 hover:opacity-100"
         >
-            <h1 class="font-display text-md">The Civia Project</h1>
-            <h2 class="text-xs opacity-50 italic">Real People. Real Talk.</h2>
+            <h1 class="font-display text-md flex items-center gap-1">
+                <Logo size="small" />
+                <span class="md:text-right">The Civia Project</span>
+            </h1>
+            <h2
+                class="text-xs opacity-50 italic md:text-right md:visible invisible"
+            >
+                Real People. Real Talk.
+            </h2>
         </a>
 
         <div
@@ -33,9 +41,9 @@ import Messages from "./Messages.tsx";
         </div>
     </div>
 
-    <div class="absolute right-0 top-0 flex justify-end md:hidden z-50">
+    <!-- <div class="absolute right-0 top-0 flex justify-end md:hidden z-50">
         <MenuIcon />
-    </div>
+    </div> -->
 </civia-navigation>
 
 <script>
