@@ -1,0 +1,57 @@
+---
+config:
+    flowchart:
+        defaultRenderer: elk
+---
+graph TD
+    CLOUDFLARE_WAF@{ shape: cloud }
+    TURSO@{ shape: cylinder }
+    GRAFANA@{ shape: cylinder }
+    LAVINMQ@{ shape: cylinder }
+    WORKER_GENERAL["GENERAL"]
+    WORKER_EMAIL["EMAIL"]
+    EMAIL["BREVO"]
+
+    CLIENT -->|HTTPS| CLOUDFLARE_WAF
+
+    CLOUDFLARE_WAF -->|HTTPS mTLS| NGINX
+
+    NGINX --> API
+
+    API --> TURSO
+    API -->|AMQP 0-9-1| LAVINMQ
+
+    WORKERS <-->|AMQP 0-9-1| LAVINMQ
+    WORKERS --> TURSO
+
+    WORKER_EMAIL -->|Bulk| EMAIL
+
+    REVERSE_PROXY_SERVER -->|Alloy| GRAFANA
+    SERVER -->|Alloy| GRAFANA
+    API --> |Floki| GRAFANA
+    WORKERS --> |Floki| GRAFANA
+    TURSO --> |Prometheus| GRAFANA
+
+    %% Currently using CloudAMQP Free LAVINMQ Tier
+    %% LAVINMQ --> |Prometheus| GRAFANA
+
+    subgraph UP_CLOUD
+      REVERSE_PROXY_SERVER
+      SERVER
+    end
+
+    subgraph REVERSE_PROXY_SERVER
+      NGINX
+    end
+
+    subgraph SERVER
+        subgraph NODE_JS_WORKER_THREADS
+            API
+            WORKERS
+        end
+    end
+
+    subgraph WORKERS
+        WORKER_GENERAL
+        WORKER_EMAIL
+    end

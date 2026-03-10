@@ -1,0 +1,19 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Inter Variable', 'serif';
+  --font-sans: 'Inter Variable', sans-serif;
+
+  --breakpoint-xs: 25rem;
+
+  --animate-wiggle: wiggle 1s ease-in-out infinite;
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-5deg);
+    }
+    50% {
+      transform: rotate(5deg);
+    }
+  }
+}

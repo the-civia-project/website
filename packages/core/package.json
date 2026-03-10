@@ -1,0 +1,23 @@
+{
+  "name": "@the-civia-project/core",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@the-civia-project/prettier-config": "link:../prettier-config",
+    "@types/node": "^20.19.33",
+    "prettier": "^3.8.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

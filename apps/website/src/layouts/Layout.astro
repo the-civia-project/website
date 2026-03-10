@@ -1,0 +1,30 @@
+---
+import Footer from '../components/Footer.astro';
+import Logo from '../components/Logo.astro';
+import BaseLayout from './BaseLayout.astro';
+---
+
+<BaseLayout>
+  <Fragment slot="header">
+    <slot name="header" />
+  </Fragment>
+
+  <div class="flex justify-center items-center" transition:name="content">
+    <main class="md:w-125 flex flex-col gap-8">
+      <a href="/" class="flex items-center gap-4">
+        <Logo />
+        <div>
+          <h1 class="text-xl md:text-3xl font-bold text-center">
+            The Civia Project
+          </h1>
+          <h2 class="text-xs opacity-50 italic">Real People. Real Talk.</h2>
+        </div>
+      </a>
+      <hr class="opacity-25" />
+
+      <slot />
+
+      <Footer />
+    </main>
+  </div>
+</BaseLayout>

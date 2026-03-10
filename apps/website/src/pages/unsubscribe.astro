@@ -1,0 +1,39 @@
+---
+import HandWaving from '../assets/icons/hand-waving.svg';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <Fragment slot="header">
+    <title>The Civia Project &mdash; 404</title>
+  </Fragment>
+  <div class="py-25 md:py-42 flex justify-center items-center">
+    <div class="text-center flex flex-col gap-16">
+      <h1 class="text-xl">Good bye</h1>
+      <div class="flex items-center gap-1">
+        <HandWaving class="w-5 animate-wiggle" /><span
+          >You have successfully unsubscribed from our newsletter!</span
+        >
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { API_URL } from 'astro:env/client';
+
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const params = Object.fromEntries(urlSearchParams.entries());
+
+  if (params.who) {
+    fetch(`${API_URL}/unsubscribe`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: params.who,
+      }),
+    }).catch(() => {});
+  }
+</script>

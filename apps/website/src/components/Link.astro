@@ -1,0 +1,28 @@
+---
+import { twMerge } from 'tailwind-merge';
+
+interface Props {
+  path: string;
+  isCurrent?: boolean;
+  class?: string;
+}
+
+const { path, isCurrent: is_current = false } = Astro.props;
+---
+
+<a
+  href={path}
+  rel="prefetch"
+  class={twMerge(
+    'whitespace-pre',
+    'text-center inline-flex items-center justify-center',
+    'p-4',
+    'uppercase underline underline-offset-8 decoration-transparent',
+    'ease-in-out duration-500 opacity-50 hover:opacity-100',
+    'text-white fill-white hover:bg-white hover:text-black hover:fill-black',
+    is_current ? 'decoration-white' : '',
+    Astro.props.class,
+  )}
+>
+  <slot />
+</a>

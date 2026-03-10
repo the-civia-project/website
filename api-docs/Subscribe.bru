@@ -1,0 +1,22 @@
+meta {
+  name: Subscribe
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{URL}}/subscribe
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "me@aifrim.com"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,84 @@
+---
+import Image from '../assets/og/about.webp';
+import AlexandruIfrim from '../assets/team/alexandru-ifrim.webp';
+import GabrielPene from '../assets/team/gabriel-pene.webp';
+import TudorPalade from '../assets/team/tudor-palade.webp';
+import TeamMember from '../components/TeamMember.astro';
+import Layout from '../layouts/Layout.astro';
+
+const image_url = new URL(Image.src, Astro.site);
+
+const description =
+  'About the The Civia Project, our reasons for creating it and the team behind it.';
+---
+
+<Layout>
+  <Fragment slot="header">
+    <title>About &mdash; The Civia Project</title>
+
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image_url} />
+
+    <!-- X Card -->
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image_url} />
+  </Fragment>
+  <div>
+    <h1 class="text-5xl">About</h1>
+
+    <hr class="opacity-25 my-10" />
+
+    <h2 class="text-2xl leading-12">
+      What is <span class="underline font-bold underline-offset-8"
+        >The Civia Project</span
+      >?
+    </h2>
+
+    <p class="mt-2">
+      At its essence it is attempt to address one of the failings of capitalism
+      and one ouf our failings as humans in a Post-WWII Europe in order to
+      protect our valued democracies and safeguard our future.
+    </p>
+
+    <p class="mt-10">
+      We believe, that within social capitalism at least, social media should
+      not be influenced by capital needs but by the needs of its community.
+    </p>
+
+    <p class="mt-10">
+      The main responsibility of the platform should be its users benefits, not
+      profit margins, corporate or government interests.
+    </p>
+
+    <p class="mt-10">
+      We are working on setting up a non-profit non-governmental organization
+      with a set of rules that will work as a framework meant to limit and
+      empower us. To keep us on the straight and narrow.
+    </p>
+
+    <hr class="opacity-25 my-10" />
+
+    <h2 class="text-2xl leading-12">Meet the Team</h2>
+
+    <div class="flex flex-wrap justify-between">
+      <TeamMember
+        src={AlexandruIfrim}
+        alt="Alexandru Ifrim"
+        linkedin="https://www.linkedin.com/in/alexandruifrim/"
+      />
+      <TeamMember
+        src={GabrielPene}
+        alt="Gabriel Pene"
+        linkedin="https://www.linkedin.com/in/gabriel-pene/"
+      />
+      <TeamMember
+        src={TudorPalade}
+        alt="Tudor Palade"
+        linkedin="https://www.linkedin.com/in/tudor-palade/"
+      />
+    </div>
+  </div>
+</Layout>

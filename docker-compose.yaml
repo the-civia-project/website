@@ -1,0 +1,14 @@
+services:
+  lavinmq:
+    image: cloudamqp/lavinmq:latest
+    environment:
+      LAVINMQ_DEFAULT_VHOST: newsletter
+    volumes:
+      - lavinmq:/var/lib/lavinmq/data
+    ports:
+      - 15672:15672 # HTTP
+      - 5672:5672 # AMQP
+    restart: unless-stopped
+
+volumes:
+  lavinmq:

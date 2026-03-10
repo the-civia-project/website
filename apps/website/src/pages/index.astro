@@ -1,0 +1,70 @@
+---
+import Image from '../assets/og/index.webp';
+import Footer from '../components/Footer.astro';
+import Logo from '../components/Logo.astro';
+import Strong from '../components/Strong.astro';
+import U from '../components/U.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const image_url = new URL(Image.src, Astro.site);
+
+const description =
+  'Make the world more resilient towards and better equipped against fake news, propaganda, disinformation, misinformation and malinformation.';
+---
+
+<BaseLayout>
+  <Fragment slot="header">
+    <title>The Civia Project &mdash; Real People. Real Talk.</title>
+
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image_url} />
+
+    <!-- X Card -->
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image_url} />
+  </Fragment>
+
+  <div class="flex grow justify-center items-center">
+    <main class="md:w-125 flex flex-col gap-8">
+      <div class="flex items-center justify-center">
+        <div class="flex items-center gap-4">
+          <Logo />
+          <div>
+            <h1 class="text-xl md:text-3xl font-bold text-center">
+              The Civia Project
+            </h1>
+            <h2 class="text-xs opacity-50 italic text-right">
+              Real People. Real Talk.
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <hr class="opacity-25" />
+
+      <p class="text-center italic mt-10">
+        Make the world <Strong>more resilient</Strong> towards and <Strong
+          >better equipped</Strong
+        > against <U>fake news</U>, <U>propaganda</U>, <U>disinformation</U>, <U
+          >misinformation</U
+        > and <U>malinformation</U>.
+      </p>
+
+      <p class="text-xs text-center my-10 opacity-60">
+        First, we will start by building the first <U>public</U> and <U
+          >transparent</U
+        >
+        <Strong>civic social media</Strong> built on <U
+          >strong privacy primitives</U
+        > with the <Strong>users benefit</Strong> in mind, not <i
+          >capital gains</i
+        >.
+      </p>
+
+      <Footer />
+    </main>
+  </div>
+</BaseLayout>

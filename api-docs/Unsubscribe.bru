@@ -1,0 +1,22 @@
+meta {
+  name: Unsubscribe
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{URL}}/unsubscribe
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "6029ae50-b345-4e43-8704-ff1ed7462899"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

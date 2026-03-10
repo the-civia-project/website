@@ -1,0 +1,34 @@
+---
+import HandIcon from '../assets/icons/hand.svg';
+import Image from '../assets/og/404.webp';
+import Layout from '../layouts/Layout.astro';
+
+const image_url = new URL(Image.src, Astro.site);
+
+const description = 'This is not the page you are looking for!';
+---
+
+<Layout>
+  <Fragment slot="header">
+    <title>The Civia Project &mdash; 404</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image_url} />
+
+    <!-- X Card -->
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image_url} />
+  </Fragment>
+  <div class="py-25 md:py-42 flex justify-center items-center">
+    <div class="text-center flex flex-col gap-16">
+      <h1 class="text-xl"><span class="font-black">404</span> NOT FOUND</h1>
+      <div class="flex items-center gap-1">
+        <HandIcon class="w-5 animate-pulse" /><span
+          >This is not the page you are looking for!</span
+        >
+      </div>
+    </div>
+  </div>
+</Layout>

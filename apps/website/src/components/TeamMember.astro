@@ -1,0 +1,27 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import LinkedIn from '../assets/social/linkedin-white.png';
+import TeamPicture from './TeamPicture.astro';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  linkedin: string;
+}
+
+const { src, alt, linkedin } = Astro.props;
+---
+
+<div class="flex flex-col gap-4 items-center">
+  <TeamPicture src={src} alt={alt} />
+  <div class="flex justify-center items-center gap-1">
+    <span>{alt}</span>
+    <a href={linkedin} target="_blank">
+      <Image width={16} height={16} src={LinkedIn} alt={`${alt} on LinkedIn`} />
+    </a>
+  </div>
+  <div class="text-xs flex flex-col gap-1 items-center opacity-50">
+    <slot />
+  </div>
+</div>

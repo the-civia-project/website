@@ -1,0 +1,43 @@
+---
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+
+import { ClientRouter } from 'astro:transitions';
+
+const canonical_url = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="canonical" href={canonical_url} />
+    <meta
+      name="keywords"
+      content="civia, project, social, media, platform, privacy, ngo, non-profit, organization"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="The Civia Project" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical_url} />
+
+    <!-- X Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="The Civia Project" />
+    <meta name="twitter:site" content="@TheCiviaProject" />
+
+    <slot name="header" />
+
+    <ClientRouter />
+  </head>
+  <body class="p-8 text-white bg-black min-h-screen flex flex-col gap-8">
+    <slot />
+  </body>
+</html>
