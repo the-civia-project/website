@@ -1,6 +1,6 @@
-**CIVIA FOUNDATION**
+# Bylaws | CIVIA FOUNDATION
 
-**BYLAWS**
+> **DRAFT**: This document is a work in progress.
 
 *As adopted by the Foundation Board*
 
