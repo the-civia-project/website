@@ -1,7 +1,11 @@
+includeWorkspaceRoot: true
+
 packages:
   - apps/*
   - packages/*
-includeWorkspaceRoot: true
+allowBuilds:
+  esbuild: true
+  sharp: true
 
 onlyBuiltDependencies:
   - sharp
