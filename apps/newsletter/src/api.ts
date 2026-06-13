@@ -71,6 +71,7 @@ app.use((ctx, next) => {
       ctx.var.logger.warn(
         {
           method: ctx.req.method,
+          endpoint: ctx.req.url,
           headers: ctx.req.header(),
           connection_info: getConnInfo(ctx),
           raw: await ctx.req.text(),
