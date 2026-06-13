@@ -47,3 +47,6 @@ plan.json
 
 # turso
 local.db*
+
+#.pnpm
+.pnpm-store/
