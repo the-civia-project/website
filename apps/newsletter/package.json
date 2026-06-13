@@ -6,7 +6,8 @@
     "dev": "tsx watch --clear-screen=false src/index.ts",
     "format": "prettier --write .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "start": "tsx src/index.ts"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.9",
