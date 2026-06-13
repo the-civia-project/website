@@ -7,7 +7,7 @@
   },
   "devDependencies": {
     "@the-civia-project/prettier-config": "link:packages/prettier-config",
-    "@types/node": "^20.19.33",
-    "prettier": "^3.8.1"
+    "@types/node": "^20.19.43",
+    "prettier": "^3.8.4"
   }
 }

@@ -11,18 +11,18 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.1",
-    "@astrojs/solid-js": "^6.0.0",
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/solid-js": "^6.0.1",
     "@fontsource-variable/inter": "^5.2.8",
-    "@tailwindcss/vite": "^4.1.17",
-    "@the-civia-project/prettier-config": "link:../prettier-config",
+    "@tailwindcss/vite": "^4.3.0",
+    "@the-civia-project/prettier-config": "link:../../packages/prettier-config",
     "@types/web": "^0.0.342",
-    "astro": "^6.0.5",
-    "dotenv": "^17.3.1",
-    "solid-js": "^1.9.6",
-    "tailwind-merge": "^3.4.0",
-    "tailwindcss": "^4.1.17",
-    "zod": "^4.3.6"
+    "astro": "^6.4.6",
+    "dotenv": "^17.4.2",
+    "solid-js": "^1.9.13",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "sharp": "^0.34.5"
