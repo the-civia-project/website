@@ -3,6 +3,7 @@ import Image from '../assets/og/about.webp';
 import AlexandruIfrim from '../assets/team/alexandru-ifrim.webp';
 import GabrielPene from '../assets/team/gabriel-pene.webp';
 import TudorPalade from '../assets/team/tudor-palade.webp';
+import ȘtefanAlexandruMocanu from '../assets/team/ștefan-alexandru-mocanu.webp';
 import TeamMember from '../components/TeamMember.astro';
 import Layout from '../layouts/Layout.astro';
 
@@ -63,7 +64,7 @@ const description =
 
     <h2 class="text-2xl leading-12">Meet the Team</h2>
 
-    <div class="flex flex-wrap justify-between">
+    <div class="flex flex-wrap justify-around">
       <TeamMember
         src={AlexandruIfrim}
         alt="Alexandru Ifrim"
@@ -78,6 +79,11 @@ const description =
         src={TudorPalade}
         alt="Tudor Palade"
         linkedin="https://www.linkedin.com/in/tudor-palade/"
+      />
+      <TeamMember
+        src={ȘtefanAlexandruMocanu}
+        alt="Ștefan Alexandru Mocanu"
+        linkedin="https://www.linkedin.com/in/stefan-alexandru-mocanu/"
       />
     </div>
   </div>
