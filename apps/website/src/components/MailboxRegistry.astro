@@ -12,7 +12,7 @@ import LoadingIcon from '../assets/icons/circle-notch.svg';
       class={twMerge(
         'input-wrapper',
         'border-zinc-700 bg-zinc-900 hover:border-zinc-400 focus:border-zinc-400',
-        'grow transition-all border-2 rounded',
+        'grow transition-all border-2 rounded-md',
         'flex grow items-center px-3',
       )}
     >
@@ -30,7 +30,7 @@ import LoadingIcon from '../assets/icons/circle-notch.svg';
         class="border-none outline-none grow py-2"
       />
     </div>
-    <Button class="button-wrapper pointer-events-none">
+    <Button class="button pointer-events-none">
       <div class="flex items-center">
         <LoadingIcon
           class="loading fill-current w-0 transition-all duration-75 animate-spin"
@@ -41,9 +41,7 @@ import LoadingIcon from '../assets/icons/circle-notch.svg';
         <WarningIcon
           class="error fill-current opacity-50 w-0 transition-all duration-75"
         />
-        <span class="text overflow-hidden transition-all duration-75"
-          >Subscribe</span
-        >
+        <span class="text overflow-hidden">Subscribe</span>
       </div>
     </Button>
   </div>

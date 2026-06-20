@@ -1,6 +1,7 @@
 ---
 import Image from '../assets/og/index.webp';
 import Footer from '../components/Footer.astro';
+import Link from '../components/Link.astro';
 import Logo from '../components/Logo.astro';
 import Strong from '../components/Strong.astro';
 import U from '../components/U.astro';
@@ -61,6 +62,13 @@ const description =
           >&ldquo;capital gains&rdquo;</i
         >.
       </p>
+
+      <hr class="opacity-25" />
+
+      <div class="grid grid-cols-2 gap-4">
+        <Link path="/manifesto">Manifesto</Link>
+        <Link path="https://demo.theciviaproject.org">Check our demo</Link>
+      </div>
 
       <Footer />
     </main>

@@ -18,8 +18,9 @@ const { path, isCurrent: is_current = false } = Astro.props;
     'text-center inline-flex items-center justify-center',
     'p-4',
     'uppercase underline underline-offset-8 decoration-transparent',
-    'ease-in-out duration-500 opacity-50 hover:opacity-100',
-    'text-white fill-white hover:bg-white hover:text-black hover:fill-black',
+    'ease-in-out duration-500',
+    'border border-white/50 rounded-md',
+    'text-black bg-white shadow-2xl hover:shadow-white/50',
     is_current ? 'decoration-white' : '',
     Astro.props.class,
   )}
