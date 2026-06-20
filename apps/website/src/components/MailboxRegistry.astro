@@ -6,44 +6,56 @@ import OkIcon from '../assets/icons/checks.svg';
 import LoadingIcon from '../assets/icons/circle-notch.svg';
 ---
 
-<civia-mailbox-registry
-  class="flex flex-wrap md:flex-nowrap gap-4 justify-between"
->
-  <div
-    class={twMerge(
-      'border-zinc-700 bg-zinc-900 hover:border-zinc-400 focus:border-zinc-400',
-      'grow transition-all border-2 rounded',
-      'flex grow items-center px-3',
-    )}
-  >
-    <WarningIcon
-      class="warning fill-current opacity-50 w-0 transition-all duration-75"
-    />
-    <OkIcon class="ok fill-current opacity-50 w-0 transition-all duration-75" />
-    <input
-      name="email"
-      type="email"
-      autocomplete="email"
-      placeholder="your@email.address"
-      class="border-none outline-none grow py-2"
-    />
-  </div>
-  <Button class="pointer-events-none">
-    <div class="flex items-center">
-      <LoadingIcon
-        class="loading fill-current w-0 transition-all duration-75 animate-spin"
+<civia-mailbox-registry>
+  <div class="wrapper flex flex-wrap md:flex-nowrap gap-4 justify-between">
+    <div
+      class={twMerge(
+        'input-wrapper',
+        'border-zinc-700 bg-zinc-900 hover:border-zinc-400 focus:border-zinc-400',
+        'grow transition-all border-2 rounded',
+        'flex grow items-center px-3',
+      )}
+    >
+      <WarningIcon
+        class="warning fill-current opacity-50 w-0 transition-all duration-75"
       />
       <OkIcon
-        class="subscribed fill-current opacity-50 w-0 transition-all duration-75"
+        class="ok fill-current opacity-50 w-0 transition-all duration-75"
       />
-      <WarningIcon
-        class="error fill-current opacity-50 w-0 transition-all duration-75"
+      <input
+        name="email"
+        type="email"
+        autocomplete="email"
+        placeholder="your@email.address"
+        class="border-none outline-none grow py-2"
       />
-      <span class="text overflow-hidden transition-all duration-75"
-        >Subscribe</span
-      >
     </div>
-  </Button>
+    <Button class="button-wrapper pointer-events-none">
+      <div class="flex items-center">
+        <LoadingIcon
+          class="loading fill-current w-0 transition-all duration-75 animate-spin"
+        />
+        <OkIcon
+          class="subscribed fill-current opacity-50 w-0 transition-all duration-75"
+        />
+        <WarningIcon
+          class="error fill-current opacity-50 w-0 transition-all duration-75"
+        />
+        <span class="text overflow-hidden transition-all duration-75"
+          >Subscribe</span
+        >
+      </div>
+    </Button>
+  </div>
+  <div
+    class="error-message h-0 overflow-hidden p-0 opacity-25 flex gap-4 items-center justify-center"
+  >
+    <WarningIcon class="fill-current" />
+    <div>
+      There was an error while trying to subscribe you.<br />Please try again
+      later.
+    </div>
+  </div>
 </civia-mailbox-registry>
 
 <script>
@@ -52,6 +64,8 @@ import LoadingIcon from '../assets/icons/circle-notch.svg';
 
   class MailboxRegistry extends HTMLElement {
     #wrapper!: HTMLDivElement;
+    #error_message!: HTMLDivElement;
+    #input_wrapper!: HTMLDivElement;
     #input!: HTMLInputElement;
     #ok_icon!: SVGElement;
     #warning_icon!: SVGElement;
@@ -62,7 +76,9 @@ import LoadingIcon from '../assets/icons/circle-notch.svg';
     #subscribed_error_icon!: SVGElement;
 
     connectedCallback() {
-      const wrapper = this.querySelector('div');
+      const wrapper = this.querySelector('div.wrapper');
+      const error_message = this.querySelector('div.error-message');
+      const input_wrapper = this.querySelector('div.input-wrapper');
       const input = this.querySelector('input');
       const warning_icon = this.querySelector('svg.warning');
       const ok_icon = this.querySelector('svg.ok');
@@ -72,28 +88,20 @@ import LoadingIcon from '../assets/icons/circle-notch.svg';
       const subscribed_ok_icon = this.querySelector('svg.subscribed');
       const subscribed_error_icon = this.querySelector('svg.error');
 
-      if (
-        !wrapper ||
-        !input ||
-        !warning_icon ||
-        !ok_icon ||
-        !button ||
-        !loading_icon ||
-        !text ||
-        !subscribed_ok_icon ||
-        !subscribed_error_icon
-      ) {
-        throw new Error(
-          'Wrapper/Input/Button/WarningIcon/OkIcon/LoadingIcon/SubscribedOkIcon\SubscribedErrorIcon element is missing',
-        );
+      if (!(wrapper instanceof HTMLDivElement)) {
+        throw new Error('Wrapper is not a HTMLDivElement');
       }
 
-      if (!(wrapper instanceof HTMLDivElement)) {
-        throw new Error('Input is not a HTMLInputElement');
+      if (!(error_message instanceof HTMLDivElement)) {
+        throw new Error('Error message wrapper is not a HTMLDivElement');
       }
 
       if (!(input instanceof HTMLInputElement)) {
         throw new Error('Input is not a HTMLInputElement');
+      }
+
+      if (!(input_wrapper instanceof HTMLDivElement)) {
+        throw new Error('InputWrapper is not a HTMLDivElement');
       }
 
       if (!(warning_icon instanceof SVGElement)) {
@@ -124,6 +132,8 @@ import LoadingIcon from '../assets/icons/circle-notch.svg';
       }
 
       this.#wrapper = wrapper;
+      this.#error_message = error_message;
+      this.#input_wrapper = input_wrapper;
       this.#input = input;
       this.#warning_icon = warning_icon;
       this.#ok_icon = ok_icon;
@@ -147,7 +157,7 @@ import LoadingIcon from '../assets/icons/circle-notch.svg';
       const value = this.#input.value;
 
       if (value === '') {
-        this.#wrapper.classList.remove('gap-2');
+        this.#input_wrapper.classList.remove('gap-2');
 
         this.#warning_icon.classList.add('w-0');
         this.#warning_icon.classList.remove('w-6');
@@ -156,11 +166,14 @@ import LoadingIcon from '../assets/icons/circle-notch.svg';
         this.#ok_icon.classList.remove('w-6');
 
         this.#button.classList.add('pointer-events-none');
+
+        this.#wrapper.classList.remove('hidden');
+        this.#error_message.classList.add('h-0');
         return;
       }
 
       const result = z.email().safeParse(value);
-      this.#wrapper.classList.add('gap-2');
+      this.#input_wrapper.classList.add('gap-2');
 
       if (result.success) {
         this.#warning_icon.classList.add('w-0');
@@ -202,11 +215,13 @@ import LoadingIcon from '../assets/icons/circle-notch.svg';
           if (response.ok) {
             this.#subscribed_ok_icon.classList.add('w-6');
           } else {
-            this.#subscribed_error_icon.classList.add('w-6');
+            this.#wrapper.classList.add('hidden');
+            this.#error_message.classList.remove('h-0');
           }
         })
         .catch(() => {
-          this.#subscribed_error_icon.classList.add('w-6');
+          this.#wrapper.classList.add('hidden');
+          this.#error_message.classList.remove('h-0');
         })
         .finally(() => {
           this.#loading_icon.classList.remove('w-6');
