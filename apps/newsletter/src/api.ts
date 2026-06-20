@@ -32,6 +32,16 @@ const http_logger = main_logger().child({ ctx: 'HTTP' });
 const queueProcessNewsletter = await amqp.queueProcessNewsletter();
 const queueSendEmail = await amqp.queueSendEmail();
 
+async function buildRequestLog(ctx: Context<Env, string, {}>) {
+  return {
+    method: ctx.req.method,
+    endpoint: ctx.req.url,
+    headers: ctx.req.header(),
+    connection_info: getConnInfo(ctx),
+    raw: await ctx.req.text(),
+  };
+}
+
 const app = new Hono();
 app.use(requestId());
 
@@ -69,13 +79,7 @@ app.use((ctx, next) => {
       //
 
       ctx.var.logger.warn(
-        {
-          method: ctx.req.method,
-          endpoint: ctx.req.url,
-          headers: ctx.req.header(),
-          connection_info: getConnInfo(ctx),
-          raw: await ctx.req.text(),
-        },
+        await buildRequestLog(ctx),
         'Unknown endpoint accessed',
       );
     }
@@ -93,13 +97,7 @@ app.use('/work/*', async (ctx, next) => {
     return next();
   } else {
     ctx.var.logger.warn(
-      {
-        method: ctx.req.method,
-        endpoint: ctx.req.url,
-        headers: ctx.req.header(),
-        connection_info: getConnInfo(ctx),
-        raw: await ctx.req.text(),
-      },
+      await buildRequestLog(ctx),
       'Unauthorized access attempt to /work endpoints',
     );
     return ctx.body(null, 401);
@@ -121,11 +119,8 @@ const invalidMiddleware = async (
   if (!result.success) {
     ctx.var.logger.warn(
       {
-        method: ctx.req.method,
-        headers: ctx.req.header(),
-        connection_info: getConnInfo(ctx),
+        ...(await buildRequestLog(ctx)),
         result,
-        raw: await ctx.req.text(),
       },
       'Invalid email address format',
     );
@@ -150,7 +145,10 @@ app.post('/subscribe', validateEmailAddressSchema, async (ctx) => {
   try {
     if (await isEmailAddressSubscribed(json.email)) {
       ctx.var.logger.warn(
-        { email: json.email },
+        {
+          ...(await buildRequestLog(ctx)),
+          email: json.email,
+        },
         'Attempt to subscribe an already subscribed email address',
       );
 
@@ -176,6 +174,7 @@ app.post('/subscribe', validateEmailAddressSchema, async (ctx) => {
         { email: json.email },
         'Database did not return subscriber UUID',
       );
+
       return ctx.body(null, 500);
     }
 
@@ -228,7 +227,10 @@ app.delete('/unsubscribe', validUUIDSchema, async (ctx) => {
   try {
     if (!(await isEmailAddressSubscribedById(json.id))) {
       ctx.var.logger.warn(
-        { email_id: json.id },
+        {
+          ...(await buildRequestLog(ctx)),
+          email_id: json.id,
+        },
         `Attempt to unsubscribe an email address that is not subscribed`,
       );
 
