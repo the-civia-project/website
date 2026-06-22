@@ -1,29 +1,42 @@
 ---
-import { twMerge } from 'tailwind-merge';
+type Variant = 'default' | 'secondary';
 
 interface Props {
   path: string;
   isCurrent?: boolean;
+  variant?: Variant;
   class?: string;
 }
 
-const { path, isCurrent: is_current = false } = Astro.props;
+const {
+  path,
+  isCurrent: is_current = false,
+  variant = 'default',
+  class: className,
+} = Astro.props;
+
+const variants: Record<Variant, string> = {
+  default:
+    'border-white/50 text-black bg-white shadow-2xl hover:shadow-white/50',
+  secondary:
+    'border-zinc-600 bg-zinc-800 text-zinc-100 shadow-2xl hover:shadow-zinc-500/50',
+};
 ---
 
 <a
   href={path}
   rel="prefetch"
-  class={twMerge(
+  class:list={[
     'whitespace-pre',
     'text-center inline-flex items-center justify-center',
     'p-4',
     'uppercase underline underline-offset-8 decoration-transparent',
     'ease-in-out duration-500',
-    'border border-white/50 rounded-md',
-    'text-black bg-white shadow-2xl hover:shadow-white/50',
+    'border rounded-md',
+    variants[variant],
     is_current ? 'decoration-white' : '',
-    Astro.props.class,
-  )}
+    className,
+  ]}
 >
   <slot />
 </a>

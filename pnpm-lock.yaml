@@ -120,15 +120,15 @@ importers:
       astro:
         specifier: ^6.4.6
         version: 6.4.6(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.61.1)(tsx@4.22.4)
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.4.0
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
       solid-js:
         specifier: ^1.9.13
         version: 1.9.13
-      tailwind-merge:
-        specifier: ^3.6.0
-        version: 3.6.0
       tailwindcss:
         specifier: ^4.3.0
         version: 4.3.0
@@ -1828,6 +1828,9 @@ packages:
     resolution: {integrity: sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==}
     engines: {node: '>= 12'}
 
+  date-fns@4.4.0:
+    resolution: {integrity: sha512-+1UMbeh68lH1SegH83CGWwpb6OHHbpSgr3+s5Eww5M4CAgswBpoWS0AjTOfEJ33HiYKz1hdj/KTFprzXHmq/6w==}
+
   dateformat@4.6.3:
     resolution: {integrity: sha512-2P0p0pFGzHS5EMnhdxQi7aJN+iMheud0UhG4dlE1DLAlvL8JHjJJTX/CSm4JXwV0Ka5nGk3zC5mcb5bUQUxxMA==}
 
@@ -3313,9 +3316,6 @@ packages:
 
   tailwind-merge@3.4.0:
     resolution: {integrity: sha512-uSaO4gnW+b3Y2aWoWfFpX62vn2sR3skfhbjsEnaBI81WD1wBLlHZe5sWf0AqjksNdYTbGBEd0UasQMT3SNV15g==}
-
-  tailwind-merge@3.6.0:
-    resolution: {integrity: sha512-uxL7qAVQriqRQPAyK3pj66VqskWqoZ37PW94jwOTwNfq/z9oyu1V+eqrZqtR2+fCiXdYOZe/Modt8GtvqNzu+w==}
 
   tailwindcss@4.3.0:
     resolution: {integrity: sha512-y6nxMGB1nMW9R6k96e5gdIFzcfL/gTJRNaqGes1YvkLnPVXzWgbqFF2yLC0T8G774n24cx3Pe8XrKoniCOAH+Q==}
@@ -5147,6 +5147,8 @@ snapshots:
 
   data-uri-to-buffer@4.0.1: {}
 
+  date-fns@4.4.0: {}
+
   dateformat@4.6.3: {}
 
   debounce-fn@6.0.0:
@@ -6831,8 +6833,6 @@ snapshots:
   tagged-tag@1.0.0: {}
 
   tailwind-merge@3.4.0: {}
-
-  tailwind-merge@3.6.0: {}
 
   tailwindcss@4.3.0: {}
 

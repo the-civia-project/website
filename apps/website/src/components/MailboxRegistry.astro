@@ -1,6 +1,5 @@
 ---
 import Button from './Button.astro';
-import { twMerge } from 'tailwind-merge';
 import WarningIcon from '../assets/icons/warning.svg';
 import OkIcon from '../assets/icons/checks.svg';
 import LoadingIcon from '../assets/icons/circle-notch.svg';
@@ -9,12 +8,12 @@ import LoadingIcon from '../assets/icons/circle-notch.svg';
 <civia-mailbox-registry>
   <div class="wrapper flex flex-wrap md:flex-nowrap gap-4 justify-between">
     <div
-      class={twMerge(
+      class:list={[
         'input-wrapper',
         'border-zinc-700 bg-zinc-900 hover:border-zinc-400 focus:border-zinc-400',
         'grow transition-all border-2 rounded-md',
         'flex grow items-center px-3',
-      )}
+      ]}
     >
       <WarningIcon
         class="warning fill-current opacity-50 w-0 transition-all duration-75"

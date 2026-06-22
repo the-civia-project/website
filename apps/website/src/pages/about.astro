@@ -5,6 +5,7 @@ import GabrielPene from '../assets/team/gabriel-pene.webp';
 import TudorPalade from '../assets/team/tudor-palade.webp';
 import ȘtefanAlexandruMocanu from '../assets/team/ștefan-alexandru-mocanu.webp';
 import TeamMember from '../components/TeamMember.astro';
+import U from '../components/U.astro';
 import Layout from '../layouts/Layout.astro';
 
 const image_url = new URL(Image.src, Astro.site);
@@ -15,7 +16,7 @@ const description =
 
 <Layout>
   <Fragment slot="header">
-    <title>About &mdash; The Civia Project</title>
+    <title>Who We Are &mdash; The Civia Project</title>
 
     <meta name="description" content={description} />
 
@@ -27,64 +28,74 @@ const description =
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image_url} />
   </Fragment>
-  <div>
-    <h1 class="text-5xl">About</h1>
 
-    <hr class="opacity-25 my-10" />
+  <header>
+    <span class="block text-xs uppercase tracking-widest text-zinc-500"
+      >About</span
+    >
+    <h1 class="mt-2 text-4xl font-bold tracking-tight md:text-5xl">
+      Who We Are
+    </h1>
+  </header>
 
-    <h2 class="text-2xl leading-12">
-      What is <span class="underline font-bold underline-offset-8"
-        >The Civia Project</span
-      >?
+  <section
+    class="mt-10 border-t border-zinc-800 pt-10 [&_p]:mt-4 [&_p]:leading-relaxed [&_p]:text-zinc-300"
+  >
+    <h2 class="text-2xl font-bold leading-snug text-white">
+      What is <U>The Civia Project</U>?
     </h2>
 
-    <p class="mt-2">
+    <p>
       At its essence it is attempt to address one of the failings of capitalism
       and one ouf our failings as humans in a Post-WWII Europe in order to
       protect our valued democracies and safeguard our future.
     </p>
 
-    <p class="mt-10">
+    <p>
       We believe, that within social capitalism at least, social media should
       not be influenced by capital needs but by the needs of its community.
     </p>
 
-    <p class="mt-10">
-      The main responsibility of the platform should be its users benefits, not
+    <p>
+      The main responsibility of the platform should be its users' benefits, not
       profit margins, corporate or government interests.
     </p>
 
-    <p class="mt-10">
+    <p>
       We are working on setting up a non-profit non-governmental organization
       with a set of rules that will work as a framework meant to limit and
       empower us. To keep us on the straight and narrow.
     </p>
+  </section>
 
-    <hr class="opacity-25 my-10" />
+  <section class="mt-10 border-t border-zinc-800 pt-10">
+    <h2 class="text-2xl font-bold leading-snug text-white">Meet the Team</h2>
 
-    <h2 class="text-2xl leading-12">Meet the Team</h2>
-
-    <div class="flex flex-wrap justify-around">
+    <div class="mt-10 grid grid-cols-2 gap-8">
       <TeamMember
         src={AlexandruIfrim}
-        alt="Alexandru Ifrim"
+        name="Alexandru Ifrim"
         linkedin="https://www.linkedin.com/in/alexandruifrim/"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
       />
       <TeamMember
         src={GabrielPene}
-        alt="Gabriel Pene"
+        name="Gabriel Pene"
         linkedin="https://www.linkedin.com/in/gabriel-pene/"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
       />
       <TeamMember
         src={TudorPalade}
-        alt="Tudor Palade"
+        name="Tudor Palade"
         linkedin="https://www.linkedin.com/in/tudor-palade/"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
       />
       <TeamMember
         src={ȘtefanAlexandruMocanu}
-        alt="Ștefan Alexandru Mocanu"
+        name="Ștefan Alexandru Mocanu"
         linkedin="https://www.linkedin.com/in/stefan-alexandru-mocanu/"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
       />
     </div>
-  </div>
+  </section>
 </Layout>

@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { twMerge } from 'tailwind-merge';
+import Explore from './Explore.astro';
 import MailboxRegistry from './MailboxRegistry.astro';
 import SocialLinks from './SocialLinks.astro';
 
@@ -9,6 +9,8 @@ const end_year = new Date().getFullYear();
 ---
 
 <div class="flex flex-col gap-5 items-stretch">
+  <Explore />
+
   <div class="flex flex-col gap-8">
     <hr class="opacity-25" />
 
@@ -20,10 +22,7 @@ const end_year = new Date().getFullYear();
   <SocialLinks />
 
   <div
-    class={twMerge(
-      'text-xs',
-      'flex flex-row flex-wrap gap-2 justify-center items-center text-center opacity-50 text-shadow-lg',
-    )}
+    class="text-xs flex flex-row flex-wrap gap-2 justify-center items-center text-center opacity-50 text-shadow-lg"
   >
     <span
       >&copy; {

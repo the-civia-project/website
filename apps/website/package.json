@@ -18,9 +18,9 @@
     "@the-civia-project/prettier-config": "link:../../packages/prettier-config",
     "@types/web": "^0.0.342",
     "astro": "^6.4.6",
+    "date-fns": "^4.1.0",
     "dotenv": "^17.4.2",
     "solid-js": "^1.9.13",
-    "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.0",
     "zod": "^4.4.3"
   },

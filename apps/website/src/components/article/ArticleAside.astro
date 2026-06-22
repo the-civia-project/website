@@ -1,0 +1,17 @@
+---
+import Label from './Label.astro';
+
+interface Props {
+  label: string;
+  italic?: boolean;
+}
+
+const { label, italic = false } = Astro.props;
+---
+
+<aside class="mt-10 border-l-2 border-zinc-700 py-1 pl-6">
+  <Label>{label}</Label>
+  <div class:list={['mt-3 space-y-4 text-zinc-300', italic && 'italic']}>
+    <slot />
+  </div>
+</aside>

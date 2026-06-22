@@ -1,11 +1,8 @@
 ---
 import Image from '../assets/og/index.webp';
-import Footer from '../components/Footer.astro';
-import Link from '../components/Link.astro';
-import Logo from '../components/Logo.astro';
 import Strong from '../components/Strong.astro';
 import U from '../components/U.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../layouts/Layout.astro';
 
 const image_url = new URL(Image.src, Astro.site);
 
@@ -13,7 +10,7 @@ const description =
   'Make the world more resilient towards and better equipped against fake news, propaganda, disinformation, misinformation and malinformation.';
 ---
 
-<BaseLayout>
+<Layout centered>
   <Fragment slot="header">
     <title>The Civia Project &mdash; Real People. Real Talk.</title>
 
@@ -28,49 +25,27 @@ const description =
     <meta name="twitter:image" content={image_url} />
   </Fragment>
 
-  <div class="flex grow justify-center items-center">
-    <main class="md:w-125 flex flex-col gap-8">
-      <div class="flex items-center justify-center">
-        <div class="flex items-center gap-4">
-          <Logo />
-          <div>
-            <h1 class="text-xl md:text-3xl font-bold text-center">
-              The Civia Project
-            </h1>
-            <h2 class="text-xs opacity-50 italic text-right">
-              Real People. Real Talk.
-            </h2>
-          </div>
-        </div>
-      </div>
+  <aside
+    class="border-l-2 border-zinc-700 py-1 pl-6 [&_p]:mt-3 [&_p]:italic [&_p]:leading-relaxed [&_p]:text-zinc-300"
+  >
+    <span class="block text-xs uppercase tracking-widest text-zinc-500"
+      >Mission</span
+    >
+    <p>
+      Make the world <Strong>more resilient</Strong> towards and <Strong
+        >better equipped</Strong
+      > against <U>fake news</U>, <U>propaganda</U>, <U>disinformation</U>, <U
+        >misinformation</U
+      > and <U>malinformation</U>.
+    </p>
+  </aside>
 
-      <hr class="opacity-25" />
-
-      <p class="text-sm text-center italic mt-10">
-        Make the world <Strong>more resilient</Strong> towards and <Strong
-          >better equipped</Strong
-        > against <U>fake news</U>, <U>propaganda</U>, <U>disinformation</U>, <U
-          >misinformation</U
-        > and <U>malinformation</U>.
-      </p>
-
-      <p class="text-xl text-center my-10 opacity-60">
-        We have started building the first <U>public</U> and <U>transparent</U>
-        <Strong>civic social media</Strong> built on <U
-          >strong privacy primitives</U
-        > with the <Strong>users benefit</Strong> in mind, not <i
-          >&ldquo;capital gains&rdquo;</i
-        >.
-      </p>
-
-      <hr class="opacity-25" />
-
-      <div class="grid grid-cols-2 gap-4">
-        <Link path="/social-paper">Social Paper</Link>
-        <Link path="https://demo.theciviaproject.org">Check our demo</Link>
-      </div>
-
-      <Footer />
-    </main>
-  </div>
-</BaseLayout>
+  <p class="text-xl leading-relaxed text-zinc-100">
+    We have started building the first <U>public</U> and <U>transparent</U>
+    <Strong>civic social media platform</Strong> built on <U
+      >strong privacy primitives</U
+    > with the <Strong>users' benefit</Strong> in mind, not <em
+      >&ldquo;capital gains&rdquo;</em
+    >.
+  </p>
+</Layout>

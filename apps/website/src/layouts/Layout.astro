@@ -2,6 +2,12 @@
 import Footer from '../components/Footer.astro';
 import Logo from '../components/Logo.astro';
 import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  centered?: boolean;
+}
+
+const { centered = false } = Astro.props;
 ---
 
 <BaseLayout>
@@ -9,8 +15,14 @@ import BaseLayout from './BaseLayout.astro';
     <slot name="header" />
   </Fragment>
 
-  <div class="flex justify-center items-center" transition:name="content">
-    <main class="md:w-125 flex flex-col gap-8">
+  <div
+    class:list={[
+      'flex flex-1 justify-center',
+      centered ? 'items-center' : 'items-start',
+    ]}
+    transition:name="content"
+  >
+    <main class:list={['md:w-150 flex w-full flex-col', 'gap-8']}>
       <a href="/" class="flex items-center gap-4">
         <Logo />
         <div>
@@ -24,7 +36,9 @@ import BaseLayout from './BaseLayout.astro';
 
       <slot />
 
-      <Footer />
+      <div class="mt-10">
+        <Footer />
+      </div>
     </main>
   </div>
 </BaseLayout>

@@ -1,0 +1,65 @@
+---
+import Label from './article/Label.astro';
+import Link from './Link.astro';
+
+interface Props {
+  current?: string;
+  class?: string;
+}
+
+const { current = Astro.url.pathname, class: className } = Astro.props;
+
+const normalize = (path: string) => path.replace(/\/$/, '') || '/';
+const current_path = normalize(current);
+
+const links = [
+  { path: '/social-paper', label: 'Social Paper' },
+  { path: 'https://demo.theciviaproject.org', label: 'Check our demo' },
+  {
+    path: 'https://discord.gg/pNTmzvd7pe',
+    label: 'Discord community',
+    variant: 'secondary' as const,
+  },
+  {
+    path: 'https://matrix.to/#/#the-civia-project:matrix.org',
+    label: 'Matrix community',
+    variant: 'secondary' as const,
+  },
+];
+
+const visible_links = links.filter(
+  ({ path }) => normalize(path) !== current_path,
+);
+---
+
+{
+  visible_links.length > 0 && (
+    <nav
+      aria-label="Explore"
+      class:list={[
+        'rounded-sm border border-zinc-800 bg-zinc-950 p-6',
+        className,
+      ]}
+    >
+      <Label>Explore</Label>
+      <div
+        class:list={[
+          'mt-4 grid gap-4',
+          visible_links.length > 1 ? 'grid-cols-2' : 'grid-cols-1',
+        ]}
+      >
+        {visible_links.map(({ path, label, variant }, index) => (
+          <Link
+            path={path}
+            variant={variant ?? 'default'}
+            class={
+              visible_links.length === 3 && index === 0 ? 'col-span-2 w-full' : ''
+            }
+          >
+            {label}
+          </Link>
+        ))}
+      </div>
+    </nav>
+  )
+}

@@ -1,0 +1,60 @@
+---
+import Label from './Label.astro';
+
+type Props = {
+  title: string;
+  id: string;
+} & (
+  | { number: number; final?: never }
+  | { final: true; number?: never }
+);
+
+const { title, id, ...variant } = Astro.props as Props;
+const is_final = 'final' in variant;
+const number = is_final ? undefined : variant.number;
+const label = is_final ? 'Final Conclusion' : `Conclusion ${number}`;
+---
+
+<aside
+  id={id}
+  class:list={[
+    'mt-10 scroll-mt-8 rounded-sm border-l-2 p-6',
+    is_final
+      ? 'border border-zinc-600 border-l-white bg-zinc-950 ring-1 ring-white/10'
+      : 'border border-zinc-800 border-l-zinc-400 bg-zinc-950',
+  ]}
+>
+  <div class="flex items-start gap-5">
+    {
+      number !== undefined && (
+        <span
+          aria-hidden="true"
+          class="select-none text-4xl font-bold leading-none tabular-nums text-zinc-800"
+        >
+          {number}
+        </span>
+      )
+    }
+    <div class="min-w-0 flex-1">
+      <header>
+        <Label>{label}</Label>
+        <h3
+          class:list={[
+            'mt-1 font-semibold text-white',
+            is_final ? 'text-xl' : 'text-lg',
+          ]}
+        >
+          {title}
+        </h3>
+      </header>
+      <div
+        class:list={[
+          'mt-4 flex flex-col gap-4 [&_p]:leading-relaxed [&_p]:text-zinc-300 [&_strong]:font-semibold [&_strong]:text-white',
+          is_final && '[&_p:last-child]:text-white',
+        ]}
+      >
+        <slot />
+      </div>
+    </div>
+  </div>
+</aside>

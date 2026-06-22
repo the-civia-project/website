@@ -1,0 +1,24 @@
+---
+import { format } from 'date-fns';
+import Label from './Label.astro';
+
+interface Props {
+  label?: string;
+  title: string;
+  author: string;
+  date: Date | string;
+}
+
+const { label, title, author, date } = Astro.props;
+const published = format(new Date(date), 'dd/MM/yyyy');
+---
+
+<header>
+  {label && <Label>{label}</Label>}
+  <h1 class="mt-2 text-4xl font-bold tracking-tight md:text-5xl">{title}</h1>
+  <p class="mt-4 text-sm text-zinc-300">
+    <span class="text-zinc-500">By</span> {author}
+    <span class="text-zinc-600"> · </span>
+    {published}
+  </p>
+</header>
