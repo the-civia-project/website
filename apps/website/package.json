@@ -25,6 +25,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "qrcode": "^1.5.4",
     "sharp": "^0.34.5"
   }
 }

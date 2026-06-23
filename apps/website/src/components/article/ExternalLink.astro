@@ -1,0 +1,61 @@
+---
+import ArrowSquareOutIcon from '../../assets/icons/arrow-square-out.svg';
+
+interface Props {
+  href: string;
+  class?: string;
+}
+
+const { href, class: className } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={[
+    // Group for hover state management
+    'group',
+
+    // Base text styling
+    'text-white',
+
+    // Layout: inline and flex for icon/text alignment
+    'inline',
+    'inline-flex items-baseline gap-1',
+
+    // Custom class overrides
+    className,
+  ]}
+>
+  <span
+    class:list={[
+      // Text decoration
+      'underline',
+      'decoration-zinc-600',
+      'underline-offset-2',
+      // Hover states
+      'group-hover:decoration-white',
+    ]}
+  >
+    <slot />
+  </span>
+  <ArrowSquareOutIcon
+    class:list={[
+      // Layout
+      'inline-block',
+      'shrink-0',
+      'align-text-bottom',
+
+      // Sizing
+      'size-4',
+
+      // Color
+      'fill-current',
+      'opacity-50',
+      'group-hover:opacity-100',
+      'transition-opacity',
+    ]}
+    aria-hidden="true"
+  />
+</a>

@@ -1,6 +1,6 @@
 ---
 import Label from './article/Label.astro';
-import Link from './Link.astro';
+import Button from './Button.astro';
 import UsersIcon from '../assets/icons/users-thress.svg';
 import WrenchIcon from '../assets/icons/wrench.svg';
 import RocketIcon from '../assets/icons/rocket-launch.svg';
@@ -59,7 +59,7 @@ const visible_links = links.filter(
         ]}
       >
         {visible_links.map(({ path, label, Icon }, index) => (
-          <Link
+          <Button
             path={path}
             variant="secondary"
             class={
@@ -73,7 +73,7 @@ const visible_links = links.filter(
           >
             <Icon slot="icon" class="fill-current" />
             {label}
-          </Link>
+          </Button>
         ))}
       </div>
     </nav>
