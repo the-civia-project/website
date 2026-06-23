@@ -1,0 +1,36 @@
+---
+import Image from '../assets/og/social-paper.webp';
+import Article from '../components/article/Article.astro';
+import ArticleHeader from '../components/article/ArticleHeader.astro';
+import Layout from '../layouts/Layout.astro';
+
+const image_url = new URL(Image.src, Astro.site);
+
+const description =
+  'The Technical Paper is a technical overview of the Civia Project, a decentralized social media platform.';
+---
+
+<Layout>
+  <Fragment slot="header">
+    <title>Social Paper &mdash; The Civia Project</title>
+
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image_url} />
+
+    <!-- X Card -->
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image_url} />
+  </Fragment>
+
+  <Article>
+    <ArticleHeader
+      label="Technical Paper"
+      title="The Technical Paper"
+      author="Alexandru Ifrim, Ștefan Alexandru Mocanu"
+      date="2026-06-22"
+    />
+  </Article>
+</Layout>

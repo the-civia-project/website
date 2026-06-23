@@ -1,6 +1,11 @@
 ---
 import Label from './article/Label.astro';
 import Link from './Link.astro';
+import UsersIcon from '../assets/icons/users-thress.svg';
+import WrenchIcon from '../assets/icons/wrench.svg';
+import RocketIcon from '../assets/icons/rocket-launch.svg';
+import DiscordIcon from '../assets/social/discord.svg';
+import MatrixIcon from '../assets/social/matrix.svg';
 
 interface Props {
   current?: string;
@@ -13,17 +18,22 @@ const normalize = (path: string) => path.replace(/\/$/, '') || '/';
 const current_path = normalize(current);
 
 const links = [
-  { path: '/social-paper', label: 'Social Paper' },
-  { path: 'https://demo.theciviaproject.org', label: 'Check our demo' },
+  { path: '/social-paper', label: 'Social Paper', Icon: UsersIcon },
+  { path: '/technical-paper', label: 'Technical Paper', Icon: WrenchIcon },
+  {
+    path: 'https://demo.theciviaproject.org',
+    label: 'Check our demo',
+    Icon: RocketIcon,
+  },
   {
     path: 'https://discord.gg/pNTmzvd7pe',
     label: 'Discord community',
-    variant: 'secondary' as const,
+    Icon: DiscordIcon,
   },
   {
     path: 'https://matrix.to/#/#the-civia-project:matrix.org',
     label: 'Matrix community',
-    variant: 'secondary' as const,
+    Icon: MatrixIcon,
   },
 ];
 
@@ -48,14 +58,20 @@ const visible_links = links.filter(
           visible_links.length > 1 ? 'grid-cols-2' : 'grid-cols-1',
         ]}
       >
-        {visible_links.map(({ path, label, variant }, index) => (
+        {visible_links.map(({ path, label, Icon }, index) => (
           <Link
             path={path}
-            variant={variant ?? 'default'}
+            variant="secondary"
             class={
-              visible_links.length === 3 && index === 0 ? 'col-span-2 w-full' : ''
+              visible_links.length === 5 &&
+              path === 'https://demo.theciviaproject.org'
+                ? 'col-span-2 w-full'
+                : visible_links.length === 3 && index === 0
+                  ? 'col-span-2 w-full'
+                  : ''
             }
           >
+            <Icon slot="icon" class="fill-current" />
             {label}
           </Link>
         ))}
