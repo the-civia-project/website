@@ -1,0 +1,138 @@
+---
+import ArrowDefs from './ArrowDefs.astro';
+import DiagramArrow from './DiagramArrow.astro';
+import DiagramCaption from './DiagramCaption.astro';
+import DiagramNode from './DiagramNode.astro';
+import DiagramZone from './DiagramZone.astro';
+import {
+  ARROW_GAP,
+  FONT_SMALL,
+  NODE_H_SM,
+  P,
+  W,
+  ZONE_GAP,
+  ZONE_INSET,
+  nodeCenterY,
+  nodeRowY,
+  zoneFootnoteY,
+  zoneHeight,
+} from './diagram-tokens';
+
+const arrow = 'lanes-arrow';
+const zoneW = W - P * 2;
+const zoneH = zoneHeight(NODE_H_SM, true);
+
+const publicZoneY = P;
+const privateZoneY = publicZoneY + zoneH + ZONE_GAP;
+
+const publicRowY = nodeRowY(publicZoneY);
+const publicCy = nodeCenterY(publicZoneY, NODE_H_SM);
+const privateRowY = nodeRowY(privateZoneY);
+const privateCy = nodeCenterY(privateZoneY, NODE_H_SM);
+
+const feedSteps = [
+  { title: 'Intent' },
+  { title: 'Vector DB' },
+  { title: 'Post', subtitle: 'IDs', subFontSize: FONT_SMALL },
+  { title: 'Bloom /', subtitle: 'Cuckoo / Q', subFontSize: FONT_SMALL },
+  { title: 'Rank' },
+  { title: 'Feed' },
+];
+
+function layoutNodes(zoneX: number, count: number) {
+  const innerW = zoneW - ZONE_INSET * 2;
+  const nodeW = (innerW - ARROW_GAP * (count - 1)) / count;
+  const startX = zoneX + ZONE_INSET;
+  return { nodeW, startX };
+}
+
+const pub = layoutNodes(P, feedSteps.length);
+const priv = layoutNodes(P, feedSteps.length);
+
+const viewH = P + zoneH + ZONE_GAP + zoneH + P;
+---
+
+<svg
+  viewBox={`0 0 ${W} ${viewH}`}
+  width="100%"
+  height="auto"
+  role="img"
+  aria-label="Public and private feed pipelines: on-device intent queries separate vector stores"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <ArrowDefs id={arrow} />
+
+  <DiagramZone x={P} y={publicZoneY} width={zoneW} height={zoneH} label="Public lane" />
+  {
+    feedSteps.map((step, i) => {
+      const x = pub.startX + i * (pub.nodeW + ARROW_GAP);
+      return (
+        <>
+          {i > 0 && (
+            <DiagramArrow
+              x1={pub.startX + (i - 1) * (pub.nodeW + ARROW_GAP) + pub.nodeW}
+              y1={publicCy}
+              x2={x}
+              y2={publicCy}
+              markerId={arrow}
+            />
+          )}
+          <DiagramNode
+            x={x}
+            y={publicRowY}
+            width={pub.nodeW}
+            height={NODE_H_SM}
+            title={step.title}
+            subtitle={step.subtitle}
+            subFontSize={step.subFontSize}
+          />
+        </>
+      );
+    })
+  }
+  <DiagramCaption
+    x={P}
+    y={zoneFootnoteY(publicZoneY, zoneH)}
+    text="Public vector store · Filter before rank"
+  />
+
+  <DiagramZone
+    x={P}
+    y={privateZoneY}
+    width={zoneW}
+    height={zoneH}
+    label="Private lane"
+  />
+  {
+    feedSteps.map((step, i) => {
+      const x = priv.startX + i * (priv.nodeW + ARROW_GAP);
+      return (
+        <>
+          {i > 0 && (
+            <DiagramArrow
+              x1={priv.startX + (i - 1) * (priv.nodeW + ARROW_GAP) + priv.nodeW}
+              y1={privateCy}
+              x2={x}
+              y2={privateCy}
+              markerId={arrow}
+            />
+          )}
+          <DiagramNode
+            x={x}
+            y={privateRowY}
+            width={priv.nodeW}
+            height={NODE_H_SM}
+            title={step.title}
+            subtitle={step.subtitle}
+            subFontSize={step.subFontSize}
+          />
+        </>
+      );
+    })
+  }
+  <DiagramCaption
+    x={P}
+    y={zoneFootnoteY(privateZoneY, zoneH)}
+    text="Private vector store · Whisper delivery · Ciphertext only on server"
+  />
+</svg>

@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import './diagram.css';
 
 @theme {
   --font-display: 'Inter Variable', 'serif';

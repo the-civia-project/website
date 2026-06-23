@@ -5,9 +5,12 @@ import BaseLayout from './BaseLayout.astro';
 
 interface Props {
   centered?: boolean;
+  size?: 'medium' | 'large';
 }
 
-const { centered = false } = Astro.props;
+const { centered = false, size = 'medium' } = Astro.props;
+
+const size_class = size === 'medium' ? 'md:w-150' : 'md:w-175';
 ---
 
 <BaseLayout>
@@ -22,8 +25,8 @@ const { centered = false } = Astro.props;
     ]}
     transition:name="content"
   >
-    <main class:list={['md:w-150 flex w-full flex-col', 'gap-8']}>
-      <a href="/" class="flex items-center gap-4">
+    <main class:list={['flex w-full flex-col', 'gap-8', size_class]}>
+      <a href="/" class="print:hidden flex items-center gap-4">
         <Logo />
         <div>
           <h1 class="text-xl md:text-3xl font-bold text-center">
@@ -32,11 +35,12 @@ const { centered = false } = Astro.props;
           <h2 class="text-xs opacity-50 italic">Real People. Real Talk.</h2>
         </div>
       </a>
-      <hr class="opacity-25" />
+
+      <hr class="print:hidden opacity-25" />
 
       <slot />
 
-      <div class="mt-10">
+      <div class="print:hidden mt-10">
         <Footer />
       </div>
     </main>

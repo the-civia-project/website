@@ -1,0 +1,34 @@
+---
+import { FONT_ZONE, ZONE_INSET } from './diagram-tokens';
+
+interface Props {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  label: string;
+  labelAnchor?: 'start' | 'middle';
+}
+
+const { x, y, width, height, label, labelAnchor = 'start' } = Astro.props;
+const labelX = labelAnchor === 'middle' ? x + width / 2 : x + ZONE_INSET;
+const labelY = y + ZONE_INSET + 4;
+---
+
+<rect
+  class="diagram-zone"
+  x={x}
+  y={y}
+  width={width}
+  height={height}
+  rx="12"
+  ry="12"
+  stroke-width="1"
+  stroke-dasharray="6 4"></rect>
+<text
+  class="diagram-label"
+  x={labelX}
+  y={labelY}
+  text-anchor={labelAnchor === 'middle' ? 'middle' : 'start'}
+  font-size={FONT_ZONE}>{label}</text
+>

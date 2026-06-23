@@ -1,0 +1,171 @@
+---
+import ArrowDefs from './ArrowDefs.astro';
+import DiagramArrow from './DiagramArrow.astro';
+import DiagramCaption from './DiagramCaption.astro';
+import DiagramNode from './DiagramNode.astro';
+import DiagramZone from './DiagramZone.astro';
+import {
+  ARROW_GAP,
+  NODE_H,
+  NODE_H_SM,
+  P,
+  W,
+  ZONE_INSET,
+  nodeCenterY,
+  zoneFootnoteY,
+  zoneHeightDoubleRow,
+} from './diagram-tokens';
+
+const arrow = 'local-arrow';
+const gap = P;
+const leftW = 312;
+const rightW = W - P * 2 - gap - leftW;
+const zoneY = P;
+const zoneH = zoneHeightDoubleRow(NODE_H, 20, true);
+
+const leftX = P;
+const rightX = P + leftW + gap;
+
+const deviceInset = leftX + ZONE_INSET;
+const deviceRow1Y = zoneY + 28 + 8;
+const deviceRow2Y = deviceRow1Y + NODE_H + 20;
+const deviceMidY = deviceRow1Y + (NODE_H - NODE_H_SM) / 2;
+const deviceArrowY = zoneY + zoneH / 2;
+
+const serverInset = rightX + ZONE_INSET;
+const serverRow1Y = deviceRow1Y;
+const serverRow2Y = deviceRow2Y;
+
+const viewH = P + zoneH + P;
+---
+
+<svg
+  viewBox={`0 0 ${W} ${viewH}`}
+  width="100%"
+  height="auto"
+  role="img"
+  aria-label="Device-origin intent and filters versus server-side query, filter, and rank"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <ArrowDefs id={arrow} />
+
+  <DiagramZone x={leftX} y={zoneY} width={leftW} height={zoneH} label="User device" />
+  <DiagramNode
+    x={deviceInset}
+    y={deviceRow1Y}
+    width={130}
+    title="Compute intent"
+    subtitle="locally"
+  />
+  <DiagramNode
+    x={deviceInset}
+    y={deviceRow2Y}
+    width={130}
+    title="Maintain filters"
+    subtitle="Bloom / Cuckoo / Q"
+  />
+  <DiagramNode
+    x={deviceInset + 130 + 24}
+    y={deviceMidY}
+    width={120}
+    height={NODE_H_SM}
+    title="Settings &"
+    subtitle="history"
+  />
+
+  <DiagramArrow
+    x1={leftX + leftW}
+    y1={deviceArrowY}
+    x2={rightX}
+    y2={deviceArrowY}
+    markerId={arrow}
+  />
+  <text
+    class="diagram-label"
+    x={leftX + leftW + gap / 2}
+    y={deviceArrowY - 8}
+    text-anchor="middle"
+    font-size="9">per request</text
+  >
+
+  <DiagramZone
+    x={rightX}
+    y={zoneY}
+    width={rightW}
+    height={zoneH}
+    label="Platform server"
+  />
+
+  <DiagramNode
+    x={serverInset}
+    y={serverRow1Y}
+    width={120}
+    height={NODE_H_SM}
+    title="Vector DB query"
+  />
+  <DiagramArrow
+    x1={serverInset + 120}
+    y1={nodeCenterY(zoneY, NODE_H_SM)}
+    x2={serverInset + 120 + ARROW_GAP + 20}
+    y2={nodeCenterY(zoneY, NODE_H_SM)}
+    markerId={arrow}
+  />
+  <DiagramNode
+    x={serverInset + 120 + ARROW_GAP + 20}
+    y={serverRow1Y}
+    width={100}
+    height={NODE_H_SM}
+    title="Post IDs"
+  />
+
+  <DiagramArrow
+    x1={serverInset + 120 + ARROW_GAP + 20 + 50}
+    y1={serverRow1Y + NODE_H_SM}
+    x2={serverInset + 120 + ARROW_GAP + 20 + 50}
+    y2={serverRow2Y}
+    markerId={arrow}
+  />
+
+  <DiagramNode
+    x={serverInset + 120 + ARROW_GAP + 20}
+    y={serverRow2Y}
+    width={100}
+    height={NODE_H_SM}
+    title="Filter seen"
+  />
+  <DiagramArrow
+    x1={serverInset + 120 + ARROW_GAP + 20}
+    y1={serverRow2Y + NODE_H_SM / 2}
+    x2={serverInset + 120}
+    y2={serverRow2Y + NODE_H_SM / 2}
+    markerId={arrow}
+  />
+  <DiagramNode
+    x={serverInset}
+    y={serverRow2Y}
+    width={100}
+    height={NODE_H_SM}
+    title="Rank"
+  />
+
+  <DiagramArrow
+    x1={serverInset + 50}
+    y1={serverRow2Y + NODE_H_SM}
+    x2={serverInset + 50}
+    y2={serverRow2Y + NODE_H_SM + 20}
+    markerId={arrow}
+  />
+  <DiagramNode
+    x={serverInset}
+    y={serverRow2Y + NODE_H_SM + 20}
+    width={120}
+    height={NODE_H_SM}
+    title="Return feed"
+  />
+
+  <DiagramCaption
+    x={rightX}
+    y={zoneFootnoteY(zoneY, zoneH)}
+    text="Ephemeral processing · No persistent profiling"
+  />
+</svg>

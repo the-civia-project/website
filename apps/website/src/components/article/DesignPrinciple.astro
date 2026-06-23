@@ -1,0 +1,33 @@
+---
+import Label from './Label.astro';
+
+interface Props {
+  id: string;
+  title: string;
+  final?: boolean;
+}
+
+const { id, title, final = false } = Astro.props;
+const label = final ? 'Final Principle' : 'Design Principle';
+---
+
+<aside
+  id={id}
+  class:list={[
+    'mt-10 scroll-mt-8 border-l-2 py-1 pl-6',
+    final
+      ? 'border-white/80 ring-1 ring-white/10'
+      : 'border-zinc-500',
+  ]}
+>
+  <Label>{label}</Label>
+  <h3 class="mt-2 text-lg font-semibold text-white">{title}</h3>
+  <div
+    class:list={[
+      'mt-4 space-y-4 [&_p]:leading-relaxed [&_p]:text-zinc-300 [&_strong]:font-semibold [&_strong]:text-white',
+      final && '[&_p:last-child]:text-zinc-100',
+    ]}
+  >
+    <slot />
+  </div>
+</aside>

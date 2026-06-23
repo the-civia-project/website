@@ -14,13 +14,9 @@ const { id, part } = Astro.props;
   class="scroll-mt-8 mt-16 border-t border-zinc-800 pt-10 text-2xl font-bold leading-snug"
   id={id}
 >
-  {
-    part && (
-      <Label class="mb-2 block font-normal">{part}</Label>
-    )
-  }
+  {part && <Label class="mb-2 block font-normal">{part}</Label>}
   <a href={`#${id}`} class="group text-white no-underline hover:text-zinc-200">
-    <span class="mr-1 text-zinc-600 group-hover:text-zinc-400">&sect;</span><slot
-    />
+    <span class="mr-1 text-zinc-600 group-hover:text-zinc-400">&sect;</span
+    ><slot />
   </a>
 </h2>
