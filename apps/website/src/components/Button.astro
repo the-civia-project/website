@@ -1,24 +1,49 @@
 ---
+type Variant = 'default' | 'secondary' | 'ghost';
+
 interface Props {
+  path?: string;
+  variant?: Variant;
   class?: string;
 }
 
-const { class: class_list } = Astro.props;
+const {
+  path,
+  variant = 'default',
+  class: className,
+} = Astro.props;
+
 const has_icon = Astro.slots.has('icon');
+const is_internal = path ? !path.startsWith('http') : false;
+
+const variants: Record<Variant, string> = {
+  default:
+    'p-4 border-white/50 text-black bg-white shadow-2xl hover:shadow-white/50',
+  secondary:
+    'p-4 border-zinc-600 bg-zinc-800 text-zinc-100 shadow-2xl hover:border-white/50 hover:bg-white hover:text-black hover:shadow-white/50',
+  ghost:
+    'py-2 px-4 md:px-12 shadow-none border-white/50 bg-transparent text-white fill-white opacity-50 hover:opacity-100 focus:opacity-100 hover:bg-white focus:bg-white hover:text-black focus:text-black hover:fill-black focus:fill-black transition-colors duration-500',
+};
+
+const Tag = path ? 'a' : 'button';
+const tag_props = path
+  ? { href: path, ...(is_internal ? { rel: 'prefetch' } : {}) }
+  : { type: 'button' as const };
 ---
 
-<button
+<Tag
+  {...tag_props}
   class:list={[
-    class_list,
+    'group',
     'whitespace-pre',
     'text-center inline-flex items-center justify-center',
     has_icon && 'gap-2',
-    'py-2 px-4 md:px-12',
     'uppercase underline underline-offset-8 decoration-transparent',
-    'ease-in-out duration-500 opacity-50 hover:opacity-100 focus:opacity-100',
-    'border border-white/50 rounded-md',
-    'text-white fill-white hover:bg-white focus:bg-white hover:text-black focus:text-black hover:fill-black focus:fill-black',
-    'transition-colors duration-500 cursor-pointer',
+    'ease-in-out duration-500',
+    'border rounded-md',
+    'cursor-pointer',
+    variants[variant],
+    className,
   ]}
 >
   {
@@ -29,4 +54,4 @@ const has_icon = Astro.slots.has('icon');
     )
   }
   <slot />
-</button>
+</Tag>

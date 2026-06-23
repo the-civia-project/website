@@ -1,0 +1,193 @@
+@media print {
+  @page {
+    margin: 2cm;
+    size: A4;
+  }
+
+  body {
+    background: white !important;
+    color: #18181b !important;
+    padding: 0 !important;
+  }
+
+  main {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  article,
+  article p,
+  article li,
+  article em {
+    color: #3f3f46 !important;
+  }
+
+  article strong {
+    color: #09090b !important;
+  }
+
+  article h1,
+  article h2,
+  article h3,
+  article h2 a,
+  article h3 {
+    color: #09090b !important;
+  }
+
+  article a {
+    color: #09090b !important;
+    text-decoration: underline;
+  }
+
+  article aside {
+    border-color: #d4d4d8 !important;
+    background: #fafafa !important;
+  }
+
+  article nav[aria-label='Table of contents'] {
+    border-color: #d4d4d8 !important;
+    background: #fafafa !important;
+  }
+
+  article h2 {
+    break-before: page;
+    border-color: #d4d4d8 !important;
+  }
+
+  article h2:first-of-type {
+    break-before: auto;
+  }
+
+  article figure,
+  article aside {
+    break-inside: avoid;
+  }
+
+  article figure {
+    background: white !important;
+    border-color: #d4d4d8 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  article figure svg {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  article figcaption {
+    color: #71717a !important;
+  }
+
+  article span,
+  article .text-zinc-500,
+  article .text-zinc-600 {
+    color: #71717a !important;
+  }
+
+  /* Grow page — scoped printable templates */
+  @page grow-flyer {
+    margin: 0;
+    size: A4;
+  }
+
+  @page grow-poster {
+    margin: 0;
+    size: A3;
+  }
+
+  @page grow-stickers {
+    margin: 0;
+    size: A4;
+  }
+
+  body[data-grow-print] > div,
+  body[data-grow-print] main > *:not(.grow-printables) {
+    display: none !important;
+  }
+
+  body[data-grow-print] .grow-printables {
+    display: block !important;
+  }
+
+  body[data-grow-print] .grow-printables .grow-printable {
+    display: none !important;
+  }
+
+  body[data-grow-print='flyer'] .grow-print-flyer,
+  body[data-grow-print='flyer-awareness'] .grow-print-flyer-awareness,
+  body[data-grow-print='flyer-mission'] .grow-print-flyer-mission,
+  body[data-grow-print='flyer-event'] .grow-print-flyer-event,
+  body[data-grow-print='flyer-intro'] .grow-print-flyer-intro,
+  body[data-grow-print='poster'] .grow-print-poster,
+  body[data-grow-print='poster-awareness'] .grow-print-poster-awareness,
+  body[data-grow-print='poster-mission'] .grow-print-poster-mission,
+  body[data-grow-print='poster-event'] .grow-print-poster-event,
+  body[data-grow-print='poster-community'] .grow-print-poster-community,
+  body[data-grow-print='stickers'] .grow-print-stickers,
+  body[data-grow-print='stickers-tagline'] .grow-print-stickers-tagline,
+  body[data-grow-print='stickers-mission'] .grow-print-stickers-mission,
+  body[data-grow-print='stickers-brand'] .grow-print-stickers-brand,
+  body[data-grow-print='stickers-civic'] .grow-print-stickers-civic {
+    display: block !important;
+  }
+
+  .grow-printable {
+    background: white !important;
+    color: #09090b !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .grow-print-flyer {
+    page: grow-flyer;
+  }
+
+  .grow-print-poster {
+    page: grow-poster;
+  }
+
+  .grow-print-stickers {
+    page: grow-stickers;
+  }
+
+  body[data-grow-print='flyer'] .grow-print-flyer > div,
+  body[data-grow-print='flyer-awareness'] .grow-print-flyer-awareness > img,
+  body[data-grow-print='flyer-mission'] .grow-print-flyer-mission > img,
+  body[data-grow-print='flyer-event'] .grow-print-flyer-event > img,
+  body[data-grow-print='flyer-intro'] .grow-print-flyer-intro > img,
+  body[data-grow-print='poster'] .grow-print-poster > div,
+  body[data-grow-print='poster-awareness'] .grow-print-poster-awareness > img,
+  body[data-grow-print='poster-mission'] .grow-print-poster-mission > img,
+  body[data-grow-print='poster-event'] .grow-print-poster-event > img,
+  body[data-grow-print='poster-community'] .grow-print-poster-community > img,
+  body[data-grow-print='stickers'] .grow-print-stickers > div,
+  body[data-grow-print='stickers-tagline'] .grow-print-stickers-tagline > img,
+  body[data-grow-print='stickers-mission'] .grow-print-stickers-mission > img,
+  body[data-grow-print='stickers-brand'] .grow-print-stickers-brand > img,
+  body[data-grow-print='stickers-civic'] .grow-print-stickers-civic > img {
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+
+  body[data-grow-print='flyer-awareness'] .grow-print-flyer-awareness,
+  body[data-grow-print='flyer-mission'] .grow-print-flyer-mission,
+  body[data-grow-print='flyer-event'] .grow-print-flyer-event,
+  body[data-grow-print='flyer-intro'] .grow-print-flyer-intro {
+    page: grow-flyer;
+  }
+
+  body[data-grow-print='poster-awareness'] .grow-print-poster-awareness,
+  body[data-grow-print='poster-mission'] .grow-print-poster-mission,
+  body[data-grow-print='poster-event'] .grow-print-poster-event,
+  body[data-grow-print='poster-community'] .grow-print-poster-community {
+    page: grow-poster;
+  }
+
+  body[data-grow-print='stickers-tagline'] .grow-print-stickers-tagline,
+  body[data-grow-print='stickers-mission'] .grow-print-stickers-mission,
+  body[data-grow-print='stickers-brand'] .grow-print-stickers-brand,
+  body[data-grow-print='stickers-civic'] .grow-print-stickers-civic {
+    page: grow-stickers;
+  }
+}

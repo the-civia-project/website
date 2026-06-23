@@ -1,0 +1,227 @@
+---
+import ArrowDefs from './ArrowDefs.astro';
+import DiagramArrow from './DiagramArrow.astro';
+import DiagramNode from './DiagramNode.astro';
+import DiagramZone from './DiagramZone.astro';
+import {
+  ARROW_GAP,
+  FONT_SMALL,
+  NODE_H_SM,
+  NODE_RX_SM,
+  P,
+  W,
+  ZONE_GAP,
+  ZONE_HEADER,
+  ZONE_INSET,
+  nodeCenterY,
+  nodeRowY,
+} from './diagram-tokens';
+
+const arrow = 'system-arrow';
+
+const identityW = 320;
+const identityX = (W - identityW) / 2;
+const identityY = P;
+const identityH = ZONE_HEADER + 8 + NODE_H_SM + ZONE_INSET;
+const identityRowY = nodeRowY(identityY);
+const identityCy = nodeCenterY(identityY, NODE_H_SM);
+
+const laneW = (W - P * 2 - ZONE_GAP) / 2;
+const laneY = identityY + identityH + ZONE_GAP;
+const laneH = ZONE_HEADER + 8 + NODE_H_SM + 16 + NODE_H_SM + ZONE_INSET;
+const laneRowY = nodeRowY(laneY);
+const laneCy = nodeCenterY(laneY, NODE_H_SM);
+const laneSubY = laneRowY + NODE_H_SM + 16;
+
+const publicX = P;
+const privateX = P + laneW + ZONE_GAP;
+
+const metricsW = 320;
+const metricsX = (W - metricsW) / 2;
+const metricsY = laneY + laneH + ZONE_GAP;
+const metricsH = ZONE_HEADER + 8 + 20 + ZONE_INSET;
+
+const publicSteps = ['Intent', 'Vector DB', 'Filter', 'Rank'];
+const privateSteps = ['Intent', 'Vector DB', 'Filter', 'Rank'];
+
+function laneNodeWidth(count: number) {
+  const innerW = laneW - ZONE_INSET * 2;
+  return (innerW - ARROW_GAP * (count - 1)) / count;
+}
+
+const pubNodeW = laneNodeWidth(publicSteps.length);
+const privNodeW = laneNodeWidth(privateSteps.length);
+
+const viewH = metricsY + metricsH + P;
+---
+
+<svg
+  viewBox={`0 0 ${W} ${viewH}`}
+  width="100%"
+  height="auto"
+  role="img"
+  aria-label="Full platform architecture: identity, public and private lanes, metrics"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <ArrowDefs id={arrow} />
+
+  <DiagramZone
+    x={identityX}
+    y={identityY}
+    width={identityW}
+    height={identityH}
+    label="Identity layer"
+    labelAnchor="middle"
+  />
+  {
+    ['EUDI', 'ZKP', 'Pseudonym'].map((label, i) => {
+      const nodeW = 80;
+      const totalW = 3 * nodeW + 2 * ARROW_GAP;
+      const startX = identityX + (identityW - totalW) / 2;
+      const x = startX + i * (nodeW + ARROW_GAP);
+      return (
+        <>
+          {i > 0 && (
+            <DiagramArrow
+              x1={startX + (i - 1) * (nodeW + ARROW_GAP) + nodeW}
+              y1={identityCy}
+              x2={x}
+              y2={identityCy}
+              markerId={arrow}
+            />
+          )}
+          <DiagramNode
+            x={x}
+            y={identityRowY}
+            width={nodeW}
+            height={NODE_H_SM}
+            rx={NODE_RX_SM}
+            title={label}
+            fontSize={FONT_SMALL}
+          />
+        </>
+      );
+    })
+  }
+
+  <DiagramArrow
+    x1={W / 2}
+    y1={identityY + identityH}
+    x2={W / 2}
+    y2={laneY}
+    markerId={arrow}
+  />
+
+  <DiagramZone x={publicX} y={laneY} width={laneW} height={laneH} label="Public lane" />
+  {
+    publicSteps.map((label, i) => {
+      const x = publicX + ZONE_INSET + i * (pubNodeW + ARROW_GAP);
+      return (
+        <>
+          {i > 0 && (
+            <DiagramArrow
+              x1={publicX + ZONE_INSET + (i - 1) * (pubNodeW + ARROW_GAP) + pubNodeW}
+              y1={laneCy}
+              x2={x}
+              y2={laneCy}
+              markerId={arrow}
+            />
+          )}
+          <DiagramNode
+            x={x}
+            y={laneRowY}
+            width={pubNodeW}
+            height={NODE_H_SM}
+            rx={NODE_RX_SM}
+            title={label}
+            fontSize={FONT_SMALL}
+          />
+        </>
+      );
+    })
+  }
+  <DiagramNode
+    x={publicX + ZONE_INSET}
+    y={laneSubY}
+    width={laneW - ZONE_INSET * 2}
+    height={NODE_H_SM}
+    rx={NODE_RX_SM}
+    title="Public posts · Content vectors"
+    fontSize={9}
+  />
+
+  <DiagramZone
+    x={privateX}
+    y={laneY}
+    width={laneW}
+    height={laneH}
+    label="Private lane"
+  />
+  {
+    privateSteps.map((label, i) => {
+      const x = privateX + ZONE_INSET + i * (privNodeW + ARROW_GAP);
+      return (
+        <>
+          {i > 0 && (
+            <DiagramArrow
+              x1={privateX + ZONE_INSET + (i - 1) * (privNodeW + ARROW_GAP) + privNodeW}
+              y1={laneCy}
+              x2={x}
+              y2={laneCy}
+              markerId={arrow}
+            />
+          )}
+          <DiagramNode
+            x={x}
+            y={laneRowY}
+            width={privNodeW}
+            height={NODE_H_SM}
+            rx={NODE_RX_SM}
+            title={label}
+            fontSize={FONT_SMALL}
+          />
+        </>
+      );
+    })
+  }
+  <DiagramNode
+    x={privateX + ZONE_INSET}
+    y={laneSubY}
+    width={laneW - ZONE_INSET * 2}
+    height={NODE_H_SM}
+    rx={NODE_RX_SM}
+    title="Private vectors · Whisper delivery"
+    fontSize={9}
+  />
+
+  <DiagramArrow
+    x1={publicX + laneW / 2}
+    y1={laneY + laneH}
+    x2={publicX + laneW / 2}
+    y2={metricsY}
+    markerId={arrow}
+  />
+  <DiagramArrow
+    x1={privateX + laneW / 2}
+    y1={laneY + laneH}
+    x2={privateX + laneW / 2}
+    y2={metricsY}
+    markerId={arrow}
+  />
+
+  <DiagramZone
+    x={metricsX}
+    y={metricsY}
+    width={metricsW}
+    height={metricsH}
+    label="Anonymized aggregate metrics"
+    labelAnchor="middle"
+  />
+  <text
+    class="diagram-subtext"
+    x={metricsX + metricsW / 2}
+    y={metricsY + ZONE_HEADER + 28}
+    text-anchor="middle"
+    font-size="9">Operational health only · No per-user profiling</text
+  >
+</svg>

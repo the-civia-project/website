@@ -2,7 +2,7 @@
 
 > **DRAFT**: This document is a work in progress.
 
-*As adopted by the Foundation Board*
+_As adopted by the Foundation Board_
 
 \[DATE\]
 
@@ -27,33 +27,33 @@ with the rights of individuals in the digital space.
 The Foundation pursues this mission through the following core
 objectives:
 
--   Developing and maintaining the Civia application, a social
-    networking platform that verifies user identity using EUDI
-    Wallet-compliant credentials under the eIDAS 2.0 framework, while
-    upholding data minimization and anonymization principles.
+- Developing and maintaining the Civia application, a social
+  networking platform that verifies user identity using EUDI
+  Wallet-compliant credentials under the eIDAS 2.0 framework, while
+  upholding data minimization and anonymization principles.
 
--   Promoting digital trust by ensuring all participants are real,
-    accountable individuals, thereby reducing disinformation, bot
-    activity, and coordinated inauthentic behavior.
+- Promoting digital trust by ensuring all participants are real,
+  accountable individuals, thereby reducing disinformation, bot
+  activity, and coordinated inauthentic behavior.
 
--   Protecting user privacy as a foundational design requirement,
-    ensuring that identity verification does not equate to surveillance,
-    data commodification, or unnecessary disclosure of personal
-    information.
+- Protecting user privacy as a foundational design requirement,
+  ensuring that identity verification does not equate to surveillance,
+  data commodification, or unnecessary disclosure of personal
+  information.
 
--   Operating a platform permanently free from advertising and from the
-    commercial exploitation of user data in any form.
+- Operating a platform permanently free from advertising and from the
+  commercial exploitation of user data in any form.
 
--   Providing a safe, chronological, and non-manipulative experience for
-    all users, with algorithmic content recommendation available only as
-    a strictly opt-in feature for verified adult users.
+- Providing a safe, chronological, and non-manipulative experience for
+  all users, with algorithmic content recommendation available only as
+  a strictly opt-in feature for verified adult users.
 
--   Supporting open-source development, independent security audits, and
-    transparent governance.
+- Supporting open-source development, independent security audits, and
+  transparent governance.
 
--   Engaging in education, policy advocacy, and research in the fields
-    of digital identity, privacy-preserving technologies, and
-    responsible social media.
+- Engaging in education, policy advocacy, and research in the fields
+  of digital identity, privacy-preserving technologies, and
+  responsible social media.
 
 **2. Defined Terms**
 
@@ -159,19 +159,19 @@ unverified entities to hold user accounts.
 
 The Foundation shall implement Identity Verification in a manner that:
 
--   Relies on Selective Disclosure so that users need only present the
-    minimum required credential attributes (e.g., proof of being a legal
-    adult in a jurisdiction) without exposing full identity documents;
+- Relies on Selective Disclosure so that users need only present the
+  minimum required credential attributes (e.g., proof of being a legal
+  adult in a jurisdiction) without exposing full identity documents;
 
--   Employs Zero-Knowledge Proofs or equivalent cryptographic techniques
-    wherever technically feasible to avoid unnecessary data transfer;
+- Employs Zero-Knowledge Proofs or equivalent cryptographic techniques
+  wherever technically feasible to avoid unnecessary data transfer;
 
--   Does not store raw identity credentials or full personal identifiers
-    beyond what is strictly necessary for verification purposes; and
+- Does not store raw identity credentials or full personal identifiers
+  beyond what is strictly necessary for verification purposes; and
 
--   Complies fully with Articles 5, 25, and 32 GDPR, and with the
-    technical specifications issued under eIDAS 2.0 and the EUDI Wallet
-    framework.
+- Complies fully with Articles 5, 25, and 32 GDPR, and with the
+  technical specifications issued under eIDAS 2.0 and the EUDI Wallet
+  framework.
 
 **4.2 Data Minimization and Purpose Limitation**
 
@@ -183,17 +183,17 @@ consistent with Article 5(1)(b) GDPR.
 
 In particular:
 
--   The Foundation shall not collect, sell, license, or otherwise
-    commercialize user personal data for advertising, Targeted
-    Marketing, or any third-party commercial purpose;
+- The Foundation shall not collect, sell, license, or otherwise
+  commercialize user personal data for advertising, Targeted
+  Marketing, or any third-party commercial purpose;
 
--   User content and interaction data shall be processed solely for the
-    purpose of delivering platform functionality and, where applicable,
-    safety and trust enforcement; and
+- User content and interaction data shall be processed solely for the
+  purpose of delivering platform functionality and, where applicable,
+  safety and trust enforcement; and
 
--   The Foundation shall publish a clear and accessible Privacy Notice
-    detailing all categories of data processed, legal bases, retention
-    periods, and user rights.
+- The Foundation shall publish a clear and accessible Privacy Notice
+  detailing all categories of data processed, legal bases, retention
+  periods, and user rights.
 
 **4.3 Pseudonymization and On-Platform Anonymity**
 
@@ -203,16 +203,16 @@ or handle. The link between a user's verified identity and their
 on-platform pseudonym shall be protected through strong technical and
 organizational measures, including:
 
--   Cryptographic separation between identity verification records and
-    social activity data;
+- Cryptographic separation between identity verification records and
+  social activity data;
 
--   Access controls ensuring that the mapping between a verified
-    identity and a user account is accessible only under lawful process
-    or explicit user request; and
+- Access controls ensuring that the mapping between a verified
+  identity and a user account is accessible only under lawful process
+  or explicit user request; and
 
--   Prohibition on the Foundation proactively linking or publishing a
-    user's real identity alongside their platform activity, except where
-    required by a valid legal obligation.
+- Prohibition on the Foundation proactively linking or publishing a
+  user's real identity alongside their platform activity, except where
+  required by a valid legal obligation.
 
 **4.4 Privacy by Design and Default**
 
@@ -252,20 +252,20 @@ subject to waiver, suspension, or exception by the Board, the Executive
 Director, or any other person or body. For the avoidance of doubt, this
 prohibition includes:
 
--   Display advertising, banner advertising, sponsored posts, promoted
-    content, and native advertising;
+- Display advertising, banner advertising, sponsored posts, promoted
+  content, and native advertising;
 
--   Audio and video advertising, including pre-roll, mid-roll, and
-    interstitial formats;
+- Audio and video advertising, including pre-roll, mid-roll, and
+  interstitial formats;
 
--   Paid placement of any content, account, or product in feeds, search
-    results, or recommendation surfaces;
+- Paid placement of any content, account, or product in feeds, search
+  results, or recommendation surfaces;
 
--   Affiliate marketing arrangements that result in content being
-    presented or ranked on the basis of commercial consideration; and
+- Affiliate marketing arrangements that result in content being
+  presented or ranked on the basis of commercial consideration; and
 
--   Any other commercial arrangement under which a third party pays for
-    exposure to Civia users or for preferential treatment of content.
+- Any other commercial arrangement under which a third party pays for
+  exposure to Civia users or for preferential treatment of content.
 
 Any amendment to this Section 5.1 shall be null and void, regardless of
 the procedure by which it is purportedly adopted. The prohibition on
@@ -283,19 +283,19 @@ Marketing is conducted on the Civia platform or elsewhere.
 
 This prohibition applies to:
 
--   Direct sale or licensing of user data to advertising networks, data
-    brokers, or marketing platforms;
+- Direct sale or licensing of user data to advertising networks, data
+  brokers, or marketing platforms;
 
--   Transfer of data to third parties through API access, data
-    partnerships, or platform integrations where the Foundation has
-    reason to believe such data will be used for Targeted Marketing;
+- Transfer of data to third parties through API access, data
+  partnerships, or platform integrations where the Foundation has
+  reason to believe such data will be used for Targeted Marketing;
 
--   The construction or maintenance of advertising audience profiles,
-    interest graphs, or behavioural models derived from user activity on
-    Civia; and
+- The construction or maintenance of advertising audience profiles,
+  interest graphs, or behavioural models derived from user activity on
+  Civia; and
 
--   Any arrangement, however structured, that results in user data being
-    used to select or deliver commercial messages to individuals.
+- Any arrangement, however structured, that results in user data being
+  used to select or deliver commercial messages to individuals.
 
 The Foundation shall include contractual prohibitions on Targeted
 Marketing use in all agreements with service providers, contractors, and
@@ -308,16 +308,16 @@ Notwithstanding the foregoing, the Foundation may enter into commercial
 relationships that do not involve advertising or the commercialization
 of user data, including:
 
--   Mission-aligned sponsorships or institutional partnerships that are
-    disclosed transparently to users and that do not grant any sponsor
-    access to user data or influence over content presentation;
+- Mission-aligned sponsorships or institutional partnerships that are
+  disclosed transparently to users and that do not grant any sponsor
+  access to user data or influence over content presentation;
 
--   Revenue from optional user subscriptions that provide enhanced
-    features, provided that no features essential to basic privacy or
-    safety are withheld from non-paying users; and
+- Revenue from optional user subscriptions that provide enhanced
+  features, provided that no features essential to basic privacy or
+  safety are withheld from non-paying users; and
 
--   Grants and contracts from public bodies, research institutions, or
-    philanthropic organizations for specific mission-aligned activities.
+- Grants and contracts from public bodies, research institutions, or
+  philanthropic organizations for specific mission-aligned activities.
 
 All commercial relationships shall be reviewed and approved by the Board
 and disclosed in the Foundation's annual report.
@@ -340,22 +340,22 @@ available to any user who is a Minor. This prohibition is absolute and
 applies regardless of parental or guardian consent. The Foundation shall
 implement technical measures to enforce this prohibition, including:
 
--   Age verification through the Identity Verification process, using
-    Selective Disclosure or Zero-Knowledge Proof of age to confirm that
-    a user has attained eighteen (18) years of age without revealing
-    their precise date of birth;
+- Age verification through the Identity Verification process, using
+  Selective Disclosure or Zero-Knowledge Proof of age to confirm that
+  a user has attained eighteen (18) years of age without revealing
+  their precise date of birth;
 
--   Permanent suppression of all Algorithmic Recommendation features in
-    the platform interface for accounts verified as belonging to a
-    Minor;
+- Permanent suppression of all Algorithmic Recommendation features in
+  the platform interface for accounts verified as belonging to a
+  Minor;
 
--   Prohibition on any secondary profiling or engagement-optimisation
-    processing of a Minor's activity data, whether or not such
-    processing would result in visible recommendations; and
+- Prohibition on any secondary profiling or engagement-optimisation
+  processing of a Minor's activity data, whether or not such
+  processing would result in visible recommendations; and
 
--   Regular technical audits to verify that no Algorithmic
-    Recommendation pathways are accessible by Minor accounts, whether
-    through standard interfaces or through API or developer access.
+- Regular technical audits to verify that no Algorithmic
+  Recommendation pathways are accessible by Minor accounts, whether
+  through standard interfaces or through API or developer access.
 
 This prohibition is consistent with and supplements the obligations
 arising under Article 28 of Regulation (EU) 2022/2065 (Digital Services
@@ -368,31 +368,31 @@ For users who have been verified as having attained the age of eighteen
 (18) years, the Foundation may offer Algorithmic Recommendations as an
 optional feature, subject to the following conditions:
 
--   Activation of Algorithmic Recommendations shall require Explicit
-    Opt-In by the user. The feature shall be presented in a neutral
-    manner, without dark patterns, pre-selected defaults, or repeated
-    prompting designed to encourage uptake;
+- Activation of Algorithmic Recommendations shall require Explicit
+  Opt-In by the user. The feature shall be presented in a neutral
+  manner, without dark patterns, pre-selected defaults, or repeated
+  prompting designed to encourage uptake;
 
--   At the point of opt-in, the Foundation shall provide clear and
-    plain-language disclosure of: (i) what data is used to generate
-    recommendations; (ii) the purpose and logic of the recommendation
-    system; (iii) the absence of any commercial or advertising influence
-    on recommendations; and (iv) how the user can deactivate the feature
-    at any time;
+- At the point of opt-in, the Foundation shall provide clear and
+  plain-language disclosure of: (i) what data is used to generate
+  recommendations; (ii) the purpose and logic of the recommendation
+  system; (iii) the absence of any commercial or advertising influence
+  on recommendations; and (iv) how the user can deactivate the feature
+  at any time;
 
--   The recommendation system shall not incorporate
-    engagement-maximisation objectives that prioritise emotionally
-    provocative, divisive, or addictive content. The Foundation shall
-    publish the design principles and objectives of any recommendation
-    system it operates;
+- The recommendation system shall not incorporate
+  engagement-maximisation objectives that prioritise emotionally
+  provocative, divisive, or addictive content. The Foundation shall
+  publish the design principles and objectives of any recommendation
+  system it operates;
 
--   Users who have opted in may withdraw that consent at any time with
-    immediate effect, reverting to a chronological feed. Withdrawal of
-    consent shall be as easy as the original opt-in; and
+- Users who have opted in may withdraw that consent at any time with
+  immediate effect, reverting to a chronological feed. Withdrawal of
+  consent shall be as easy as the original opt-in; and
 
--   The Foundation shall conduct and publish periodic impact assessments
-    of its recommendation system to evaluate effects on user wellbeing,
-    information diversity, and compliance with applicable law.
+- The Foundation shall conduct and publish periodic impact assessments
+  of its recommendation system to evaluate effects on user wellbeing,
+  information diversity, and compliance with applicable law.
 
 **6.4 No Profiling of Minors**
 
@@ -411,18 +411,18 @@ profiling, the Foundation shall implement the following protections for
 Minor users, consistent with the best interests of the child as a
 primary consideration:
 
--   Privacy settings for Minor accounts shall default to the most
-    restrictive available options;
+- Privacy settings for Minor accounts shall default to the most
+  restrictive available options;
 
--   Direct messaging from non-connected users to Minor accounts shall be
-    disabled by default;
+- Direct messaging from non-connected users to Minor accounts shall be
+  disabled by default;
 
--   The Foundation shall not send marketing communications of any kind
-    to Minor users; and
+- The Foundation shall not send marketing communications of any kind
+  to Minor users; and
 
--   The Foundation shall designate a Child Safety Officer or equivalent
-    responsible person to oversee the implementation of minor protection
-    policies and to receive reports of concerns regarding Minor users.
+- The Foundation shall designate a Child Safety Officer or equivalent
+  responsible person to oversee the implementation of minor protection
+  policies and to receive reports of concerns regarding Minor users.
 
 **7. Membership**
 
@@ -453,28 +453,28 @@ Foundation's mission, as determined by the Board.
 
 The Board shall be responsible for:
 
--   Determining and overseeing the strategic direction of the Foundation
-    and the Civia platform;
+- Determining and overseeing the strategic direction of the Foundation
+  and the Civia platform;
 
--   Approving the annual budget, financial statements, and major
-    expenditures;
+- Approving the annual budget, financial statements, and major
+  expenditures;
 
--   Appointing and supervising the Executive Director and senior
-    leadership;
+- Appointing and supervising the Executive Director and senior
+  leadership;
 
--   Ensuring the Foundation's compliance with applicable law, including
-    GDPR, eIDAS 2.0, the Digital Services Act, and applicable nonprofit
-    regulations;
+- Ensuring the Foundation's compliance with applicable law, including
+  GDPR, eIDAS 2.0, the Digital Services Act, and applicable nonprofit
+  regulations;
 
--   Reviewing and approving any material changes to the Foundation's
-    privacy policy, data practices, or identity verification
-    architecture;
+- Reviewing and approving any material changes to the Foundation's
+  privacy policy, data practices, or identity verification
+  architecture;
 
--   Overseeing compliance with the advertising prohibition in Section 5
-    and the minor protection obligations in Section 6; and
+- Overseeing compliance with the advertising prohibition in Section 5
+  and the minor protection obligations in Section 6; and
 
--   Safeguarding the Foundation's mission against commercial or
-    political capture.
+- Safeguarding the Foundation's mission against commercial or
+  political capture.
 
 **8.3 Term and Appointment**
 
@@ -536,17 +536,17 @@ and responding to safeguarding concerns.
 
 The Foundation shall be funded through:
 
--   Voluntary user donations and subscriptions that do not grant access
-    to user data or compromise platform neutrality;
+- Voluntary user donations and subscriptions that do not grant access
+  to user data or compromise platform neutrality;
 
--   Grants from public institutions, foundations, and mission-aligned
-    philanthropic organizations;
+- Grants from public institutions, foundations, and mission-aligned
+  philanthropic organizations;
 
--   Revenue from privacy-respecting ancillary services, where approved
-    by the Board; and
+- Revenue from privacy-respecting ancillary services, where approved
+  by the Board; and
 
--   Any other sources approved by the Board as consistent with the
-    Foundation's mission and independence.
+- Any other sources approved by the Board as consistent with the
+  Foundation's mission and independence.
 
 The Foundation shall maintain full financial transparency. Annual
 financial statements, audited by an independent external auditor, shall
@@ -559,45 +559,45 @@ compensation for services rendered.
 The Foundation is committed to radical transparency in its governance
 and operations. The Foundation shall publish:
 
--   Annual reports detailing mission activities, financial accounts,
-    governance decisions, and privacy impact assessments;
+- Annual reports detailing mission activities, financial accounts,
+  governance decisions, and privacy impact assessments;
 
--   A Transparency Report at least annually, disclosing the number and
-    nature of legal requests for user data received and the Foundation's
-    responses thereto, to the extent permitted by law;
+- A Transparency Report at least annually, disclosing the number and
+  nature of legal requests for user data received and the Foundation's
+  responses thereto, to the extent permitted by law;
 
--   An annual compliance report addressing the Foundation's adherence to
-    Sections 5 and 6 of these Bylaws, including confirmation that no
-    advertising revenue was received and that no data was used for
-    Targeted Marketing purposes;
+- An annual compliance report addressing the Foundation's adherence to
+  Sections 5 and 6 of these Bylaws, including confirmation that no
+  advertising revenue was received and that no data was used for
+  Targeted Marketing purposes;
 
--   Summaries of Board meeting decisions (excluding matters subject to
-    legal privilege or security sensitivity);
+- Summaries of Board meeting decisions (excluding matters subject to
+  legal privilege or security sensitivity);
 
--   All significant changes to the platform's privacy architecture,
-    identity verification procedures, or data practices, with advance
-    notice to users where reasonably practicable; and
+- All significant changes to the platform's privacy architecture,
+  identity verification procedures, or data practices, with advance
+  notice to users where reasonably practicable; and
 
--   The Foundation's open-source code repositories and security audit
-    reports.
+- The Foundation's open-source code repositories and security audit
+  reports.
 
 **12. Amendments to Bylaws**
 
 These Bylaws may be amended by a two-thirds (2/3) majority vote of the
 full Board of Directors at a duly convened meeting, provided that:
 
--   Written notice of the proposed amendment, including the text of the
-    proposed change and the rationale, is provided to all Directors no
-    fewer than thirty (30) days prior to the vote;
+- Written notice of the proposed amendment, including the text of the
+  proposed change and the rationale, is provided to all Directors no
+  fewer than thirty (30) days prior to the vote;
 
--   Any amendment that materially alters the core privacy and identity
-    principles set out in Section 4, the advertising and data
-    commercialization prohibitions in Section 5, or the minor protection
-    provisions in Section 6 shall additionally require review and
-    written opinion from the Foundation's DPO; and
+- Any amendment that materially alters the core privacy and identity
+  principles set out in Section 4, the advertising and data
+  commercialization prohibitions in Section 5, or the minor protection
+  provisions in Section 6 shall additionally require review and
+  written opinion from the Foundation's DPO; and
 
--   Amendments shall be published publicly and communicated to the user
-    community within thirty (30) days of adoption.
+- Amendments shall be published publicly and communicated to the user
+  community within thirty (30) days of adoption.
 
 For the avoidance of doubt, Section 5.1 (Absolute Prohibition on
 Advertising) may not be amended, repealed, or suspended by any vote of

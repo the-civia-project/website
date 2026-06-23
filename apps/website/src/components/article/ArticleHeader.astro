@@ -1,23 +1,57 @@
 ---
 import { format } from 'date-fns';
 import Label from './Label.astro';
+import PrintPdfButton from './PrintPdfButton.astro';
 
 interface Props {
   label?: string;
   title: string;
-  author: string;
+  authors: string[];
   date: Date | string;
+  draft?: boolean;
 }
 
-const { label, title, author, date } = Astro.props;
+const { label, title, authors, date, draft = false } = Astro.props;
+const authorLine = authors.join(', ');
 const published = format(new Date(date), 'dd/MM/yyyy');
 ---
 
 <header>
-  {label && <Label>{label}</Label>}
-  <h1 class="mt-2 text-4xl font-bold tracking-tight md:text-5xl">{title}</h1>
+  <div class="flex items-start justify-between gap-4">
+    <div class="min-w-0 flex-1">
+      {label && <Label>{label}</Label>}
+      <h1 class="mt-2 text-4xl font-bold tracking-tight md:text-5xl">
+        {title}
+      </h1>
+    </div>
+
+    <div class="flex shrink-0 items-center gap-3">
+      {
+        draft && (
+          <span
+            class:list={[
+              // display/hiding
+              'print:hidden',
+              // border and background
+              'rounded-full border border-amber-500/40 bg-amber-500/15',
+              // padding/spacing
+              'px-2.5 pt-1 pb-0.5',
+              // typography
+              'text-xs font-medium uppercase tracking-wide',
+              // color
+              'text-amber-200',
+            ]}
+          >
+            Draft
+          </span>
+        )
+      }
+      <PrintPdfButton />
+    </div>
+  </div>
   <p class="mt-4 text-sm text-zinc-300">
-    <span class="text-zinc-500">By</span> {author}
+    <span class="text-zinc-500">By</span>
+    {authorLine}
     <span class="text-zinc-600"> · </span>
     {published}
   </p>

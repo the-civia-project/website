@@ -1,4 +1,5 @@
 ---
+import InternalLink from './article/InternalLink.astro';
 import { Image } from 'astro:assets';
 import Explore from './Explore.astro';
 import MailboxRegistry from './MailboxRegistry.astro';
@@ -39,8 +40,12 @@ const end_year = new Date().getFullYear();
   </div>
 
   <div class="flex items-center justify-center text-xs opacity-50 gap-3">
-    <a href="/privacy" class="hover:underline">Privacy Policy</a>
-    <a href="/about" class="hover:underline">About</a>
+    <InternalLink href="/privacy" variant="plain" class="hover:underline"
+      >Privacy Policy</InternalLink
+    >
+    <InternalLink href="/about" variant="plain" class="hover:underline"
+      >About</InternalLink
+    >
   </div>
 
   <div

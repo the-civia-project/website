@@ -1,11 +1,11 @@
 ---
 import Label from './article/Label.astro';
-import Link from './Link.astro';
-import UsersIcon from '@the-civia-project/assets/icons/users-thress.svg';
-import WrenchIcon from '@the-civia-project/assets/icons/wrench.svg';
-import RocketIcon from '@the-civia-project/assets/icons/rocket-launch.svg';
-import DiscordIcon from '@the-civia-project/assets/social/discord.svg';
-import MatrixIcon from '@the-civia-project/assets/social/matrix.svg';
+import Button from './Button.astro';
+import UsersIcon from '../assets/icons/users-thress.svg';
+import WrenchIcon from '../assets/icons/wrench.svg';
+import RocketIcon from '../assets/icons/rocket-launch.svg';
+import DiscordIcon from '../assets/social/discord.svg';
+import MatrixIcon from '../assets/social/matrix.svg';
 
 interface Props {
   current?: string;
@@ -59,7 +59,7 @@ const visible_links = links.filter(
         ]}
       >
         {visible_links.map(({ path, label, Icon }, index) => (
-          <Link
+          <Button
             path={path}
             variant="secondary"
             class={
@@ -73,7 +73,7 @@ const visible_links = links.filter(
           >
             <Icon slot="icon" class="fill-current" />
             {label}
-          </Link>
+          </Button>
         ))}
       </div>
     </nav>
