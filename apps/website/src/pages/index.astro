@@ -1,5 +1,7 @@
 ---
 import Image from '../assets/og/index.webp';
+import HandWavingIcon from '../assets/icons/hand-waving.svg';
+import Link from '../components/Link.astro';
 import Strong from '../components/Strong.astro';
 import U from '../components/U.astro';
 import Layout from '../layouts/Layout.astro';
@@ -50,4 +52,23 @@ const description =
       >&ldquo;capital gains&rdquo;</em
     >.
   </p>
+
+  <aside
+    class="border-l-2 border-zinc-700 py-1 pl-6 [&_li]:italic [&_li]:leading-relaxed [&_li]:text-zinc-300 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5"
+  >
+    <span class="block text-xs uppercase tracking-widest text-zinc-500"
+      >Help us grow</span
+    >
+    <ul>
+      <li>Print flyers, posters, and stickers (PDFs)</li>
+      <li>Use logo and brand assets</li>
+      <li>Share ready-made social posts</li>
+      <li>Spread the word in your community</li>
+    </ul>
+  </aside>
+
+  <Link path="/help-us-grow" variant="secondary" class="mt-4 w-full">
+    <HandWavingIcon slot="icon" class="fill-current" />
+    Help us grow
+  </Link>
 </Layout>

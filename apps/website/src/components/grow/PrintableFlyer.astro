@@ -1,0 +1,32 @@
+---
+interface Props {
+  preview?: boolean;
+}
+
+const { preview = false } = Astro.props;
+
+const mission =
+  'Make the world more resilient towards and better equipped against fake news, propaganda, disinformation, misinformation and malinformation.';
+const url = 'https://theciviaproject.org';
+---
+
+<div class:list={['grow-printable grow-print-flyer', !preview && 'hidden']}>
+  <div
+    class="flex h-[297mm] w-[210mm] flex-col items-center justify-between bg-white p-12 text-center text-black"
+  >
+    <div class="flex flex-col items-center gap-6">
+      <img src="/grow/logo.svg" alt="" width="80" height="95" class="h-24 w-auto" />
+      <div>
+        <h1 class="text-4xl font-bold tracking-tight">The Civia Project</h1>
+        <p class="mt-2 text-lg italic text-zinc-600">Real People. Real Talk.</p>
+      </div>
+    </div>
+
+    <p class="max-w-md text-lg leading-relaxed text-zinc-700">{mission}</p>
+
+    <div class="flex flex-col items-center gap-4">
+      <img src="/grow/qr-code.svg" alt="" width="120" height="120" class="size-28" />
+      <p class="text-xl font-semibold tracking-wide">{url}</p>
+    </div>
+  </div>
+</div>

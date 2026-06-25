@@ -1,0 +1,31 @@
+---
+interface Props {
+  preview?: boolean;
+}
+
+const { preview = false } = Astro.props;
+
+const url = 'theciviaproject.org';
+---
+
+<div class:list={['grow-printable grow-print-stickers', !preview && 'hidden']}>
+  <div class="h-[297mm] w-[210mm] bg-white p-8 text-black">
+    <div class="grid h-full grid-cols-2 grid-rows-3 gap-6">
+      {
+        Array.from({ length: 6 }).map(() => (
+          <div class="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 p-4 text-center">
+            <img
+              src="/grow/logo.svg"
+              alt=""
+              width="48"
+              height="57"
+              class="h-14 w-auto"
+            />
+            <p class="mt-2 text-sm font-semibold tracking-wide">The Civia Project</p>
+            <p class="text-xs text-zinc-600">{url}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

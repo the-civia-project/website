@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  class?: string;
+}
+
+const { title, description, class: className } = Astro.props;
+---
+
+<div
+  class:list={['rounded-sm border border-zinc-800 bg-zinc-950 p-6', className]}
+>
+  <h3 class="text-lg font-bold text-white">{title}</h3>
+  <p class="mt-2 text-sm leading-relaxed text-zinc-400">{description}</p>
+  {
+    Astro.slots.has('preview') && (
+      <div class="mt-4 overflow-hidden rounded-sm border border-zinc-800 bg-zinc-900">
+        <slot name="preview" />
+      </div>
+    )
+  }
+  {
+    Astro.slots.has('actions') && (
+      <div class="mt-4 flex flex-wrap gap-2">
+        <slot name="actions" />
+      </div>
+    )
+  }
+</div>

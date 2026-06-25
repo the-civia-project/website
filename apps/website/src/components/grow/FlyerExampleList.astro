@@ -1,0 +1,22 @@
+---
+import FlyerExample from './FlyerExample.astro';
+
+export interface FlyerExampleData {
+  title: string;
+  description: string;
+  href: string;
+  download: string;
+}
+
+interface Props {
+  flyers: FlyerExampleData[];
+}
+
+const { flyers } = Astro.props;
+---
+
+<div class="mt-6 grid gap-6 md:grid-cols-2">
+  {flyers.map((flyer) => (
+    <FlyerExample {...flyer} />
+  ))}
+</div>

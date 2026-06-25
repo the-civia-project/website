@@ -1,0 +1,15 @@
+---
+import GrowDownloadLink from './GrowDownloadLink.astro';
+import ResourceCard from './ResourceCard.astro';
+import type { PosterExampleData } from './PosterExampleList.astro';
+
+type Props = PosterExampleData;
+
+const { title, description, href, download } = Astro.props;
+---
+
+<ResourceCard {title} {description}>
+  <div slot="actions">
+    <GrowDownloadLink href={href} download={download}>Download PDF</GrowDownloadLink>
+  </div>
+</ResourceCard>

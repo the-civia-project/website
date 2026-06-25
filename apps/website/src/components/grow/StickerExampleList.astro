@@ -1,0 +1,22 @@
+---
+import StickerExample from './StickerExample.astro';
+
+export interface StickerExampleData {
+  title: string;
+  description: string;
+  href: string;
+  download: string;
+}
+
+interface Props {
+  stickers: StickerExampleData[];
+}
+
+const { stickers } = Astro.props;
+---
+
+<div class="mt-6 grid gap-6 md:grid-cols-2">
+  {stickers.map((sticker) => (
+    <StickerExample {...sticker} />
+  ))}
+</div>

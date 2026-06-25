@@ -1,0 +1,276 @@
+---
+import type ChecksIcon from '../../assets/icons/checks.svg';
+
+type IconComponent = typeof ChecksIcon;
+
+export interface CopyItem {
+  label: string;
+  text: string;
+  Icon: IconComponent;
+}
+
+interface Props {
+  items: CopyItem[];
+  shareUrl?: string;
+}
+
+const { items, shareUrl = 'https://theciviaproject.org' } = Astro.props;
+
+function slugify(label: string) {
+  return label.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+}
+
+function escapeHtml(text: string) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function formatHashtags(text: string) {
+  return escapeHtml(text).replace(
+    /#[\w]+/g,
+    (match) => `<span class="text-sky-400">${match}</span>`,
+  );
+}
+
+const control_btn =
+  'rounded-sm p-2 text-zinc-400 transition-colors hover:text-white focus-visible:text-white disabled:pointer-events-none disabled:opacity-30';
+
+const indicator_size =
+  items.length > 14
+    ? 'min-w-[1.25rem] px-0.5 py-0 text-[10px]'
+    : items.length > 10
+      ? 'min-w-[1.5rem] px-0.5 py-0 text-[11px]'
+      : 'min-w-[1.75rem] px-1 py-0.5 text-xs';
+
+const indicator_btn = `${indicator_size} tabular-nums text-zinc-500 transition-colors hover:text-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white`;
+
+const indicator_active =
+  'text-white underline decoration-white underline-offset-4 font-medium';
+---
+
+<div
+  class="copy-carousel rounded-sm border border-zinc-800 bg-zinc-950"
+  data-copy-carousel
+  data-share-url={shareUrl}
+>
+  <div class="copy-carousel__viewport grid">
+    {
+      items.map((item, index) => {
+        const id = `copy-${slugify(item.label)}`;
+        const active = index === 0;
+        return (
+          <div
+            class:list={[
+              'copy-carousel__slide col-start-1 row-start-1 flex h-full flex-col p-4',
+              !active && 'invisible pointer-events-none',
+              active && 'z-10',
+            ]}
+            data-slide={index}
+            data-label={item.label}
+            data-text={item.text}
+            role="tabpanel"
+            aria-hidden={active ? 'false' : 'true'}
+            id={`copy-carousel-panel-${index}`}
+          >
+            <div class="flex shrink-0 items-center justify-between gap-2">
+              <span class="inline-flex min-w-0 items-center gap-2 text-xs uppercase tracking-widest text-zinc-500">
+                <item.Icon class="size-4 shrink-0 fill-current" aria-hidden="true" />
+                {item.label}
+              </span>
+              <button
+                type="button"
+                data-copy-target={id}
+                class="inline-flex shrink-0 items-center gap-1 rounded-sm px-2 py-1 text-xs text-zinc-400 transition-colors hover:text-white"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-3.5"
+                  aria-hidden="true"
+                >
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                </svg>
+                  <span data-copy-label>Copy post</span>
+              </button>
+            </div>
+            <div class="flex min-h-0 flex-1 items-center justify-center">
+              <pre
+                id={id}
+                class="w-full max-w-2xl text-left font-mono text-sm leading-relaxed whitespace-pre-wrap text-zinc-300"
+                set:html={formatHashtags(item.text)}
+              />
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+
+  <div
+    class="flex flex-wrap items-center justify-between gap-4 border-t border-zinc-800 px-4 py-3"
+  >
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        data-carousel-prev
+        class={control_btn}
+        aria-label="Previous post"
+        disabled={items.length <= 1}
+      >
+        <span aria-hidden="true" class="block text-lg leading-none">‹</span>
+      </button>
+
+      <div
+        role="tablist"
+        aria-label="Social post examples"
+        class:list={[
+          'flex max-w-full items-center',
+          items.length > 12 ? 'flex-wrap gap-0' : 'gap-0.5',
+        ]}
+      >
+        {
+          items.map((_, index) => (
+            <button
+              type="button"
+              role="tab"
+              data-carousel-dot={index}
+              class:list={[indicator_btn, index === 0 && indicator_active]}
+              aria-selected={index === 0 ? 'true' : 'false'}
+              aria-controls={`copy-carousel-panel-${index}`}
+              aria-label={`Go to post ${index + 1}`}
+            >
+              {index + 1}
+            </button>
+          ))
+        }
+      </div>
+
+      <button
+        type="button"
+        data-carousel-next
+        class={control_btn}
+        aria-label="Next post"
+        disabled={items.length <= 1}
+      >
+        <span aria-hidden="true" class="block text-lg leading-none">›</span>
+      </button>
+    </div>
+
+    <button
+      type="button"
+      data-carousel-share
+      class="inline-flex items-center gap-1.5 rounded-sm border border-zinc-600 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 transition-colors hover:border-white/50 hover:bg-white hover:text-black"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="size-4"
+        aria-hidden="true"
+      >
+        <path d="M12 16V4"></path>
+        <path d="m7 9 5-5 5 5"></path>
+        <path d="M4 20h16"></path>
+      </svg>
+      <span data-share-label>Share post</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('[data-copy-carousel]').forEach((root) => {
+    const carousel = root as HTMLElement;
+    const slides = [...carousel.querySelectorAll<HTMLElement>('[data-slide]')];
+    const dots = [...carousel.querySelectorAll<HTMLButtonElement>('[data-carousel-dot]')];
+    const prev = carousel.querySelector<HTMLButtonElement>('[data-carousel-prev]');
+    const next = carousel.querySelector<HTMLButtonElement>('[data-carousel-next]');
+    const share_btn = carousel.querySelector<HTMLButtonElement>('[data-carousel-share]');
+    const share_url = carousel.dataset.shareUrl ?? 'https://theciviaproject.org';
+
+    if (!share_btn || slides.length === 0) return;
+
+    const can_share = typeof navigator.share === 'function';
+    const can_copy = typeof navigator.clipboard?.writeText === 'function';
+
+    if (!can_share && !can_copy) {
+      share_btn.hidden = true;
+    }
+
+    let current = 0;
+
+    function go_to(index: number) {
+      current = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, i) => {
+        const active = i === current;
+        slide.classList.toggle('invisible', !active);
+        slide.classList.toggle('pointer-events-none', !active);
+        slide.classList.toggle('z-10', active);
+        slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+
+      dots.forEach((dot, i) => {
+        const active = i === current;
+        dot.setAttribute('aria-selected', active ? 'true' : 'false');
+        dot.classList.toggle('text-white', active);
+        dot.classList.toggle('underline', active);
+        dot.classList.toggle('decoration-white', active);
+        dot.classList.toggle('underline-offset-4', active);
+        dot.classList.toggle('font-medium', active);
+        dot.classList.toggle('text-zinc-500', !active);
+      });
+    }
+
+    prev?.addEventListener('click', () => go_to(current - 1));
+    next?.addEventListener('click', () => go_to(current + 1));
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const index = Number(dot.dataset.carouselDot);
+        if (!Number.isNaN(index)) go_to(index);
+      });
+    });
+
+    share_btn.addEventListener('click', async () => {
+      const slide = slides.at(current);
+      if (!slide) return;
+
+      const text = slide.dataset.text ?? '';
+      const title = slide.dataset.label ?? 'The Civia Project';
+      const share_label = share_btn.querySelector('[data-share-label]');
+      const original_label = share_label?.textContent ?? 'Share post';
+
+      if (can_share) {
+        try {
+          await navigator.share({ title, text, url: share_url });
+          return;
+        } catch (error) {
+          if (error instanceof Error && error.name === 'AbortError') return;
+        }
+      }
+
+      if (!can_copy) return;
+
+      await navigator.clipboard.writeText(text);
+      if (share_label) share_label.textContent = 'Copied!';
+      window.setTimeout(() => {
+        if (share_label) share_label.textContent = original_label;
+      }, 2000);
+    });
+
+    go_to(0);
+  });
+</script>

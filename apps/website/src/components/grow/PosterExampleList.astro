@@ -1,0 +1,22 @@
+---
+import PosterExample from './PosterExample.astro';
+
+export interface PosterExampleData {
+  title: string;
+  description: string;
+  href: string;
+  download: string;
+}
+
+interface Props {
+  posters: PosterExampleData[];
+}
+
+const { posters } = Astro.props;
+---
+
+<div class="mt-6 grid gap-6 md:grid-cols-2">
+  {posters.map((poster) => (
+    <PosterExample {...poster} />
+  ))}
+</div>

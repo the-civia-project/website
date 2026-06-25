@@ -1,0 +1,18 @@
+---
+interface Props {
+  src: string;
+  target: string;
+}
+
+const { src, target } = Astro.props;
+---
+
+<div class:list={['grow-printable', `grow-print-${target}`, 'hidden']}>
+  <img
+    src={src}
+    alt=""
+    width="297"
+    height="420"
+    class="block h-[420mm] w-[297mm] object-contain"
+  />
+</div>

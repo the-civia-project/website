@@ -1,0 +1,451 @@
+---
+import Image from '../assets/og/help-us-grow.webp';
+import ChecksIcon from '../assets/icons/checks.svg';
+import CircleNotchIcon from '../assets/icons/circle-notch.svg';
+import HandIcon from '../assets/icons/hand.svg';
+import HandWavingIcon from '../assets/icons/hand-waving.svg';
+import RocketIcon from '../assets/icons/rocket-launch.svg';
+import UsersIcon from '../assets/icons/users-thress.svg';
+import WarningIcon from '../assets/icons/warning.svg';
+import WrenchIcon from '../assets/icons/wrench.svg';
+import PrintPdfButton from '../components/article/PrintPdfButton.astro';
+import CopyCarousel from '../components/grow/CopyCarousel.astro';
+import FlyerExampleList from '../components/grow/FlyerExampleList.astro';
+import type { FlyerExampleData } from '../components/grow/FlyerExampleList.astro';
+import GrowDownloadLink from '../components/grow/GrowDownloadLink.astro';
+import PosterExampleList from '../components/grow/PosterExampleList.astro';
+import StickerExampleList from '../components/grow/StickerExampleList.astro';
+import type { StickerExampleData } from '../components/grow/StickerExampleList.astro';
+import type { PosterExampleData } from '../components/grow/PosterExampleList.astro';
+import ResourceCard from '../components/grow/ResourceCard.astro';
+import Layout from '../layouts/Layout.astro';
+
+const image_url = new URL(Image.src, Astro.site);
+
+const description =
+  'Download brand assets, print flyers and posters, share social posts, and spread The Civia Project with your community.';
+
+const section =
+  'mt-10 border-t border-zinc-800 pt-10 [&_p]:mt-4 [&_p]:leading-relaxed [&_p]:text-zinc-300';
+
+const mission_post = `Make the world more resilient towards and better equipped against fake news, propaganda, disinformation, misinformation and malinformation.
+
+https://theciviaproject.org
+#TheCiviaProject #Disinformation`;
+
+const intro_post = `We are building in public the first public and transparent civic social media platform built on strong privacy primitives with the users' benefit in mind, not "capital gains".
+
+Make the world more resilient towards and better equipped against fake news, propaganda, disinformation, misinformation and malinformation.
+
+https://theciviaproject.org
+#TheCiviaProject #CivicTech #Privacy`;
+
+const brand_post = `The Civia Project is building a civic social media platform with privacy and people first — not profit.
+
+Real People. Real Talk.
+
+Learn more: https://theciviaproject.org
+
+#TheCiviaProject #CivicTech #Privacy #SocialMedia`;
+
+const community_post = `We're building @TheCiviaProject — a public, transparent civic social media platform with strong privacy and users' benefit in mind.
+
+Real People. Real Talk.
+
+https://theciviaproject.org
+
+#CivicTech #Privacy #OpenSource`;
+
+const share_social_paper_goal = `"The goal is a fundamentally rebuilt social web: one engineered for human well-being, where users are protected, companies are mere guests, and capital gains are permanently removed from the equation."
+
+— Social Paper: https://theciviaproject.org/social-paper
+#TheCiviaProject #CivicTech`;
+
+const share_social_paper_privacy = `"To reclaim user agency and move beyond the era of surveillance capitalism, privacy can no longer be treated as a premium UI feature, an obscure setting, or a corporate promise. It must be woven directly into the Web's DNA."
+
+— Social Paper: https://theciviaproject.org/social-paper
+#Privacy #TheCiviaProject`;
+
+const share_social_paper_companies = `"In a human social network, power must flow from verified people outward. Corporations may participate in the conversation, but they do not architect the venue, own behavioral data, or decide by default what humans see in their feeds."
+
+— Social Paper: https://theciviaproject.org/social-paper
+#TheCiviaProject #SocialMedia`;
+
+const share_technical_paper_identity = `"Every user account must be linked to a verified digital identity. The platform enforces a simple hierarchy: one human, one account. Bots, automated agents, and unverified entities cannot hold user accounts."
+
+— Technical Paper: https://theciviaproject.org/technical-paper
+#TheCiviaProject #DigitalIdentity`;
+
+const share_technical_paper_lanes = `"Every post on the platform is explicitly public or private. Users choose visibility at publish time. The two lanes share identity verification and account infrastructure, but their data paths are architecturally separated — a private post never enters the public vector store."
+
+— Technical Paper: https://theciviaproject.org/technical-paper
+#Privacy #TheCiviaProject`;
+
+const share_technical_paper_governance = `"The platform's code, algorithms, and identity flows are open to public scrutiny. Independent security audits, a public bug bounty program, and transparent governance ensure the architecture described in this paper matches the system users actually run."
+
+— Technical Paper: https://theciviaproject.org/technical-paper
+#OpenSource #TheCiviaProject`;
+
+const tagline_post = `Real People. Real Talk.
+
+@TheCiviaProject is building a civic social media platform — privacy and people first, not profit.
+
+https://theciviaproject.org
+#TheCiviaProject #CivicTech`;
+
+const post_building_in_public = `We are building in public the first public and transparent civic social media platform — with strong privacy primitives and users' benefit in mind, not "capital gains".
+
+Follow along: https://theciviaproject.org
+@TheCiviaProject
+#TheCiviaProject #OpenSource #CivicTech`;
+
+const share_social_paper_connection = `"The social in social media has been overshadowed by the media of advertising. Their fundamental purpose should be to serve as a vector for genuine human connection."
+
+— Social Paper: https://theciviaproject.org/social-paper
+#TheCiviaProject #SocialMedia`;
+
+const share_social_paper_feed_choice = `"Users should be able to select the feed that suits them: a reverse-chronological timeline by default, or a local-only algorithmic feed when they explicitly opt in. The algorithm must never be imposed."
+
+— Social Paper: https://theciviaproject.org/social-paper
+#TheCiviaProject #CivicTech`;
+
+const share_social_paper_nonprofit = `"The digital town square should not be owned by a for-profit corporation beholden to the Stock Market. Instead, social media platforms should be stewarded by non-profit organizations."
+
+— Social Paper: https://theciviaproject.org/social-paper
+#TheCiviaProject #OpenSource`;
+
+const share_technical_paper_privacy_structure = `"Privacy is woven into the architecture — not offered as a toggle buried in settings. Intent is computed locally; filters are maintained on-device."
+
+— Technical Paper: https://theciviaproject.org/technical-paper
+#Privacy #TheCiviaProject`;
+
+const post_community_over_capital = `We believe social media should not be influenced by capital needs but by the needs of its community. The platform's main responsibility should be its users' benefits — not profit margins or corporate interests.
+
+https://theciviaproject.org/about
+@TheCiviaProject
+#TheCiviaProject #CivicTech`;
+
+const flyers: FlyerExampleData[] = [
+  {
+    title: 'General awareness',
+    description:
+      'Logo, tagline, and URL — hand out at events or leave at cafés and community boards.',
+    href: '/grow/flyer-awareness.pdf',
+    download: 'civia-flyer-awareness.pdf',
+  },
+  {
+    title: 'Mission statement',
+    description:
+      'Lead with our mission against disinformation — ideal for policy meetups and civic groups.',
+    href: '/grow/flyer-mission.pdf',
+    download: 'civia-flyer-mission.pdf',
+  },
+  {
+    title: 'Event / community',
+    description:
+      'Date, time, and venue layout for meetups, tabling, and local outreach.',
+    href: '/grow/flyer-event.pdf',
+    download: 'civia-flyer-event.pdf',
+  },
+  {
+    title: 'Introduction',
+    description:
+      'Who we are and what we are building — a simple intro for first-time readers.',
+    href: '/grow/flyer-intro.pdf',
+    download: 'civia-flyer-intro.pdf',
+  },
+];
+
+const posters: PosterExampleData[] = [
+  {
+    title: 'General awareness',
+    description:
+      'Bold headline layout for windows, walls, and public spaces.',
+    href: '/grow/poster-awareness.pdf',
+    download: 'civia-poster-awareness.pdf',
+  },
+  {
+    title: 'Mission statement',
+    description:
+      'Feature our mission for community centers, libraries, and civic spaces.',
+    href: '/grow/poster-mission.pdf',
+    download: 'civia-poster-mission.pdf',
+  },
+  {
+    title: 'Event / community',
+    description:
+      'Leave room for date, time, and venue — ideal for meetups and talks.',
+    href: '/grow/poster-event.pdf',
+    download: 'civia-poster-event.pdf',
+  },
+  {
+    title: 'Community outreach',
+    description:
+      'Share locally at cafés, co-working spaces, and notice boards.',
+    href: '/grow/poster-community.pdf',
+    download: 'civia-poster-community.pdf',
+  },
+];
+
+const stickers: StickerExampleData[] = [
+  {
+    title: 'Real People. Real Talk.',
+    description:
+      'Logo with our tagline — for laptops, notebooks, and water bottles.',
+    href: '/grow/stickers-tagline.pdf',
+    download: 'civia-stickers-tagline.pdf',
+  },
+  {
+    title: 'Mission statement',
+    description:
+      'Logo with our mission against disinformation — ideal for civic events.',
+    href: '/grow/stickers-mission.pdf',
+    download: 'civia-stickers-mission.pdf',
+  },
+  {
+    title: 'The Civia Project',
+    description:
+      'Logo with our name — simple brand mark for any surface.',
+    href: '/grow/stickers-brand.pdf',
+    download: 'civia-stickers-brand.pdf',
+  },
+  {
+    title: 'Privacy and people first',
+    description:
+      'Logo with a short message from our copy — share what we stand for.',
+    href: '/grow/stickers-civic.pdf',
+    download: 'civia-stickers-civic.pdf',
+  },
+];
+---
+
+<Layout size="large">
+  <Fragment slot="header">
+    <title>Help Us Grow &mdash; The Civia Project</title>
+
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image_url} />
+
+    <!-- X Card -->
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image_url} />
+  </Fragment>
+
+  <header class="flex items-start justify-between gap-4">
+    <div>
+      <span class="block text-xs uppercase tracking-widest text-zinc-500"
+        >Spread the word</span
+      >
+      <h1 class="mt-2 text-4xl font-bold tracking-tight md:text-5xl">
+        Help Us Grow
+      </h1>
+    </div>
+    <PrintPdfButton />
+  </header>
+
+  <p class="text-lg leading-relaxed text-zinc-300">
+    Print flyers, share our logo, post our message. Everything here is free to
+    use under <a
+      href="https://creativecommons.org/licenses/by-sa/4.0/"
+      target="_blank"
+      class="underline hover:text-white">CC BY-SA 4.0</a
+    > — help us reach people who care about civic tech and privacy.
+  </p>
+
+  <section class={section}>
+    <h2 class="text-2xl font-bold leading-snug text-white">Logo pack</h2>
+    <p>Download our logo for websites, slides, and print materials.</p>
+
+    <div class="mt-6 grid gap-6 md:grid-cols-2">
+      <ResourceCard
+        title="Logo mark"
+        description="SVG and PNG versions for light and dark backgrounds."
+      >
+        <div slot="preview" class="flex items-center justify-center gap-8 p-8">
+          <div class="rounded-sm bg-zinc-950 p-4">
+            <img src="/grow/logo.svg" alt="" width="54" height="64" class="h-16 w-auto" />
+          </div>
+          <div class="rounded-sm bg-white p-4">
+            <img src="/grow/logo.svg" alt="" width="54" height="64" class="h-16 w-auto" />
+          </div>
+        </div>
+        <div slot="actions">
+          <GrowDownloadLink href="/grow/logo.svg" download="civia-logo.svg">
+            SVG
+          </GrowDownloadLink>
+          <GrowDownloadLink href="/grow/logo-dark.png" download="civia-logo-dark.png">
+            PNG (dark)
+          </GrowDownloadLink>
+          <GrowDownloadLink href="/grow/logo-light.png" download="civia-logo-light.png">
+            PNG (light)
+          </GrowDownloadLink>
+        </div>
+      </ResourceCard>
+
+      <ResourceCard
+        title="QR code"
+        description="Scan to visit theciviaproject.org — add to flyers, stickers, or slides."
+      >
+        <div slot="preview" class="flex items-center justify-center p-8">
+          <img src="/grow/qr-code.svg" alt="QR code for theciviaproject.org" width="160" height="160" class="size-40 bg-white p-2" />
+        </div>
+        <div slot="actions">
+          <GrowDownloadLink href="/grow/qr-code.svg" download="civia-qr-code.svg">
+            Download SVG
+          </GrowDownloadLink>
+        </div>
+      </ResourceCard>
+    </div>
+  </section>
+
+  <section class={section}>
+    <h2 class="text-2xl font-bold leading-snug text-white">Print materials</h2>
+    <p>Download PDF flyers and posters for printing at home or at a print shop.</p>
+
+    <h3 class="mt-8 text-lg font-bold text-white">Flyers</h3>
+    <p class="mt-2 text-sm text-zinc-400">
+      Four A4 layouts to choose from — download the PDF and print on A4 paper.
+    </p>
+
+    <FlyerExampleList {flyers} />
+
+    <h3 class="mt-10 text-lg font-bold text-white">Posters</h3>
+    <p class="mt-2 text-sm text-zinc-400">
+      Four A3 layouts to choose from — download the PDF and print on A3 paper.
+    </p>
+
+    <PosterExampleList {posters} />
+
+    <h3 class="mt-10 text-lg font-bold text-white">Stickers</h3>
+    <p class="mt-2 text-sm text-zinc-400">
+      Four sticker sheet layouts to choose from — download the PDF and print on
+      sticker paper.
+    </p>
+
+    <StickerExampleList {stickers} />
+  </section>
+
+  <section class={section}>
+    <h2 class="text-2xl font-bold leading-snug text-white">Social posts</h2>
+    <p>
+      Ready-to-share posts for X, Bluesky, Mastodon, and other platforms — copy
+      the text or share directly from your device.
+    </p>
+
+    <div class="mt-6">
+      <CopyCarousel
+        items={[
+          { label: 'Mission post', text: mission_post, Icon: ChecksIcon },
+          { label: 'Intro post', text: intro_post, Icon: RocketIcon },
+          { label: 'Brand post', text: brand_post, Icon: UsersIcon },
+          {
+            label: 'Community post',
+            text: community_post,
+            Icon: UsersIcon,
+          },
+          {
+            label: 'Share — Rebuilt social web',
+            text: share_social_paper_goal,
+            Icon: HandWavingIcon,
+          },
+          {
+            label: 'Share — Privacy in the DNA',
+            text: share_social_paper_privacy,
+            Icon: WarningIcon,
+          },
+          {
+            label: 'Share — Companies as guests',
+            text: share_social_paper_companies,
+            Icon: HandIcon,
+          },
+          {
+            label: 'Share — People first, bots never',
+            text: share_technical_paper_identity,
+            Icon: CircleNotchIcon,
+          },
+          {
+            label: 'Share — Public & private lanes',
+            text: share_technical_paper_lanes,
+            Icon: WrenchIcon,
+          },
+          {
+            label: 'Share — Open governance',
+            text: share_technical_paper_governance,
+            Icon: ChecksIcon,
+          },
+          {
+            label: 'Post — Real People. Real Talk.',
+            text: tagline_post,
+            Icon: HandWavingIcon,
+          },
+          {
+            label: 'Post — Building in public',
+            text: post_building_in_public,
+            Icon: RocketIcon,
+          },
+          {
+            label: 'Share — Human connection first',
+            text: share_social_paper_connection,
+            Icon: WarningIcon,
+          },
+          {
+            label: 'Share — Feed choice restored',
+            text: share_social_paper_feed_choice,
+            Icon: CircleNotchIcon,
+          },
+          {
+            label: 'Share — Non-profit stewardship',
+            text: share_social_paper_nonprofit,
+            Icon: HandIcon,
+          },
+          {
+            label: 'Share — Privacy as structure',
+            text: share_technical_paper_privacy_structure,
+            Icon: WrenchIcon,
+          },
+          {
+            label: 'Post — Community over capital',
+            text: post_community_over_capital,
+            Icon: UsersIcon,
+          },
+        ]}
+      />
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+  document.addEventListener('click', async (event) => {
+    const copy_btn = (event.target as HTMLElement).closest('[data-copy-target]');
+    if (copy_btn) {
+      const id = copy_btn.getAttribute('data-copy-target');
+      const el = id ? document.getElementById(id) : null;
+      if (!el) return;
+      await navigator.clipboard.writeText(el.textContent ?? '');
+      const label_el = copy_btn.querySelector('[data-copy-label]') ?? copy_btn;
+      const original = label_el.textContent;
+      label_el.textContent = 'Copied!';
+      window.setTimeout(() => {
+        label_el.textContent = original;
+      }, 2000);
+      return;
+    }
+
+    const print_btn = (event.target as HTMLElement).closest('[data-grow-print]');
+    if (!print_btn) return;
+
+    const target = print_btn.getAttribute('data-grow-print');
+    if (!target) return;
+
+    document.body.dataset.growPrint = target;
+    window.print();
+  });
+
+  window.addEventListener('afterprint', () => {
+    delete document.body.dataset.growPrint;
+  });
+</script>

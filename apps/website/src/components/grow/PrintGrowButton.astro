@@ -1,0 +1,19 @@
+---
+interface Props {
+  target: string;
+  class?: string;
+}
+
+const { target, class: className } = Astro.props;
+
+const base_class =
+  'inline-flex items-center rounded-sm border border-zinc-600 bg-zinc-800 px-3 py-2 text-sm uppercase tracking-wide text-zinc-100 transition-colors hover:border-white/50 hover:bg-white hover:text-black';
+---
+
+<button
+  type="button"
+  data-grow-print={target}
+  class:list={[base_class, className]}
+>
+  <slot />
+</button>

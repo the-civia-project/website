@@ -1,0 +1,27 @@
+---
+interface Props {
+  label: string;
+  text: string;
+}
+
+const { label, text } = Astro.props;
+const id = `copy-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+---
+
+<div class="rounded-sm border border-zinc-800 bg-zinc-950 p-4">
+  <div class="flex items-center justify-between gap-2">
+    <span class="text-xs uppercase tracking-widest text-zinc-500">{label}</span>
+    <button
+      type="button"
+      data-copy-target={id}
+      class="copy-btn shrink-0 rounded-sm px-2 py-1 text-xs text-zinc-400 transition-colors hover:text-white"
+    >
+      Copy
+    </button>
+  </div>
+  <pre
+    id={id}
+    class="mt-3 font-mono text-sm leading-relaxed whitespace-pre-wrap text-zinc-300"
+    >{text}</pre
+  >
+</div>
