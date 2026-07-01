@@ -95,18 +95,19 @@ const spSection = (id: string) => {
 
     <ArticleAside label="Abstract" italic>
       <p>
-        <em>The Social Paper</em> examines the architectural and economic forces that
-        transformed the World Wide Web from a decentralized network of human connection
-        into an engine of surveillance capitalism. It proposes needed steps for ensuring
-        user privacy.
+        <em>This Social Paper</em> examines the architectural decisions and
+        economic forces that transformed the internet from a decentralized
+        network of human connection into an engine of surveillance capitalism.
+        It then proposes needed first steps for ensuring
+        user privacy and reimagining the fundamental covenant between the public and the platforms that have come to dominate what ultimately is a public resource.
       </p>
       <p>
         By tracing how privacy primitives were never embedded as non-negotiable
         defaults in the social web—and how even strong transit and messaging
-        encryption leaves users exposed to the platforms they interact with—this
+        encryption leaves users exposed to the platforms they interact with, this
         document dissects how commercial social media platforms have exploited
         the Web's open DNA to prioritize algorithmic addiction, ad-driven
-        capital gains, and corporate dominance over users' benefit.
+        capital gains, and corporate dominance over user benefit.
       </p>
       <p>
         Furthermore, it addresses the systemic vulnerabilities that allow
@@ -116,15 +117,14 @@ const spSection = (id: string) => {
         generation.
       </p>
       <p>
-        Ultimately, this paper does not serve as a foundational blueprint, but as
-        an exercise in reclaiming the digital town square. It proposes a radical
+        Ultimately, this paper does not serve as a foundational blueprint, but
+        as an exercise in reclaiming the digital town square. It proposes a radical
         architectural shift toward "local-only" privacy processing, cryptographic
         human-identity verification, and the establishment of a transparent,
         open-source, non-profit organization.
       </p>
       <p>
-        The goal is a fundamentally rebuilt social web: one engineered for human
-        well-being, where users are protected, companies are mere guests, and
+        The goal is a fundamentally rebuilt social web: one engineered for organic human communication, digital literacy, and general social development, where users are protected, companies are mere guests, and
         capital gains are permanently removed from the equation.
       </p>
     </ArticleAside>
@@ -135,210 +135,6 @@ const spSection = (id: string) => {
       <H2 id="part-i" part="Part I">
         The Architecture of Openness and the Lack of Privacy Primitives
       </H2>
-
-      <H3 id="part-i-the-necessary-architecture-of-openness"
-        >The Necessary Architecture of Openness</H3
-      >
-      <p>
-        When Tim Berners-Lee proposed the World Wide Web in 1989, his primary
-        objective was to solve a specific problem at CERN: the fragmentation of
-        information across incompatible computer systems. The Web was designed
-        as a radically open, decentralized system for researchers to share
-        documents. Its foundational building blocks—HTTP, HTML, and URLs—were
-        engineered for frictionless connectivity and data retrieval, built atop
-        an Internet whose own interconnection depended on Border Gateway
-        Protocol (BGP) routing between Autonomous Systems (ASNs)—the
-        independently operated networks of Internet Service Providers (ISPs) of
-        different tiers.
-      </p>
-
-      <p>
-        Noticeably absent from these foundational protocols were native privacy
-        primitives. There was no built-in mechanism for identity verification,
-        no native encryption, and no concept of personal data sovereignty.
-        Crucially, the Internet was not built with privacy in mind—<em
-          >nor should it have been</em
-        >. Over 35 years ago, this radical openness was a mandatory feature. The
-        cryptographic tools and computational power required for native privacy
-        would have crushed the fragile early network. It had to be frictionless
-        to allow for rapid, decentralized innovation.
-      </p>
-
-      <p>
-        However, as the Internet transitioned from an academic network to a
-        commercial engine, the absence of privacy layers paved the way for an
-        ecosystem dominated by surveillance capitalism. That does not mean every
-        service on the Web requires the same privacy primitives—requirements are
-        business-specific. But wherever user behavior and interests can be
-        extracted, privacy primitives must be required—and on the open web, that
-        requirement can only be imposed legally, not enforced by the underlying
-        protocols. Those extractions are routinely used to serve targeted ads and
-        curated news—and in doing so, platforms can push users toward more
-        polarizing content, even when no one set out to divide them.
-      </p>
-
-      <p>
-        Because the Internet had to remain open, privacy cannot be mandated at
-        the protocol layer without closing the network to innovation. Requiring
-        consumer protection on the social web is therefore a legislative
-        endeavour—not a technical one. IPsec, TLS, WireGuard, and end-to-end
-        encryption are real privacy primitives; they protect users from third
-        parties and, when enforced, from platforms themselves. But on commercial
-        social media they cannot be <em>technically enforced</em> as
-        non-negotiable defaults—a platform can always decrypt at the destination,
-        bury E2EE in settings, or remove it entirely. Only law can require that
-        those primitives be implemented, maintained, and honored. Technical
-        architecture shows what compliance <em>looks like</em>; legislation is
-        what makes compliance <em>mandatory</em>.
-      </p>
-
-      <H3 id="part-i-the-scarcity-of-privacy-primitives"
-        >The Scarcity of Privacy Primitives</H3
-      >
-      <p>
-        A "primitive" in computer science is a basic building block upon which
-        more complex systems are built. While the Web developed robust
-        primitives for communication and data transfer, and later added genuine
-        privacy primitives that protect consumers from third parties. Yet for the
-        social web, those primitives were never embedded as structural
-        defaults—and they do not, on their own, protect users from the platforms
-        at the other end of the connection:
-      </p>
-
-      <ul>
-        <ArticleListItem>
-          <U>Cookies (1994):</U> Originally introduced by Netscape to solve a technical
-          issue (allowing a shopping cart to remember items), cookies were quickly
-          weaponized by ad networks into the primary vector for third-party tracking—and,
-          as cookies were later restricted by legislation (e.g. <ExternalLink
-            href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32002L0058"
-            >ePrivacy</ExternalLink
-          >, <ExternalLink
-            href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
-            >GDPR</ExternalLink
-          >) and browser policy, similar persistence shifted to localStorage, sessionStorage,
-          and IndexedDB.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>IPsec (1995):</U> A genuine privacy primitive at the network
-          layer—widely deployed in VPNs and enterprise security to protect
-          communications from third-party adversaries on the path. It does not,
-          however, protect users from the platform at the destination: social
-          media services still decrypt and harvest the raw data when it arrives.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>SSL/TLS (HTTPS):</U> Introduced in the mid-1990s, this encrypts
-          data in transit and protects consumers from eavesdropping by third
-          parties on the network. At the platform termination point, the
-          destination service still sees and can harvest the plaintext payload.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>WireGuard (2015):</U> Designed as a modern, high-performance
-          alternative to older VPN protocols like IPsec, WireGuard simplified
-          secure tunneling through state-of-the-art cryptography and a
-          remarkably small, auditable codebase. Like IPsec, it is a valid
-          primitive for securing transit from third parties; it does not prevent
-          the ultimate destination (the social platform) from harvesting the
-          decrypted payload once it arrives.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>End-to-End Encryption (E2EE):</U> True end-to-end encryption is a
-          genuine privacy primitive: when enforced, it protects message content
-          from third parties and from the platform itself. Commercial social
-          media has historically treated it as optional, buried in settings, and
-          revocable when revenue or regulation demands—never as a non-negotiable
-          default.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Mobile:</U> The same scarcity played out on mobile: advertising identifiers
-          (IDFA, GAID), on-device app storage, and third-party SDKs became primary
-          vectors for behavioral extraction—met only later with restrictions like
-          App Tracking Transparency.
-        </ArticleListItem>
-      </ul>
-
-      <p>
-        Because privacy against platform extraction was not a structural
-        primitive of the social web—and because even strong third-party
-        protections were treated as optional features—commercial platforms had to
-        bolt privacy onto the sides of their products. As the digital economy
-        matured, platform architects realized that engineering true privacy into
-        the system would directly cannibalize their primary source of capital:
-        targeted ads.
-      </p>
-
-      <H3 id="part-i-the-new-dna-local-only-primitives"
-        >The New DNA: Local-Only Primitives</H3
-      >
-      <p>
-        To fix this, the architecture must shift from centralized corporate
-        servers to local processing—meaning the user's own hardware handles the
-        computational load. True privacy primitives for the modern social web
-        must be built entirely around a "local-only" framework that securely
-        spans the user's personal hardware ecosystem. The primitives below are
-        the technical expression of those legal obligations—the architecture a
-        steward builds when privacy is required, not optional. This is a
-        foundational architecture—not a finished privacy guarantee. Governance,
-        query safeguards, and visible user control must still be woven in:
-      </p>
-
-      <ul>
-        <ArticleListItem>
-          <U>Local-only feed building:</U> At the platform level, public posts & content
-          are processed with machine learning so they can be matched to what users
-          are looking for, then stored in searchable databases on the platform. However,
-          instead of a centralized server profiling the user to decide what they should
-          see, this matching process is inverted. The user's device locally computes
-          an "intent"—a secure, on-device representation of their current interests
-          or search parameters—and sends it to the server to run the matching pipeline
-          for that feed request. The server does not retain intent to build a profile,
-          and it does not learn which content they engaged with from on-device interaction
-          history.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Local-only tracking of user platform interaction:</U> The device locally
-          observes user behavior to personalize the experience. If the platform needs
-          to update its broader models, it must rely on volunteers helping it do so
-          or by collecting anonymized data strictly from users who explicitly allow
-          it.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Local-only settings:</U> By enforcing local-only settings, user preferences
-          (blocks, themes, filters) act as an on-device firewall, preventing platforms
-          from mining "privacy toggles" as just another psychological data point.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Encrypted Cross-Device Synchronization:</U> To ensure a seamless user
-          experience, these local states are shared exclusively between the user's
-          own active sessions across their phone, tablet, laptop, and PC. This creates
-          a secure, personal data mesh. Synchronization happens via zero-trust, end-to-end
-          encrypted relays or direct peer-to-peer connections. The platform's servers
-          act only as blind couriers; they never hold the master copy, the decryption
-          keys, or the plaintext data. <ExternalLink
-            href="https://support.signal.org/hc/en-us/articles/213134507-Linked-Devices"
-            >Signal</ExternalLink
-          > and <ExternalLink
-            href="https://faq.whatsapp.com/general/download-and-installation/about-linked-devices"
-            >WhatsApp</ExternalLink
-          > already demonstrate this for messaging: linked devices stay synchronized end-to-end encrypted across
-          phone, tablet, and desktop.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Encrypted backups:</U> To protect against device loss without reverting
-          to corporate cloud storage, local state is backed up end-to-end encrypted.
-          Backup relays or user-controlled storage hold only ciphertext—the platform
-          never holds the decryption keys or plaintext data. <ExternalLink
-            href="https://support.signal.org/hc/en-us/articles/360007059732-Backup-and-Restore-Messages"
-            >Signal</ExternalLink
-          > and <ExternalLink
-            href="https://faq.whatsapp.com/general/chats/how-to-back-up-to-google-drive-with-end-to-end-encryption"
-            >WhatsApp</ExternalLink
-          > have already proven this model for messaging backups—Signal on its own
-          infrastructure, WhatsApp to Google Drive and iCloud when end-to-end
-          encrypted backup is enabled; the same approach can extend to the broader
-          social web.
-        </ArticleListItem>
-      </ul>
 
       <Conclusion id="conclusion-1" number={1} title="Improving the Social Web">
         <p>
@@ -351,10 +147,10 @@ const spSection = (id: string) => {
         </p>
 
         <p>
-          By demanding and implementing local-only feed building, local
-          settings, local-only tracking of user platform interaction, encrypted
-          cross-device synchronization, and encrypted backups, the tech industry
-          can fundamentally break the centralized data-harvesting model while
+          By demanding the implementation of local-only feed building, local
+          settings, local-only tracking of user-platform interaction, encrypted
+          cross-device synchronization, and encrypted backups, we can push the tech industry
+          to fundamentally breakaway from the centralized data-harvesting model while
           preserving connectivity.
         </p>
 
@@ -371,7 +167,7 @@ const spSection = (id: string) => {
             href="https://faq.whatsapp.com/general/chats/how-to-back-up-to-google-drive-with-end-to-end-encryption"
             >end-to-end encrypted backup</ExternalLink
           >. These are not
-          untested ideas—the social web need only adopt what messaging has already
+          untested ideas, the social web can adopt what messaging has already
           demonstrated.
         </p>
 
@@ -381,6 +177,217 @@ const spSection = (id: string) => {
           legislation, it will remain a fragile illusion.
         </p>
       </Conclusion>
+
+      <details class="mt-8 border-t border-zinc-800 pt-6">
+        <summary class="cursor-pointer select-none [&::-webkit-details-marker]:hidden marker:hidden text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors py-1">
+          Read full section
+        </summary>
+        <div class="mt-6">
+          <H3 id="part-i-the-necessary-architecture-of-openness"
+            >The Necessary Architecture of Openness</H3
+          >
+          <p>
+            When Tim Berners-Lee proposed the World Wide Web in 1989, his primary
+            objective was to solve a specific problem at CERN: the fragmentation of
+            information across incompatible computer systems. The Web was designed
+            as a radically open, decentralized system for researchers to share
+            documents. Its foundational building blocks—HTTP, HTML, and URLs—were
+            engineered for frictionless connectivity and data retrieval, built atop
+            an Internet whose own interconnection depended on Border Gateway
+            Protocol (BGP) routing between Autonomous Systems (ASNs)—the
+            independently operated networks of Internet Service Providers (ISPs) of
+            different tiers.
+          </p>
+
+          <p>
+            Noticeably absent from these foundational protocols were native privacy
+            primitives. There was no built-in mechanism for identity verification,
+            no native encryption, and no concept of personal data sovereignty.
+            Crucially, the Internet was not built with privacy in mind—<em
+              >nor should it have been</em
+            >. Over 35 years ago, this radical openness was a mandatory feature. The
+            cryptographic tools and computational power required for native privacy
+            would have crushed the fragile early network. It had to be frictionless
+            to allow for rapid, decentralized innovation.
+          </p>
+
+          <p>
+            However, as the Internet transitioned from an academic network to a
+            commercial engine, the absence of privacy layers paved the way for an
+            ecosystem dominated by surveillance capitalism. That does not mean every
+            service on the Web requires the same privacy primitives—requirements are
+            business-specific. But wherever user behavior and interests can be
+            extracted, privacy primitives must be required—and on the open web, that
+            requirement can only be imposed legally, not enforced by the underlying
+            protocols. Those extractions are routinely used to serve targeted ads and
+            curated news—and in doing so, platforms can push users toward more
+            polarizing content, even when no one set out to divide them.
+          </p>
+
+          <p>
+            Because the Internet had to remain open, privacy cannot be mandated at
+            the protocol layer without closing the network to innovation. Requiring
+            consumer protection on the social web is therefore a legislative
+            endeavour—not a technical one. IPsec, TLS, WireGuard, and end-to-end
+            encryption are real privacy primitives; they protect users from third
+            parties and, when enforced, from platforms themselves. But on commercial
+            social media they cannot be <em>technically enforced</em> as
+            non-negotiable defaults—a platform can always decrypt at the destination,
+            bury E2EE in settings, or remove it entirely. Only law can require that
+            those primitives be implemented, maintained, and honored. Technical
+            architecture shows what compliance <em>looks like</em>; legislation is
+            what makes compliance <em>mandatory</em>.
+          </p>
+
+          <H3 id="part-i-the-scarcity-of-privacy-primitives"
+            >The Scarcity of Privacy Primitives</H3
+          >
+          <p>
+            A "primitive" in computer science is a basic building block upon which
+            more complex systems are built. While the Web developed robust
+            primitives for communication and data transfer, and later added genuine
+            privacy primitives that protect consumers from third parties. Yet for the
+            social web, those primitives were never embedded as structural
+            defaults—and they do not, on their own, protect users from the platforms
+            at the other end of the connection:
+          </p>
+
+          <ul>
+            <ArticleListItem>
+              <U>Cookies (1994):</U> Originally introduced by Netscape to solve a technical
+              issue (allowing a shopping cart to remember items), cookies were quickly
+              weaponized by ad networks into the primary vector for third-party tracking—and,
+              as cookies were later restricted by legislation (e.g. <ExternalLink
+                href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32002L0058"
+                >ePrivacy</ExternalLink
+              >, <ExternalLink
+                href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+                >GDPR</ExternalLink
+              >) and browser policy, similar persistence shifted to localStorage, sessionStorage,
+              and IndexedDB.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>IPsec (1995):</U> A genuine privacy primitive at the network
+              layer—widely deployed in VPNs and enterprise security to protect
+              communications from third-party adversaries on the path. It does not,
+              however, protect users from the platform at the destination: social
+              media services still decrypt and harvest the raw data when it arrives.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>SSL/TLS (HTTPS):</U> Introduced in the mid-1990s, this encrypts
+              data in transit and protects consumers from eavesdropping by third
+              parties on the network. At the platform termination point, the
+              destination service still sees and can harvest the plaintext payload.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>WireGuard (2015):</U> Designed as a modern, high-performance
+              alternative to older VPN protocols like IPsec, WireGuard simplified
+              secure tunneling through state-of-the-art cryptography and a
+              remarkably small, auditable codebase. Like IPsec, it is a valid
+              primitive for securing transit from third parties; it does not prevent
+              the ultimate destination (the social platform) from harvesting the
+              decrypted payload once it arrives.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>End-to-End Encryption (E2EE):</U> True end-to-end encryption is a
+              genuine privacy primitive: when enforced, it protects message content
+              from third parties and from the platform itself. Commercial social
+              media has historically treated it as optional, buried in settings, and
+              revocable when revenue or regulation demands—never as a non-negotiable
+              default.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Mobile:</U> The same scarcity played out on mobile: advertising identifiers
+              (IDFA, GAID), on-device app storage, and third-party SDKs became primary
+              vectors for behavioral extraction—met only later with restrictions like
+              App Tracking Transparency.
+            </ArticleListItem>
+          </ul>
+
+          <p>
+            Because privacy against platform extraction was not a structural
+            primitive of the social web—and because even strong third-party
+            protections were treated as optional features—commercial platforms had to
+            bolt privacy onto the sides of their products. As the digital economy
+            matured, platform architects realized that engineering true privacy into
+            the system would directly cannibalize their primary source of capital:
+            targeted ads.
+          </p>
+
+          <H3 id="part-i-the-new-dna-local-only-primitives"
+            >The New DNA: Local-Only Primitives</H3
+          >
+          <p>
+            To fix this, the architecture must shift from centralized corporate
+            servers to local processing—meaning the user's own hardware handles the
+            computational load. True privacy primitives for the modern social web
+            must be built entirely around a "local-only" framework that securely
+            spans the user's personal hardware ecosystem. The primitives below are
+            the technical expression of those legal obligations—the architecture a
+            steward builds when privacy is required, not optional. This is a
+            foundational architecture—not a finished privacy guarantee. Governance,
+            query safeguards, and visible user control must still be woven in:
+          </p>
+
+          <ul>
+            <ArticleListItem>
+              <U>Local-only feed building:</U> At the platform level, public posts & content
+              are processed with machine learning so they can be matched to what users
+              are looking for, then stored in searchable databases on the platform. However,
+              instead of a centralized server profiling the user to decide what they should
+              see, this matching process is inverted. The user's device locally computes
+              an "intent"—a secure, on-device representation of their current interests
+              or search parameters—and sends it to the server to run the matching pipeline
+              for that feed request. The server does not retain intent to build a profile,
+              and it does not learn which content they engaged with from on-device interaction
+              history.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Local-only tracking of user platform interaction:</U> The device locally
+              observes user behavior to personalize the experience. If the platform needs
+              to update its broader models, it must rely on volunteers helping it do so
+              or by collecting anonymized data strictly from users who explicitly allow
+              it.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Local-only settings:</U> By enforcing local-only settings, user preferences
+              (blocks, themes, filters) act as an on-device firewall, preventing platforms
+              from mining "privacy toggles" as just another psychological data point.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Encrypted Cross-Device Synchronization:</U> To ensure a seamless user
+              experience, these local states are shared exclusively between the user's
+              own active sessions across their phone, tablet, laptop, and PC. This creates
+              a secure, personal data mesh. Synchronization happens via zero-trust, end-to-end
+              encrypted relays or direct peer-to-peer connections. The platform's servers
+              act only as blind couriers; they never hold the master copy, the decryption
+              keys, or the plaintext data. <ExternalLink
+                href="https://support.signal.org/hc/en-us/articles/213134507-Linked-Devices"
+                >Signal</ExternalLink
+              > and <ExternalLink
+                href="https://faq.whatsapp.com/general/download-and-installation/about-linked-devices"
+                >WhatsApp</ExternalLink
+              > already demonstrate this for messaging: linked devices stay synchronized end-to-end encrypted across
+              phone, tablet, and desktop.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Encrypted backups:</U> To protect against device loss without reverting
+              to corporate cloud storage, local state is backed up end-to-end encrypted.
+              Backup relays or user-controlled storage hold only ciphertext—the platform
+              never holds the decryption keys or plaintext data. <ExternalLink
+                href="https://support.signal.org/hc/en-us/articles/360007059732-Backup-and-Restore-Messages"
+                >Signal</ExternalLink
+              > and <ExternalLink
+                href="https://faq.whatsapp.com/general/chats/how-to-back-up-to-google-drive-with-end-to-end-encryption"
+                >WhatsApp</ExternalLink
+              > have already proven this model for messaging backups—Signal on its own
+              infrastructure, WhatsApp to Google Drive and iCloud when end-to-end
+              encrypted backup is enabled; the same approach can extend to the broader
+              social web.
+            </ArticleListItem>
+          </ul>
+        </div>
+      </details>
     </section>
 
     <section>
@@ -388,88 +395,19 @@ const spSection = (id: string) => {
         Hooked on the Feed and the Commodification of Connection
       </H2>
 
-      <H3 id="part-ii-social-media-hooked-on-the-feed"
-        >Social Media: Hooked on the Feed</H3
-      >
-      <p>
-        Social media platforms generate revenue by showing you ads. It is their
-        core engine. The absolute vast majority of their multi-trillion-dollar
-        valuations comes from harvesting identity and selling attention. Paid
-        services and features account for a very small percentage of their
-        bottom line.
-      </p>
-
-      <p>
-        In their early days, platforms like Facebook, Twitter, and Instagram
-        focused purely on user acquisition and connection. They were
-        venture-capital funded, and their investors needed those networks to
-        reach critical mass—winning the network-effects race was the path to a
-        successful exit. But once these companies went public, the stock market
-        demanded perpetual growth in Average Revenue Per User (ARPU). To drive
-        these capital gains, social media platforms made a critical architectural
-        shift: they abandoned chronological timelines in favor of algorithmic
-        feeds.
-      </p>
-
-      <p>
-        The engineering mandate became simple—keep people hooked on the feed for
-        as long as possible. The longer a user continuously scrolls, the more
-        ads they can be shown. Independent analysis confirms that major
-        platforms' algorithms reward engagement—and that outrage spreads before
-        fact-checking can occur. In this environment, privacy and users' benefit
-        are actively antithetical to the business model. Platforms designed user
-        interfaces to encourage oversharing and perfectly tailor the addiction
-        loop.
-      </p>
-
-      <H3 id="part-ii-algorithmic-interventions">Algorithmic Interventions</H3>
-      <p>
-        The most direct way to fix filter bubbles is not to retune a platform's
-        engagement objective function, but to restore chronological timelines by
-        default and—when users explicitly opt in—let locally computed intent
-        drive what they see.
-      </p>
-      <ul>
-        <ArticleListItem>
-          <U>User intent over engagement rewards:</U> Platforms should not train
-          algorithms to maximize clicks, likes, and watch time—or tune objective
-          functions to serve a "balanced diet" they define unilaterally. When users
-          explicitly choose an algorithmic feed, what they see should follow their
-          own locally computed intent: a secure, on-device query sent to the server
-          to run the matching pipeline for that request—without retaining intent
-          to build a profile or optimizing for engagement behind the user's back.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>The Exploration vs. Exploitation Tradeoff:</U> Recommendation systems
-          heavily favor "exploitation" (showing you what they know you like). To break
-          echo chambers, systems need to dial up "exploration" (taking a risk by showing
-          you something entirely new). This introduces planned serendipity into a
-          user's feed.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Bridging-Based Ranking:</U> When users opt into algorithmic feeds,
-          instead of promoting content that gets a high reaction from a specific,
-          polarized cluster of users, ranking can recognize sentiment across
-          diverse, opposing user clusters—not only positive reactions—and ensure
-          the full spectrum of perspectives is served. This elevates content that
-          finds common ground without silencing disagreement or over-indexing on
-          outrage from any one side.
-        </ArticleListItem>
-      </ul>
-
       <Conclusion
         id="conclusion-2"
         number={2}
         title="Adding the Social back in Social Media"
       >
         <p>
-          For too long, the "social" in social media has been entirely
+          For too long, the "social" in social media has been
           overshadowed by the "media" of advertising. Social networks should not
           be vectors for capital gains, engineered solely to keep investors
           happy and stock prices climbing. Their fundamental purpose should be
           to serve as a vector for genuine human connection. The Internet was
           designed to be a global melting pot, a shared digital space where our
-          differences are showcased to be cherished and celebrated. Instead, the
+          differences are showcased and constructively confronted. Instead, the
           current ad-driven models weaponize these differences, algorithmically
           optimizing for outrage to divide and polarize us simply because anger
           increases screen time.
@@ -478,7 +416,7 @@ const spSection = (id: string) => {
         <p>
           Commercial platforms stripped away users' benefit by abandoning
           chronological timelines and making outrage-optimized algorithmic feeds
-          the default—and often the only—option. A healthier social network must
+          the default (and often the only) option. A healthier social network must
           restore that choice. Users should be able to select the feed that
           suits them: a reverse-chronological timeline by default, or a
           local-only algorithmic feed when they explicitly opt in. The algorithm
@@ -492,15 +430,15 @@ const spSection = (id: string) => {
           on polarization should be read with extreme skepticism. When the
           subject of the research funds and controls the experiment, buries
           opt-in privacy features, and alters algorithms mid-trial without
-          disclosure, the conclusions serve the platform—not the public.
+          disclosure, the conclusions serve the platform, not the public.
         </p>
 
         <p>
           To reclaim this original promise, the underlying ownership structures
           of these platforms must change. The digital town square should not be
-          owned by a for-profit corporation beholden to the Stock Market.
+          owned by a for-profit corporation beholden to capital markets.
           Instead, social media platforms should be stewarded by non-profit
-          organizations.
+          organizations operating transparently in the public interest, with a clear mandate to protect users and ensure that the platform's architecture serves the public good rather than private profit.
         </p>
 
         <p>
@@ -516,146 +454,88 @@ const spSection = (id: string) => {
           /> can we finally add the "social" back into social media.
         </p>
       </Conclusion>
+
+      <details class="mt-8 border-t border-zinc-800 pt-6">
+        <summary class="cursor-pointer select-none [&::-webkit-details-marker]:hidden marker:hidden text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors py-1">
+          Read full section
+        </summary>
+        <div class="mt-6">
+          <H3 id="part-ii-social-media-hooked-on-the-feed"
+            >Social Media: Hooked on the Feed</H3
+          >
+          <p>
+            Social media platforms generate revenue by showing you ads. It is their
+            core engine. The absolute vast majority of their multi-trillion-dollar
+            valuations comes from harvesting identity and selling attention. Paid
+            services and features account for a very small percentage of their
+            bottom line.
+          </p>
+
+          <p>
+            In their early days, platforms like Facebook, Twitter, and Instagram
+            focused purely on user acquisition and connection. They were
+            venture-capital funded, and their investors needed those networks to
+            reach critical mass—winning the network-effects race was the path to a
+            successful exit. But once these companies went public, the stock market
+            demanded perpetual growth in Average Revenue Per User (ARPU). To drive
+            these capital gains, social media platforms made a critical architectural
+            shift: they abandoned chronological timelines in favor of algorithmic
+            feeds.
+          </p>
+
+          <p>
+            The engineering mandate became simple—keep people hooked on the feed for
+            as long as possible. The longer a user continuously scrolls, the more
+            ads they can be shown. Independent analysis confirms that major
+            platforms' algorithms reward engagement—and that outrage spreads before
+            fact-checking can occur. In this environment, privacy and users' benefit
+            are actively antithetical to the business model. Platforms designed user
+            interfaces to encourage oversharing and perfectly tailor the addiction
+            loop.
+          </p>
+
+          <H3 id="part-ii-algorithmic-interventions">Algorithmic Interventions</H3>
+          <p>
+            The most direct way to fix filter bubbles is not to retune a platform's
+            engagement objective function, but to restore chronological timelines by
+            default and—when users explicitly opt in—let locally computed intent
+            drive what they see.
+          </p>
+          <ul>
+            <ArticleListItem>
+              <U>User intent over engagement rewards:</U> Platforms should not train
+              algorithms to maximize clicks, likes, and watch time—or tune objective
+              functions to serve a "balanced diet" they define unilaterally. When users
+              explicitly choose an algorithmic feed, what they see should follow their
+              own locally computed intent: a secure, on-device query sent to the server
+              to run the matching pipeline for that request—without retaining intent
+              to build a profile or optimizing for engagement behind the user's back.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>The Exploration vs. Exploitation Tradeoff:</U> Recommendation systems
+              heavily favor "exploitation" (showing you what they know you like). To break
+              echo chambers, systems need to dial up "exploration" (taking a risk by showing
+              you something entirely new). This introduces planned serendipity into a
+              user's feed.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Bridging-Based Ranking:</U> When users opt into algorithmic feeds,
+              instead of promoting content that gets a high reaction from a specific,
+              polarized cluster of users, ranking can recognize sentiment across
+              diverse, opposing user clusters—not only positive reactions—and ensure
+              the full spectrum of perspectives is served. This elevates content that
+              finds common ground without silencing disagreement or over-indexing on
+              outrage from any one side.
+            </ArticleListItem>
+          </ul>
+        </div>
+      </details>
     </section>
 
     <section>
       <H2 id="part-iii" part="Part III">
         The Next Generation: Easing Children into the Digital World
       </H2>
-
-      <H3 id="part-iii-the-legislative-wave">The Legislative Wave</H3>
-      <p>
-        The addictive, ad-driven architecture of modern social media has proven
-        especially catastrophic for the developing minds of children.
-        Recognizing this, a massive legislative wave has recently swept the
-        globe. Over the last two years, governments have shifted from issuing
-        warnings to enacting hard legal barriers. <ExternalLink
-          href="https://www.legislation.gov.au/C2024A00127/asmade/text"
-          >Australia</ExternalLink
-        > has been at the forefront: since 10 December 2025, children under 16
-        have been barred from holding accounts on major platforms such as
-        Instagram, TikTok, and YouTube, with fines of up to A$49.5 million
-        levied on companies that fail to comply—while imposing no penalties on
-        young people themselves. Nations ranging from <ExternalLink
-          href="https://www.legislation.gov.uk/ukpga/2023/50/contents"
-          >the UK</ExternalLink
-        > and <ExternalLink
-          href="https://www.assemblee-nationale.fr/dyn/17/dossiers/proteger_mineurs_reseaux_sociaux_17e"
-          >France</ExternalLink
-        > to <ExternalLink
-          href="https://uaelegislation.gov.ae/en/legislations/4506"
-          >the UAE</ExternalLink
-        > are currently implementing their own age restrictions and mandatory
-        parental consent laws.
-      </p>
-
-      <p>
-        These laws come from a place of necessary urgency. However, as the <ExternalLink
-          href="https://news.un.org/en/story/2025/12/1166557"
-          >United Nations</ExternalLink
-        > and <ExternalLink
-          href="https://www.abc.net.au/news/2025-01-07/social-media-ban-mental-health-different-approach/104789108"
-          >child psychology experts</ExternalLink
-        > have pointed out, simply banning children from platforms is treating
-        the symptom rather than curing the disease. <ExternalLink
-          href="https://www.unicef.org.au/unicef-youth/staying-safe-online/social-media-ban-explainer"
-          >UNICEF Australia</ExternalLink
-        > agrees: the real fix is improving social media safety and listening
-        to young people—not merely delaying their access. Enforcing these bans
-        also pushes platforms toward behavioural inferencing and biometric age
-        checks—the same profiling machinery this paper argues against.
-      </p>
-
-      <p>
-        None of this criticism is an argument for ignoring the law. Where
-        legislators have acted—as in <ExternalLink
-          href="https://www.legislation.gov.au/C2024A00127/asmade/text"
-          >Australia</ExternalLink
-        > and the other jurisdictions named above—platforms operating in those
-        markets must comply fully. This paper may disagree with ban-first or
-        surveillance-heavy enforcement models and still hold that legal
-        obligations are binding: disagreement with policy is not permission to
-        disregard it.
-      </p>
-
-      <H3 id="part-iii-safe-by-design">Safe by Design</H3>
-      <p>
-        Completely isolating minors until their 16th birthday creates a
-        dangerous cliff-edge scenario: a child goes from having zero digital
-        exposure to being suddenly thrust into a highly manipulative,
-        algorithmically hostile environment with no preparation. Because
-        children are growing up in a digital-first world, they need to be
-        carefully <em>eased</em> into social media, not just locked out of it.
-      </p>
-
-      <p>
-        Easing children into the digital town square means the spaces they
-        inhabit must be "safe by design" from the ground up. This requires an
-        entirely different set of rules for underage accounts. Children do not
-        need algorithmic feeds optimized for endless scrolling; they need
-        chronological feeds that allow them to step away naturally. They need
-        the absolute guarantee, backed by <InternalLink
-          href="#part-i-the-new-dna-local-only-primitives"
-          paper={sp}
-          section={spSection('part-i')}
-          heading="The New DNA: Local-Only Primitives"
-        />, that their behavioral data is not being harvested to build psychological
-        profiles for targeted advertising.
-      </p>
-
-      <H3 id="part-iii-guardrails-for-minor-accounts"
-        >Guardrails for Minor Accounts</H3
-      >
-      <p>
-        Safe architecture alone is not enough. Where age restrictions,
-        parental-consent requirements, or other minor-protection laws apply—as
-        they already do in <ExternalLink
-          href="https://www.legislation.gov.au/C2024A00127/asmade/text"
-          >Australia</ExternalLink
-        >, <ExternalLink
-          href="https://www.legislation.gov.uk/ukpga/2023/50/contents"
-          >the UK</ExternalLink
-        >, <ExternalLink
-          href="https://www.assemblee-nationale.fr/dyn/17/dossiers/proteger_mineurs_reseaux_sociaux_17e"
-          >France</ExternalLink
-        >, <ExternalLink
-          href="https://uaelegislation.gov.ae/en/legislations/4506"
-          >the UAE</ExternalLink
-        >, and beyond—the platform will respect them—regardless of whether we
-        agree with every policy choice behind them. Compliance is not optional
-        decoration; it is part of easing children in responsibly, rather than
-        treating regulation and product design as opposing forces.
-      </p>
-
-      <p>
-        Underage accounts operate under deliberate limitations on the social
-        graph—and those limitations sit in parents' hands.
-      </p>
-
-      <p>
-        Public accounts eligible for minor interaction must appear on <strong
-          >curated allowlists</strong
-        > vetted against child-safety criteria. The allowlist defines what is
-        <em>eligible</em>, not what is automatic: parents still choose what
-        their child may select from those lists.
-      </p>
-
-      <p>
-        New connections—follows, direct messages, and other one-to-one or group
-        links—require explicit <strong>validation from a verified parent or
-        guardian</strong> before they take effect. A minor cannot freely expand
-        their reach; every new link passes through a parent. Even when a public
-        account is on the allowlist, a parent must still approve each specific
-        connection.
-      </p>
-
-      <p>
-        Guardrails on an underage account—connection rules, feed type, time
-        limits, and other restrictions—can be <strong
-          >added and removed by parents</strong
-        >. The platform provides safe defaults; parents retain full control to
-        tighten or relax limitations as their child matures.
-      </p>
 
       <Conclusion
         id="conclusion-3"
@@ -671,12 +551,12 @@ const spSection = (id: string) => {
             paper={sp}
             section={spSection('part-iii')}
             heading="The Legislative Wave"
-          />, we must respect it—even when we believe safe-by-design architecture would serve children better
+          />, we must respect it even when we believe safe-by-design architecture would serve children better
           than ban-first approaches alone. And we must constrain the social graph
-          itself—through curated allowlists of eligible public accounts—with
-          parents choosing what their child may access from those lists—parent
+          itself through curated allowlists of eligible public accounts with
+          parents choosing what their child may access from those lists, parent
           validation of every new connection, and parent-controlled limitations
-          that can be added or removed as needed—so that easing in never means
+          that can be added or removed as needed so that easing in never means
           exposure without supervision.
         </p>
 
@@ -690,82 +570,153 @@ const spSection = (id: string) => {
           complexities of the open Web.
         </p>
       </Conclusion>
+
+      <details class="mt-8 border-t border-zinc-800 pt-6">
+        <summary class="cursor-pointer select-none [&::-webkit-details-marker]:hidden marker:hidden text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors py-1">
+          Read full section
+        </summary>
+        <div class="mt-6">
+          <H3 id="part-iii-the-legislative-wave">The Legislative Wave</H3>
+          <p>
+            The addictive, ad-driven architecture of modern social media has proven
+            especially catastrophic for the developing minds of children.
+            Recognizing this, a massive legislative wave has recently swept the
+            globe. Over the last two years, governments have shifted from issuing
+            warnings to enacting hard legal barriers. <ExternalLink
+              href="https://www.legislation.gov.au/C2024A00127/asmade/text"
+              >Australia</ExternalLink
+            > has been at the forefront: since 10 December 2025, children under 16
+            have been barred from holding accounts on major platforms such as
+            Instagram, TikTok, and YouTube, with fines of up to A$49.5 million
+            levied on companies that fail to comply—while imposing no penalties on
+            young people themselves. Nations ranging from <ExternalLink
+              href="https://www.legislation.gov.uk/ukpga/2023/50/contents"
+              >the UK</ExternalLink
+            > and <ExternalLink
+              href="https://www.assemblee-nationale.fr/dyn/17/dossiers/proteger_mineurs_reseaux_sociaux_17e"
+              >France</ExternalLink
+            > to <ExternalLink
+              href="https://uaelegislation.gov.ae/en/legislations/4506"
+              >the UAE</ExternalLink
+            > are currently implementing their own age restrictions and mandatory
+            parental consent laws.
+          </p>
+
+          <p>
+            These laws come from a place of necessary urgency. However, as the <ExternalLink
+              href="https://news.un.org/en/story/2025/12/1166557"
+              >United Nations</ExternalLink
+            > and <ExternalLink
+              href="https://www.abc.net.au/news/2025-01-07/social-media-ban-mental-health-different-approach/104789108"
+              >child psychology experts</ExternalLink
+            > have pointed out, simply banning children from platforms is treating
+            the symptom rather than curing the disease. <ExternalLink
+              href="https://www.unicef.org.au/unicef-youth/staying-safe-online/social-media-ban-explainer"
+              >UNICEF Australia</ExternalLink
+            > agrees: the real fix is improving social media safety and listening
+            to young people—not merely delaying their access. Enforcing these bans
+            also pushes platforms toward behavioural inferencing and biometric age
+            checks—the same profiling machinery this paper argues against.
+          </p>
+
+          <p>
+            None of this criticism is an argument for ignoring the law. Where
+            legislators have acted—as in <ExternalLink
+              href="https://www.legislation.gov.au/C2024A00127/asmade/text"
+              >Australia</ExternalLink
+            > and the other jurisdictions named above—platforms operating in those
+            markets must comply fully. This paper may disagree with ban-first or
+            surveillance-heavy enforcement models and still hold that legal
+            obligations are binding: disagreement with policy is not permission to
+            disregard it.
+          </p>
+
+          <H3 id="part-iii-safe-by-design">Safe by Design</H3>
+          <p>
+            Completely isolating minors until their 16th birthday creates a
+            dangerous cliff-edge scenario: a child goes from having zero digital
+            exposure to being suddenly thrust into a highly manipulative,
+            algorithmically hostile environment with no preparation. Because
+            children are growing up in a digital-first world, they need to be
+            carefully <em>eased</em> into social media, not just locked out of it.
+          </p>
+
+          <p>
+            Easing children into the digital town square means the spaces they
+            inhabit must be "safe by design" from the ground up. This requires an
+            entirely different set of rules for underage accounts. Children do not
+            need algorithmic feeds optimized for endless scrolling; they need
+            chronological feeds that allow them to step away naturally. They need
+            the absolute guarantee, backed by <InternalLink
+              href="#part-i-the-new-dna-local-only-primitives"
+              paper={sp}
+              section={spSection('part-i')}
+              heading="The New DNA: Local-Only Primitives"
+            />, that their behavioral data is not being harvested to build psychological
+            profiles for targeted advertising.
+          </p>
+
+          <H3 id="part-iii-guardrails-for-minor-accounts"
+            >Guardrails for Minor Accounts</H3
+          >
+          <p>
+            Safe architecture alone is not enough. Where age restrictions,
+            parental-consent requirements, or other minor-protection laws apply—as
+            they already do in <ExternalLink
+              href="https://www.legislation.gov.au/C2024A00127/asmade/text"
+              >Australia</ExternalLink
+            >, <ExternalLink
+              href="https://www.legislation.gov.uk/ukpga/2023/50/contents"
+              >the UK</ExternalLink
+            >, <ExternalLink
+              href="https://www.assemblee-nationale.fr/dyn/17/dossiers/proteger_mineurs_reseaux_sociaux_17e"
+              >France</ExternalLink
+            >, <ExternalLink
+              href="https://uaelegislation.gov.ae/en/legislations/4506"
+              >the UAE</ExternalLink
+            >, and beyond—the platform will respect them—regardless of whether we
+            agree with every policy choice behind them. Compliance is not optional
+            decoration; it is part of easing children in responsibly, rather than
+            treating regulation and product design as opposing forces.
+          </p>
+
+          <p>
+            Underage accounts operate under deliberate limitations on the social
+            graph—and those limitations sit in parents' hands.
+          </p>
+
+          <p>
+            Public accounts eligible for minor interaction must appear on <strong
+              >curated allowlists</strong
+            > vetted against child-safety criteria. The allowlist defines what is
+            <em>eligible</em>, not what is automatic: parents still choose what
+            their child may select from those lists.
+          </p>
+
+          <p>
+            New connections—follows, direct messages, and other one-to-one or group
+            links—require explicit <strong>validation from a verified parent or
+            guardian</strong> before they take effect. A minor cannot freely expand
+            their reach; every new link passes through a parent. Even when a public
+            account is on the allowlist, a parent must still approve each specific
+            connection.
+          </p>
+
+          <p>
+            Guardrails on an underage account—connection rules, feed type, time
+            limits, and other restrictions—can be <strong
+              >added and removed by parents</strong
+            >. The platform provides safe defaults; parents retain full control to
+            tighten or relax limitations as their child matures.
+          </p>
+        </div>
+      </details>
     </section>
 
     <section>
       <H2 id="part-iv" part="Part IV">
         The Automation of Outrage and Reclaiming the Human Network
       </H2>
-
-      <H3 id="part-iv-the-ease-of-creating-and-managing-bots"
-        >The Ease of Creating and Managing Bots</H3
-      >
-      <p>
-        The radical openness that allowed the early Web to flourish has become
-        the exact vulnerability currently destroying its social fabric. Because
-        there is no structural identity verification on the modern web, creating
-        and managing bots on social media has become trivially easy.
-      </p>
-
-      <p>
-        Anyone with basic coding knowledge and a few dollars can spin up
-        thousands of synthetic accounts using automated scripts and open APIs.
-        Today, bots are not just spamming links; they are weaponized to game
-        algorithmic feeds; they act as super-spreaders of propaganda,
-        misinformation, disinformation, malinformation, and fake news. They
-        exist to artificially amplify outrage and polarize the public.
-      </p>
-
-      <H3 id="part-iv-the-industry-of-social-media-farms"
-        >The Industry of Social Media Farms</H3
-      >
-      <p>
-        Bots are only half the problem. Across the globe, an entire industry of
-        social media farms operates in plain sight: warehouses of phones,
-        freelancers paid per engagement, and operators juggling dozens—or
-        thousands—of accounts at once. These networks do not exist to converse.
-        They exist to manufacture momentum. A single farm can swarm a post with
-        likes and reposts until algorithms mistake manufactured hype for organic
-        virality, pushing divisive content into millions of genuine feeds. The
-        same infrastructure is used to spread propaganda, misinformation,
-        disinformation, malinformation, and fake news: coordinated accounts
-        amplify outrage, drown out nuance, and create the illusion that extreme
-        positions dominate the public square.
-      </p>
-
-      <p>
-        Unlike fully automated bots, farm accounts are often operated by real
-        people on real devices, which makes them harder for trust-and-safety
-        teams to classify and remove. They exploit the same open architecture
-        and engagement-driven ranking that bots do—only at industrial scale.
-      </p>
-
-      <H3 id="part-iv-ai-powered-bots-and-farms">AI-Powered Bots and Farms</H3>
-      <p>
-        Generative AI has supercharged both threats at once. Scripted bots no
-        longer need hand-written scripts, and farm operators no longer need
-        rooms of people typing identical replies. The same models that draft
-        marketing copy can now run entire account networks—holding contextual
-        conversations, mimicking human empathy, and producing flawless, highly
-        persuasive text at an infinite scale. A single operator can manage what
-        used to require a warehouse.
-      </p>
-
-      <p>
-        Beyond text, generative AI has ushered in a new era of synthetic
-        media—hyper-realistic deepfakes, fabricated photos, and completely fake
-        videos that are now nearly indistinguishable from reality, bypassing
-        human skepticism and rewriting it in real time. Because these bots act
-        and sound like real users, and can seamlessly generate fake visual
-        evidence of events that never happened, they are becoming nearly
-        impossible to spot through traditional means and incredibly difficult
-        for trust and safety teams to remove. The cost of generating a million
-        synthetic opinions, paired with fabricated visual media, is effectively
-        zero, allowing bad actors to entirely drown out genuine human discourse.
-        Defending democracies against this threat requires structural
-        verification, deliberation, and accountability—not content moderation
-        alone.
-      </p>
 
       <Conclusion id="conclusion-4" number={4} title="People First, Bots Never">
         <p>
@@ -784,139 +735,99 @@ const spSection = (id: string) => {
           but it is a meaningful improvement over the system we have today.
         </p>
       </Conclusion>
+
+      <details class="mt-8 border-t border-zinc-800 pt-6">
+        <summary class="cursor-pointer select-none [&::-webkit-details-marker]:hidden marker:hidden text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors py-1">
+          Read full section
+        </summary>
+        <div class="mt-6">
+          <H3 id="part-iv-the-ease-of-creating-and-managing-bots"
+            >The Ease of Creating and Managing Bots</H3
+          >
+          <p>
+            The radical openness that allowed the early Web to flourish has become
+            the exact vulnerability currently destroying its social fabric. Because
+            there is no structural identity verification on the modern web, creating
+            and managing bots on social media has become trivially easy.
+          </p>
+
+          <p>
+            Anyone with basic coding knowledge and a few dollars can spin up
+            thousands of synthetic accounts using automated scripts and open APIs.
+            Today, bots are not just spamming links; they are weaponized to game
+            algorithmic feeds; they act as super-spreaders of propaganda,
+            misinformation, disinformation, malinformation, and fake news. They
+            exist to artificially amplify outrage and polarize the public.
+          </p>
+
+          <H3 id="part-iv-the-industry-of-social-media-farms"
+            >The Industry of Social Media Farms</H3
+          >
+          <p>
+            Bots are only half the problem. Across the globe, an entire industry of
+            social media farms operates in plain sight: warehouses of phones,
+            freelancers paid per engagement, and operators juggling dozens—or
+            thousands—of accounts at once. These networks do not exist to converse.
+            They exist to manufacture momentum. A single farm can swarm a post with
+            likes and reposts until algorithms mistake manufactured hype for organic
+            virality, pushing divisive content into millions of genuine feeds. The
+            same infrastructure is used to spread propaganda, misinformation,
+            disinformation, malinformation, and fake news: coordinated accounts
+            amplify outrage, drown out nuance, and create the illusion that extreme
+            positions dominate the public square.
+          </p>
+
+          <p>
+            Unlike fully automated bots, farm accounts are often operated by real
+            people on real devices, which makes them harder for trust-and-safety
+            teams to classify and remove. They exploit the same open architecture
+            and engagement-driven ranking that bots do—only at industrial scale.
+          </p>
+
+          <H3 id="part-iv-ai-powered-bots-and-farms">AI-Powered Bots and Farms</H3>
+          <p>
+            Generative AI has supercharged both threats at once. Scripted bots no
+            longer need hand-written scripts, and farm operators no longer need
+            rooms of people typing identical replies. The same models that draft
+            marketing copy can now run entire account networks—holding contextual
+            conversations, mimicking human empathy, and producing flawless, highly
+            persuasive text at an infinite scale. A single operator can manage what
+            used to require a warehouse.
+          </p>
+
+          <p>
+            Beyond text, generative AI has ushered in a new era of synthetic
+            media—hyper-realistic deepfakes, fabricated photos, and completely fake
+            videos that are now nearly indistinguishable from reality, bypassing
+            human skepticism and rewriting it in real time. Because these bots act
+            and sound like real users, and can seamlessly generate fake visual
+            evidence of events that never happened, they are becoming nearly
+            impossible to spot through traditional means and incredibly difficult
+            for trust and safety teams to remove. The cost of generating a million
+            synthetic opinions, paired with fabricated visual media, is effectively
+            zero, allowing bad actors to entirely drown out genuine human discourse.
+            Defending democracies against this threat requires structural
+            verification, deliberation, and accountability—not content moderation
+            alone.
+          </p>
+        </div>
+      </details>
     </section>
 
     <section>
       <H2 id="part-v" part="Part V"> The Corporate Guest in a Human Space </H2>
 
-      <H3 id="part-v-rebalancing-the-current-power-dynamic"
-        >Rebalancing the Current Power Dynamic</H3
-      >
-      <p>
-        In the current iteration of the Web, users are treated as the product,
-        and corporations are treated as the primary customers. Social media
-        architectures are optimized entirely to appease these commercial
-        entities, granting them unfettered access to human attention and data.
-        To grab and hold that attention, engagement-driven ranking tends to
-        amplify polarizing and inflammatory content—material that provokes
-        strong reactions and keeps users on the app longer so that more ads can
-        be served. The platforms decide the defaults: algorithmic feeds over
-        chronological timelines, buried privacy settings over visible control,
-        corporate data retention over user sovereignty. They own the social
-        graph, the ranking systems, and the unilateral right to change the
-        rules—often announced in a policy update long after the product has
-        already shifted beneath users' feet.
-      </p>
-
-      <p>
-        This imbalance is not a failure of goodwill; it is a structural
-        consequence of for-profit stewardship. Public social media companies owe
-        a fiduciary duty to shareholders, not to the people using the platform.
-        Privacy primitives, chronological feeds, and reduced engagement are not
-        neutral product choices—they are direct threats to Average Revenue Per
-        User. A for-profit board cannot voluntarily surrender the architectural
-        levers that drive capital gains and expect to remain in office. As long
-        as the venue is built to maximize shareholder value, users will always
-        sit at the bottom of the hierarchy.
-      </p>
-
-      <p>
-        Rebalancing this dynamic requires reversing who the space is for. In a
-        human social network, power must flow from verified people outward.
-        Corporations may participate in the conversation, but they do not
-        architect the venue, own behavioral data, or decide by default what
-        humans see in their feeds. That reversal is architectural and
-        economic—not a settings panel, a transparency report, or a promise to
-        "do better." The platform must be governed for community welfare first;
-        only then can companies be relegated to guests rather than overlords.
-      </p>
-
-      <H3 id="part-v-pure-capitalism-and-social-capitalism"
-        >Pure Capitalism and Social Capitalism</H3
-      >
-      <p>
-        These are not abstract ideologies—they are two operating models for how
-        a social platform can be run. <em>Pure capitalism on the social web</em> is
-        the dominant model today: revenue from advertising and attention harvesting,
-        growth and ARPU as the measures of success, and user data and engagement treated
-        as inputs to capital gains. Algorithmic feeds are tuned to maximize time-on-app.
-        Encryption, privacy controls, and feed choice exist only so long as they do
-        not threaten revenue—when they do, they are buried, made optional, or removed
-        entirely. Surveillance capitalism, as described throughout this paper, is
-        the mechanism; pure capitalism names the governance outcome: shareholder value
-        placed above community welfare.
-      </p>
-
-      <p>
-        <em>Social capitalism on the social web</em> inverts that priority. The platform's
-        primary obligation is to its community—not to profit margins, quarterly earnings,
-        or investor returns. Capital is still required to operate the platform. Revenue
-        from optional premium features and services, donations, sponsorships, and
-        grants must fund maintenance, research and development, salaries, and bonuses—but
-        that capital does not own the architecture or the data layer. Stewardship
-        by a non-profit organization is the structural guarantee that community needs,
-        not capital needs, set the product direction. The platform's open-source code,
-        released under a license separate from this website, will permit anyone to
-        fork and operate a competing social media service. That ensures community
-        obligations are enforceable—not merely asserted in marketing copy. If the
-        steward breaks the rules, users are not locked in: they can audit the code,
-        depart, and sustain the mission from a fork. Feeds are not optimized for capital
-        gains; they are engineered for human connection and well-being.
-      </p>
-
-      <ul>
-        <ArticleListItem>
-          <U>Success metric:</U> Under pure capitalism, the platform optimizes for
-          ARPU and shareholder return. Under social capitalism, it optimizes for user
-          well-being and community health.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Steward:</U> A for-profit board accountable to investors versus a non-profit
-          organization accountable to its users and the public.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Corporate role:</U> Owner of the venue, the graph, and the defaults—versus
-          guest, present by contribution and subject to the community's rules.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Privacy primitives:</U> Negotiable the moment they threaten revenue—versus
-          non-negotiable requirements—legally mandated and structurally implemented
-          in the architecture.
-        </ArticleListItem>
-      </ul>
-
-      <p>
-        The distinction is not rhetorical; it determines what can be built and
-        what will survive. Under pure capitalism, every privacy primitive described in <InternalLink
-          href="#part-i-the-new-dna-local-only-primitives"
-          paper={sp}
-          section={spSection('part-i')}
-          heading="The New DNA: Local-Only Primitives"
-        /> is negotiable the moment it cannibalizes ad targeting. Under social capitalism,
-        those primitives remain stable because the steward is bound by law and by
-        non-profit governance, and because the institution is not engineered to
-        maximize shareholder value—not because the open Internet technically
-        prevents reversal. Lawful compliance may require adaptation of any
-        feature; that is true of every platform operating within the law. The difference
-        is what else can trigger those reversals. Under pure capitalism, direct communication,
-        local-only processing, and every other privacy primitive are features on loan—revocable
-        when revenue demands it, not only when regulation does. Under social capitalism,
-        the steward operates fully within regulation but holds a higher ethical boundary
-        than a for-profit company: capital gain alone is never sufficient reason to
-        abandon a primitive or sell out the users who depend on it.
-      </p>
-
       <Conclusion id="conclusion-5" number={5} title="Companies Second">
         <p>
-          Social media should be for people first, and companies are simply
+          Social media should be for people first, and corporations are simply
           guests in the conversation.
         </p>
 
         <p>
           We can look to the physical world for a healthier model of corporate
-          participation. When a company wants a presence at a major human social
-          event—such as a cultural festival, a city marathon, or a community
-          gathering—that presence is not granted by default, nor do they get to
+          participation. When a company wants a presence at a major social
+          event, such as a cultural festival, a city marathon, or a community
+          gathering, that presence is not granted by default, nor do they get to
           own the venue. Instead, their presence is usually linked to a massive
           donation or financial contribution to support the event itself. They
           are acknowledged as sponsors and guests, permitted to participate only
@@ -941,9 +852,133 @@ const spSection = (id: string) => {
           privilege earned by supporting the commons—through open-source
           maintenance, contributions to the non-profit stewarding the
           platform—not a right purchased with ad spend. That is the rebalancing:
-          people first, companies second.
+          people first, corporations second.
         </p>
       </Conclusion>
+
+      <details class="mt-8 border-t border-zinc-800 pt-6">
+        <summary class="cursor-pointer select-none [&::-webkit-details-marker]:hidden marker:hidden text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors py-1">
+          Read full section
+        </summary>
+        <div class="mt-6">
+          <H3 id="part-v-rebalancing-the-current-power-dynamic"
+            >Rebalancing the Current Power Dynamic</H3
+          >
+          <p>
+            In the current iteration of the Web, users are treated as the product,
+            and corporations are treated as the primary customers. Social media
+            architectures are optimized entirely to appease these commercial
+            entities, granting them unfettered access to human attention and data.
+            To grab and hold that attention, engagement-driven ranking tends to
+            amplify polarizing and inflammatory content—material that provokes
+            strong reactions and keeps users on the app longer so that more ads can
+            be served. The platforms decide the defaults: algorithmic feeds over
+            chronological timelines, buried privacy settings over visible control,
+            corporate data retention over user sovereignty. They own the social
+            graph, the ranking systems, and the unilateral right to change the
+            rules—often announced in a policy update long after the product has
+            already shifted beneath users' feet.
+          </p>
+
+          <p>
+            This imbalance is not a failure of goodwill; it is a structural
+            consequence of for-profit stewardship. Public social media companies owe
+            a fiduciary duty to shareholders, not to the people using the platform.
+            Privacy primitives, chronological feeds, and reduced engagement are not
+            neutral product choices—they are direct threats to Average Revenue Per
+            User. A for-profit board cannot voluntarily surrender the architectural
+            levers that drive capital gains and expect to remain in office. As long
+            as the venue is built to maximize shareholder value, users will always
+            sit at the bottom of the hierarchy.
+          </p>
+
+          <p>
+            Rebalancing this dynamic requires reversing who the space is for. In a
+            human social network, power must flow from verified people outward.
+            Corporations may participate in the conversation, but they do not
+            architect the venue, own behavioral data, or decide by default what
+            humans see in their feeds. That reversal is architectural and
+            economic—not a settings panel, a transparency report, or a promise to
+            "do better." The platform must be governed for community welfare first;
+            only then can companies be relegated to guests rather than overlords.
+          </p>
+
+          <H3 id="part-v-pure-capitalism-and-social-capitalism"
+            >Pure Capitalism and Social Capitalism</H3
+          >
+          <p>
+            These are not abstract ideologies—they are two operating models for how
+            a social platform can be run. <em>Pure capitalism on the social web</em> is
+            the dominant model today: revenue from advertising and attention harvesting,
+            growth and ARPU as the measures of success, and user data and engagement treated
+            as inputs to capital gains. Algorithmic feeds are tuned to maximize time-on-app.
+            Encryption, privacy controls, and feed choice exist only so long as they do
+            not threaten revenue—when they do, they are buried, made optional, or removed
+            entirely. Surveillance capitalism, as described throughout this paper, is
+            the mechanism; pure capitalism names the governance outcome: shareholder value
+            placed above community welfare.
+          </p>
+
+          <p>
+            <em>Social capitalism on the social web</em> inverts that priority. The platform's
+            primary obligation is to its community—not to profit margins, quarterly earnings,
+            or investor returns. Capital is still required to operate the platform. Revenue
+            from optional premium features and services, donations, sponsorships, and
+            grants must fund maintenance, research and development, salaries, and bonuses—but
+            that capital does not own the architecture or the data layer. Stewardship
+            by a non-profit organization is the structural guarantee that community needs,
+            not capital needs, set the product direction. The platform's open-source code,
+            released under a license separate from this website, will permit anyone to
+            fork and operate a competing social media service. That ensures community
+            obligations are enforceable—not merely asserted in marketing copy. If the
+            steward breaks the rules, users are not locked in: they can audit the code,
+            depart, and sustain the mission from a fork. Feeds are not optimized for capital
+            gains; they are engineered for human connection and well-being.
+          </p>
+
+          <ul>
+            <ArticleListItem>
+              <U>Success metric:</U> Under pure capitalism, the platform optimizes for
+              ARPU and shareholder return. Under social capitalism, it optimizes for user
+              well-being and community health.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Steward:</U> A for-profit board accountable to investors versus a non-profit
+              organization accountable to its users and the public.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Corporate role:</U> Owner of the venue, the graph, and the defaults—versus
+              guest, present by contribution and subject to the community's rules.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Privacy primitives:</U> Negotiable the moment they threaten revenue—versus
+              non-negotiable requirements—legally mandated and structurally implemented
+              in the architecture.
+            </ArticleListItem>
+          </ul>
+
+          <p>
+            The distinction is not rhetorical; it determines what can be built and
+            what will survive. Under pure capitalism, every privacy primitive described in <InternalLink
+              href="#part-i-the-new-dna-local-only-primitives"
+              paper={sp}
+              section={spSection('part-i')}
+              heading="The New DNA: Local-Only Primitives"
+            /> is negotiable the moment it cannibalizes ad targeting. Under social capitalism,
+            those primitives remain stable because the steward is bound by law and by
+            non-profit governance, and because the institution is not engineered to
+            maximize shareholder value—not because the open Internet technically
+            prevents reversal. Lawful compliance may require adaptation of any
+            feature; that is true of every platform operating within the law. The difference
+            is what else can trigger those reversals. Under pure capitalism, direct communication,
+            local-only processing, and every other privacy primitive are features on loan—revocable
+            when revenue demands it, not only when regulation does. Under social capitalism,
+            the steward operates fully within regulation but holds a higher ethical boundary
+            than a for-profit company: capital gain alone is never sufficient reason to
+            abandon a primitive or sell out the users who depend on it.
+          </p>
+        </div>
+      </details>
     </section>
 
     <section>
@@ -951,227 +986,233 @@ const spSection = (id: string) => {
         Law, Not Policy — Free Speech and Platform Responsibility
       </H2>
 
-      <H3 id="part-vi-platforms-as-private-legislatures">
-        Platforms as Private Legislatures
-      </H3>
-      <p>
-        Commercial social media platforms do not merely host speech—they govern
-        it. Meta, X, and their peers maintain sprawling Terms of Service and
-        "community standards" that function as a private legal code: vague,
-        unilateral, and subject to change without notice. A user can be suspended,
-        shadowbanned, or permanently removed not because they broke the law of any
-        country, but because a trust-and-safety team decided their speech was
-        "harmful," "misleading," or simply inconvenient to advertisers, regulators,
-        or the platform's own leadership.
-      </p>
-
-      <p>
-        This is not neutral infrastructure. It is vigilante governance. The
-        platform acts as prosecutor, judge, and executioner—with no obligation to
-        publish evidence, hold a hearing, or submit its decision to independent
-        review. When punishment is invisible, as with shadowbans, the user may not
-        even know they have been sanctioned. The digital town square has been
-        placed under the jurisdiction of corporate policy, not public law.
-      </p>
-
-      <H3 id="part-vi-vigilante-enforcement-and-government-flagging">
-        Vigilante Enforcement and Government Flagging
-      </H3>
-      <p>
-        The problem deepens when informal state power routes through these private
-        pipelines. Internal files released from X (formerly Twitter) documented
-        formal channels between platform staff and U.S. government agencies—cases
-        in which employees searched for reasons to suspend accounts that had been
-        flagged, with no judicial order and no appeal. Litigation surrounding <ExternalLink
-          href="https://www.supremecourt.gov/opinions/23pdf/23-411_19m2.pdf"
-          >Murthy v. Missouri</ExternalLink
-        > described similar pressure on Meta and other platforms to act on
-        COVID-related speech, election content, and other politically sensitive
-        topics. Whether or not every allegation in those cases constitutes unlawful
-        coercion, the structural pattern is clear: governments can influence
-        takedowns without going to court, and platforms can comply without
-        disclosing that state influence shaped the outcome.
-      </p>
-
-      <p>
-        As documented in <InternalLink
-          href="#part-vii-government-flagging-without-due-process-x"
-          paper={sp}
-          section={spSection('part-vii')}
-          heading="Government Flagging Without Due Process — X"
-        />, exposure followed—but no structural requirement to provide due process
-        or to separate lawful compliance from discretionary enforcement. Users are
-        left negotiating with entities whose moderation choices are opaque,
-        revocable, and accountable to neither voters nor courts.
-      </p>
-
-      <H3 id="part-vi-jurisdiction-follows-the-speaker">
-        Jurisdiction Follows the Speaker
-      </H3>
-      <p>
-        There is a healthier model, and maritime law offers a useful analogy. On
-        the high seas, a vessel is primarily governed by the law of its flag state—the
-        country of registration. In port, coastal states may enforce their own laws
-        within territorial waters. The ship's owner does not write a parallel code
-        of conduct for everyone aboard.
-      </p>
-
-      <p>
-        The same principle should govern speech on a human social network. What a
-        person may say should be bound by the law that governs <em>them</em>—where
-        they reside, and where they are physically present—not by a platform's
-        commercial interests or ideological preferences. The platform should not impose
-        additional speech rules beyond applicable law. Users are not subject to a
-        corporate morality layer sitting on top of statute.
-      </p>
-
-      <p>
-        This is a deliberate rejection of the status quo. Meta and X can remove you
-        because they dislike you, disagree with you, or because a government agency
-        asked—often with no judge involved. On a network built for human welfare,
-        the operative question is not "does the platform approve?" but "does
-        applicable law prohibit this, and has due process been followed?"
-      </p>
-
-      <H3 id="part-vi-architecture-is-not-speech-policy">
-        Architecture Is Not Speech Policy
-      </H3>
-      <p>
-        "No additional speech rules" does not mean "no rules." It means
-        distinguishing <em>speech governance</em> from <em>venue architecture</em>.
-        The obligations described elsewhere in this paper—verified identity and one
-        human per account (<InternalLink href="#part-iv" paper={sp} section={spSection('part-iv')} />), chronological feeds by default (<InternalLink href="#part-ii" paper={sp} section={spSection('part-ii')} />), guardrails for minor accounts (<InternalLink href="#part-iii" paper={sp} section={spSection('part-iii')} />)—are structural choices about how the space works. They are not a parallel speech code. A user in Germany and a user in Brazil may both post whatever their respective applicable laws permit; the platform does not rank lawful speech for outrage, bury it through shadowbans, or suppress it to protect advertiser comfort.
-      </p>
-
-      <H3 id="part-vi-professional-advice-and-verified-credentials">
-        Professional Advice and Verified Credentials
-      </H3>
-      <p>
-        Not all speech on a social network is the same. General expression—opinions,
-        debate, education—is one category. <em>Professional advice</em> is another:
-        directive counsel that can cause serious harm when wrong, such as telling
-        someone to take a medication, sell their shares, or sign a legal document.
-        That is not ordinary opinion. It is regulated conduct carried out through words.
-      </p>
-
-      <p>
-        Unauthorized practice of medicine, law, and regulated financial advice is
-        already illegal in most jurisdictions. The platform should not judge whether
-        professional advice is <em>correct</em>. It should require proof of license
-        before a user may hold themselves out as a physician, lawyer, or regulated
-        financial adviser. That is not a corporate morality layer—it is architecture
-        aligned with law.
-      </p>
-
-      <p>
-        Professional licenses map to <U>Electronic Attestations of Attributes</U> (EAA)
-        and <U>Qualified Electronic Attestations of Attributes</U> (QEAA) under <ExternalLink
-          href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183"
-          >eIDAS 2.0</ExternalLink
-        >, issued by authentic sources—medical councils, bar associations, financial
-        regulators—and presented through the <ExternalLink
-          href="https://commission.europa.eu/topics/digital-economy-and-society/european-digital-identity_en"
-          >EUDI Wallet</ExternalLink
-        >. Users prove license type, jurisdiction, and validity through <InternalLink
-          href="/technical-paper#part-i-selective-disclosure-and-zkp"
-          paper="Technical Paper"
-          section="Part I: Identity Verification Architecture"
-          heading="Selective Disclosure and Zero-Knowledge Proofs"
-        />—without oversharing identity. The platform verifies that a credential exists
-        and is in scope; it does not endorse the advice itself.
-      </p>
-
-      <ul>
-        <ArticleListItem>
-          <U>Default speech:</U> Any verified human may post opinions and general information
-          without a professional credential.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Professional advice mode:</U> Posting directive medical, legal, or regulated
-          financial advice should require a verified credential. The account should display
-          <em>Verified physician — [jurisdiction]</em> (or equivalent), not platform
-          approval of the content.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Public disclaimers:</U> Professional posts on the public lane should carry
-          a default notice that no doctor–patient, lawyer–client, or advisory relationship
-          is created.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Jurisdiction:</U> A credential proves authority in its issuing jurisdiction.
-          A license in one country does not automatically authorize practice elsewhere.
-        </ArticleListItem>
-      </ul>
-
-      <p>
-        Bad advice from a licensed professional remains a matter for regulators,
-        professional bodies, and courts—not for platform trust-and-safety teams.
-        The EU credential ecosystem is still maturing; identity and professional frameworks
-        beyond the European Union will be integrated as they mature.
-      </p>
-
-      <H3 id="part-vi-what-the-platform-is-responsible-for">
-        What the Platform Is Responsible For
-      </H3>
-      <p>
-        Platform responsibility, under this model, is narrow and explicit:
-      </p>
-      <ul>
-        <ArticleListItem>
-          <U>Lawful compliance:</U> Where legislators have acted—as with minor-protection
-          laws in <ExternalLink href="https://www.legislation.gov.au/C2024A00127/asmade/text"
-            >Australia</ExternalLink
-          >, the <ExternalLink href="https://www.legislation.gov.uk/ukpga/2023/50/contents"
-            >UK</ExternalLink
-          >, and elsewhere—the platform complies fully. Disagreement with a policy
-          is not permission to disregard it.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Lawful process:</U> Compelled removal, restriction, or deanonymization
-          requires a valid legal obligation—court order, statutory duty, or competent
-          authority—not an informal government flag or an internal policy judgment.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Transparency:</U> Government requests and legally compelled actions are
-          logged and reported. State influence on enforcement is not hidden behind
-          a Terms of Service pretext.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>No shadowbans:</U> If content is limited, the limit is visible to the
-          user, attributable to a legal basis, and subject to the appeals process
-          that applicable law requires.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>No discretionary ideological enforcement:</U> The platform does not
-          police lawful speech for "brand safety," political convenience, or
-          engagement optimization.
-        </ArticleListItem>
-      </ul>
-
-      <p>
-        Cross-border speech remains hard. Content legal for the speaker may be
-        illegal where it is accessed. Honest systems must confront audience
-        jurisdiction—through technical geo-restriction where law requires it, not
-        through global corporate censorship. VPNs, conflicts of law, and markets with
-        incompatible speech regimes are limitations we acknowledge rather than
-        paper over with a universal community standard.
-      </p>
-
       <Conclusion id="conclusion-6" number={6} title="Law, Not Terms of Service">
         <p>
           Free speech on the social web has been privatized. Platforms legislate,
-          punish, and reverse their own rules at will—sometimes at the informal
-          direction of governments, always without the constraints that bind public
+          punish, and reverse their own rules at will without the constraints that bind public
           institutions.
         </p>
         <p>
-          The platform should refuse that model. Speech is governed by law—the law that governs
-          the speaker—not by corporate policy. The steward's duty is to build a
+          We should refuse that model. Speech is governed by law—the law that governs
+          the speaker and is enacted by democratic processes—not by corporate policy. The steward's duty is to build a
           trustworthy venue, comply with lawful process, and stay out of the business
           of moral censorship. Architecture protects people; credentials anchor professional
           accountability; law bounds speech; the platform is neither legislature nor vigilante.
         </p>
       </Conclusion>
+
+      <details class="mt-8 border-t border-zinc-800 pt-6">
+        <summary class="cursor-pointer select-none [&::-webkit-details-marker]:hidden marker:hidden text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors py-1">
+          Read full section
+        </summary>
+        <div class="mt-6">
+          <H3 id="part-vi-platforms-as-private-legislatures">
+            Platforms as Private Legislatures
+          </H3>
+          <p>
+            Commercial social media platforms do not merely host speech—they govern
+            it. Meta, X, and their peers maintain sprawling Terms of Service and
+            "community standards" that function as a private legal code: vague,
+            unilateral, and subject to change without notice. A user can be suspended,
+            shadowbanned, or permanently removed not because they broke the law of any
+            country, but because a trust-and-safety team decided their speech was
+            "harmful," "misleading," or simply inconvenient to advertisers, regulators,
+            or the platform's own leadership.
+          </p>
+
+          <p>
+            This is not neutral infrastructure. It is vigilante governance. The
+            platform acts as prosecutor, judge, and executioner—with no obligation to
+            publish evidence, hold a hearing, or submit its decision to independent
+            review. When punishment is invisible, as with shadowbans, the user may not
+            even know they have been sanctioned. The digital town square has been
+            placed under the jurisdiction of corporate policy, not public law.
+          </p>
+
+          <H3 id="part-vi-vigilante-enforcement-and-government-flagging">
+            Vigilante Enforcement and Government Flagging
+          </H3>
+          <p>
+            The problem deepens when informal state power routes through these private
+            pipelines. Internal files released from X (formerly Twitter) documented
+            formal channels between platform staff and U.S. government agencies—cases
+            in which employees searched for reasons to suspend accounts that had been
+            flagged, with no judicial order and no appeal. Litigation surrounding <ExternalLink
+              href="https://www.supremecourt.gov/opinions/23pdf/23-411_19m2.pdf"
+              >Murthy v. Missouri</ExternalLink
+            > described similar pressure on Meta and other platforms to act on
+            COVID-related speech, election content, and other politically sensitive
+            topics. Whether or not every allegation in those cases constitutes unlawful
+            coercion, the structural pattern is clear: governments can influence
+            takedowns without going to court, and platforms can comply without
+            disclosing that state influence shaped the outcome.
+          </p>
+
+          <p>
+            As documented in <InternalLink
+              href="#part-vii-government-flagging-without-due-process-x"
+              paper={sp}
+              section={spSection('part-vii')}
+              heading="Government Flagging Without Due Process — X"
+            />, exposure followed—but no structural requirement to provide due process
+            or to separate lawful compliance from discretionary enforcement. Users are
+            left negotiating with entities whose moderation choices are opaque,
+            revocable, and accountable to neither voters nor courts.
+          </p>
+
+          <H3 id="part-vi-jurisdiction-follows-the-speaker">
+            Jurisdiction Follows the Speaker
+          </H3>
+          <p>
+            There is a healthier model, and maritime law offers a useful analogy. On
+            the high seas, a vessel is primarily governed by the law of its flag state—the
+            country of registration. In port, coastal states may enforce their own laws
+            within territorial waters. The ship's owner does not write a parallel code
+            of conduct for everyone aboard.
+          </p>
+
+          <p>
+            The same principle should govern speech on a human social network. What a
+            person may say should be bound by the law that governs <em>them</em>—where
+            they reside, and where they are physically present—not by a platform's
+            commercial interests or ideological preferences. The platform should not impose
+            additional speech rules beyond applicable law. Users are not subject to a
+            corporate morality layer sitting on top of statute.
+          </p>
+
+          <p>
+            This is a deliberate rejection of the status quo. Meta and X can remove you
+            because they dislike you, disagree with you, or because a government agency
+            asked—often with no judge involved. On a network built for human welfare,
+            the operative question is not "does the platform approve?" but "does
+            applicable law prohibit this, and has due process been followed?"
+          </p>
+
+          <H3 id="part-vi-architecture-is-not-speech-policy">
+            Architecture Is Not Speech Policy
+          </H3>
+          <p>
+            "No additional speech rules" does not mean "no rules." It means
+            distinguishing <em>speech governance</em> from <em>venue architecture</em>.
+            The obligations described elsewhere in this paper—verified identity and one
+            human per account (<InternalLink href="#part-iv" paper={sp} section={spSection('part-iv')} />), chronological feeds by default (<InternalLink href="#part-ii" paper={sp} section={spSection('part-ii')} />), guardrails for minor accounts (<InternalLink href="#part-iii" paper={sp} section={spSection('part-iii')} />)—are structural choices about how the space works. They are not a parallel speech code. A user in Germany and a user in Brazil may both post whatever their respective applicable laws permit; the platform does not rank lawful speech for outrage, bury it through shadowbans, or suppress it to protect advertiser comfort.
+          </p>
+
+          <H3 id="part-vi-professional-advice-and-verified-credentials">
+            Professional Advice and Verified Credentials
+          </H3>
+          <p>
+            Not all speech on a social network is the same. General expression—opinions,
+            debate, education—is one category. <em>Professional advice</em> is another:
+            directive counsel that can cause serious harm when wrong, such as telling
+            someone to take a medication, sell their shares, or sign a legal document.
+            That is not ordinary opinion. It is regulated conduct carried out through words.
+          </p>
+
+          <p>
+            Unauthorized practice of medicine, law, and regulated financial advice is
+            already illegal in most jurisdictions. The platform should not judge whether
+            professional advice is <em>correct</em>. It should require proof of license
+            before a user may hold themselves out as a physician, lawyer, or regulated
+            financial adviser. That is not a corporate morality layer—it is architecture
+            aligned with law.
+          </p>
+
+          <p>
+            Professional licenses map to <U>Electronic Attestations of Attributes</U> (EAA)
+            and <U>Qualified Electronic Attestations of Attributes</U> (QEAA) under <ExternalLink
+              href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183"
+              >eIDAS 2.0</ExternalLink
+            >, issued by authentic sources—medical councils, bar associations, financial
+            regulators—and presented through the <ExternalLink
+              href="https://commission.europa.eu/topics/digital-economy-and-society/european-digital-identity_en"
+              >EUDI Wallet</ExternalLink
+            >. Users prove license type, jurisdiction, and validity through <InternalLink
+              href="/technical-paper#part-i-selective-disclosure-and-zkp"
+              paper="Technical Paper"
+              section="Part I: Identity Verification Architecture"
+              heading="Selective Disclosure and Zero-Knowledge Proofs"
+            />—without oversharing identity. The platform verifies that a credential exists
+            and is in scope; it does not endorse the advice itself.
+          </p>
+
+          <ul>
+            <ArticleListItem>
+              <U>Default speech:</U> Any verified human may post opinions and general information
+              without a professional credential.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Professional advice mode:</U> Posting directive medical, legal, or regulated
+              financial advice should require a verified credential. The account should display
+              <em>Verified physician — [jurisdiction]</em> (or equivalent), not platform
+              approval of the content.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Public disclaimers:</U> Professional posts on the public lane should carry
+              a default notice that no doctor–patient, lawyer–client, or advisory relationship
+              is created.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Jurisdiction:</U> A credential proves authority in its issuing jurisdiction.
+              A license in one country does not automatically authorize practice elsewhere.
+            </ArticleListItem>
+          </ul>
+
+          <p>
+            Bad advice from a licensed professional remains a matter for regulators,
+            professional bodies, and courts—not for platform trust-and-safety teams.
+            The EU credential ecosystem is still maturing; identity and professional frameworks
+            beyond the European Union will be integrated as they mature.
+          </p>
+
+          <H3 id="part-vi-what-the-platform-is-responsible-for">
+            What the Platform Is Responsible For
+          </H3>
+          <p>
+            Platform responsibility, under this model, is narrow and explicit:
+          </p>
+          <ul>
+            <ArticleListItem>
+              <U>Lawful compliance:</U> Where legislators have acted—as with minor-protection
+              laws in <ExternalLink href="https://www.legislation.gov.au/C2024A00127/asmade/text"
+                >Australia</ExternalLink
+              >, the <ExternalLink href="https://www.legislation.gov.uk/ukpga/2023/50/contents"
+                >UK</ExternalLink
+              >, and elsewhere—the platform complies fully. Disagreement with a policy
+              is not permission to disregard it.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Lawful process:</U> Compelled removal, restriction, or deanonymization
+              requires a valid legal obligation—court order, statutory duty, or competent
+              authority—not an informal government flag or an internal policy judgment.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>Transparency:</U> Government requests and legally compelled actions are
+              logged and reported. State influence on enforcement is not hidden behind
+              a Terms of Service pretext.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>No shadowbans:</U> If content is limited, the limit is visible to the
+              user, attributable to a legal basis, and subject to the appeals process
+              that applicable law requires.
+            </ArticleListItem>
+            <ArticleListItem>
+              <U>No discretionary ideological enforcement:</U> The platform does not
+              police lawful speech for "brand safety," political convenience, or
+              engagement optimization.
+            </ArticleListItem>
+          </ul>
+
+          <p>
+            Cross-border speech remains hard. Content legal for the speaker may be
+            illegal where it is accessed. Honest systems must confront audience
+            jurisdiction—through technical geo-restriction where law requires it, not
+            through global corporate censorship. VPNs, conflicts of law, and markets with
+            incompatible speech regimes are limitations we acknowledge rather than
+            paper over with a universal community standard.
+          </p>
+        </div>
+      </details>
     </section>
 
     <section>
@@ -1179,240 +1220,13 @@ const spSection = (id: string) => {
         Lack of Accountability and Ethics in the Corporate Space
       </H2>
 
-      <p>
-        Under pure capitalism, ethical obligations—to users for honesty and
-        safety, to advertisers for fair metrics, to regulators for truthful
-        disclosure—are subordinated the moment they threaten revenue. Major
-        platforms routinely promise privacy, safety, or control—and when
-        incentives shift, they reverse course. When the law catches up, the bill
-        can be real: billion-dollar fines, class actions, congressional
-        hearings. Yet the cold, calculating math that governs big corporations
-        often budgets those costs as needed taxes—the predictable line item of
-        operating at scale—not a reason to change how the product works. Paying
-        a fine does not restore an ethical obligation to keep one's word or
-        protect vulnerable users. When fines are seen as taxes, breaking the
-        law is treated as a privilege for those who can pay, not a line that
-        must not be crossed.
-      </p>
-
-      <p>
-        The pattern repeats across companies and product lines. What follows is
-        a list of documented examples—each with sources—of ethical breaches:
-        deception, broken pledges, duty-of-care denial, misleading
-        regulators—where neither moral reckoning nor structural consequence
-        followed.
-      </p>
-
-      <p>
-        <U>The WhatsApp Acquisition Deception — Meta</U>
-      </p>
-      <ul>
-        <ArticleListItem>
-          Zuckerberg pledged at the 2014 acquisition not to change how WhatsApp
-          uses data; in 2016 WhatsApp shared phone numbers and metadata with
-          Facebook for advertising—new users had no opt-out. The FTC had warned
-          before the deal; advocates filed complaints. No meaningful penalty
-          followed (<ExternalLink
-            href="https://www.ftc.gov/system/files/documents/public_statements/297701/140410facebookwhatappltr.pdf"
-            >FTC</ExternalLink
-          >, <ExternalLink
-            href="https://abcnews.go.com/Business/Technology/whatsapp-sharing-data-facebook-raises-alarm-privacy-advocates/story?id=41717305"
-            >ABC News</ExternalLink
-          >, <ExternalLink
-            href="https://www.eff.org/deeplinks/2016/08/what-facebook-and-whatsapps-data-sharing-plans-really-mean-user-privacy-0"
-            >EFF</ExternalLink
-          >).
-        </ArticleListItem>
-      </ul>
-
-      <p>
-        <U>The “Potential Reach” Scam — Meta</U>
-      </p>
-      <ul>
-        <ArticleListItem>
-          Facebook’s Ads Manager presented “Potential Reach” as <em>people</em>
-          advertisers could target; analysts found roughly 25 million more young
-          Americans than Census data showed existed. Plaintiffs allege the
-          metric counted accounts, not people. A class action remains active; the
-          metric still ships and the ad business grew (<ExternalLink
-            href="https://www.nytimes.com/2017/09/06/business/media/facebook-advertisers.html"
-            >The New York Times</ExternalLink
-          >, <ExternalLink
-            href="https://www.reuters.com/legal/meta-platforms-must-face-advertisers-class-action-us-appeals-court-says-2024-03-21/"
-            >Reuters</ExternalLink
-          >, <ExternalLink
-            href="https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/R20.htm"
-            >Meta 10-K</ExternalLink
-          >).
-        </ArticleListItem>
-      </ul>
-
-      <p>
-        <U>The “Off-Facebook” Tracking Settlement — Meta</U>
-      </p>
-      <ul>
-        <ArticleListItem>
-          Zuckerberg’s <em>Clear History</em> promised to delete off-platform
-          data; the shipped tool disconnects it from your profile but does not
-          stop collection. The FTC imposed a $5 billion penalty in 2019; a $90
-          million settlement covered only 2010–2011 Like-button tracking.
-          Off-platform data remained central to ads (<ExternalLink
-            href="https://about.fb.com/news/2018/05/clear-history-2/"
-            >Meta</ExternalLink
-          >, <ExternalLink
-            href="https://www.ftc.gov/news-events/news/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions-facebook"
-            >FTC</ExternalLink
-          >, <ExternalLink
-            href="https://www.technologyreview.com/2020/01/29/276020/facebook-has-finally-launched-its-clear-history-button-but-it-doesnt-delete-anything/"
-            >MIT Technology Review</ExternalLink
-          >, <ExternalLink
-            href="https://www.reuters.com/legal/transactional/facebook-90-mln-privacy-settlement-approved-over-antitrust-lawyers-objection-2022-11-14/"
-            >Reuters</ExternalLink
-          >).
-        </ArticleListItem>
-      </ul>
-
-      <p>
-        <U>The 2019 Privacy Pivot — Meta</U>
-      </p>
-      <ul>
-        <ArticleListItem>
-          Zuckerberg pledged “the future is private”—end-to-end encryption across
-          Messenger, WhatsApp, and Instagram. Off-platform tracking continued;
-          Instagram encryption stalled as opt-in only, then was removed. The
-          pledge was treated as a marketing cycle, not a binding commitment (<ExternalLink
-            href="https://apnews.com/article/north-america-ap-top-news-facebook-facebook-privacy-scandal--mark-zuckerberg-a510374d496d4fea8dd69abf4096fd6b"
-            >AP</ExternalLink
-          >, <ExternalLink
-            href="https://www.computerweekly.com/feature/Facebooks-privacy-U-turn-how-Zuckerberg-backtracked-on-promises-to-protect-personal-data"
-            >Computer Weekly</ExternalLink
-          >).
-        </ArticleListItem>
-      </ul>
-
-      <p>
-        <U>The Teen Mental Health Denial — Meta</U>
-      </p>
-      <ul>
-        <ArticleListItem>
-          Executives publicly called harms inconclusive; under oath, Zuckerberg
-          denied a proven causal link to worse youth outcomes. Internal research
-          found Instagram worsened body image for one in three teen girls;
-          senators who requested the studies received a letter without them.
-          Disclosures and lawsuits followed—no retreat from teen engagement (<ExternalLink
-            href="https://docs.house.gov/meetings/IF/IF16/20211201/114268/HHRG-117-IF16-20211201-SD010.pdf"
-            >House document</ExternalLink
-          >, <ExternalLink href="https://metasinternalresearch.org/"
-            >Meta internal research summary</ExternalLink
-          >, <ExternalLink
-            href="https://www.apollothirteen.com/article/court-papers-meta-halted-research-after-harm/"
-            >litigation reporting</ExternalLink
-          >).
-        </ArticleListItem>
-      </ul>
-
-      <p>
-        <U>Instagram E2EE Buried in Settings, Then Removed — Instagram</U>
-      </p>
-      <ul>
-        <ArticleListItem>
-          Default E2EE on Instagram DMs was promised; in 2023 it shipped as
-          opt-in per chat, buried in settings. On 8 May 2026 Meta removed it,
-          citing low adoption, and directed users to WhatsApp while rolling out
-          Messenger ad hooks. Low adoption was manufactured; DMs are readable by
-          Meta again (<ExternalLink
-            href="https://www.bbc.com/news/articles/clypzxl3lvqo"
-            >BBC</ExternalLink
-          >, <ExternalLink
-            href="https://www.eff.org/deeplinks/2026/05/broken-promises-rip-instagrams-end-end-encrypted-dms"
-            >EFF</ExternalLink
-          >, <ExternalLink
-            href="https://www.theverge.com/tech/894752/instagram-end-to-end-encryption"
-            >The Verge</ExternalLink
-          >, <ExternalLink
-            href="https://developers.facebook.com/docs/messenger-platform/ads/ads-welcome-message-flows/"
-            >Messenger ad hooks</ExternalLink
-          >).
-        </ArticleListItem>
-      </ul>
-
-      <p>
-        <U>Fake Secure Messaging — Telegram</U>
-      </p>
-      <ul>
-        <ArticleListItem>
-          Telegram markets itself as a privacy-focused secure messenger, but
-          default chats are cloud-stored—not end-to-end encrypted. Only optional
-          Secret Chats are E2EE. Hundreds of millions of users treat it as
-          private; no major penalty for the architecture (<ExternalLink
-            href="https://www.telegram.org/press?setln=en"
-            >Telegram press</ExternalLink
-          >, <ExternalLink
-            href="https://freedom.press/digisec/blog/telegram-misrepresented-amid-founders-arrest/"
-            >Freedom of the Press Foundation</ExternalLink
-          >).
-        </ArticleListItem>
-      </ul>
-
-      <p>
-        <U>Misleading Regulators on Security and Spam Bots — X</U>
-      </p>
-      <ul>
-        <ArticleListItem>
-          Twitter claimed fewer than 5% of users were spam and represented FTC
-          security compliance. Whistleblower Peiter Zatko alleged executives
-          misled regulators, bonused growth over spam reduction, and avoided
-          measuring true bot prevalence. Twitter denied it; a separate $150
-          million FTC fine addressed phone-number ads, not bot metrics (<ExternalLink
-            href="https://www.washingtonpost.com/technology/interactive/2022/twitter-whistleblower-sec-spam/"
-            >The Washington Post</ExternalLink
-          >, <ExternalLink
-            href="https://apnews.com/article/technology-federal-trade-commission-us-securities-and-exchange-f1fe41b0bd7c5c407ecfb83509c671f5"
-            >AP</ExternalLink
-          >, <ExternalLink
-            href="https://www.cnbc.com/2022/08/23/twitter-whistleblower-alleges-execs-misled-board-and-public-on-spam-security.html"
-            >CNBC</ExternalLink
-          >).
-        </ArticleListItem>
-      </ul>
-
-      <p id="part-vii-government-flagging-without-due-process-x">
-        <U>Government Flagging Without Due Process — X</U>
-      </p>
-      <ul>
-        <ArticleListItem>
-          Twitter presented itself as an independent enforcer of its own Terms of
-          Service. Internal files show formal pipelines with U.S. agencies; staff
-          in documented cases searched for reasons to suspend flagged accounts
-          with no hearing or appeal. Exposure followed, but no structural
-          requirement to disclose state influence or provide due process (<ExternalLink
-            href="https://twitterfiles.substack.com/p/twitter-the-fbi-subsidiary"
-            >Matt Taibbi</ExternalLink
-          >, <ExternalLink href="https://en.wikipedia.org/wiki/Twitter_Files"
-            >summary</ExternalLink
-          >).
-        </ArticleListItem>
-      </ul>
-
-      <p>
-        Across these platforms, the arc is the same: promise trust,
-        misstate or bury the control, and—when the law catches up—pay for the
-        past. Then keep operating. The math is cold and deliberate: eat the
-        fine, retain the architecture, repeat. Reversals are product
-        decisions—not betrayals with remedies that bind the next promise. Until
-        penalties force lasting change, ethical obligations—honesty, duty of
-        care, fair dealing—and legal accountability remain optional for
-        corporations large enough to price the bill. Deception is normalized
-        when profitable.
-      </p>
-
       <Conclusion
         id="conclusion-7"
         number={7}
         title="When Fines Are Not Accountability—or Ethics"
       >
         <p>
-          The examples above share one pattern: corporations say what users,
+          The examples below share one pattern: corporations say what users,
           advertisers, and regulators want to hear; do something else when
           revenue, regulation, or product strategy shifts; and, when the law
           catches up, pay a real price—fines, settlements, lawsuits, and public
@@ -1427,88 +1241,257 @@ const spSection = (id: string) => {
 
         <p>
           Users, advertisers, and regulators are left negotiating with entities
-          whose core incentive is revenue, not truth. That gap is an ethical
+          whose core incentive is revenue, not public good or ethical considerations. That gap is an ethical
           failure as much as a governance one—structural, not the mistake of a
           single executive or product team. A corporation that treats its public
           commitments as marketing copy cannot be trusted to police itself;
-          self-policing cannot substitute for duties owed to the people who
-          depend on the product. The next reversal is already priced in.
+          self-policing cannot substitute for duties owed to the people whose
+          participation powers the platform's existence. The next reversal is already priced in.
         </p>
       </Conclusion>
+
+      <details class="mt-8 border-t border-zinc-800 pt-6">
+        <summary class="cursor-pointer select-none [&::-webkit-details-marker]:hidden marker:hidden text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors py-1">
+          Read full section
+        </summary>
+        <div class="mt-6">
+          <p>
+            Under pure capitalism, ethical obligations—to users for honesty and
+            safety, to advertisers for fair metrics, to regulators for truthful
+            disclosure—are subordinated the moment they threaten revenue. Major
+            platforms routinely promise privacy, safety, or control—and when
+            incentives shift, they reverse course. When the law catches up, the bill
+            can be real: billion-dollar fines, class actions, congressional
+            hearings. Yet the cold, calculating math that governs big corporations
+            often budgets those costs as needed taxes—the predictable line item of
+            operating at scale—not a reason to change how the product works. Paying
+            a fine does not restore an ethical obligation to keep one's word or
+            protect vulnerable users. When fines are seen as taxes, breaking the
+            law is treated as a privilege for those who can pay, not a line that
+            must not be crossed.
+          </p>
+
+          <p>
+            The pattern repeats across companies and product lines. What follows is
+            a list of documented examples—each with sources—of ethical breaches:
+            deception, broken pledges, duty-of-care denial, misleading
+            regulators—where neither moral reckoning nor structural consequence
+            followed.
+          </p>
+
+          <p>
+            <U>The WhatsApp Acquisition Deception — Meta</U>
+          </p>
+          <ul>
+            <ArticleListItem>
+              Zuckerberg pledged at the 2014 acquisition not to change how WhatsApp
+              uses data; in 2016 WhatsApp shared phone numbers and metadata with
+              Facebook for advertising—new users had no opt-out. The FTC had warned
+              before the deal; advocates filed complaints. No meaningful penalty
+              followed (<ExternalLink
+                href="https://www.ftc.gov/system/files/documents/public_statements/297701/140410facebookwhatappltr.pdf"
+                >FTC</ExternalLink
+              >, <ExternalLink
+                href="https://abcnews.go.com/Business/Technology/whatsapp-sharing-data-facebook-raises-alarm-privacy-advocates/story?id=41717305"
+                >ABC News</ExternalLink
+              >, <ExternalLink
+                href="https://www.eff.org/deeplinks/2016/08/what-facebook-and-whatsapps-data-sharing-plans-really-mean-user-privacy-0"
+                >EFF</ExternalLink
+              >).
+            </ArticleListItem>
+          </ul>
+
+          <p>
+            <U>The "Potential Reach" Scam — Meta</U>
+          </p>
+          <ul>
+            <ArticleListItem>
+              Facebook's Ads Manager presented "Potential Reach" as <em>people</em>
+              advertisers could target; analysts found roughly 25 million more young
+              Americans than Census data showed existed. Plaintiffs allege the
+              metric counted accounts, not people. A class action remains active; the
+              metric still ships and the ad business grew (<ExternalLink
+                href="https://www.nytimes.com/2017/09/06/business/media/facebook-advertisers.html"
+                >The New York Times</ExternalLink
+              >, <ExternalLink
+                href="https://www.reuters.com/legal/meta-platforms-must-face-advertisers-class-action-us-appeals-court-says-2024-03-21/"
+                >Reuters</ExternalLink
+              >, <ExternalLink
+                href="https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/R20.htm"
+                >Meta 10-K</ExternalLink
+              >).
+            </ArticleListItem>
+          </ul>
+
+          <p>
+            <U>The "Off-Facebook" Tracking Settlement — Meta</U>
+          </p>
+          <ul>
+            <ArticleListItem>
+              Zuckerberg's <em>Clear History</em> promised to delete off-platform
+              data; the shipped tool disconnects it from your profile but does not
+              stop collection. The FTC imposed a $5 billion penalty in 2019; a $90
+              million settlement covered only 2010–2011 Like-button tracking.
+              Off-platform data remained central to ads (<ExternalLink
+                href="https://about.fb.com/news/2018/05/clear-history-2/"
+                >Meta</ExternalLink
+              >, <ExternalLink
+                href="https://www.ftc.gov/news-events/news/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions-facebook"
+                >FTC</ExternalLink
+              >, <ExternalLink
+                href="https://www.technologyreview.com/2020/01/29/276020/facebook-has-finally-launched-its-clear-history-button-but-it-doesnt-delete-anything/"
+                >MIT Technology Review</ExternalLink
+              >, <ExternalLink
+                href="https://www.reuters.com/legal/transactional/facebook-90-mln-privacy-settlement-approved-over-antitrust-lawyers-objection-2022-11-14/"
+                >Reuters</ExternalLink
+              >).
+            </ArticleListItem>
+          </ul>
+
+          <p>
+            <U>The 2019 Privacy Pivot — Meta</U>
+          </p>
+          <ul>
+            <ArticleListItem>
+              Zuckerberg pledged "the future is private"—end-to-end encryption across
+              Messenger, WhatsApp, and Instagram. Off-platform tracking continued;
+              Instagram encryption stalled as opt-in only, then was removed. The
+              pledge was treated as a marketing cycle, not a binding commitment (<ExternalLink
+                href="https://apnews.com/article/north-america-ap-top-news-facebook-facebook-privacy-scandal--mark-zuckerberg-a510374d496d4fea8dd69abf4096fd6b"
+                >AP</ExternalLink
+              >, <ExternalLink
+                href="https://www.computerweekly.com/feature/Facebooks-privacy-U-turn-how-Zuckerberg-backtracked-on-promises-to-protect-personal-data"
+                >Computer Weekly</ExternalLink
+              >).
+            </ArticleListItem>
+          </ul>
+
+          <p>
+            <U>The Teen Mental Health Denial — Meta</U>
+          </p>
+          <ul>
+            <ArticleListItem>
+              Executives publicly called harms inconclusive; under oath, Zuckerberg
+              denied a proven causal link to worse youth outcomes. Internal research
+              found Instagram worsened body image for one in three teen girls;
+              senators who requested the studies received a letter without them.
+              Disclosures and lawsuits followed—no retreat from teen engagement (<ExternalLink
+                href="https://docs.house.gov/meetings/IF/IF16/20211201/114268/HHRG-117-IF16-20211201-SD010.pdf"
+                >House document</ExternalLink
+              >, <ExternalLink href="https://metasinternalresearch.org/"
+                >Meta internal research summary</ExternalLink
+              >, <ExternalLink
+                href="https://www.apollothirteen.com/article/court-papers-meta-halted-research-after-harm/"
+                >litigation reporting</ExternalLink
+              >).
+            </ArticleListItem>
+          </ul>
+
+          <p>
+            <U>Instagram E2EE Buried in Settings, Then Removed — Instagram</U>
+          </p>
+          <ul>
+            <ArticleListItem>
+              Default E2EE on Instagram DMs was promised; in 2023 it shipped as
+              opt-in per chat, buried in settings. On 8 May 2026 Meta removed it,
+              citing low adoption, and directed users to WhatsApp while rolling out
+              Messenger ad hooks. Low adoption was manufactured; DMs are readable by
+              Meta again (<ExternalLink
+                href="https://www.bbc.com/news/articles/clypzxl3lvqo"
+                >BBC</ExternalLink
+              >, <ExternalLink
+                href="https://www.eff.org/deeplinks/2026/05/broken-promises-rip-instagrams-end-end-encrypted-dms"
+                >EFF</ExternalLink
+              >, <ExternalLink
+                href="https://www.theverge.com/tech/894752/instagram-end-to-end-encryption"
+                >The Verge</ExternalLink
+              >, <ExternalLink
+                href="https://developers.facebook.com/docs/messenger-platform/ads/ads-welcome-message-flows/"
+                >Messenger ad hooks</ExternalLink
+              >).
+            </ArticleListItem>
+          </ul>
+
+          <p>
+            <U>Fake Secure Messaging — Telegram</U>
+          </p>
+          <ul>
+            <ArticleListItem>
+              Telegram markets itself as a privacy-focused secure messenger, but
+              default chats are cloud-stored—not end-to-end encrypted. Only optional
+              Secret Chats are E2EE. Hundreds of millions of users treat it as
+              private; no major penalty for the architecture (<ExternalLink
+                href="https://www.telegram.org/press?setln=en"
+                >Telegram press</ExternalLink
+              >, <ExternalLink
+                href="https://freedom.press/digisec/blog/telegram-misrepresented-amid-founders-arrest/"
+                >Freedom of the Press Foundation</ExternalLink
+              >).
+            </ArticleListItem>
+          </ul>
+
+          <p>
+            <U>Misleading Regulators on Security and Spam Bots — X</U>
+          </p>
+          <ul>
+            <ArticleListItem>
+              Twitter claimed fewer than 5% of users were spam and represented FTC
+              security compliance. Whistleblower Peiter Zatko alleged executives
+              misled regulators, bonused growth over spam reduction, and avoided
+              measuring true bot prevalence. Twitter denied it; a separate $150
+              million FTC fine addressed phone-number ads, not bot metrics (<ExternalLink
+                href="https://www.washingtonpost.com/technology/interactive/2022/twitter-whistleblower-sec-spam/"
+                >The Washington Post</ExternalLink
+              >, <ExternalLink
+                href="https://apnews.com/article/technology-federal-trade-commission-us-securities-and-exchange-f1fe41b0bd7c5c407ecfb83509c671f5"
+                >AP</ExternalLink
+              >, <ExternalLink
+                href="https://www.cnbc.com/2022/08/23/twitter-whistleblower-alleges-execs-misled-board-and-public-on-spam-security.html"
+                >CNBC</ExternalLink
+              >).
+            </ArticleListItem>
+          </ul>
+
+          <p id="part-vii-government-flagging-without-due-process-x">
+            <U>Government Flagging Without Due Process — X</U>
+          </p>
+          <ul>
+            <ArticleListItem>
+              Twitter presented itself as an independent enforcer of its own Terms of
+              Service. Internal files show formal pipelines with U.S. agencies; staff
+              in documented cases searched for reasons to suspend flagged accounts
+              with no hearing or appeal. Exposure followed, but no structural
+              requirement to disclose state influence or provide due process (<ExternalLink
+                href="https://twitterfiles.substack.com/p/twitter-the-fbi-subsidiary"
+                >Matt Taibbi</ExternalLink
+              >, <ExternalLink href="https://en.wikipedia.org/wiki/Twitter_Files"
+                >summary</ExternalLink
+              >).
+            </ArticleListItem>
+          </ul>
+
+          <p>
+            Across these platforms, the arc is the same: promise trust,
+            misstate or bury the control, and—when the law catches up—pay for the
+            past. Then keep operating. The math is cold and deliberate: eat the
+            fine, retain the architecture, repeat. Reversals are product
+            decisions—not betrayals with remedies that bind the next promise. Until
+            penalties force lasting change, ethical obligations—honesty, duty of
+            care, fair dealing—and legal accountability remain optional for
+            corporations large enough to price the bill. Deception is normalized
+            when profitable.
+          </p>
+        </div>
+      </details>
     </section>
 
     <section>
       <H2 id="part-viii" part="Part VIII">The Blueprint for a Private Web</H2>
 
-      <H3 id="part-viii-synthesizing-the-vision">Synthesizing the Vision</H3>
-      <p>
-        The trajectory of the modern Internet is not an accident; it is the
-        mathematical result of an open architecture colliding with the absolute
-        demand for capital gains. To repair the digital town square, we cannot
-        rely on the very corporations that profit from its degradation. We must
-        address all the systemic failures concurrently:
-      </p>
-
-      <ul>
-        <ArticleListItem>
-          We must improve the Web, as described in <InternalLink
-            href="#part-i-the-new-dna-local-only-primitives"
-            paper={sp}
-            section={spSection('part-i')}
-            heading="The New DNA: Local-Only Primitives"
-          />, by embedding local-only privacy primitives (like local-only feed building,
-          secure cross-device synchronization, and encrypted backups) directly into
-          its DNA.
-        </ArticleListItem>
-        <ArticleListItem>
-          We must add the "social" back into social media, as described in <InternalLink href="#part-ii" paper={sp} section={spSection('part-ii')} />, by restoring users' benefit over the feed—reverse-chronological by default,
-          with local-only algorithms available only as an explicit choice—rather than
-          forcing outrage-optimized feeds designed for capital gains.
-        </ArticleListItem>
-        <ArticleListItem>
-          We must protect the vulnerable, as described in <InternalLink href="#part-iii" paper={sp} section={spSection('part-iii')} />, by designing spaces that safely ease children into the digital world, rather
-          than exploiting their developing minds.
-        </ArticleListItem>
-        <ArticleListItem>
-          We must enforce a people first, bots never hierarchy, as described in <InternalLink href="#part-iv" paper={sp} section={spSection('part-iv')} />, by utilizing cryptographic identity protocols to eradicate
-          propaganda, misinformation, disinformation, malinformation, and fake news,
-          social media farms, and coordinated multi-account manipulation—and to enforce
-          human accountability.
-        </ArticleListItem>
-        <ArticleListItem>
-          We must put companies second, as described in <InternalLink href="#part-v" paper={sp} section={spSection('part-v')} />, ensuring that corporate entities are treated as contributing guests rather
-          than algorithmic dictators.
-        </ArticleListItem>
-        <ArticleListItem>
-          We must refuse corporate speech governance, as described in <InternalLink
-            href="#part-vi"
-            paper={sp}
-            section={spSection('part-vi')}
-          />, by binding what users may say to applicable law—not to platform Terms of
-          Service, shadowbans, or informal government flagging without judicial
-          oversight.
-        </ArticleListItem>
-        <ArticleListItem>
-          We must gate professional advice behind verified licenses, as described in <InternalLink
-            href="#part-vi-professional-advice-and-verified-credentials"
-            paper={sp}
-            section={spSection('part-vi')}
-            heading="Professional Advice and Verified Credentials"
-          />, using the EUDI Wallet to prove medical, legal, or regulated financial qualifications—without
-          the platform judging the truth of the advice itself.
-        </ArticleListItem>
-        <ArticleListItem>
-          We must insist on corporate accountability and ethics, as described in <InternalLink href="#part-vii" paper={sp} section={spSection('part-vii')} />, by recognizing that commercial platforms can deceive users and
-          regulators, deny duty of care, treat fines as a tax—pay, keep
-          operating, break promises, enforce bans without due process—and face
-          no obligation, ethical or structural, to keep their word.
-        </ArticleListItem>
-      </ul>
-
       <Conclusion id="conclusion-final" final title="The Commitment to Build">
         <p>
           Identifying these problems is no longer sufficient. Writing about the
-          necessary architecture is only the first step; the final step is to
+          necessary architecture is only the first step, the next step is to
           build it.
         </p>
 
@@ -1525,7 +1508,7 @@ const spSection = (id: string) => {
           transparent non-profit Non-Governmental Organization (NGO). The sole
           mission of this organization will be to build, steward, and maintain a
           fundamentally new, open-source social media platform. In the beginning,
-          this organization will be funded by donations and grants—not venture
+          this organization will be funded by donations and grants— and never by venture
           capital chasing a network-effects exit.
         </p>
 
@@ -1545,12 +1528,84 @@ const spSection = (id: string) => {
         <p>
           We are not building a platform to harvest your data, hook your
           attention, or optimize for outrage. We are building it entirely with
-          the user's benefit in mind, deliberately rejecting the pursuit of
+          the societal good in mind, deliberately rejecting the pursuit of
           "capital gains" that has corrupted the digital landscape. It is time
           to reclaim the digital town square and build a network that truly
           works for humanity.
         </p>
       </Conclusion>
+
+      <details class="mt-8 border-t border-zinc-800 pt-6">
+        <summary class="cursor-pointer select-none [&::-webkit-details-marker]:hidden marker:hidden text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors py-1">
+          Read full section
+        </summary>
+        <div class="mt-6">
+          <H3 id="part-viii-synthesizing-the-vision">Synthesizing the Vision</H3>
+          <p>
+            The trajectory of the modern Internet is not an accident; it is the
+            mathematical result of an open architecture colliding with the absolute
+            demand for capital gains. To repair the digital town square, we cannot
+            rely on the very corporations that profit from its degradation. We must
+            address all the systemic failures concurrently:
+          </p>
+
+          <ul>
+            <ArticleListItem>
+              We must improve the Web, as described in <InternalLink
+                href="#part-i-the-new-dna-local-only-primitives"
+                paper={sp}
+                section={spSection('part-i')}
+                heading="The New DNA: Local-Only Primitives"
+              />, by embedding local-only privacy primitives (like local-only feed building,
+              secure cross-device synchronization, and encrypted backups) directly into
+              its DNA.
+            </ArticleListItem>
+            <ArticleListItem>
+              We must add the "social" back into social media, as described in <InternalLink href="#part-ii" paper={sp} section={spSection('part-ii')} />, by restoring users' benefit over the feed—reverse-chronological by default,
+              with local-only algorithms available only as an explicit choice—rather than
+              forcing outrage-optimized feeds designed for capital gains.
+            </ArticleListItem>
+            <ArticleListItem>
+              We must protect the vulnerable, as described in <InternalLink href="#part-iii" paper={sp} section={spSection('part-iii')} />, by designing spaces that safely ease children into the digital world, rather
+              than exploiting their developing minds.
+            </ArticleListItem>
+            <ArticleListItem>
+              We must enforce a people first, bots never hierarchy, as described in <InternalLink href="#part-iv" paper={sp} section={spSection('part-iv')} />, by utilizing cryptographic identity protocols to eradicate
+              propaganda, misinformation, disinformation, malinformation, and fake news,
+              social media farms, and coordinated multi-account manipulation—and to enforce
+              human accountability.
+            </ArticleListItem>
+            <ArticleListItem>
+              We must put companies second, as described in <InternalLink href="#part-v" paper={sp} section={spSection('part-v')} />, ensuring that corporate entities are treated as contributing guests rather
+              than algorithmic dictators.
+            </ArticleListItem>
+            <ArticleListItem>
+              We must refuse corporate speech governance, as described in <InternalLink
+                href="#part-vi"
+                paper={sp}
+                section={spSection('part-vi')}
+              />, by binding what users may say to applicable law—not to platform Terms of
+              Service, shadowbans, or informal government flagging without judicial
+              oversight.
+            </ArticleListItem>
+            <ArticleListItem>
+              We must gate professional advice behind verified licenses, as described in <InternalLink
+                href="#part-vi-professional-advice-and-verified-credentials"
+                paper={sp}
+                section={spSection('part-vi')}
+                heading="Professional Advice and Verified Credentials"
+              />, using the EUDI Wallet to prove medical, legal, or regulated financial qualifications—without
+              the platform judging the truth of the advice itself.
+            </ArticleListItem>
+            <ArticleListItem>
+              We must insist on corporate accountability and ethics, as described in <InternalLink href="#part-vii" paper={sp} section={spSection('part-vii')} />, by recognizing that commercial platforms can deceive users and
+              regulators, deny duty of care, treat fines as a tax—pay, keep
+              operating, break promises, enforce bans without due process—and face
+              no obligation, ethical or structural, to keep their word.
+            </ArticleListItem>
+          </ul>
+        </div>
+      </details>
     </section>
   </Article>
 </Layout>
