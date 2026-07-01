@@ -1,6 +1,4 @@
 ---
-import Label from './Label.astro';
-
 type Props = {
   title: string;
   id: string;
@@ -11,8 +9,6 @@ type Props = {
 
 const { title, id, ...variant } = Astro.props as Props;
 const is_final = 'final' in variant;
-const number = is_final ? undefined : variant.number;
-const label = is_final ? 'Final Conclusion' : `Conclusion ${number}`;
 ---
 
 <aside
@@ -25,22 +21,11 @@ const label = is_final ? 'Final Conclusion' : `Conclusion ${number}`;
   ]}
 >
   <div class="flex items-start gap-5">
-    {
-      number !== undefined && (
-        <span
-          aria-hidden="true"
-          class="select-none text-4xl font-bold leading-none tabular-nums text-zinc-800"
-        >
-          {number}
-        </span>
-      )
-    }
     <div class="min-w-0 flex-1">
       <header>
-        <Label>{label}</Label>
         <h3
           class:list={[
-            'mt-1 font-semibold text-white',
+            'font-semibold text-white',
             is_final ? 'text-xl' : 'text-lg',
           ]}
         >
