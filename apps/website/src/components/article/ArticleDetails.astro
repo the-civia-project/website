@@ -15,18 +15,51 @@ const {
   summaryOpen = 'Hide section',
   headings,
 } = Astro.props;
+
+const panelId = crypto.randomUUID();
 ---
 
 <article-details>
-  <details
-    class="group mt-8 overflow-hidden rounded-sm border border-zinc-800 bg-zinc-950 open:border-zinc-700"
+  <div
+    class:list={[
+      'article-details-root',
+      // group
+      'group',
+      // layout
+      'mt-8 overflow-hidden rounded-sm',
+      // border and background
+      'border border-zinc-800 bg-zinc-950',
+      'group-data-[state=open]:border-zinc-700',
+      // print
+      'print:mt-0 print:overflow-visible print:border-0 print:bg-transparent',
+    ]}
+    data-state="closed"
   >
-    <summary
-      class="cursor-pointer list-none transition-colors marker:hidden hover:bg-zinc-900/40 focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-inset focus-visible:outline-none [&::-webkit-details-marker]:hidden"
+    <div
+      class:list={[
+        'article-details-trigger',
+        // interactive
+        'cursor-pointer transition-colors',
+        'hover:bg-zinc-900/40',
+        'focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-inset focus-visible:outline-none',
+        // print
+        'print:hidden',
+      ]}
+      role="button"
+      tabindex="0"
+      aria-expanded="false"
+      aria-controls={panelId}
     >
       {
         headings.length > 0 && (
-          <div class="pointer-events-auto p-6 pb-0 group-open:hidden">
+          <div
+            class:list={[
+              // layout
+              'pointer-events-auto p-6 pb-0',
+              // open/closed state
+              'group-data-[state=open]:hidden',
+            ]}
+          >
             <Label>In this section</Label>
             <div class="my-4 border-t border-zinc-800" aria-hidden="true" />
             <ArticleDetailsToc headings={headings} />
@@ -34,13 +67,45 @@ const {
           </div>
         )
       }
-      <div class="flex items-center justify-between gap-4 p-6">
-        <span class="text-sm font-medium text-zinc-300 group-open:hidden">{summary}</span>
-        <span class="hidden text-sm font-medium text-zinc-300 group-open:inline"
-          >{summaryOpen}</span
+      <div
+        class:list={[
+          // layout
+          'flex items-center justify-between gap-4 p-6',
+        ]}
+      >
+        <span
+          class:list={[
+            // typography
+            'text-sm font-medium text-zinc-300',
+            // open/closed state
+            'group-data-[state=open]:hidden',
+          ]}
         >
+          {summary}
+        </span>
+        <span
+          class:list={[
+            // display
+            'hidden',
+            // typography
+            'text-sm font-medium text-zinc-300',
+            // open/closed state
+            'group-data-[state=open]:inline',
+          ]}
+        >
+          {summaryOpen}
+        </span>
         <svg
-          class="size-4 shrink-0 text-zinc-500 transition-transform duration-200 group-open:rotate-180"
+          class:list={[
+            // layout
+            'size-4 shrink-0',
+            // color
+            'text-zinc-500',
+            // transitions
+            'transition-transform duration-200',
+            // open/closed state
+            'group-data-[state=open]:rotate-180',
+          ]}
           viewBox="0 0 16 16"
           fill="none"
           aria-hidden="true"
@@ -53,11 +118,25 @@ const {
             stroke-linejoin="round"></path>
         </svg>
       </div>
-    </summary>
-    <div class="border-t border-zinc-800 px-6 pt-4 pb-6 [&>:first-child]:mt-0">
+    </div>
+
+    <div
+      id={panelId}
+      class:list={[
+        'article-details-panel',
+        // display
+        'hidden group-data-[state=open]:block',
+        // layout
+        'border-t border-zinc-800 px-6 pt-4 pb-6',
+        '[&>h3:first-of-type]:mt-1',
+        'print:[&>h3:first-of-type]:mt-10',
+        // print
+        'print:block print:border-0 print:px-0 print:pt-0 print:pb-0',
+      ]}
+    >
       <slot />
     </div>
-  </details>
+  </div>
 </article-details>
 
 <script>
@@ -66,32 +145,77 @@ const {
       if (this.#rescrolling) return;
       this.#openIfHashInside();
     };
+    #onClick = (event: Event) => {
+      if ((event.target as HTMLElement).closest('a')) return;
+      this.#toggle();
+    };
+    #onKeyDown = (event: Event) => {
+      if (!(event instanceof KeyboardEvent)) return;
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      this.#toggle();
+    };
     #rescrolling = false;
 
     connectedCallback() {
       this.#openIfHashInside();
       window.addEventListener('hashchange', this.#onHashChange);
+
+      const trigger = this.querySelector('.article-details-trigger');
+      trigger?.addEventListener('click', this.#onClick);
+      trigger?.addEventListener('keydown', this.#onKeyDown);
     }
 
     disconnectedCallback() {
       window.removeEventListener('hashchange', this.#onHashChange);
+
+      const trigger = this.querySelector('.article-details-trigger');
+      trigger?.removeEventListener('click', this.#onClick);
+      trigger?.removeEventListener('keydown', this.#onKeyDown);
+    }
+
+    #getRoot() {
+      return this.querySelector('.article-details-root') as HTMLElement | null;
+    }
+
+    #getTrigger() {
+      return this.querySelector(
+        '.article-details-trigger',
+      ) as HTMLElement | null;
+    }
+
+    #isOpen() {
+      return this.#getRoot()?.dataset.state === 'open';
+    }
+
+    #setState(open: boolean) {
+      const root = this.#getRoot();
+      const trigger = this.#getTrigger();
+      if (!root) return;
+
+      root.dataset.state = open ? 'open' : 'closed';
+      trigger?.setAttribute('aria-expanded', String(open));
+    }
+
+    #toggle() {
+      this.#setState(!this.#isOpen());
     }
 
     #openIfHashInside() {
       const hash = decodeURIComponent(window.location.hash.slice(1));
-      const details = this.querySelector('details');
-      if (!details) return;
+      const root = this.#getRoot();
+      if (!root) return;
 
       if (!hash) {
-        details.removeAttribute('open');
+        this.#setState(false);
         return;
       }
 
       const target = document.getElementById(hash);
       const shouldOpen = Boolean(target && this.contains(target));
-      const wasClosed = shouldOpen && !details.hasAttribute('open');
+      const wasClosed = shouldOpen && !this.#isOpen();
 
-      details.toggleAttribute('open', shouldOpen);
+      this.#setState(shouldOpen);
 
       if (shouldOpen && target && wasClosed) {
         this.#rescrollToHash(hash, target);
