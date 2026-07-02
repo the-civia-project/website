@@ -22,7 +22,12 @@ if (headings.length === 0) {
       <li>
         <a
           href={`#${id}`}
-          class="text-zinc-400 transition-colors hover:text-white"
+          class:list={[
+            // typography
+            'text-zinc-400',
+            // interactive
+            'transition-colors hover:text-white',
+          ]}
           onclick="event.stopPropagation()"
         >
           {title}

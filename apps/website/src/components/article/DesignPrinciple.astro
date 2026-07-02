@@ -14,17 +14,43 @@ const label = final ? 'Final Principle' : 'Design Principle';
 <aside
   id={id}
   class:list={[
-    'mt-10 scroll-mt-8 border-l-2 py-1 pl-6',
-    final
-      ? 'border-white/80 ring-1 ring-white/10'
-      : 'border-zinc-500',
+    // layout
+    'mt-10 scroll-mt-8 py-1 pl-6',
+    // border
+    'border-l-2',
+    final ? 'border-white/80 ring-1 ring-white/10' : 'border-zinc-500',
+    // print — layout
+    'print:py-2',
+    // print — border and background
+    'print:border-zinc-300 print:bg-zinc-50 print:ring-0',
+    // print — page breaks
+    'print:break-inside-avoid',
+    // print — descendants
+    '[&_h3]:print:text-zinc-950',
+    '[&_p]:print:text-zinc-700 [&_strong]:print:text-zinc-950',
+    final && 'print:[&_p:last-child]:text-zinc-950',
   ]}
 >
   <Label>{label}</Label>
-  <h3 class="mt-2 text-lg font-semibold text-white">{title}</h3>
+  <h3
+    class:list={[
+      // layout
+      'mt-2',
+      // typography
+      'text-lg font-semibold text-white',
+      // print — typography
+      'print:text-zinc-950',
+    ]}
+  >
+    {title}
+  </h3>
   <div
     class:list={[
-      'mt-4 space-y-4 [&_p]:leading-relaxed [&_p]:text-zinc-300 [&_strong]:font-semibold [&_strong]:text-white',
+      // layout
+      'mt-4 space-y-4',
+      // typography — descendants
+      '[&_p]:leading-relaxed [&_p]:text-zinc-300',
+      '[&_strong]:font-semibold [&_strong]:text-white',
       final && '[&_p:last-child]:text-zinc-100',
     ]}
   >

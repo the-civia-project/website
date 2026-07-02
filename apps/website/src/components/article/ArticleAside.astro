@@ -9,9 +9,32 @@ interface Props {
 const { label, italic = false } = Astro.props;
 ---
 
-<aside class="mt-10 border-l-2 border-zinc-700 py-1 pl-6">
+<aside
+  class:list={[
+    // layout
+    'mt-10 py-1 pl-6',
+    // border
+    'border-l-2 border-zinc-700',
+    // print — layout
+    'print:py-2',
+    // print — border and background
+    'print:border-zinc-300 print:bg-zinc-50',
+    // print — page breaks
+    'print:break-inside-avoid',
+    // print — descendants
+    '[&_p]:print:text-zinc-700',
+  ]}
+>
   <Label>{label}</Label>
-  <div class:list={['mt-3 space-y-4 text-zinc-300', italic && 'italic']}>
+  <div
+    class:list={[
+      // layout
+      'mt-3 space-y-4',
+      // typography
+      'text-zinc-300',
+      italic && 'italic',
+    ]}
+  >
     <slot />
   </div>
 </aside>

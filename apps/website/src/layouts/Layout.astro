@@ -25,22 +25,64 @@ const size_class = size === 'medium' ? 'md:w-150' : 'md:w-175';
     ]}
     transition:name="content"
   >
-    <main class:list={['flex w-full flex-col', 'gap-8', size_class]}>
-      <a href="/" class="print:hidden flex items-center gap-4">
+    <main
+      class:list={[
+        // layout
+        'flex w-full flex-col gap-8',
+        size_class,
+        // print — layout
+        'print:w-full print:max-w-none',
+      ]}
+    >
+      <a
+        href="/"
+        class:list={[
+          // layout
+          'flex items-center gap-4',
+          // print — display
+          'print:hidden',
+        ]}
+      >
         <Logo />
         <div>
-          <h1 class="text-xl md:text-3xl font-bold text-center">
+          <h1
+            class:list={[
+              // typography
+              'text-center text-xl font-bold md:text-3xl',
+            ]}
+          >
             The Civia Project
           </h1>
-          <h2 class="text-xs opacity-50 italic">Real People. Real Talk.</h2>
+          <h2
+            class:list={[
+              // typography
+              'text-xs italic opacity-50',
+            ]}
+          >
+            Real People. Real Talk.
+          </h2>
         </div>
       </a>
 
-      <hr class="print:hidden opacity-25" />
+      <hr
+        class:list={[
+          // opacity
+          'opacity-25',
+          // print — display
+          'print:hidden',
+        ]}
+      />
 
       <slot />
 
-      <div class="print:hidden mt-10">
+      <div
+        class:list={[
+          // layout
+          'mt-10',
+          // print — display
+          'print:hidden',
+        ]}
+      >
         <Footer />
       </div>
     </main>

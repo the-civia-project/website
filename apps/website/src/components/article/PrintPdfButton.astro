@@ -6,7 +6,23 @@ import PrinterIcon from '../../assets/icons/printer.svg';
   type="button"
   onclick="window.print()"
   aria-label="Print or save as PDF"
-  class="print:hidden shrink-0 rounded-sm p-2 text-zinc-400 transition-colors hover:text-white focus:text-white cursor-pointer"
+  class:list={[
+    // layout
+    'shrink-0 rounded-sm p-2',
+    // typography
+    'text-zinc-400',
+    // interactive
+    'cursor-pointer transition-colors hover:text-white focus:text-white',
+    // print — display
+    'print:hidden',
+  ]}
 >
-  <PrinterIcon class="size-5 fill-current" />
+  <PrinterIcon
+    class:list={[
+      // sizing
+      'size-5',
+      // color
+      'fill-current',
+    ]}
+  />
 </button>

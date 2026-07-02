@@ -6,14 +6,42 @@ import QuestionIcon from '../../assets/icons/question.svg';
 
 <div
   data-editorial-question
-  class="mt-4 rounded border border-yellow-500/40 bg-yellow-500/10 px-4 py-3 text-yellow-200"
+  class:list={[
+    // layout
+    'mt-4 px-4 py-3',
+    // border and background
+    'rounded border border-yellow-500/40 bg-yellow-500/10',
+    // typography
+    'text-yellow-200',
+    // print — display
+    'print:hidden',
+  ]}
 >
-  <div class="flex items-start gap-2 text-sm text-yellow-200">
+  <div
+    class:list={[
+      // layout
+      'flex items-start gap-2',
+      // typography
+      'text-sm text-yellow-200',
+    ]}
+  >
     <QuestionIcon
-      class="mt-0.5 size-5 shrink-0 fill-current text-yellow-200"
+      class:list={[
+        // layout
+        'mt-0.5 size-5 shrink-0',
+        // color
+        'fill-current text-yellow-200',
+      ]}
       aria-hidden="true"
     />
-    <div class="min-w-0 flex-1 text-yellow-200">
+    <div
+      class:list={[
+        // layout
+        'min-w-0 flex-1',
+        // typography
+        'text-yellow-200',
+      ]}
+    >
       <slot />
     </div>
   </div>

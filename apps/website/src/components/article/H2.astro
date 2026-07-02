@@ -12,9 +12,53 @@ const { id, part } = Astro.props;
 ---
 
 <h2
-  class="scroll-mt-8 mt-16 border-t border-zinc-800 pt-10 text-2xl font-bold leading-snug"
+  class:list={[
+    // layout
+    'scroll-mt-8 mt-16 pt-10',
+    // border
+    'border-t border-zinc-800',
+    // typography
+    'text-2xl font-bold leading-snug',
+    // print — layout
+    'print:mt-0 print:pt-0',
+    // print — border
+    'print:border-0',
+    // print — typography
+    'print:text-zinc-950',
+    // print — page breaks
+    'print:break-inside-avoid print:break-after-avoid-page',
+  ]}
   id={id}
 >
-  {part && <Label class="mb-2 block font-normal">{part}</Label>}
-  <InternalLink href={`#${id}`} variant="heading"><slot /></InternalLink>
+  {
+    part && (
+      <Label
+        class:list={[
+          // layout
+          'mb-2 block',
+          // typography
+          'font-normal',
+          // print — layout
+          'print:mb-3',
+          // print — typography
+          'print:text-xs print:font-medium print:uppercase print:tracking-widest',
+          'print:text-zinc-500',
+        ]}
+      >
+        {part}
+      </Label>
+    )
+  }
+  <InternalLink
+    href={`#${id}`}
+    variant="heading"
+    class:list={[
+      // print — typography
+      'print:text-2xl print:font-bold print:leading-tight print:text-zinc-900',
+      // print — descendants
+      'print:[&>span[aria-hidden]]:hidden',
+    ]}
+  >
+    <slot />
+  </InternalLink>
 </h2>

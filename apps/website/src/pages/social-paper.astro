@@ -8,10 +8,10 @@ import ArticleAside from '../components/article/ArticleAside.astro';
 import ArticleDetails from '../components/article/ArticleDetails.astro';
 import ArticleHeader from '../components/article/ArticleHeader.astro';
 import ArticleListItem from '../components/article/ArticleListItem.astro';
+import ArticlePart from '../components/article/ArticlePart.astro';
 import Conclusion from '../components/article/Conclusion.astro';
 import ExternalLink from '../components/article/ExternalLink.astro';
 import InternalLink from '../components/article/InternalLink.astro';
-import H2 from '../components/article/H2.astro';
 import H3 from '../components/article/H3.astro';
 import SectionLead from '../components/article/SectionLead.astro';
 import TableOfContents from '../components/article/TableOfContents.astro';
@@ -136,12 +136,12 @@ const spSection = (id: string) => {
 
     <TableOfContents items={parts} />
 
-    <section>
-      <H2 id="part-i" part="Part I">
-        The Architecture of Openness and the Lack of Privacy Primitives
-      </H2>
-
-      <SectionLead>
+    <ArticlePart
+      id="part-i"
+      part="Part I"
+      title="The Architecture of Openness and the Lack of Privacy Primitives"
+    >
+      <SectionLead slot="lead">
         The Web was built for frictionless openness, not privacy. That gap
         enabled surveillance capitalism. Fixing the social web means embedding
         local-only privacy primitives into its DNA, backed by legislation.
@@ -409,14 +409,14 @@ const spSection = (id: string) => {
           legislation, it will remain a fragile illusion.
         </p>
       </Conclusion>
-    </section>
+    </ArticlePart>
 
-    <section>
-      <H2 id="part-ii" part="Part II">
-        Hooked on the Feed and the Commodification of Connection
-      </H2>
-
-      <SectionLead>
+    <ArticlePart
+      id="part-ii"
+      part="Part II"
+      title="Hooked on the Feed and the Commodification of Connection"
+    >
+      <SectionLead slot="lead">
         Commercial platforms replaced chronological timelines with
         outrage-optimized algorithmic feeds to maximize ad revenue. Reclaiming
         genuine connection requires user-controlled feeds, non-profit
@@ -563,14 +563,14 @@ const spSection = (id: string) => {
           /> can we finally add the "social" back into social media.
         </p>
       </Conclusion>
-    </section>
+    </ArticlePart>
 
-    <section>
-      <H2 id="part-iii" part="Part III">
-        The Next Generation: Easing Children into the Digital World
-      </H2>
-
-      <SectionLead>
+    <ArticlePart
+      id="part-iii"
+      part="Part III"
+      title="The Next Generation: Easing Children into the Digital World"
+    >
+      <SectionLead slot="lead">
         Governments are banning children from social media, but bans alone create
         a dangerous cliff-edge. Minors need safe-by-design architecture: parent-controlled
         guardrails, chronological feeds, and digital literacy, not exploitation of
@@ -759,14 +759,14 @@ const spSection = (id: string) => {
           complexities of the open Web.
         </p>
       </Conclusion>
-    </section>
+    </ArticlePart>
 
-    <section>
-      <H2 id="part-iv" part="Part IV">
-        The Automation of Outrage and Reclaiming the Human Network
-      </H2>
-
-      <SectionLead>
+    <ArticlePart
+      id="part-iv"
+      part="Part IV"
+      title="The Automation of Outrage and Reclaiming the Human Network"
+    >
+      <SectionLead slot="lead">
         The Web's openness makes bots, click farms, and AI-generated
         disinformation cheap at industrial scale. Defending human discourse
         requires verified identity tying every account to a real, accountable
@@ -877,12 +877,14 @@ const spSection = (id: string) => {
           but it is a meaningful improvement over the system we have today.
         </p>
       </Conclusion>
-    </section>
+    </ArticlePart>
 
-    <section>
-      <H2 id="part-v" part="Part V"> The Corporate Guest in a Human Space </H2>
-
-      <SectionLead>
+    <ArticlePart
+      id="part-v"
+      part="Part V"
+      title="The Corporate Guest in a Human Space"
+    >
+      <SectionLead slot="lead">
         Today's platforms treat users as the product and corporations as primary
         customers. Social media should be a human space where companies participate
         as contributing guests, not architectural overlords chasing capital gains.
@@ -1055,14 +1057,14 @@ const spSection = (id: string) => {
           people first, corporations second.
         </p>
       </Conclusion>
-    </section>
+    </ArticlePart>
 
-    <section>
-      <H2 id="part-vi" part="Part VI">
-        Law, Not Policy — Free Speech and Platform Responsibility
-      </H2>
-
-      <SectionLead>
+    <ArticlePart
+      id="part-vi"
+      part="Part VI"
+      title="Law, Not Policy — Free Speech and Platform Responsibility"
+    >
+      <SectionLead slot="lead">
         Platforms have become private legislatures—writing speech rules, shadowbanning
         users, and routing government pressure without due process. Speech should
         be governed by democratic law, not corporate Terms of Service.
@@ -1315,14 +1317,14 @@ const spSection = (id: string) => {
           accountability; law bounds speech; the platform is neither legislature nor vigilante.
         </p>
       </Conclusion>
-    </section>
+    </ArticlePart>
 
-    <section>
-      <H2 id="part-vii" part="Part VII">
-        Lack of Accountability and Ethics in the Corporate Space
-      </H2>
-
-      <SectionLead>
+    <ArticlePart
+      id="part-vii"
+      part="Part VII"
+      title="Lack of Accountability and Ethics in the Corporate Space"
+    >
+      <SectionLead slot="lead">
         Major platforms routinely break privacy pledges, mislead regulators, and
         treat billion-dollar fines as the cost of doing business. That pattern
         reveals an ethical failure structural to for-profit stewardship, not
@@ -1589,12 +1591,14 @@ const spSection = (id: string) => {
           participation powers the platform's existence. The next reversal is already priced in.
         </p>
       </Conclusion>
-    </section>
+    </ArticlePart>
 
-    <section>
-      <H2 id="part-viii" part="Part VIII">The Blueprint for a Private Web</H2>
-
-      <SectionLead>
+    <ArticlePart
+      id="part-viii"
+      part="Part VIII"
+      title="The Blueprint for a Private Web"
+    >
+      <SectionLead slot="lead">
         Repairing the digital town square requires addressing every systemic failure
         at once. This paper's principles converge in a concrete commitment: an
         open-source, non-profit platform built for human welfare, not shareholder
@@ -1717,6 +1721,6 @@ const spSection = (id: string) => {
           works for humanity.
         </p>
       </Conclusion>
-    </section>
+    </ArticlePart>
   </Article>
 </Layout>

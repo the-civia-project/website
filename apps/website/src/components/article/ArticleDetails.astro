@@ -30,8 +30,10 @@ const panelId = crypto.randomUUID();
       // border and background
       'border border-zinc-800 bg-zinc-950',
       'group-data-[state=open]:border-zinc-700',
-      // print
-      'print:mt-0 print:overflow-visible print:border-0 print:bg-transparent',
+      // print — layout
+      'print:mt-0 print:overflow-visible',
+      // print — border and background
+      'print:border-0 print:bg-transparent',
     ]}
     data-state="closed"
   >
@@ -42,7 +44,7 @@ const panelId = crypto.randomUUID();
         'cursor-pointer transition-colors',
         'hover:bg-zinc-900/40',
         'focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-inset focus-visible:outline-none',
-        // print
+        // print — display
         'print:hidden',
       ]}
       role="button"
@@ -61,9 +63,25 @@ const panelId = crypto.randomUUID();
             ]}
           >
             <Label>In this section</Label>
-            <div class="my-4 border-t border-zinc-800" aria-hidden="true" />
+            <div
+              class:list={[
+                // layout
+                'my-4',
+                // border
+                'border-t border-zinc-800',
+              ]}
+              aria-hidden="true"
+            />
             <ArticleDetailsToc headings={headings} />
-            <div class="mt-4 border-t border-zinc-800" aria-hidden="true" />
+            <div
+              class:list={[
+                // layout
+                'mt-4',
+                // border
+                'border-t border-zinc-800',
+              ]}
+              aria-hidden="true"
+            />
           </div>
         )
       }
@@ -129,9 +147,16 @@ const panelId = crypto.randomUUID();
         // layout
         'border-t border-zinc-800 px-6 pt-4 pb-6',
         '[&>h3:first-of-type]:mt-1',
-        'print:[&>h3:first-of-type]:mt-10',
-        // print
-        'print:block print:border-0 print:px-0 print:pt-0 print:pb-0',
+        // print — display
+        'print:block',
+        // print — layout
+        'print:px-0 print:pt-0 print:pb-0',
+        // print — border
+        'print:border-0',
+        // print — descendants
+        '[&_p]:print:text-zinc-700',
+        '[&_li]:print:text-zinc-700',
+        '[&_strong]:print:text-zinc-950',
       ]}
     >
       <slot />

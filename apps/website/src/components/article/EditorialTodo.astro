@@ -11,16 +11,51 @@ const { title } = Astro.props;
 
 <div
   data-editorial-todo
-  class="mt-4 rounded border border-teal-500/40 bg-teal-500/10 px-4 py-3 text-teal-200 [&_*]:!text-teal-200"
+  class:list={[
+    // layout
+    'mt-4 px-4 py-3',
+    // border and background
+    'rounded border border-teal-500/40 bg-teal-500/10',
+    // typography
+    'text-teal-200',
+    // descendants
+    '[&_*]:!text-teal-200',
+    // print — display
+    'print:hidden',
+  ]}
 >
-  <div class="flex items-center gap-2 leading-none">
+  <div
+    class:list={[
+      // layout
+      'flex items-center gap-2 leading-none',
+    ]}
+  >
     <CheckCircleIcon
-      class="size-5 shrink-0 fill-current text-teal-200"
+      class:list={[
+        // layout
+        'size-5 shrink-0',
+        // color
+        'fill-current text-teal-200',
+      ]}
       aria-hidden="true"
     />
-    <span class="font-medium">{title}</span>
+    <span
+      class:list={[
+        // typography
+        'font-medium',
+      ]}
+    >
+      {title}
+    </span>
   </div>
-  <div class="mt-3 space-y-3 text-sm">
+  <div
+    class:list={[
+      // layout
+      'mt-3 space-y-3',
+      // typography
+      'text-sm',
+    ]}
+  >
     <slot />
   </div>
 </div>
