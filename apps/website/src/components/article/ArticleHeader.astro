@@ -1,5 +1,6 @@
 ---
 import { format } from 'date-fns';
+import Logo from '../Logo.astro';
 import Label from './Label.astro';
 import PrintPdfButton from './PrintPdfButton.astro';
 
@@ -9,14 +10,66 @@ interface Props {
   authors: string[];
   date: Date | string;
   draft?: boolean;
+  printCover?: boolean;
+  printDescription?: string;
 }
 
-const { label, title, authors, date, draft = false } = Astro.props;
+const {
+  label,
+  title,
+  authors,
+  date,
+  draft = false,
+  printCover = false,
+  printDescription,
+} = Astro.props;
 const authorLine = authors.join(', ');
 const published = format(new Date(date), 'dd/MM/yyyy');
 ---
 
-<header>
+<header
+  class:list={[
+    printCover && [
+      // print — layout
+      'print:flex print:min-h-[100vh] print:flex-col',
+      'print:items-start print:justify-center',
+      // print — page breaks
+      'print:break-inside-avoid print:break-after-page',
+    ],
+  ]}
+>
+  {
+    printCover && (
+      <div
+        class:list={[
+          // display
+          'hidden print:flex',
+          // print — layout
+          'print:mb-5 print:items-center print:gap-4',
+        ]}
+      >
+        <Logo />
+        <div>
+          <p
+            class:list={[
+              // print — typography
+              'print:text-2xl print:font-bold print:text-zinc-950',
+            ]}
+          >
+            The Civia Project
+          </p>
+          <p
+            class:list={[
+              // print — typography
+              'print:text-xs print:italic print:text-zinc-500',
+            ]}
+          >
+            Real People. Real Talk.
+          </p>
+        </div>
+      </div>
+    )
+  }
   <div
     class:list={[
       // layout
@@ -29,15 +82,20 @@ const published = format(new Date(date), 'dd/MM/yyyy');
         'min-w-0 flex-1',
       ]}
     >
-      {label && <Label>{label}</Label>}
+      {
+        label && (
+          <Label class:list={[printCover && 'print:hidden']}>{label}</Label>
+        )
+      }
       <h1
         class:list={[
           // layout
           'mt-2',
+          printCover && 'print:mt-0',
           // typography
           'text-4xl font-bold tracking-tight md:text-5xl',
           // print — typography
-          'print:text-zinc-950',
+          'print:text-7xl print:leading-tight print:text-zinc-950',
         ]}
       >
         {title}
@@ -48,6 +106,8 @@ const published = format(new Date(date), 'dd/MM/yyyy');
       class:list={[
         // layout
         'flex shrink-0 items-center gap-3',
+        // print — display
+        'print:hidden',
       ]}
     >
       {
@@ -71,6 +131,22 @@ const published = format(new Date(date), 'dd/MM/yyyy');
       <PrintPdfButton />
     </div>
   </div>
+  {
+    printDescription && (
+      <p
+        class:list={[
+          // display
+          'hidden print:block',
+          // print — layout
+          'print:mt-6 print:max-w-prose',
+          // print — typography
+          'print:text-base print:leading-relaxed print:text-zinc-600',
+        ]}
+      >
+        {printDescription}
+      </p>
+    )
+  }
   <p
     class:list={[
       // layout
@@ -98,10 +174,11 @@ const published = format(new Date(date), 'dd/MM/yyyy');
         'text-zinc-600',
         // print — typography
         'print:text-zinc-500',
+        printCover && 'print:hidden',
       ]}
     >
       {' '}·{' '}
     </span>
-    {published}
+    <span class:list={[printCover && 'print:hidden']}>{published}</span>
   </p>
 </header>
