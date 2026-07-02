@@ -11,13 +11,13 @@ const { title, id, printCenterPage = false, ...variant } = Astro.props as Props;
 const is_final = 'final' in variant;
 const number = 'number' in variant ? variant.number : undefined;
 
-const print_label_classes = [
-  // display
-  'hidden',
+const label_classes = [
+  // layout
+  'mb-2',
   // print — layout
-  'print:mb-3 print:block',
+  'print:mb-3',
   // print — typography
-  'print:text-xs print:font-medium print:uppercase print:tracking-widest',
+  'print:font-medium',
   'print:text-zinc-500',
 ];
 ---
@@ -71,12 +71,12 @@ const print_label_classes = [
         <header>
           {
             !is_final && number !== undefined && (
-              <Label class:list={print_label_classes}>
+              <Label class:list={label_classes}>
                 Conclusion {number}
               </Label>
             )
           }
-          {is_final && <Label class:list={print_label_classes}>Closing</Label>}
+          {is_final && <Label class:list={label_classes}>Closing</Label>}
           <h3
             class:list={[
               // typography
