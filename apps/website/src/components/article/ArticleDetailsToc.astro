@@ -1,0 +1,33 @@
+---
+export interface ArticleDetailsHeading {
+  id: string;
+  title: string;
+}
+
+interface Props {
+  headings: ArticleDetailsHeading[];
+  class?: string;
+}
+
+const { headings, class: className } = Astro.props;
+
+if (headings.length === 0) {
+  return null;
+}
+---
+
+<ol class:list={['space-y-1.5 text-sm', className]}>
+  {
+    headings.map(({ id, title }) => (
+      <li>
+        <a
+          href={`#${id}`}
+          class="text-zinc-400 transition-colors hover:text-white"
+          onclick="event.stopPropagation()"
+        >
+          {title}
+        </a>
+      </li>
+    ))
+  }
+</ol>

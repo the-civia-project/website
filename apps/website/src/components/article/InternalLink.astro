@@ -16,7 +16,7 @@ interface Props {
 const { href, variant = 'inline', class: className, paper, section, heading } =
   Astro.props;
 
-const has_breadcrumb = Boolean(paper);
+const has_breadcrumb = Boolean(paper || section);
 ---
 
 <a
@@ -55,8 +55,13 @@ const has_breadcrumb = Boolean(paper);
               {paper}
               {section && (
                 <>
-                  {' » '}
-                  <span aria-hidden="true">&sect;</span> {section}
+                  {paper && (
+                    <>
+                      {' » '}
+                      <span aria-hidden="true">&sect;</span>{' '}
+                    </>
+                  )}
+                  {section}
                   {heading && (
                     <>
                       {' » '}

@@ -1,0 +1,118 @@
+---
+import ArticleDetailsToc, {
+  type ArticleDetailsHeading,
+} from './ArticleDetailsToc.astro';
+import Label from './Label.astro';
+
+interface Props {
+  summary?: string;
+  summaryOpen?: string;
+  headings: ArticleDetailsHeading[];
+}
+
+const {
+  summary = 'Read full section',
+  summaryOpen = 'Hide section',
+  headings,
+} = Astro.props;
+---
+
+<article-details>
+  <details
+    class="group mt-8 overflow-hidden rounded-sm border border-zinc-800 bg-zinc-950 open:border-zinc-700"
+  >
+    <summary
+      class="cursor-pointer list-none transition-colors marker:hidden hover:bg-zinc-900/40 focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-inset focus-visible:outline-none [&::-webkit-details-marker]:hidden"
+    >
+      {
+        headings.length > 0 && (
+          <div class="pointer-events-auto p-6 pb-0 group-open:hidden">
+            <Label>In this section</Label>
+            <div class="my-4 border-t border-zinc-800" aria-hidden="true" />
+            <ArticleDetailsToc headings={headings} />
+            <div class="mt-4 border-t border-zinc-800" aria-hidden="true" />
+          </div>
+        )
+      }
+      <div class="flex items-center justify-between gap-4 p-6">
+        <span class="text-sm font-medium text-zinc-300 group-open:hidden">{summary}</span>
+        <span class="hidden text-sm font-medium text-zinc-300 group-open:inline"
+          >{summaryOpen}</span
+        >
+        <svg
+          class="size-4 shrink-0 text-zinc-500 transition-transform duration-200 group-open:rotate-180"
+          viewBox="0 0 16 16"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M4 6l4 4 4-4"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </div>
+    </summary>
+    <div class="border-t border-zinc-800 px-6 pt-4 pb-6 [&>:first-child]:mt-0">
+      <slot />
+    </div>
+  </details>
+</article-details>
+
+<script>
+  class ArticleDetails extends HTMLElement {
+    #onHashChange = () => {
+      if (this.#rescrolling) return;
+      this.#openIfHashInside();
+    };
+    #rescrolling = false;
+
+    connectedCallback() {
+      this.#openIfHashInside();
+      window.addEventListener('hashchange', this.#onHashChange);
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('hashchange', this.#onHashChange);
+    }
+
+    #openIfHashInside() {
+      const hash = decodeURIComponent(window.location.hash.slice(1));
+      const details = this.querySelector('details');
+      if (!details) return;
+
+      if (!hash) {
+        details.removeAttribute('open');
+        return;
+      }
+
+      const target = document.getElementById(hash);
+      const shouldOpen = Boolean(target && this.contains(target));
+      const wasClosed = shouldOpen && !details.hasAttribute('open');
+
+      details.toggleAttribute('open', shouldOpen);
+
+      if (shouldOpen && target && wasClosed) {
+        this.#rescrollToHash(hash, target);
+      }
+    }
+
+    #rescrollToHash(hash: string, target: HTMLElement) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this.#rescrolling = true;
+          const base = `${window.location.pathname}${window.location.search}`;
+          history.replaceState(null, '', base);
+          history.replaceState(null, '', `${base}#${hash}`);
+          target.scrollIntoView({ block: 'start' });
+          this.#rescrolling = false;
+        });
+      });
+    }
+  }
+
+  if (!customElements.get('article-details')) {
+    customElements.define('article-details', ArticleDetails);
+  }
+</script>
