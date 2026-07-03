@@ -1,0 +1,86 @@
+---
+import { resolveReferenceUrl } from '../../lib/print-references';
+
+const refs = Astro.locals.printReferences;
+---
+
+{
+  refs.length > 0 && (
+    <section
+      class:list={[
+        // print — page breaks
+        'print:break-before-page',
+      ]}
+    >
+      <h2
+        class:list={[
+          // display
+          'hidden',
+          // print — display
+          'print:block',
+          // print — layout
+          'print:mb-8',
+          // print — typography
+          'print:text-2xl print:font-bold print:tracking-tight print:text-zinc-900',
+        ]}
+      >
+        References
+      </h2>
+      <ol
+        class:list={[
+          // layout
+          'mt-4 list-decimal space-y-3 pl-6',
+          // typography
+          'text-sm leading-relaxed text-zinc-400',
+          // print — layout
+          'print:mt-0',
+          // print — typography
+          'print:text-zinc-700',
+        ]}
+      >
+      {refs.map(({ href, label }: (typeof refs)[number], index: number) => {
+        const ref = index + 1;
+        const url = resolveReferenceUrl(href, Astro.site, Astro.url.pathname);
+        const is_external = href.startsWith('http://') || href.startsWith('https://');
+        return (
+          <li
+            id={`ref-${ref}`}
+            class:list={[
+              // print — page breaks
+              'print:break-inside-avoid',
+            ]}
+          >
+            <span
+              class:list={[
+                // typography
+                'font-medium text-zinc-200',
+                // print — typography
+                'print:text-zinc-950',
+              ]}
+            >
+              {label}
+            </span>
+            {' — '}
+            <a
+              href={url}
+              class:list={[
+                // typography
+                'break-all text-zinc-500 underline decoration-zinc-700 underline-offset-2',
+                'hover:text-zinc-300 hover:decoration-zinc-400',
+                // print — typography
+                'print:text-zinc-600 print:no-underline',
+              ]}
+              {...(is_external && {
+                target: '_blank',
+                rel: 'noopener noreferrer',
+              })}
+            >
+              {url}
+            </a>
+          </li>
+        );
+      })}
+      </ol>
+    </section>
+  )
+}

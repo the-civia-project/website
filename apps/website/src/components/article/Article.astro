@@ -1,3 +1,9 @@
+---
+const content = await Astro.slots.render('default');
+const has_references = Astro.slots.has('references');
+const references = has_references ? await Astro.slots.render('references') : '';
+---
+
 <article
   class:list={[
     // screen — section content
@@ -23,5 +29,6 @@
     '[&_h3+p]:print:break-before-avoid-page [&_h3+p]:print:break-inside-avoid',
   ]}
 >
-  <slot />
+  <Fragment set:html={content} />
+  {has_references && <Fragment set:html={references} />}
 </article>

@@ -2,6 +2,7 @@
 import Image from '@the-civia-project/assets/og/social-paper.webp';
 import Article from '../components/article/Article.astro';
 import ArticleAside from '../components/article/ArticleAside.astro';
+import ArticleDetails from '../components/article/ArticleDetails.astro';
 import ArticleHeader from '../components/article/ArticleHeader.astro';
 import ArticleListItem from '../components/article/ArticleListItem.astro';
 import DesignPrinciple from '../components/article/DesignPrinciple.astro';
@@ -12,6 +13,7 @@ import ExternalLink from '../components/article/ExternalLink.astro';
 import InternalLink from '../components/article/InternalLink.astro';
 import H2 from '../components/article/H2.astro';
 import H3 from '../components/article/H3.astro';
+import References from '../components/article/References.astro';
 import TableOfContents from '../components/article/TableOfContents.astro';
 import DualLanes from '../components/diagrams/DualLanes.astro';
 import FeedPipeline from '../components/diagrams/FeedPipeline.astro';
@@ -113,9 +115,11 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         The platform will initially target the European Union market. Every
         account is tied to a verified natural person through the <ExternalLink
           href="https://commission.europa.eu/topics/digital-economy-and-society/european-digital-identity_en"
+              label="European Digital Identity Wallet — European Commission"
           >EUDI Wallet</ExternalLink
         > under the <ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183"
+              label="Regulation (EU) 2024/1183 (eIDAS 2.0)"
           >eIDAS 2.0</ExternalLink
         > framework.
       </p>
@@ -124,6 +128,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
           >public</U
         > lane for conventional social posting, and a <U>private</U> lane where friend-only
         posts are encrypted via Signal's <ExternalLink href="https://signal.org/docs/"
+              label="Signal Protocol Documentation"
           >Whisper Protocol</ExternalLink
         >.
       </p>
@@ -180,12 +185,15 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       <p>
         Identity verification on the platform relies on the <ExternalLink
           href="https://commission.europa.eu/topics/digital-economy-and-society/european-digital-identity_en"
+              label="European Digital Identity Wallet — European Commission"
           >European Digital Identity Wallet</ExternalLink
         > (<U>EUDI Wallet</U>), compliant with <ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183"
+              label="Regulation (EU) 2024/1183 (eIDAS 2.0)"
           >Regulation (EU) 2024/1183</ExternalLink
         > (<ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183"
+              label="Regulation (EU) 2024/1183 (eIDAS 2.0)"
           >eIDAS 2.0</ExternalLink
         >). Users hold government-issued digital credentials locally in their wallet.
         At registration, the platform receives only what the user explicitly chooses
@@ -257,15 +265,19 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         identifiers beyond what is strictly necessary for verification purposes,
         consistent with <ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_5"
+              label="GDPR Article 5 — Principles Relating to Processing of Personal Data"
           >Article 5</ExternalLink
         >, <ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_25"
+              label="GDPR Article 25 — Data Protection by Design and by Default"
           >Article 25</ExternalLink
         >, and <ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_32"
+              label="GDPR Article 32 — Security of Processing"
           >Article 32</ExternalLink
         > of the <ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+              label="General Data Protection Regulation (EU) 2016/679"
           >GDPR</ExternalLink
         >.
       </p>
@@ -398,12 +410,15 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       <p>
         When a user publishes privately, the post is encrypted on the client
         before it leaves the device. It is delivered to all friends using Signal's
-        <ExternalLink href="https://signal.org/docs/">Whisper Protocol</ExternalLink
+        <ExternalLink href="https://signal.org/docs/"
+              label="Signal Protocol Documentation">Whisper Protocol</ExternalLink
         > (<ExternalLink
           href="https://signal.org/docs/specifications/doubleratchet/"
+              label="The Double Ratchet Algorithm — Signal Specifications"
           >Double Ratchet</ExternalLink
         > and <ExternalLink
           href="https://signal.org/docs/specifications/x3dh/"
+              label="The X3DH Key Agreement Protocol — Signal Specifications"
           >X3DH key agreement</ExternalLink
         >). Friends decrypt on their own devices.
       </p>
@@ -422,7 +437,8 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       <p>
         Private delivery requires an established friend relationship. Key
         exchange and session management follow <ExternalLink
-          href="https://signal.org/docs/">Whisper Protocol</ExternalLink
+          href="https://signal.org/docs/"
+              label="Signal Protocol Documentation">Whisper Protocol</ExternalLink
         > semantics. The public and private data paths never merge without user action.
       </p>
 
@@ -440,6 +456,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
           query the vector store and run the filter-then-rank pipeline when
           adults opt in to algorithmic feeds. Private posts are encrypted and
           delivered to friends via the <ExternalLink href="https://signal.org/docs/"
+              label="Signal Protocol Documentation"
             >Whisper Protocol</ExternalLink
           >; the server relays ciphertext only. Private feeds are assembled on the
           device — reverse-chronological and friends-only — with no server-side algorithmic
@@ -763,7 +780,8 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
             heading="The New DNA: Local-Only Primitives"
           /> — on-device intent vectors, probabilistic seen-post filters, E2EE
           cross-device sync, and a private lane encrypted by the <ExternalLink
-            href="https://signal.org/docs/">Whisper Protocol</ExternalLink
+            href="https://signal.org/docs/"
+              label="Signal Protocol Documentation">Whisper Protocol</ExternalLink
           > (Part III).
         </ArticleListItem>
         <ArticleListItem>
@@ -786,6 +804,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
           validation on every connection, and algorithmic recommendations only with
           parental approval (<ExternalLink
             href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065"
+              label="Digital Services Act (Regulation (EU) 2022/2065)"
             >DSA</ExternalLink
           > safeguards in <InternalLink
             href="#part-v-compliance-dsa"
@@ -880,6 +899,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       <H3 id="part-v-compliance-gdpr">
         <ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+              label="General Data Protection Regulation (EU) 2016/679"
           >GDPR</ExternalLink
         >
       </H3>
@@ -887,6 +907,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         <ArticleListItem>
           <U>Privacy by design and by default</U> (<ExternalLink
             href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_25"
+              label="GDPR Article 25 — Data Protection by Design and by Default"
             >Article 25</ExternalLink
           >) — protective settings are the default; personal data processing is limited
           to what the architecture requires.
@@ -894,12 +915,14 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         <ArticleListItem>
           <U>Data minimization</U> (<ExternalLink
             href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_5"
+              label="GDPR Article 5 — Principles Relating to Processing of Personal Data"
             >Article 5</ExternalLink
           >) — only data adequate, relevant, and necessary for stated purposes is processed.
         </ArticleListItem>
         <ArticleListItem>
           <U>Data Protection Impact Assessments</U> (<ExternalLink
             href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_35"
+              label="GDPR Article 35 — Data Protection Impact Assessment"
             >Article 35</ExternalLink
           >) — conducted for high-risk processing activities, including identity verification
           and feed personalization.
@@ -910,12 +933,15 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       <p>
         Digital identity verification follows <ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183"
+              label="Regulation (EU) 2024/1183 (eIDAS 2.0)"
           >Regulation (EU) 2024/1183</ExternalLink
         > (<ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183"
+              label="Regulation (EU) 2024/1183 (eIDAS 2.0)"
           >eIDAS 2.0</ExternalLink
         >) and the <ExternalLink
           href="https://commission.europa.eu/topics/digital-economy-and-society/european-digital-identity_en"
+              label="European Digital Identity Wallet — European Commission"
           >EUDI Wallet framework</ExternalLink
         >: selective disclosure, zero-knowledge proofs where feasible, and no storage
         of raw credentials beyond what verification requires.
@@ -924,15 +950,18 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       <H3 id="part-v-compliance-dsa">
         Digital Services Act (<ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065"
+              label="Digital Services Act (Regulation (EU) 2022/2065)"
           >DSA</ExternalLink
         >)
       </H3>
       <p>
         Serving EU users as a very large online platform, it is designed with <ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065"
+              label="Digital Services Act (Regulation (EU) 2022/2065)"
           >Regulation (EU) 2022/2065</ExternalLink
         > (the <ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065"
+              label="Digital Services Act (Regulation (EU) 2022/2065)"
           >Digital Services Act</ExternalLink
         >) in mind — particularly its obligations around the protection of minors and
         transparency of recommender systems.
@@ -942,6 +971,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
           <U
             ><ExternalLink
               href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32022R2065#art_28"
+              label="DSA Article 28 — Online Interface Design and Organisation"
               >Article 28</ExternalLink
             > — Protection of minors:</U
           > the architecture enforces age verification through the identity layer
@@ -958,6 +988,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
           <U
             >Recommender system transparency (<ExternalLink
               href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32022R2065#art_27"
+              label="DSA Article 27 — Recommender System Transparency"
               >Article 27</ExternalLink
             >):</U
           > for adult users who explicitly opt in to algorithmic feeds, the platform
@@ -978,6 +1009,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       <p>
         <ExternalLink
           href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065"
+              label="Digital Services Act (Regulation (EU) 2022/2065)"
           >DSA</ExternalLink
         > compliance is not a layer applied after the fact. Chronological defaults,
         parental approval for minor algorithmic recommendations, and verified identity
@@ -1011,5 +1043,14 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         </p>
       </DesignPrinciple>
     </section>
+
+    <ArticleDetails
+      headings={[]}
+      summary="References"
+      summaryOpen="Hide references"
+      slot="references"
+    >
+      <References />
+    </ArticleDetails>
   </Article>
 </Layout>

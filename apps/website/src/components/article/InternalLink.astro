@@ -1,6 +1,11 @@
 ---
 type Variant = 'inline' | 'heading' | 'plain';
 
+import {
+  formatInternalLinkLabel,
+  registerPrintReference,
+} from '../../lib/print-references';
+
 interface Props {
   href: string;
   variant?: Variant;
@@ -17,6 +22,14 @@ const { href, variant = 'inline', class: className, paper, section, heading } =
   Astro.props;
 
 const has_breadcrumb = Boolean(paper || section);
+
+const ref = paper
+  ? registerPrintReference(
+      Astro.locals.printReferences,
+      href,
+      formatInternalLinkLabel(paper, section, heading),
+    )
+  : undefined;
 ---
 
 <a
@@ -96,3 +109,29 @@ const has_breadcrumb = Boolean(paper || section);
     )
   }
 </a>
+{
+  ref !== undefined && (
+    <sup
+      class:list={[
+        // layout
+        'hidden',
+        // print — layout
+        'print:inline',
+        // print — typography
+        'print:text-xs print:font-normal print:text-zinc-600',
+      ]}
+    >
+      <a
+        href={`#ref-${ref}`}
+        class:list={[
+          // typography
+          'no-underline',
+          // print — typography
+          'print:text-zinc-600',
+        ]}
+      >
+        [{ref}]
+      </a>
+    </sup>
+  )
+}
