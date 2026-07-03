@@ -1,11 +1,8 @@
 ---
 import { format } from 'date-fns';
-import DiscordIcon from '../../assets/social/discord.svg';
-import MatrixIcon from '../../assets/social/matrix.svg';
-import GlobeIcon from '../../assets/icons/globa.svg';
-import RocketIcon from '../../assets/icons/rocket-launch.svg';
-import Logo from '../Logo.astro';
 import Label from './Label.astro';
+import PrintBranding from './PrintBranding.astro';
+import PrintCommunityLinks from './PrintCommunityLinks.astro';
 import PrintPdfButton from './PrintPdfButton.astro';
 
 interface Props {
@@ -29,29 +26,6 @@ const {
 } = Astro.props;
 const authorLine = authors.join(', ');
 const published = format(new Date(date), 'dd/MM/yyyy');
-
-const communityLinks = [
-  {
-    href: 'https://theciviaproject.org',
-    label: 'theciviaproject.org',
-    Icon: GlobeIcon,
-  },
-  {
-    href: 'https://demo.theciviaproject.org',
-    label: 'demo.theciviaproject.org',
-    Icon: RocketIcon,
-  },
-  {
-    href: 'https://discord.gg/pNTmzvd7pe',
-    label: 'discord.gg/pNTmzvd7pe',
-    Icon: DiscordIcon,
-  },
-  {
-    href: 'https://matrix.to/#/#the-civia-project:matrix.org',
-    label: '#the-civia-project:matrix.org',
-    Icon: MatrixIcon,
-  },
-];
 ---
 
 <header
@@ -65,38 +39,7 @@ const communityLinks = [
     ],
   ]}
 >
-  {
-    printCover && (
-      <div
-        class:list={[
-          // display
-          'hidden print:flex',
-          // print — layout
-          'print:mb-5 print:items-center print:gap-4',
-        ]}
-      >
-        <Logo />
-        <div>
-          <p
-            class:list={[
-              // print — typography
-              'print:text-2xl print:font-bold print:text-zinc-950',
-            ]}
-          >
-            The Civia Project
-          </p>
-          <p
-            class:list={[
-              // print — typography
-              'print:text-xs print:italic print:text-zinc-500',
-            ]}
-          >
-            Real People. Real Talk.
-          </p>
-        </div>
-      </div>
-    )
-  }
+  {printCover && <PrintBranding />}
   <div
     class:list={[
       // layout
@@ -213,49 +156,12 @@ const communityLinks = [
       <div
         class:list={[
           // display
-          'hidden print:flex',
+          'hidden print:block',
           // print — layout
-          'print:mt-8 print:items-center print:gap-4',
+          'print:mt-8',
         ]}
       >
-        <img
-          src="/qr.svg"
-          alt=""
-          class:list={[
-            // print — layout
-            'print:size-32 print:shrink-0',
-          ]}
-        />
-        <div
-          class:list={[
-            // print — layout
-            'print:flex print:flex-col print:gap-3',
-          ]}
-        >
-          {communityLinks.map(({ href, label, Icon }) => (
-            <a
-              href={href}
-              class:list={[
-                // print — layout
-                'print:flex print:items-center print:gap-2',
-                // print — typography
-                'print:text-sm print:text-zinc-600 print:no-underline',
-              ]}
-            >
-              <Icon
-                width={16}
-                height={16}
-                class:list={[
-                  // print — layout
-                  'print:shrink-0',
-                  // print — fill
-                  'print:fill-zinc-600',
-                ]}
-              />
-              {label}
-            </a>
-          ))}
-        </div>
+        <PrintCommunityLinks />
       </div>
     )
   }

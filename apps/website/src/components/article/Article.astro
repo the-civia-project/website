@@ -2,6 +2,8 @@
 const content = await Astro.slots.render('default');
 const has_references = Astro.slots.has('references');
 const references = has_references ? await Astro.slots.render('references') : '';
+const has_back_page = Astro.slots.has('backPage');
+const back_page = has_back_page ? await Astro.slots.render('backPage') : '';
 ---
 
 <article
@@ -14,12 +16,12 @@ const references = has_references ? await Astro.slots.render('references') : '';
     '[&_section_ul]:mt-4 [&_section_ul]:space-y-4',
     // print — typography
     'print:text-zinc-700',
-    '[&_p]:print:text-zinc-700',
     '[&_li]:print:text-zinc-700',
     '[&_em]:print:text-zinc-700',
     '[&_strong]:print:font-semibold [&_strong]:print:text-zinc-950',
     '[&_h1]:print:text-7xl [&_h1]:print:leading-tight [&_h1]:print:text-zinc-950',
     '[&_h2]:print:text-4xl [&_h2]:print:font-bold [&_h2]:print:text-zinc-950',
+    '[&_.print-back-page_h2]:print:text-3xl [&_.print-back-page_h2]:print:tracking-tight',
     '[&_h3]:print:text-2xl [&_h3]:print:font-semibold [&_h3]:print:text-zinc-950',
     '[&_section_p]:print:text-zinc-700',
     '[&_section_em]:print:text-zinc-700',
@@ -31,4 +33,5 @@ const references = has_references ? await Astro.slots.render('references') : '';
 >
   <Fragment set:html={content} />
   {has_references && <Fragment set:html={references} />}
+  {has_back_page && <Fragment set:html={back_page} />}
 </article>

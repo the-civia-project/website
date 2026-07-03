@@ -1,0 +1,36 @@
+---
+import Logo from '../Logo.astro';
+---
+
+<div
+  class:list={[
+    'hidden',
+    // print — layout
+    'print:mb-5 print:flex print:items-center print:gap-4',
+  ]}
+>
+  <Logo />
+  <div
+    class:list={[
+      // print — layout
+      'print:flex print:flex-col print:gap-0.5',
+    ]}
+  >
+    <p
+      class:list={[
+        // print — typography
+        'print:m-0 print:text-2xl print:font-bold print:leading-none print:text-zinc-950',
+      ]}
+    >
+      The Civia Project
+    </p>
+    <p
+      class:list={[
+        // print — typography
+        'print:m-0 print:text-xs print:leading-none print:italic print:text-zinc-500',
+      ]}
+    >
+      Real People. Real Talk.
+    </p>
+  </div>
+</div>

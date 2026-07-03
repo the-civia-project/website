@@ -1,0 +1,71 @@
+---
+import DiscordIcon from '../../assets/social/discord.svg';
+import MatrixIcon from '../../assets/social/matrix.svg';
+import GlobeIcon from '../../assets/icons/globa.svg';
+import RocketIcon from '../../assets/icons/rocket-launch.svg';
+import {
+  communityLinks,
+  type CommunityLinkIcon,
+} from '../../lib/community-links';
+
+const icons: Record<
+  CommunityLinkIcon,
+  typeof GlobeIcon
+> = {
+  globe: GlobeIcon,
+  rocket: RocketIcon,
+  discord: DiscordIcon,
+  matrix: MatrixIcon,
+};
+---
+
+<div
+  class:list={[
+    // print — layout
+    'print:flex print:items-center print:gap-4',
+  ]}
+>
+  <img
+    src="/qr.svg"
+    alt=""
+    class:list={[
+      // print — layout
+      'print:size-32 print:shrink-0',
+    ]}
+  />
+  <div
+    class:list={[
+      // print — layout
+      'print:flex print:flex-col print:gap-3',
+    ]}
+  >
+    {
+      communityLinks.map(({ href, label, icon }) => {
+        const Icon = icons[icon];
+        return (
+          <a
+            href={href}
+            class:list={[
+              // print — layout
+              'print:flex print:items-center print:gap-2',
+              // print — typography
+              'print:text-sm print:text-zinc-600 print:no-underline',
+            ]}
+          >
+            <Icon
+              width={16}
+              height={16}
+              class:list={[
+                // print — layout
+                'print:shrink-0',
+                // print — fill
+                'print:fill-zinc-600',
+              ]}
+            />
+            {label}
+          </a>
+        );
+      })
+    }
+  </div>
+</div>

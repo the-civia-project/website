@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import HeroPhoto from '../../assets/Edwin_Andrade.unsplash.webp';
+import PrintBranding from './PrintBranding.astro';
+import PrintCommunityLinks from './PrintCommunityLinks.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Join the build',
+  description = `We're building an open, privacy-first social network in public — open source, non-profit, governed for users, not shareholders. Follow the work, try the demo, and join the community.`,
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    'print-back-page',
+    // display
+    'hidden',
+    // print — layout
+    'print:flex print:min-h-[100vh] print:flex-col',
+    'print:items-start print:justify-center',
+    // print — page breaks
+    'print:break-before-page print:break-inside-avoid',
+  ]}
+>
+  <PrintBranding />
+
+  <Image
+    src={HeroPhoto}
+    alt="Many hands raised toward the sky"
+    class:list={[
+      // print — layout
+      'print:mt-6 print:w-full print:aspect-[16/9] print:object-cover',
+      // print — border
+      'print:rounded-2xl',
+      // print — color
+      'print:print-color-adjust-exact',
+    ]}
+    style="object-position: center 60%;"
+  />
+
+  <h2
+    class:list={[
+      // print — layout
+      'print:mt-8',
+      // print — typography
+      'print:text-3xl print:font-bold print:tracking-tight print:text-zinc-950',
+    ]}
+  >
+    {title}
+  </h2>
+
+  <p
+    class:list={[
+      // print — layout
+      'print:mt-4 print:max-w-prose',
+      // print — typography
+      'print:text-base print:leading-relaxed print:text-zinc-600',
+    ]}
+  >
+    {description}
+  </p>
+
+  <div
+    class:list={[
+      // print — layout
+      'print:mt-8',
+    ]}
+  >
+    <PrintCommunityLinks />
+  </div>
+</div>

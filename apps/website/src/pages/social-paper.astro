@@ -13,6 +13,7 @@ import Conclusion from '../components/article/Conclusion.astro';
 import ExternalLink from '../components/article/ExternalLink.astro';
 import InternalLink from '../components/article/InternalLink.astro';
 import References from '../components/article/References.astro';
+import PrintBackPage from '../components/article/PrintBackPage.astro';
 import H3 from '../components/article/H3.astro';
 import SectionLead from '../components/article/SectionLead.astro';
 import TableOfContents from '../components/article/TableOfContents.astro';
@@ -351,8 +352,7 @@ const spSection = (id: string) => {
             servers act only as blind couriers; they never hold the master copy, the
             decryption keys, or the plaintext data. <ExternalLink
               href="https://support.signal.org/hc/en-us/articles/213134507-Linked-Devices"
-              label="Signal Support — Linked Devices"
-              >Signal</ExternalLink
+              label="Signal Support — Linked Devices">Signal</ExternalLink
             > and <ExternalLink
               href="https://faq.whatsapp.com/general/download-and-installation/about-linked-devices"
               label="WhatsApp Help — About Linked Devices"
@@ -406,17 +406,15 @@ const spSection = (id: string) => {
         <p>
           <ExternalLink
             href="https://support.signal.org/hc/en-us/articles/213134507-Linked-Devices"
-              label="Signal Support — Linked Devices"
-            >Signal</ExternalLink
+            label="Signal Support — Linked Devices">Signal</ExternalLink
           > and <ExternalLink
             href="https://faq.whatsapp.com/general/download-and-installation/about-linked-devices"
-              label="WhatsApp Help — About Linked Devices"
-            >WhatsApp</ExternalLink
+            label="WhatsApp Help — About Linked Devices">WhatsApp</ExternalLink
           > have already proven encrypted cross-device synchronization for messaging;
           both have demonstrated encrypted backups as well: Signal on its own infrastructure,
           WhatsApp to Google Drive and iCloud when users enable <ExternalLink
             href="https://faq.whatsapp.com/general/chats/how-to-back-up-to-google-drive-with-end-to-end-encryption"
-              label="WhatsApp Help — End-to-End Encrypted Backup to Google Drive"
+            label="WhatsApp Help — End-to-End Encrypted Backup to Google Drive"
             >end-to-end encrypted backup</ExternalLink
           >. These are not untested ideas, the social web can adopt what
           messaging has already demonstrated.
@@ -609,7 +607,7 @@ const spSection = (id: string) => {
           globe. Over the last two years, governments have shifted from issuing
           warnings to enacting hard legal barriers. <ExternalLink
             href="https://www.legislation.gov.au/C2024A00127/asmade/text"
-              label="Online Safety Amendment (Social Media Minimum Age) Act 2024 — Australia"
+            label="Online Safety Amendment (Social Media Minimum Age) Act 2024 — Australia"
             >Australia</ExternalLink
           > has been at the forefront: since 10 December 2025, children under 16 have
           been barred from holding accounts on major platforms such as Instagram,
@@ -617,15 +615,14 @@ const spSection = (id: string) => {
           that fail to comply, while imposing no penalties on young people themselves.
           Nations ranging from <ExternalLink
             href="https://www.legislation.gov.uk/ukpga/2023/50/contents"
-              label="Online Safety Act 2023 — United Kingdom"
-            >the UK</ExternalLink
+            label="Online Safety Act 2023 — United Kingdom">the UK</ExternalLink
           > and <ExternalLink
             href="https://www.assemblee-nationale.fr/dyn/17/dossiers/proteger_mineurs_reseaux_sociaux_17e"
-              label="Protéger les mineurs des risques des réseaux sociaux — Assemblée nationale"
+            label="Protéger les mineurs des risques des réseaux sociaux — Assemblée nationale"
             >France</ExternalLink
           > to <ExternalLink
             href="https://uaelegislation.gov.ae/en/legislations/4506"
-              label="UAE Federal Legislation on Child Digital Safety (Decree-Law No. 4506)"
+            label="UAE Federal Legislation on Child Digital Safety (Decree-Law No. 4506)"
             >the UAE</ExternalLink
           > are currently implementing their own age restrictions and mandatory parental
           consent laws.
@@ -634,16 +631,16 @@ const spSection = (id: string) => {
         <p>
           These laws come from a place of necessary urgency. However, as the <ExternalLink
             href="https://news.un.org/en/story/2025/12/1166557"
-              label="UN News — Age-Related Social Media Bans Won't Keep Kids Safe (UNICEF)"
+            label="UN News — Age-Related Social Media Bans Won't Keep Kids Safe (UNICEF)"
             >United Nations</ExternalLink
           > and <ExternalLink
             href="https://www.abc.net.au/news/2025-01-07/social-media-ban-mental-health-different-approach/104789108"
-              label="ABC News — Evidence Linking Social Media to Youth Mental Health Is 'Weak'"
+            label="ABC News — Evidence Linking Social Media to Youth Mental Health Is 'Weak'"
             >child psychology experts</ExternalLink
           > have pointed out, simply banning children from platforms is treating the
           symptom rather than curing the disease. <ExternalLink
             href="https://www.unicef.org.au/unicef-youth/staying-safe-online/social-media-ban-explainer"
-              label="UNICEF Australia — Social Media Ban: A Simple Guide"
+            label="UNICEF Australia — Social Media Ban: A Simple Guide"
             >UNICEF Australia</ExternalLink
           > agrees: the real fix is improving social media safety and listening to
           young people, not merely delaying their access. Enforcing these bans also
@@ -655,7 +652,7 @@ const spSection = (id: string) => {
           None of this criticism is an argument for ignoring the law. Where
           legislators have acted, as in <ExternalLink
             href="https://www.legislation.gov.au/C2024A00127/asmade/text"
-              label="Online Safety Amendment (Social Media Minimum Age) Act 2024 — Australia"
+            label="Online Safety Amendment (Social Media Minimum Age) Act 2024 — Australia"
             >Australia</ExternalLink
           > and the other jurisdictions named above, platforms operating in those
           markets must comply fully. This paper may disagree with ban-first or surveillance-heavy
@@ -695,19 +692,18 @@ const spSection = (id: string) => {
           parental-consent requirements, or other minor-protection laws apply,
           as they already do in <ExternalLink
             href="https://www.legislation.gov.au/C2024A00127/asmade/text"
-              label="Online Safety Amendment (Social Media Minimum Age) Act 2024 — Australia"
+            label="Online Safety Amendment (Social Media Minimum Age) Act 2024 — Australia"
             >Australia</ExternalLink
           >, <ExternalLink
             href="https://www.legislation.gov.uk/ukpga/2023/50/contents"
-              label="Online Safety Act 2023 — United Kingdom"
-            >the UK</ExternalLink
+            label="Online Safety Act 2023 — United Kingdom">the UK</ExternalLink
           >, <ExternalLink
             href="https://www.assemblee-nationale.fr/dyn/17/dossiers/proteger_mineurs_reseaux_sociaux_17e"
-              label="Protéger les mineurs des risques des réseaux sociaux — Assemblée nationale"
+            label="Protéger les mineurs des risques des réseaux sociaux — Assemblée nationale"
             >France</ExternalLink
           >, <ExternalLink
             href="https://uaelegislation.gov.ae/en/legislations/4506"
-              label="UAE Federal Legislation on Child Digital Safety (Decree-Law No. 4506)"
+            label="UAE Federal Legislation on Child Digital Safety (Decree-Law No. 4506)"
             >the UAE</ExternalLink
           >, and beyond, the platform will respect them, regardless of whether
           we agree with every policy choice behind them. Compliance is not
@@ -1175,7 +1171,7 @@ const spSection = (id: string) => {
           accounts that had been flagged, with no judicial order and no appeal.
           Litigation surrounding <ExternalLink
             href="https://www.supremecourt.gov/opinions/23pdf/23-411_19m2.pdf"
-              label="Murthy v. Missouri — U.S. Supreme Court Opinion (2024)"
+            label="Murthy v. Missouri — U.S. Supreme Court Opinion (2024)"
             >Murthy v. Missouri</ExternalLink
           > described similar pressure on Meta and other platforms to act on COVID-related
           speech, election content, and other politically sensitive topics. Whether
@@ -1280,12 +1276,12 @@ const spSection = (id: string) => {
           > (EAA) and <U>Qualified Electronic Attestations of Attributes</U> (QEAA)
           under <ExternalLink
             href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183"
-              label="Regulation (EU) 2024/1183 (eIDAS 2.0)"
+            label="Regulation (EU) 2024/1183 (eIDAS 2.0)"
             >eIDAS 2.0</ExternalLink
           >, issued by authentic sources (medical councils, bar associations,
           financial regulators) and presented through the <ExternalLink
             href="https://commission.europa.eu/topics/digital-economy-and-society/european-digital-identity_en"
-              label="European Digital Identity Wallet — European Commission"
+            label="European Digital Identity Wallet — European Commission"
             >EUDI Wallet</ExternalLink
           >. Users prove license type, jurisdiction, and validity through <InternalLink
             href="/technical-paper#part-i-selective-disclosure-and-zkp"
@@ -1343,8 +1339,7 @@ const spSection = (id: string) => {
               >Australia</ExternalLink
             >, the <ExternalLink
               href="https://www.legislation.gov.uk/ukpga/2023/50/contents"
-              label="Online Safety Act 2023 — United Kingdom"
-              >UK</ExternalLink
+              label="Online Safety Act 2023 — United Kingdom">UK</ExternalLink
             >, and elsewhere, the platform complies fully. Disagreement with a
             policy is not permission to disregard it.
           </ArticleListItem>
@@ -1555,7 +1550,8 @@ const spSection = (id: string) => {
               href="https://docs.house.gov/meetings/IF/IF16/20211201/114268/HHRG-117-IF16-20211201-SD010.pdf"
               label="U.S. House — Protecting Kids Online Hearing Exhibit (Frances Haugen)"
               >House document</ExternalLink
-            >, <ExternalLink href="https://metasinternalresearch.org/"
+            >, <ExternalLink
+              href="https://metasinternalresearch.org/"
               label="Meta's Internal Research — Teen Mental Health and Well-Being"
               >Meta internal research summary</ExternalLink
             >, <ExternalLink
@@ -1605,8 +1601,7 @@ const spSection = (id: string) => {
             optional Secret Chats are E2EE. Hundreds of millions of users treat
             it as private; no major penalty for the architecture (<ExternalLink
               href="https://www.telegram.org/press?setln=en"
-              label="Telegram — Press Info"
-              >Telegram press</ExternalLink
+              label="Telegram — Press Info">Telegram press</ExternalLink
             >, <ExternalLink
               href="https://freedom.press/digisec/blog/telegram-misrepresented-amid-founders-arrest/"
               label="Freedom of the Press Foundation — Telegram Misrepresented Amid Founder's Arrest"
@@ -1654,9 +1649,9 @@ const spSection = (id: string) => {
               href="https://twitterfiles.substack.com/p/twitter-the-fbi-subsidiary"
               label="Matt Taibbi — Twitter, the FBI Subsidiary"
               >Matt Taibbi</ExternalLink
-            >, <ExternalLink href="https://en.wikipedia.org/wiki/Twitter_Files"
-              label="Wikipedia — Twitter Files"
-              >summary</ExternalLink
+            >, <ExternalLink
+              href="https://en.wikipedia.org/wiki/Twitter_Files"
+              label="Wikipedia — Twitter Files">summary</ExternalLink
             >).
           </ArticleListItem>
         </ul>
@@ -1868,5 +1863,7 @@ const spSection = (id: string) => {
     >
       <References />
     </ArticleDetails>
+
+    <PrintBackPage slot="backPage" />
   </Article>
 </Layout>

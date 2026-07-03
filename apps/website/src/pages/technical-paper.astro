@@ -14,6 +14,7 @@ import InternalLink from '../components/article/InternalLink.astro';
 import H2 from '../components/article/H2.astro';
 import H3 from '../components/article/H3.astro';
 import References from '../components/article/References.astro';
+import PrintBackPage from '../components/article/PrintBackPage.astro';
 import TableOfContents from '../components/article/TableOfContents.astro';
 import DualLanes from '../components/diagrams/DualLanes.astro';
 import FeedPipeline from '../components/diagrams/FeedPipeline.astro';
@@ -1052,5 +1053,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
     >
       <References />
     </ArticleDetails>
+
+    <PrintBackPage slot="backPage" />
   </Article>
 </Layout>
