@@ -1,7 +1,8 @@
 ---
-import Image from '@the-civia-project/assets/og/index.webp';
+import Image from '../assets/og/index.webp';
+import Label from '../components/article/Label.astro';
+import PrintCta from '../components/article/PrintCta.astro';
 import Strong from '../components/Strong.astro';
-import U from '../components/U.astro';
 import Layout from '../layouts/Layout.astro';
 
 const image_url = new URL(Image.src, Astro.site);
@@ -10,7 +11,7 @@ const description =
   'Make the world more resilient towards and better equipped against fake news, propaganda, disinformation, misinformation and malinformation.';
 ---
 
-<Layout centered>
+<Layout centered printLogo>
   <Fragment slot="header">
     <title>The Civia Project &mdash; Real People. Real Talk.</title>
 
@@ -25,13 +26,40 @@ const description =
     <meta name="twitter:image" content={image_url} />
   </Fragment>
 
-
-    <span class="block text-xs uppercase tracking-widest text-zinc-500"
-      >Mission</span
+  <section
+    class:list={[
+      // layout
+      'flex flex-col gap-3',
+      // print — layout
+      'print:gap-4',
+      // print — page breaks
+      'print:break-inside-avoid',
+    ]}
+  >
+    <Label
+      class:list={[
+        // print — typography
+        'print:text-sm print:font-semibold print:tracking-[0.2em] print:text-zinc-500',
+      ]}
     >
-    <p>
-      Build a socially responsible social media platform that is <Strong>open-source</Strong>, <Strong>privacy-preserving</Strong>, and <Strong>civic-minded</Strong>. And through this enable people to connect and communicate in a way that is <Strong>trustworthy</Strong>, <Strong>accountable</Strong>, and <Strong>ethical</Strong>.
+      Mission
+    </Label>
+    <p
+      class:list={[
+        // print — typography
+        'print:m-0 print:text-lg print:leading-relaxed print:text-zinc-700',
+        'print:[&_strong]:font-bold print:[&_strong]:text-zinc-950',
+      ]}
+    >
+      Build a socially responsible social media platform that is <Strong
+        >open-source</Strong
+      >, <Strong>privacy-preserving</Strong>, and <Strong>civic-minded</Strong>.
+      And through this enable people to connect and communicate in a way that is
+      <Strong>trustworthy</Strong>, <Strong>accountable</Strong>, and <Strong
+        >ethical</Strong
+      >.
     </p>
+  </section>
 
-
+  <PrintCta />
 </Layout>

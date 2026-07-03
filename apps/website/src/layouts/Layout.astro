@@ -4,11 +4,15 @@ import Logo from '../components/Logo.astro';
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {
+  /** Vertically center page content on screen. */
   centered?: boolean;
+  /** Content column width on medium screens and up. */
   size?: 'medium' | 'large';
+  /** Show the header logo and branding when printing. Hidden by default. */
+  printLogo?: boolean;
 }
 
-const { centered = false, size = 'medium' } = Astro.props;
+const { centered = false, size = 'medium', printLogo = false } = Astro.props;
 
 const size_class = size === 'medium' ? 'md:w-150' : 'md:w-175';
 ---
@@ -40,7 +44,8 @@ const size_class = size === 'medium' ? 'md:w-150' : 'md:w-175';
           // layout
           'flex items-center gap-4',
           // print — display
-          'print:hidden',
+          !printLogo && 'print:hidden',
+          printLogo && 'print:mb-5',
         ]}
       >
         <Logo />
@@ -49,6 +54,10 @@ const size_class = size === 'medium' ? 'md:w-150' : 'md:w-175';
             class:list={[
               // typography
               'text-center text-xl font-bold md:text-3xl',
+              printLogo && [
+                // print — typography
+                'print:m-0 print:text-left print:text-2xl print:leading-none print:text-zinc-950',
+              ],
             ]}
           >
             The Civia Project
@@ -57,6 +66,10 @@ const size_class = size === 'medium' ? 'md:w-150' : 'md:w-175';
             class:list={[
               // typography
               'text-xs italic opacity-50',
+              printLogo && [
+                // print — typography
+                'print:m-0 print:text-left print:text-xs print:leading-none print:italic print:text-zinc-500 print:opacity-100',
+              ],
             ]}
           >
             Real People. Real Talk.
