@@ -42,11 +42,6 @@ export function formatInternalLinkLabel(
   return parts.join(' » ');
 }
 
-/** Strip markup from slot HTML so ExternalLink can fall back to plain-text labels. */
-export function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, '').trim();
-}
-
 /**
  * Resolve a reference href to an absolute URL for the References list.
  *

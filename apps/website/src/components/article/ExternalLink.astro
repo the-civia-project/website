@@ -1,20 +1,15 @@
 ---
 import ArrowSquareOutIcon from '../../assets/icons/arrow-square-out.svg';
-import { registerPrintReference, stripHtml } from '../../lib/print-references';
+import { registerPrintReference } from '../../lib/print-references';
 
 interface Props {
   href: string;
+  label: string;
   class?: string;
-  /** Optional reference label; defaults to slot text. */
-  label?: string;
 }
 
-const { href, class: className, label: labelProp } = Astro.props;
+const { href, class: className, label } = Astro.props;
 
-const slot_html = Astro.slots.has('default')
-  ? await Astro.slots.render('default')
-  : '';
-const label = labelProp ?? (stripHtml(slot_html) || href);
 const ref = registerPrintReference(Astro.locals.printReferences, href, label);
 ---
 
@@ -42,8 +37,9 @@ const ref = registerPrintReference(Astro.locals.printReferences, href, label);
       // interactive
       'group-hover:decoration-white',
     ]}
-    set:html={slot_html}
-  />
+  >
+    {label}
+  </span>
   <ArrowSquareOutIcon
     class:list={[
       // layout
