@@ -1,18 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import HeroPhoto from '../../assets/Edwin_Andrade.unsplash.webp';
+import { defaultPrintBackPageCta } from '../../lib/ctas';
 import PrintBranding from './PrintBranding.astro';
 import PrintCommunityLinks from './PrintCommunityLinks.astro';
 
-interface Props {
-  title?: string;
-  description?: string;
-}
-
-const {
-  title = 'Join the build',
-  description = `We're building an open, privacy-first social network in public — open source, non-profit, governed for users, not shareholders. Follow the work, try the demo, and join the community.`,
-} = Astro.props;
+const { title, description } = defaultPrintBackPageCta;
 ---
 
 <div
@@ -34,7 +27,7 @@ const {
     alt="Many hands raised toward the sky"
     class:list={[
       // print — layout
-      'print:mt-6 print:w-full print:aspect-[16/9]',
+      'print:mt-6 print:w-full print:aspect-[16/9] print:object-cover print:object-bottom',
       // print — border
       'print:rounded-2xl',
       // print — color
@@ -43,6 +36,7 @@ const {
   />
 
   <h2
+    data-print-back-title
     class:list={[
       // print — layout
       'print:mt-8',
@@ -54,6 +48,7 @@ const {
   </h2>
 
   <p
+    data-print-back-description
     class:list={[
       // print — layout
       'print:mt-4 print:max-w-prose',
@@ -73,3 +68,36 @@ const {
     <PrintCommunityLinks />
   </div>
 </div>
+
+<script>
+  import { printBackPageCtas } from '../../lib/ctas';
+
+  // SSR always renders defaultPrintBackPageCta for stable cached HTML.
+  // Swap to a random preset in the browser before the user prints.
+  // Applies a random CTA (Call To Action) from printBackPageCtas
+  // to the "Back Page" print view. Ensures each print gets a different message.
+  (function updatePrintBackPageCta() {
+    // Find the root element for the print back page
+    const root = document.querySelector('.print-back-page');
+
+    // If not found, or not an HTMLElement, exit early
+    if (!(root instanceof HTMLElement)) return;
+
+    // Pick a random CTA preset from the available list
+    const cta =
+      printBackPageCtas[Math.floor(Math.random() * printBackPageCtas.length)]!;
+
+    // Find title and description elements by specific data attributes
+    const titleEl = root.querySelector('[data-print-back-title]');
+    const descriptionEl = root.querySelector('[data-print-back-description]');
+
+    // Set the text content of each, if present
+    if (titleEl) {
+      titleEl.textContent = cta.title;
+    }
+
+    if (descriptionEl) {
+      descriptionEl.textContent = cta.description;
+    }
+  })();
+</script>
