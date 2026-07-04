@@ -26,11 +26,13 @@ const { title, description } = defaultPrintBackPageCta;
   <h2
     data-print-cta-title
     class:list={[
+      // typography
+      'text-zinc-950 dark:text-white',
       // print — layout
       'print:mt-8',
       centered && 'print:mt-10',
       // print — typography
-      'print:text-3xl print:font-bold print:tracking-tight print:text-zinc-950',
+      'print:text-3xl print:font-bold print:tracking-tight',
       centered && 'print:text-center',
     ]}
   >
@@ -40,11 +42,13 @@ const { title, description } = defaultPrintBackPageCta;
   <p
     data-print-cta-description
     class:list={[
+      // typography
+      'text-zinc-600 dark:text-zinc-400',
       // print — layout
       'print:mt-4 print:max-w-prose',
       centered && 'print:mx-auto',
       // print — typography
-      'print:text-base print:leading-relaxed print:text-zinc-600',
+      'print:text-base print:leading-relaxed',
       centered && 'print:text-center',
     ]}
   >

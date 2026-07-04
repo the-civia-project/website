@@ -11,7 +11,7 @@ const description =
   'Make the world more resilient towards and better equipped against fake news, propaganda, disinformation, misinformation and malinformation.';
 ---
 
-<Layout centered printLogo>
+<Layout centered printCentered printLogo>
   <Fragment slot="header">
     <title>The Civia Project &mdash; Real People. Real Talk.</title>
 
@@ -39,16 +39,18 @@ const description =
     <Label
       class:list={[
         // print — typography
-        'print:text-sm print:font-semibold print:tracking-[0.2em] print:text-zinc-500',
+        'print:text-sm print:font-semibold print:tracking-[0.2em]',
       ]}
     >
       Mission
     </Label>
     <p
       class:list={[
+        // typography
+        'leading-relaxed text-zinc-700 dark:text-zinc-300',
         // print — typography
-        'print:m-0 print:text-lg print:leading-relaxed print:text-zinc-700',
-        'print:[&_strong]:font-bold print:[&_strong]:text-zinc-950',
+        'print:m-0 print:text-lg print:leading-relaxed',
+        '[&_strong]:font-bold [&_strong]:text-zinc-950 dark:[&_strong]:text-white',
       ]}
     >
       Build a socially responsible social media platform that is <Strong

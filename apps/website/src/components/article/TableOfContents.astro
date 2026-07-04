@@ -35,7 +35,7 @@ const { items } = Astro.props;
         // layout
         'mt-10 p-6',
         // border and background
-        'rounded-sm border border-zinc-800 bg-zinc-950',
+        'rounded-sm border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-black',
         // print — layout
         'print:mt-0 print:p-0',
         // print — border and background
@@ -48,7 +48,6 @@ const { items } = Astro.props;
           'print:mb-10',
           // print — typography
           'print:text-2xl print:font-bold print:normal-case print:tracking-tight',
-          'print:text-zinc-900',
         ]}
       >
         Contents
@@ -72,7 +71,7 @@ const { items } = Astro.props;
                 // print — layout
                 'print:py-4',
                 // print — border
-                'print:border-b print:border-zinc-200',
+                'print:border-b print:border-zinc-200 dark:print:border-zinc-800',
                 'print:last:border-b-0',
               ]}
             >
@@ -80,9 +79,7 @@ const { items } = Astro.props;
                 href={`#${id}`}
                 class:list={[
                   // typography
-                  'text-zinc-400',
-                  // interactive
-                  'transition-colors hover:text-white',
+                  'text-zinc-600 transition-colors hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white',
                   // print — layout
                   'print:block',
                   // print — typography
@@ -92,12 +89,11 @@ const { items } = Astro.props;
                 <span
                   class:list={[
                     // typography
-                    'text-zinc-600',
+                    'text-zinc-500 dark:text-zinc-600',
                     // print — layout
                     'print:block',
                     // print — typography
                     'print:text-xs print:font-medium print:uppercase print:tracking-widest',
-                    'print:text-zinc-300',
                   ]}
                 >
                   {part}
@@ -117,7 +113,6 @@ const { items } = Astro.props;
                     'print:mt-1.5 print:block',
                     // print — typography
                     'print:text-base print:font-medium print:leading-snug',
-                    'print:text-zinc-900',
                   ]}
                 >
                   {title}

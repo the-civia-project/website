@@ -20,8 +20,10 @@ const refs = Astro.locals.printReferences;
           'print:block',
           // print — layout
           'print:mb-8',
+          // typography
+          'text-zinc-950 dark:text-white',
           // print — typography
-          'print:text-2xl print:font-bold print:tracking-tight print:text-zinc-900',
+          'print:text-2xl print:font-bold print:tracking-tight',
         ]}
       >
         References
@@ -31,11 +33,9 @@ const refs = Astro.locals.printReferences;
           // layout
           'mt-4 list-decimal space-y-3 pl-6',
           // typography
-          'text-sm leading-relaxed text-zinc-400',
+          'text-sm leading-relaxed text-zinc-600 dark:text-zinc-400',
           // print — layout
           'print:mt-0',
-          // print — typography
-          'print:text-zinc-700',
         ]}
       >
       {refs.map(({ href, label }: (typeof refs)[number], index: number) => {
@@ -53,9 +53,7 @@ const refs = Astro.locals.printReferences;
             <span
               class:list={[
                 // typography
-                'font-medium text-zinc-200',
-                // print — typography
-                'print:text-zinc-950',
+                'font-medium text-zinc-700 dark:text-zinc-200',
               ]}
             >
               {label}
@@ -65,10 +63,10 @@ const refs = Astro.locals.printReferences;
               href={url}
               class:list={[
                 // typography
-                'break-all text-zinc-500 underline decoration-zinc-700 underline-offset-2',
-                'hover:text-zinc-300 hover:decoration-zinc-400',
+                'break-all text-zinc-500 underline decoration-zinc-300 underline-offset-2',
+                'hover:text-zinc-700 hover:decoration-zinc-500 dark:decoration-zinc-700 dark:hover:text-zinc-300 dark:hover:decoration-zinc-400',
                 // print — typography
-                'print:text-zinc-600 print:no-underline',
+                'print:no-underline',
               ]}
               {...(is_external && {
                 target: '_blank',

@@ -332,7 +332,14 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
           >query the vector database</U
         >. Ranking happens <em>after</em> seen-post filtering.
       </p>
-      <ol class="mt-4 list-decimal space-y-3 pl-6 text-zinc-300">
+      <ol
+        class:list={[
+          // layout
+          'mt-4 list-decimal space-y-3 pl-6',
+          // color
+          'text-zinc-700 dark:text-zinc-300',
+        ]}
+      >
         <li>
           The user's <U>intent vector</U> is computed <strong>locally</strong> on
           the device from on-device signals.

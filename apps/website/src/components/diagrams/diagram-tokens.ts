@@ -19,7 +19,19 @@ export const FONT_SUB = 9;
 export const FONT_CAPTION = 9;
 export const FONT_SMALL = 8;
 
+/** Light-mode diagram colors (mirrored in diagram.css). */
 export const C = {
+  nodeFill: '#f4f4f5',
+  nodeStroke: '#52525b',
+  zoneStroke: '#a1a1aa',
+  arrow: '#52525b',
+  text: '#09090b',
+  subtext: '#3f3f46',
+  label: '#52525b',
+} as const;
+
+/** Dark-mode diagram colors (mirrored in diagram.css). */
+export const C_DARK = {
   nodeFill: '#09090b',
   nodeStroke: '#52525b',
   zoneStroke: '#3f3f46',

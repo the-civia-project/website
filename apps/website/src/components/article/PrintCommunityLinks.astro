@@ -31,6 +31,8 @@ const icons: Record<
     class:list={[
       // print — layout
       'print:size-32 print:shrink-0',
+      // print — color
+      'dark:print:invert',
     ]}
   />
   <div
@@ -46,20 +48,22 @@ const icons: Record<
           <a
             href={href}
             class:list={[
+              // typography
+              'text-zinc-600 dark:text-zinc-400',
               // print — layout
               'print:flex print:items-center print:gap-2',
               // print — typography
-              'print:text-sm print:text-zinc-600 print:no-underline',
+              'print:text-sm print:no-underline',
             ]}
           >
             <Icon
               width={16}
               height={16}
               class:list={[
+                // color
+                'fill-zinc-600 dark:fill-zinc-400',
                 // print — layout
                 'print:shrink-0',
-                // print — fill
-                'print:fill-zinc-600',
               ]}
             />
             {label}

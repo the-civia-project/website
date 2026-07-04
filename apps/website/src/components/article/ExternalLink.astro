@@ -24,18 +24,16 @@ const ref = registerPrintReference(Astro.locals.printReferences, href, label);
     // layout
     'inline inline-flex items-baseline gap-1',
     // typography
-    'text-white',
-    // print — typography
-    'print:text-zinc-950 print:underline',
+    'text-zinc-950 underline dark:text-white print:underline',
     className,
   ]}
 >
   <span
     class:list={[
       // typography
-      'underline decoration-zinc-600 underline-offset-2',
+      'underline decoration-zinc-300 underline-offset-2',
       // interactive
-      'group-hover:decoration-white',
+      'group-hover:decoration-zinc-950 dark:decoration-zinc-600 dark:group-hover:decoration-white',
     ]}
   >
     {label}
@@ -62,19 +60,13 @@ const ref = registerPrintReference(Astro.locals.printReferences, href, label);
     'hidden',
     // print — layout
     'print:inline',
+    // typography
+    'text-zinc-600 dark:text-zinc-400',
     // print — typography
-    'print:text-xs print:font-normal print:text-zinc-600',
+    'print:text-xs print:font-normal',
   ]}
 >
-  <a
-    href={`#ref-${ref}`}
-    class:list={[
-      // typography
-      'no-underline',
-      // print — typography
-      'print:text-zinc-600',
-    ]}
-  >
+  <a href={`#ref-${ref}`} class="no-underline">
     [{ref}]
   </a>
 </sup>

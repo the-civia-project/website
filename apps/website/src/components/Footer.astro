@@ -23,7 +23,14 @@ const end_year = new Date().getFullYear();
   <SocialLinks />
 
   <div
-    class="text-xs flex flex-row flex-wrap gap-2 justify-center items-center text-center opacity-50 text-shadow-lg"
+    class:list={[
+      // layout
+      'flex flex-row flex-wrap gap-2 justify-center items-center text-center',
+      // typography
+      'text-xs',
+      // interactive
+      'opacity-50 text-shadow-lg',
+    ]}
   >
     <span
       >&copy; {
@@ -39,7 +46,16 @@ const end_year = new Date().getFullYear();
     <span>The Civia Project</span>
   </div>
 
-  <div class="flex items-center justify-center text-xs opacity-50 gap-3">
+  <div
+    class:list={[
+      // layout
+      'flex items-center justify-center gap-3',
+      // typography
+      'text-xs',
+      // interactive
+      'opacity-50',
+    ]}
+  >
     <InternalLink href="/privacy" variant="plain" class="hover:underline"
       >Privacy Policy</InternalLink
     >
@@ -49,7 +65,14 @@ const end_year = new Date().getFullYear();
   </div>
 
   <div
-    class="text-xs flex flex-wrap gap-1 justify-center items-center content-center opacity-50"
+    class:list={[
+      // layout
+      'flex flex-wrap gap-1 justify-center items-center content-center',
+      // typography
+      'text-xs',
+      // interactive
+      'opacity-50',
+    ]}
   >
     <span>Content licensed under</span>
     <a

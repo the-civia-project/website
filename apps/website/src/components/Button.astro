@@ -16,13 +16,37 @@ const {
 const has_icon = Astro.slots.has('icon');
 const is_internal = path ? !path.startsWith('http') : false;
 
-const variants: Record<Variant, string> = {
-  default:
-    'p-4 border-white/50 text-black bg-white shadow-2xl hover:shadow-white/50',
-  secondary:
-    'p-4 border-zinc-600 bg-zinc-800 text-zinc-100 shadow-2xl hover:border-white/50 hover:bg-white hover:text-black hover:shadow-white/50',
-  ghost:
-    'py-2 px-4 md:px-12 shadow-none border-white/50 bg-transparent text-white fill-white opacity-50 hover:opacity-100 focus:opacity-100 hover:bg-white focus:bg-white hover:text-black focus:text-black hover:fill-black focus:fill-black transition-colors duration-500',
+const variants: Record<Variant, string[]> = {
+  default: [
+    // layout
+    'p-4',
+    // border and background
+    'border-zinc-950/50 bg-zinc-950 text-white shadow-2xl',
+    // interactive
+    'hover:border-zinc-950/50 hover:bg-white hover:text-zinc-950',
+    'dark:border-white/50 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-950 dark:hover:text-white',
+  ],
+  secondary: [
+    // layout
+    'p-4',
+    // border and background
+    'border-zinc-300 bg-zinc-100 text-zinc-950 shadow-2xl',
+    // interactive
+    'hover:border-zinc-950 hover:bg-zinc-950 hover:text-white',
+    'dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:border-white/50 dark:hover:bg-white dark:hover:text-zinc-950',
+  ],
+  ghost: [
+    // layout
+    'py-2 px-4 md:px-12',
+    // border and background
+    'shadow-none border-zinc-950/50 bg-transparent',
+    // color
+    'text-zinc-950 fill-zinc-950',
+    // interactive
+    'opacity-50 hover:opacity-100 focus:opacity-100',
+    'hover:bg-zinc-950 focus:bg-zinc-950 hover:text-white focus:text-white hover:fill-white focus:fill-white',
+    'dark:border-white/50 dark:text-white dark:fill-white dark:hover:bg-white dark:hover:text-zinc-950 dark:focus:bg-white dark:focus:text-zinc-950 dark:hover:fill-zinc-950 dark:focus:fill-zinc-950',
+  ],
 };
 
 const Tag = path ? 'a' : 'button';
@@ -34,15 +58,21 @@ const tag_props = path
 <Tag
   {...tag_props}
   class:list={[
+    // group
     'group',
-    'whitespace-pre',
+    // typography
+    'whitespace-pre uppercase underline underline-offset-8 decoration-transparent',
+    // layout
     'text-center inline-flex items-center justify-center',
     has_icon && 'gap-2',
-    'uppercase underline underline-offset-8 decoration-transparent',
-    'ease-in-out duration-500',
+    // transitions
+    'transition-colors ease-in-out duration-500',
+    // border and background
     'border rounded-md',
+    // interactive
     'cursor-pointer',
-    variants[variant],
+    // variant
+    ...variants[variant],
     className,
   ]}
 >

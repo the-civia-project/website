@@ -1,65 +1,64 @@
 svg .diagram-node {
-  fill: #09090b;
+  fill: #f4f4f5;
   stroke: #52525b;
 }
 
 svg .diagram-text {
-  fill: #fafafa;
+  fill: #09090b;
 }
 
 svg .diagram-subtext {
-  fill: #a1a1aa;
+  fill: #3f3f46;
 }
 
 svg .diagram-zone {
   fill: none;
-  stroke: #3f3f46;
-}
-
-svg .diagram-label {
-  fill: #71717a;
-}
-
-svg .diagram-arrow {
   stroke: #a1a1aa;
 }
 
+svg .diagram-label {
+  fill: #52525b;
+}
+
+svg .diagram-arrow {
+  stroke: #52525b;
+}
+
 svg .diagram-marker {
+  fill: #52525b;
+}
+
+.dark svg .diagram-node {
+  fill: #09090b;
+  stroke: #52525b;
+}
+
+.dark svg .diagram-text {
+  fill: #fafafa;
+}
+
+.dark svg .diagram-subtext {
   fill: #a1a1aa;
 }
 
-@media print {
-  svg .diagram-node {
-    fill: #f4f4f5 !important;
-    stroke: #52525b !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
+.dark svg .diagram-zone {
+  fill: none;
+  stroke: #3f3f46;
+}
 
-  svg .diagram-text {
-    fill: #09090b !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
+.dark svg .diagram-label {
+  fill: #71717a;
+}
 
-  svg .diagram-subtext {
-    fill: #3f3f46 !important;
-  }
+.dark svg .diagram-arrow {
+  stroke: #a1a1aa;
+}
 
-  svg .diagram-zone {
-    fill: #fafafa !important;
-    stroke: #a1a1aa !important;
-  }
+.dark svg .diagram-marker {
+  fill: #a1a1aa;
+}
 
-  svg .diagram-label {
-    fill: #52525b !important;
-  }
-
-  svg .diagram-arrow {
-    stroke: #52525b !important;
-  }
-
-  svg .diagram-marker {
-    fill: #52525b !important;
-  }
+svg {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }

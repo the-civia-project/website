@@ -42,12 +42,12 @@ const ref = paper
     variant === 'heading' && 'inline',
     variant === 'plain' && 'inline',
     // typography
-    variant === 'inline' && 'text-white',
-    variant === 'heading' && ['text-white', 'no-underline', 'hover:text-zinc-200'],
-    // print — typography
-    variant === 'inline' && 'print:text-zinc-950 print:underline',
-    variant === 'heading' && 'print:text-zinc-950 print:no-underline',
-    variant === 'plain' && 'print:text-zinc-950',
+    variant === 'inline' &&
+      'text-zinc-950 underline dark:text-white print:underline',
+    variant === 'heading' && [
+      'text-zinc-950 no-underline hover:text-zinc-700 dark:text-white dark:hover:text-zinc-200 print:no-underline',
+    ],
+    variant === 'plain' && 'text-zinc-950 dark:text-white',
     className,
   ]}
 >
@@ -59,7 +59,7 @@ const ref = paper
             // layout
             'mr-1',
             // typography
-            'text-zinc-600 group-hover:text-zinc-400',
+            'text-zinc-500 group-hover:text-zinc-700 dark:text-zinc-600 dark:group-hover:text-zinc-400',
           ]}
           aria-hidden="true"
         >
@@ -72,10 +72,7 @@ const ref = paper
         class:list={[
           variant === 'inline' && [
             // typography
-            'underline decoration-zinc-600 underline-offset-2',
-            'group-hover:decoration-white',
-            // print — typography
-            'print:text-zinc-950',
+            'underline decoration-zinc-300 underline-offset-2 group-hover:decoration-zinc-950 dark:decoration-zinc-600 dark:group-hover:decoration-white',
           ],
         ]}
       >
@@ -117,19 +114,13 @@ const ref = paper
         'hidden',
         // print — layout
         'print:inline',
+        // typography
+        'text-zinc-600 dark:text-zinc-400',
         // print — typography
-        'print:text-xs print:font-normal print:text-zinc-600',
+        'print:text-xs print:font-normal',
       ]}
     >
-      <a
-        href={`#ref-${ref}`}
-        class:list={[
-          // typography
-          'no-underline',
-          // print — typography
-          'print:text-zinc-600',
-        ]}
-      >
+      <a href={`#ref-${ref}`} class="no-underline">
         [{ref}]
       </a>
     </sup>

@@ -7,7 +7,13 @@ const { class: className } = Astro.props;
 ---
 
 <span
-  class:list={['block text-xs uppercase tracking-widest text-zinc-500', className]}
+  class:list={[
+    // layout
+    'block',
+    // typography
+    'text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400',
+    className,
+  ]}
 >
   <slot />
 </span>

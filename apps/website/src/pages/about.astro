@@ -30,7 +30,13 @@ const description =
   </Fragment>
 
   <header>
-    <span class="block text-xs uppercase tracking-widest text-zinc-500"
+    <span
+      class:list={[
+        // layout
+        'block',
+        // typography
+        'text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400',
+      ]}
       >About</span
     >
     <h1 class="mt-2 text-4xl font-bold tracking-tight md:text-5xl">
@@ -39,9 +45,14 @@ const description =
   </header>
 
   <section
-    class="mt-10 border-t border-zinc-800 pt-10 [&_p]:mt-4 [&_p]:leading-relaxed [&_p]:text-zinc-300"
+    class:list={[
+      // layout
+      'mt-10 border-t border-zinc-200 pt-10 dark:border-zinc-800',
+      // descendants
+      '[&_p]:mt-4 [&_p]:leading-relaxed [&_p]:text-zinc-700 dark:[&_p]:text-zinc-300',
+    ]}
   >
-    <h2 class="text-2xl font-bold leading-snug text-white">
+    <h2 class="text-2xl font-bold leading-snug text-zinc-950 dark:text-white">
       What is <U>The Civia Project</U>?
     </h2>
 
@@ -68,8 +79,8 @@ const description =
     </p>
   </section>
 
-  <section class="mt-10 border-t border-zinc-800 pt-10">
-    <h2 class="text-2xl font-bold leading-snug text-white">Meet the Team</h2>
+  <section class="mt-10 border-t border-zinc-200 pt-10 dark:border-zinc-800">
+    <h2 class="text-2xl font-bold leading-snug text-zinc-950 dark:text-white">Meet the Team</h2>
 
     <div class="mt-10 grid grid-cols-2 gap-8">
       <TeamMember

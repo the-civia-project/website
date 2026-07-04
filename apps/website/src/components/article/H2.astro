@@ -16,15 +16,13 @@ const { id, part } = Astro.props;
     // layout
     'scroll-mt-8 mt-16 pt-10',
     // border
-    'border-t border-zinc-800',
+    'border-t border-zinc-200 dark:border-zinc-800',
     // typography
-    'text-2xl font-bold leading-snug',
+    'text-2xl font-bold leading-snug text-zinc-950 dark:text-white',
     // print — layout
     'print:mt-0 print:pt-0',
     // print — border
     'print:border-0',
-    // print — typography
-    'print:text-zinc-950',
     // print — page breaks
     'print:break-inside-avoid print:break-after-avoid-page',
   ]}
@@ -42,7 +40,6 @@ const { id, part } = Astro.props;
           'print:mb-3',
           // print — typography
           'print:text-xs print:font-medium print:uppercase print:tracking-widest',
-          'print:text-zinc-300',
         ]}
       >
         {part}
@@ -54,7 +51,7 @@ const { id, part } = Astro.props;
     variant="heading"
     class:list={[
       // print — typography
-      'print:text-4xl print:font-bold print:leading-tight print:text-zinc-900',
+      'print:text-4xl print:font-bold print:leading-tight',
       // print — descendants
       'print:[&>span[aria-hidden]]:hidden',
     ]}

@@ -63,9 +63,9 @@ const published = format(new Date(date), 'dd/MM/yyyy');
           'mt-2',
           printCover && 'print:mt-0',
           // typography
-          'text-4xl font-bold tracking-tight md:text-5xl',
+          'text-4xl font-bold tracking-tight text-zinc-950 dark:text-white md:text-5xl',
           // print — typography
-          'print:text-7xl print:leading-tight print:text-zinc-950',
+          'print:text-7xl print:leading-tight',
         ]}
       >
         {title}
@@ -89,9 +89,9 @@ const published = format(new Date(date), 'dd/MM/yyyy');
               // layout
               'px-2.5 pt-1 pb-0.5',
               // border and background
-              'rounded-full border border-amber-500/40 bg-amber-500/15',
+              'rounded-full border border-amber-600/40 bg-amber-500/15 dark:border-amber-500/40',
               // typography
-              'text-xs font-medium uppercase tracking-wide text-amber-200',
+              'text-xs font-medium uppercase tracking-wide text-amber-900 dark:text-amber-200',
             ]}
           >
             Draft
@@ -109,8 +109,10 @@ const published = format(new Date(date), 'dd/MM/yyyy');
           'hidden print:block',
           // print — layout
           'print:mt-6 print:max-w-prose',
+          // typography
+          'text-zinc-600 dark:text-zinc-400',
           // print — typography
-          'print:text-base print:leading-relaxed print:text-zinc-600',
+          'print:text-base print:leading-relaxed',
         ]}
       >
         {printDescription}
@@ -122,28 +124,15 @@ const published = format(new Date(date), 'dd/MM/yyyy');
       // layout
       'mt-4',
       // typography
-      'text-sm text-zinc-300',
-      // print — typography
-      'print:text-zinc-700',
+      'text-sm text-zinc-700 dark:text-zinc-300',
     ]}
   >
-    <span
-      class:list={[
-        // typography
-        'text-zinc-500',
-        // print — typography
-        'print:text-zinc-500',
-      ]}
-    >
-      By
-    </span>
+    <span class="text-zinc-500 dark:text-zinc-400">By</span>
     {authorLine}
     <span
       class:list={[
         // typography
-        'text-zinc-600',
-        // print — typography
-        'print:text-zinc-500',
+        'text-zinc-600 dark:text-zinc-500',
         printCover && 'print:hidden',
       ]}
     >

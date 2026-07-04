@@ -13,9 +13,9 @@ const { id } = Astro.props;
     // layout
     'scroll-mt-8 mt-8',
     // typography
-    'text-lg font-semibold text-zinc-100',
+    'text-lg font-semibold text-zinc-950 dark:text-zinc-100',
     // print — typography
-    'print:text-2xl print:font-semibold print:text-zinc-950',
+    'print:text-2xl print:font-semibold',
     // print — page breaks
     'print:break-inside-avoid print:break-after-avoid-page',
   ]}
@@ -25,10 +25,8 @@ const { id } = Astro.props;
     href={`#${id}`}
     variant="heading"
     class:list={[
-      // typography
-      'text-zinc-100',
       // print — typography
-      'print:text-zinc-950 print:no-underline',
+      'print:no-underline',
       // print — descendants
       'print:[&>span[aria-hidden]]:hidden',
     ]}

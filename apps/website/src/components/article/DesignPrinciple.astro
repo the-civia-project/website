@@ -18,17 +18,18 @@ const label = final ? 'Final Principle' : 'Design Principle';
     'mt-10 scroll-mt-8 py-1 pl-6',
     // border
     'border-l-2',
-    final ? 'border-white/80 ring-1 ring-white/10' : 'border-zinc-500',
+    final
+      ? 'border-zinc-950/80 ring-1 ring-zinc-950/10 dark:border-white/80 dark:ring-white/10'
+      : 'border-zinc-400 dark:border-zinc-500',
     // print — layout
     'print:py-2',
     // print — border and background
-    'print:border-zinc-300 print:bg-zinc-50 print:ring-0',
+    'border-l-2 print:bg-transparent print:ring-0',
+    final
+      ? 'print:border-0 print:border-l-4 print:border-l-zinc-950 dark:print:border-l-white'
+      : 'print:border-0 print:border-l-4 print:border-l-zinc-400 dark:print:border-l-zinc-500',
     // print — page breaks
     'print:break-inside-avoid',
-    // print — descendants
-    '[&_h3]:print:text-zinc-950',
-    '[&_p]:print:text-zinc-700 [&_strong]:print:text-zinc-950',
-    final && 'print:[&_p:last-child]:text-zinc-950',
   ]}
 >
   <Label>{label}</Label>
@@ -37,9 +38,9 @@ const label = final ? 'Final Principle' : 'Design Principle';
       // layout
       'mt-2',
       // typography
-      'text-lg font-semibold text-white',
+      'text-lg font-semibold text-zinc-950 dark:text-white',
       // print — typography
-      'print:text-2xl print:font-semibold print:text-zinc-950',
+      'print:text-2xl print:font-semibold',
     ]}
   >
     {title}
@@ -49,9 +50,10 @@ const label = final ? 'Final Principle' : 'Design Principle';
       // layout
       'mt-4 space-y-4',
       // typography — descendants
-      '[&_p]:leading-relaxed [&_p]:text-zinc-300',
-      '[&_strong]:font-semibold [&_strong]:text-white',
-      final && '[&_p:last-child]:text-zinc-100',
+      '[&_p]:leading-relaxed [&_p]:text-zinc-700 dark:[&_p]:text-zinc-300',
+      '[&_strong]:font-semibold [&_strong]:text-zinc-950 dark:[&_strong]:text-white',
+      final &&
+        '[&_p:last-child]:text-zinc-800 dark:[&_p:last-child]:text-zinc-100',
     ]}
   >
     <slot />

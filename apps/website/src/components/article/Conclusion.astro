@@ -18,7 +18,6 @@ const label_classes = [
   'print:mb-3',
   // print — typography
   'print:font-medium',
-  'print:text-zinc-500',
 ];
 ---
 
@@ -41,8 +40,8 @@ const label_classes = [
       // border and background
       'border-l-16 p-r-15',
       is_final
-        ? 'border border-zinc-600 bg-zinc-950 ring-1 ring-white/10'
-        : 'border border-zinc-800 bg-zinc-950',
+        ? 'border border-zinc-300 bg-white ring-1 ring-zinc-950/10 dark:border-zinc-600 dark:bg-black dark:ring-white/10'
+        : 'border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-black',
       // print — layout
       'print:mt-10 print:rounded-none print:p-0',
       is_final && 'print:mt-12 print:py-8',
@@ -50,8 +49,8 @@ const label_classes = [
       // print — border and background
       'print:bg-transparent print:ring-0',
       is_final
-        ? 'print:border-0 print:border-t print:border-b print:border-zinc-200'
-        : 'print:border-0 print:border-l-4 print:border-l-zinc-950',
+        ? 'print:border-0 print:border-t print:border-b print:border-zinc-200 dark:print:border-zinc-900'
+        : 'print:border-0 print:border-l-4 print:border-l-zinc-950 dark:print:border-l-zinc-500',
       // print — page breaks
       'print:break-inside-avoid',
     ]}
@@ -80,10 +79,10 @@ const label_classes = [
           <h3
             class:list={[
               // typography
-              'font-semibold text-white',
+              'font-semibold text-zinc-950 dark:text-white',
               is_final ? 'text-xl' : 'text-lg',
               // print — typography
-              'print:text-2xl print:font-bold print:text-zinc-950',
+              'print:text-2xl print:font-bold',
             ]}
           >
             {title}
@@ -94,15 +93,14 @@ const label_classes = [
             // layout
             'mt-4 flex flex-col gap-4',
             // typography — descendants
-            '[&_p]:leading-relaxed [&_p]:text-zinc-300',
-            '[&_strong]:font-semibold [&_strong]:text-white',
-            is_final && '[&_p:last-child]:text-white',
+            '[&_p]:leading-relaxed [&_p]:text-zinc-700 dark:[&_p]:text-zinc-300',
+            '[&_strong]:font-semibold [&_strong]:text-zinc-950 dark:[&_strong]:text-white',
+            is_final &&
+              '[&_p:last-child]:text-zinc-950 dark:[&_p:last-child]:text-white',
             // print — layout
             'print:mt-4 print:gap-4',
-            // print — typography — descendants
-            'print:[&_p]:text-zinc-600 print:[&_strong]:text-zinc-950',
             is_final &&
-              'print:[&_p:last-child]:text-zinc-950 print:[&_p:last-child]:font-medium',
+              'print:[&_p:last-child]:font-medium',
           ]}
         >
           <slot />

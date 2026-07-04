@@ -18,9 +18,24 @@ const is_internal = !href.startsWith('http');
     <a
       href={href}
       rel="prefetch"
-      class:list={['group', 'inline text-white', className]}
+      class:list={[
+        // group
+        'group',
+        // layout
+        'inline',
+        // color
+        'text-zinc-950 dark:text-white',
+        className,
+      ]}
     >
-      <span class="underline decoration-zinc-600 underline-offset-2 group-hover:decoration-white">
+      <span
+        class:list={[
+          // typography
+          'underline decoration-zinc-300 underline-offset-2',
+          // interactive
+          'group-hover:decoration-zinc-950 dark:decoration-zinc-600 dark:group-hover:decoration-white',
+        ]}
+      >
         {show_section && <span aria-hidden="true">&sect;</span>}
         <slot />
       </span>
@@ -31,25 +46,34 @@ const is_internal = !href.startsWith('http');
       target="_blank"
       rel="noopener noreferrer"
       class:list={[
+        // group
         'group',
-        'text-white',
-        'inline',
-        'inline-flex items-baseline gap-1',
+        // layout
+        'inline inline-flex items-baseline gap-1',
+        // color
+        'text-zinc-950 dark:text-white',
         className,
       ]}
     >
-      <span class="underline decoration-zinc-600 underline-offset-2 group-hover:decoration-white">
+      <span
+        class:list={[
+          // typography
+          'underline decoration-zinc-300 underline-offset-2',
+          // interactive
+          'group-hover:decoration-zinc-950 dark:decoration-zinc-600 dark:group-hover:decoration-white',
+        ]}
+      >
         <slot />
       </span>
       <ArrowSquareOutIcon
         class:list={[
-          'inline-block',
-          'shrink-0',
-          'align-text-bottom',
-          'size-4',
+          // layout
+          'inline-block shrink-0 align-text-bottom size-4',
+          // color
           'fill-current',
-          'opacity-50',
-          'group-hover:opacity-100',
+          // interactive
+          'opacity-50 group-hover:opacity-100',
+          // transitions
           'transition-opacity',
         ]}
         aria-hidden="true"

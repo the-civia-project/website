@@ -11,9 +11,7 @@ const { caption } = Astro.props;
     // layout
     'mt-8 px-4 py-6',
     // border and background
-    'rounded-sm border border-zinc-800 bg-zinc-950',
-    // print — border and background
-    'print:border-zinc-300 print:bg-white print:print-color-adjust-exact',
+    'rounded-sm border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-black',
     // print — page breaks
     'print:break-inside-avoid',
   ]}
@@ -23,9 +21,7 @@ const { caption } = Astro.props;
       // layout
       'overflow-x-auto',
       // typography
-      'text-zinc-400',
-      // print — typography
-      'print:text-zinc-600 print:print-color-adjust-exact',
+      'text-zinc-600 dark:text-zinc-400',
     ]}
   >
     <slot />
@@ -35,9 +31,7 @@ const { caption } = Astro.props;
       // layout
       'mt-3 text-center',
       // typography
-      'text-xs text-zinc-500',
-      // print — typography
-      'print:text-zinc-500',
+      'text-xs text-zinc-500 dark:text-zinc-400',
     ]}
   >
     {caption}
