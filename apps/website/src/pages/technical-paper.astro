@@ -10,11 +10,17 @@ import EditorialQuestion from '../components/article/EditorialQuestion.astro';
 import EditorialTodo from '../components/article/EditorialTodo.astro';
 import ExternalLink from '../components/article/ExternalLink.astro';
 import InternalLink from '../components/article/InternalLink.astro';
+import MermaidDiagram from '../components/article/MermaidDiagram.astro';
 import H2 from '../components/article/H2.astro';
 import H3 from '../components/article/H3.astro';
 import References from '../components/article/References.astro';
 import PrintBackPage from '../components/article/PrintBackPage.astro';
 import TableOfContents from '../components/article/TableOfContents.astro';
+import { dualLanes } from '../diagrams/dual-lanes';
+import { feedPipeline } from '../diagrams/feed-pipeline';
+import { identityFlow } from '../diagrams/identity-flow';
+import { localIntent } from '../diagrams/local-intent';
+import { systemOverview } from '../diagrams/system-overview';
 import U from '../components/U.astro';
 import Layout from '../layouts/Layout.astro';
 
@@ -266,6 +272,11 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         </ArticleListItem>
       </ul>
 
+      <MermaidDiagram
+        caption="Identity verification flow: EUDI Wallet to pseudonym separation"
+        chart={identityFlow}
+      />
+
       <DesignPrinciple id="principle-i" title="People First, Bots Never">
         <p>
           Verified digital identity is the foundation of a trustworthy social
@@ -357,6 +368,11 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         </li>
       </ol>
 
+      <MermaidDiagram
+        caption="Public-lane algorithmic feed pipeline: query, filter, then rank"
+        chart={feedPipeline}
+      />
+
       <H3 id="part-ii-private-interaction">Private Interaction</H3>
       <p>
         When a user publishes privately, the post is encrypted on the client
@@ -379,6 +395,8 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         Private delivery requires an established friend relationship. Key
         exchange and session management follow <ExternalLink href="https://signal.org/docs/" label="Signal Protocol Documentation" /> semantics. The public and private data paths never merge without user action.
       </p>
+
+      <MermaidDiagram caption="Public and private interaction lanes" chart={dualLanes} />
 
       <DesignPrinciple
         id="principle-ii"
@@ -551,6 +569,11 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         the client receives them and backs them up.
       </p>
 
+      <MermaidDiagram
+        caption="Device-origin intent and filters versus ephemeral server-side processing"
+        chart={localIntent}
+      />
+
       <DesignPrinciple
         id="principle-iii"
         title="Privacy as Structure, Not Setting"
@@ -678,6 +701,8 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         enforces the same principle: serve users' benefit, protect privacy, verify
         humanity.
       </p>
+
+      <MermaidDiagram caption="Full platform architecture synthesis" chart={systemOverview} />
 
       <H3 id="part-v-synthesizing-the-social-argument"
         >Synthesizing the Social Argument</H3
