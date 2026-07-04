@@ -27,41 +27,7 @@
   color-scheme: dark;
 }
 
-.mermaid-diagram svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin-inline: auto;
-  -webkit-print-color-adjust: exact;
-  print-color-adjust: exact;
-}
-
-/* Show light diagrams by default; swap to dark when html.dark is set. */
-.mermaid-diagram .mermaid-theme-dark {
-  display: none;
-}
-
-html.dark .mermaid-diagram .mermaid-theme-light {
-  display: none;
-}
-
-html.dark .mermaid-diagram .mermaid-theme-dark {
-  display: block;
-}
-
 @media print {
-  html:not(.dark) .mermaid-diagram .mermaid-theme-dark {
-    display: none !important;
-  }
-
-  html.dark .mermaid-diagram .mermaid-theme-light {
-    display: none !important;
-  }
-
-  html.dark .mermaid-diagram .mermaid-theme-dark {
-    display: block !important;
-  }
-
   @page {
     margin: 2cm;
     size: A4;

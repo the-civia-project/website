@@ -1,0 +1,75 @@
+---
+import Label from './Label.astro';
+import WrenchIcon from '../../assets/icons/wrench.svg';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<div
+  class:list={[
+    // layout
+    'relative mt-8 overflow-hidden px-6 py-8',
+    // border and background
+    'rounded-sm border border-dashed border-amber-500/30 bg-zinc-50 ring-1 ring-amber-500/10',
+    'dark:border-amber-500/25 dark:bg-zinc-950/60 dark:ring-amber-500/10',
+    // print
+    'print:break-inside-avoid',
+    '[print-color-adjust:exact] [-webkit-print-color-adjust:exact]',
+  ]}
+  data-diagram-placeholder
+>
+  <!-- corner crop marks -->
+  <span
+    class="pointer-events-none absolute top-3 left-3 size-3 border-t-2 border-l-2 border-amber-500/50"
+    aria-hidden="true"
+  />
+  <span
+    class="pointer-events-none absolute top-3 right-3 size-3 border-t-2 border-r-2 border-amber-500/50"
+    aria-hidden="true"
+  />
+  <span
+    class="pointer-events-none absolute bottom-3 left-3 size-3 border-b-2 border-l-2 border-amber-500/50"
+    aria-hidden="true"
+  />
+  <span
+    class="pointer-events-none absolute right-3 bottom-3 size-3 border-r-2 border-b-2 border-amber-500/50"
+    aria-hidden="true"
+  />
+
+  <div class="relative">
+    <div class="flex items-center gap-2">
+      <WrenchIcon
+        class="size-4 shrink-0 fill-amber-700 dark:fill-amber-400"
+        aria-hidden="true"
+      />
+      <Label>Diagram TODO</Label>
+    </div>
+
+    <h4
+      class:list={[
+        // layout
+        'mt-3',
+        // typography
+        'text-base font-semibold text-zinc-950 dark:text-white',
+      ]}
+    >
+      {title}
+    </h4>
+
+    <p
+      class:list={[
+        // layout
+        'mt-3 max-w-prose',
+        // typography
+        'text-sm leading-relaxed text-zinc-600 dark:text-zinc-400',
+      ]}
+    >
+      {description}
+    </p>
+  </div>
+</div>
