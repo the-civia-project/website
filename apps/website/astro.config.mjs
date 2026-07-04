@@ -11,6 +11,9 @@ const hidden = ['/404/', '/unsubscribe/'];
 
 // https://astro.build/config
 export default defineConfig({
+  build: {
+    assets: 'assets',
+  },
   env: {
     schema: {
       API_URL: envField.string({
