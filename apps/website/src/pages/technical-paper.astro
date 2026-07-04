@@ -6,7 +6,6 @@ import ArticleDetails from '../components/article/ArticleDetails.astro';
 import ArticleHeader from '../components/article/ArticleHeader.astro';
 import ArticleListItem from '../components/article/ArticleListItem.astro';
 import DesignPrinciple from '../components/article/DesignPrinciple.astro';
-import Diagram from '../components/article/Diagram.astro';
 import EditorialQuestion from '../components/article/EditorialQuestion.astro';
 import EditorialTodo from '../components/article/EditorialTodo.astro';
 import ExternalLink from '../components/article/ExternalLink.astro';
@@ -16,11 +15,6 @@ import H3 from '../components/article/H3.astro';
 import References from '../components/article/References.astro';
 import PrintBackPage from '../components/article/PrintBackPage.astro';
 import TableOfContents from '../components/article/TableOfContents.astro';
-import DualLanes from '../components/diagrams/DualLanes.astro';
-import FeedPipeline from '../components/diagrams/FeedPipeline.astro';
-import IdentityFlow from '../components/diagrams/IdentityFlow.astro';
-import LocalIntent from '../components/diagrams/LocalIntent.astro';
-import SystemOverview from '../components/diagrams/SystemOverview.astro';
 import U from '../components/U.astro';
 import Layout from '../layouts/Layout.astro';
 
@@ -272,12 +266,6 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         </ArticleListItem>
       </ul>
 
-      <Diagram
-        caption="Identity verification flow: EUDI Wallet to pseudonym separation"
-      >
-        <IdentityFlow />
-      </Diagram>
-
       <DesignPrinciple id="principle-i" title="People First, Bots Never">
         <p>
           Verified digital identity is the foundation of a trustworthy social
@@ -369,12 +357,6 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         </li>
       </ol>
 
-      <Diagram
-        caption="Public-lane algorithmic feed pipeline: query, filter, then rank"
-      >
-        <FeedPipeline />
-      </Diagram>
-
       <H3 id="part-ii-private-interaction">Private Interaction</H3>
       <p>
         When a user publishes privately, the post is encrypted on the client
@@ -397,10 +379,6 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         Private delivery requires an established friend relationship. Key
         exchange and session management follow <ExternalLink href="https://signal.org/docs/" label="Signal Protocol Documentation" /> semantics. The public and private data paths never merge without user action.
       </p>
-
-      <Diagram caption="Public and private interaction lanes">
-        <DualLanes />
-      </Diagram>
 
       <DesignPrinciple
         id="principle-ii"
@@ -573,12 +551,6 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         the client receives them and backs them up.
       </p>
 
-      <Diagram
-        caption="Device-origin intent and filters versus ephemeral server-side processing"
-      >
-        <LocalIntent />
-      </Diagram>
-
       <DesignPrinciple
         id="principle-iii"
         title="Privacy as Structure, Not Setting"
@@ -706,10 +678,6 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         enforces the same principle: serve users' benefit, protect privacy, verify
         humanity.
       </p>
-
-      <Diagram caption="Full platform architecture synthesis">
-        <SystemOverview />
-      </Diagram>
 
       <H3 id="part-v-synthesizing-the-social-argument"
         >Synthesizing the Social Argument</H3
