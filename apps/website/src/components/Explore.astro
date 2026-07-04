@@ -55,8 +55,8 @@ const visible_links = links.filter(
       <Label>Explore</Label>
       <div
         class:list={[
-          'mt-4 grid gap-4',
-          visible_links.length > 1 ? 'grid-cols-2' : 'grid-cols-1',
+          'mt-4 grid grid-cols-1 gap-4',
+          visible_links.length > 1 && 'sm:grid-cols-2',
         ]}
       >
         {visible_links.map(({ path, label, Icon }, index) => (
@@ -66,9 +66,9 @@ const visible_links = links.filter(
             class={
               visible_links.length === 5 &&
               path === 'https://demo.theciviaproject.org'
-                ? 'col-span-2 w-full'
+                ? 'w-full sm:col-span-2'
                 : visible_links.length === 3 && index === 0
-                  ? 'col-span-2 w-full'
+                  ? 'w-full sm:col-span-2'
                   : ''
             }
           >
