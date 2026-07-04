@@ -92,9 +92,11 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       authors={['Alexandru Ifrim', 'Ștefan Alexandru Mocanu']}
       date="2026-06-22"
       draft
+      printCover
+      printDescription={description}
     />
 
-    <ArticleAside label="Abstract" italic>
+    <ArticleAside label="Abstract" italic printCenterPage>
       <p>
         This paper is the technical companion to <InternalLink href="/social-paper" paper={sp} />. Where that document argues the case for improving the social web with
         privacy in mind—an exercise in reclaiming the digital town square, not a
@@ -303,7 +305,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       />
       </ArticleDetails>
 
-      <DesignPrinciple id="principle-i" title="People First, Bots Never">
+      <DesignPrinciple id="principle-i" title="People First, Bots Never" printCenterPage>
         <p>
           Verified digital identity is the foundation of a trustworthy social
           network. By tying every account to a real, accountable person through
@@ -459,6 +461,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       <DesignPrinciple
         id="principle-ii"
         title="Public Discovery, Private by Protocol"
+        printCenterPage
       >
         <p>
           Users choose visibility at publish time, with transitions governed by
@@ -666,6 +669,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       <DesignPrinciple
         id="principle-iii"
         title="Privacy as Structure, Not Setting"
+        printCenterPage
       >
         <p>
           Privacy is woven into the architecture — not offered as a toggle
@@ -792,7 +796,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       </p>
       </ArticleDetails>
 
-      <DesignPrinciple id="principle-iv" title="Metrics Without Surveillance">
+      <DesignPrinciple id="principle-iv" title="Metrics Without Surveillance" printCenterPage>
         <p>
           Operational metrics are necessary; individual surveillance is not. The
           platform measures its own health through anonymized counters — never
@@ -1065,7 +1069,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       </p>
       </ArticleDetails>
 
-      <DesignPrinciple id="principle-v" title="The Commitment to Build" final>
+      <DesignPrinciple id="principle-v" title="The Commitment to Build" final printCenterPage>
         <p>
           Identifying the necessary architecture is only the first step. We are
           building this platform in public — open source, transparent, and
