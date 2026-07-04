@@ -5,14 +5,15 @@ import ArticleAside from '../components/article/ArticleAside.astro';
 import ArticleDetails from '../components/article/ArticleDetails.astro';
 import ArticleHeader from '../components/article/ArticleHeader.astro';
 import ArticleListItem from '../components/article/ArticleListItem.astro';
+import ArticlePart from '../components/article/ArticlePart.astro';
 import DesignPrinciple from '../components/article/DesignPrinciple.astro';
 import EditorialQuestion from '../components/article/EditorialQuestion.astro';
 import EditorialTodo from '../components/article/EditorialTodo.astro';
 import ExternalLink from '../components/article/ExternalLink.astro';
 import InternalLink from '../components/article/InternalLink.astro';
 import DiagramPlaceholder from '../components/article/DiagramPlaceholder.astro';
-import H2 from '../components/article/H2.astro';
 import H3 from '../components/article/H3.astro';
+import SectionLead from '../components/article/SectionLead.astro';
 import References from '../components/article/References.astro';
 import PrintBackPage from '../components/article/PrintBackPage.astro';
 import TableOfContents from '../components/article/TableOfContents.astro';
@@ -141,9 +142,38 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
 
     <TableOfContents items={parts} />
 
-    <section>
-      <H2 id="part-i" part="Part I">Identity Verification Architecture</H2>
+    <ArticlePart
+      id="part-i"
+      part="Part I"
+      title="Identity Verification Architecture"
+    >
+      <SectionLead slot="lead">
+        Verified identity is a structural primitive: one human, one account via
+        EUDI Wallet under eIDAS 2.0. Selective disclosure and zero-knowledge
+        proofs minimize what is shared; pseudonym separation keeps verification
+        records cryptographically apart from social activity.
+      </SectionLead>
 
+      <ArticleDetails
+        headings={[
+          {
+            id: 'part-i-verified-identity-as-a-primitive',
+            title: 'Verified Identity as a Structural Primitive',
+          },
+          {
+            id: 'part-i-eudi-wallet-and-eidas',
+            title: 'EUDI Wallet and eIDAS 2.0',
+          },
+          {
+            id: 'part-i-selective-disclosure-and-zkp',
+            title: 'Selective Disclosure and Zero-Knowledge Proofs',
+          },
+          {
+            id: 'part-i-pseudonym-separation',
+            title: 'Pseudonym Separation',
+          },
+        ]}
+      >
       <H3 id="part-i-verified-identity-as-a-primitive"
         >Verified Identity as a Structural Primitive</H3
       >
@@ -271,6 +301,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         title="Identity verification flow: EUDI Wallet to pseudonym separation"
         description="EUDI Wallet (government credentials) → selective disclosure / ZKP → verified account → pseudonym separation."
       />
+      </ArticleDetails>
 
       <DesignPrinciple id="principle-i" title="People First, Bots Never">
         <p>
@@ -281,13 +312,41 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
           agents — not through moderation alone, but through architecture.
         </p>
       </DesignPrinciple>
-    </section>
+    </ArticlePart>
 
-    <section>
-      <H2 id="part-ii" part="Part II">
-        Interaction Architecture: Public and Private Lanes
-      </H2>
+    <ArticlePart
+      id="part-ii"
+      part="Part II"
+      title="Interaction Architecture: Public and Private Lanes"
+    >
+      <SectionLead slot="lead">
+        Every post is public or private, with separated data paths. The public
+        lane supports reverse-chronological or opt-in algorithmic feeds built
+        from on-device intent, vector DB queries, seen-post filters, and
+        server-side ranking. Private posts use Signal Protocol encryption; the
+        server relays ciphertext only.
+      </SectionLead>
 
+      <ArticleDetails
+        headings={[
+          {
+            id: 'part-ii-two-modes-one-platform',
+            title: 'Two Modes, One Platform',
+          },
+          {
+            id: 'part-ii-public-interaction',
+            title: 'Public Interaction',
+          },
+          {
+            id: 'part-ii-private-interaction',
+            title: 'Private Interaction',
+          },
+          {
+            id: 'part-ii-friend-graph-and-boundaries',
+            title: 'Friend Graph and Cross-Lane Boundaries',
+          },
+        ]}
+      >
       <H3 id="part-ii-two-modes-one-platform">Two Modes, One Platform</H3>
       <p>
         Every post on the platform is explicitly <U>public</U> or <U>private</U
@@ -395,6 +454,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         title="Public and private interaction lanes"
         description="Shared identity layer; public lane (publish → store/index → feeds); private lane (encrypt → relay → decrypt → device feeds)."
       />
+      </ArticleDetails>
 
       <DesignPrinciple
         id="principle-ii"
@@ -410,13 +470,43 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
           pipeline. Two modes, one platform — architecturally separated.
         </p>
       </DesignPrinciple>
-    </section>
+    </ArticlePart>
 
-    <section>
-      <H2 id="part-iii" part="Part III">
-        Privacy Architecture: Local-Only by Design
-      </H2>
+    <ArticlePart
+      id="part-iii"
+      part="Part III"
+      title="Privacy Architecture: Local-Only by Design"
+    >
+      <SectionLead slot="lead">
+        Privacy is architecture, not a setting. The public-lane server processes
+        feed requests ephemerally without building profiles; the private lane
+        cannot read content. Intent vectors and probabilistic seen-post filters
+        live on-device; minors get chronological defaults and parental gates on
+        connections and algorithmic feeds.
+      </SectionLead>
 
+      <ArticleDetails
+        headings={[
+          { id: 'part-iii-server-roles', title: 'Server Roles by Lane' },
+          {
+            id: 'part-iii-intent-computation-and-transmission',
+            title: 'Intent Computation and Transmission',
+          },
+          {
+            id: 'part-iii-seen-post-filters',
+            title: 'Seen-Post Filters: Probabilistic Data Structures',
+          },
+          {
+            id: 'part-iii-local-state-and-sync',
+            title: 'Local State and Cross-Device Synchronization',
+          },
+          { id: 'part-iii-minor-accounts', title: 'Minor Accounts' },
+          {
+            id: 'part-iii-what-we-do-not-collect',
+            title: 'What the Platform Does Not Collect and Will Never Collect',
+          },
+        ]}
+      >
       <H3 id="part-iii-server-roles">Server Roles by Lane</H3>
       <p>
         As described in <InternalLink
@@ -571,6 +661,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         title="Device-origin intent and filters versus ephemeral server-side processing"
         description="User device (local intent, filters, settings) vs server (query → filter → rank → feed); per-request boundary only."
       />
+      </ArticleDetails>
 
       <DesignPrinciple
         id="principle-iii"
@@ -584,11 +675,32 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
           is encrypted by protocol, not by policy.
         </p>
       </DesignPrinciple>
-    </section>
+    </ArticlePart>
 
-    <section>
-      <H2 id="part-iv" part="Part IV">Anonymized Aggregate Metrics</H2>
+    <ArticlePart id="part-iv" part="Part IV" title="Anonymized Aggregate Metrics">
+      <SectionLead slot="lead">
+        Only coarse anonymized counters support operational health and optional
+        per-post public-lane stats for authors—no behavioral dossiers,
+        third-party analytics, or private-lane engagement mining. Aggregation
+        thresholds and public annual disclosure keep metrics transparent without
+        surveillance.
+      </SectionLead>
 
+      <ArticleDetails
+        headings={[
+          { id: 'part-iv-purpose', title: 'Purpose' },
+          { id: 'part-iv-what-is-collected', title: 'What Is Collected' },
+          {
+            id: 'part-iv-public-vs-private-metrics',
+            title: 'Public vs Private Lane Implications',
+          },
+          { id: 'part-iv-what-is-forbidden', title: 'What Is Forbidden' },
+          {
+            id: 'part-iv-anonymization-and-transparency',
+            title: 'Anonymization and Transparency',
+          },
+        ]}
+      >
       <H3 id="part-iv-purpose">Purpose</H3>
       <p>
         The platform collects only coarse, anonymized metrics for operational
@@ -678,6 +790,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         Aggregate metrics are reported publicly. The platform publishes an
         annual disclosure of its data practices.
       </p>
+      </ArticleDetails>
 
       <DesignPrinciple id="principle-iv" title="Metrics Without Surveillance">
         <p>
@@ -687,11 +800,45 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
           aggregate data.
         </p>
       </DesignPrinciple>
-    </section>
+    </ArticlePart>
 
-    <section>
-      <H2 id="part-v" part="Part V">System Synthesis and Open Governance</H2>
+    <ArticlePart
+      id="part-v"
+      part="Part V"
+      title="System Synthesis and Open Governance"
+    >
+      <SectionLead slot="lead">
+        Identity, dual lanes, and minimal metrics synthesize into an open-source
+        system governed by a non-profit steward. GDPR, eIDAS 2.0, and DSA
+        obligations are met by construction—chronological defaults, parental
+        approval for minors, verified identity, and auditable recommender
+        transparency.
+      </SectionLead>
 
+      <ArticleDetails
+        headings={[
+          { id: 'part-v-component-overview', title: 'Component Overview' },
+          {
+            id: 'part-v-synthesizing-the-social-argument',
+            title: 'Synthesizing the Social Argument',
+          },
+          {
+            id: 'part-v-open-source-and-auditability',
+            title: 'Open Source and Auditability',
+          },
+          { id: 'part-v-compliance', title: 'Compliance Framing' },
+          {
+            id: 'part-v-compliance-gdpr',
+            title: 'General Data Protection Regulation (EU) 2016/679',
+          },
+          { id: 'part-v-compliance-eidas', title: 'eIDAS 2.0' },
+          {
+            id: 'part-v-compliance-dsa',
+            title: 'Digital Services Act (Regulation (EU) 2022/2065)',
+          },
+          { id: 'part-v-honest-limitations', title: 'Honest Limitations' },
+        ]}
+      >
       <H3 id="part-v-component-overview">Component Overview</H3>
       <p>
         The architecture ties together identity verification, dual interaction
@@ -916,6 +1063,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         exit—because accountability and ethics cannot depend on shareholders
         demanding capital gains above user benefit.
       </p>
+      </ArticleDetails>
 
       <DesignPrinciple id="principle-v" title="The Commitment to Build" final>
         <p>
@@ -930,7 +1078,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
           of accountability—not corporate self-certification.
         </p>
       </DesignPrinciple>
-    </section>
+    </ArticlePart>
 
     <ArticleDetails
       headings={[]}
