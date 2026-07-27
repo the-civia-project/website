@@ -7,8 +7,6 @@ import ArticleHeader from '../components/article/ArticleHeader.astro';
 import ArticleListItem from '../components/article/ArticleListItem.astro';
 import ArticlePart from '../components/article/ArticlePart.astro';
 import DesignPrinciple from '../components/article/DesignPrinciple.astro';
-import EditorialQuestion from '../components/article/EditorialQuestion.astro';
-import EditorialTodo from '../components/article/EditorialTodo.astro';
 import ExternalLink from '../components/article/ExternalLink.astro';
 import InternalLink from '../components/article/InternalLink.astro';
 import DiagramPlaceholder from '../components/article/DiagramPlaceholder.astro';
@@ -54,20 +52,61 @@ const parts = [
 ];
 
 const sp = 'Social Paper';
-const spI =
-  'Part I: The Architecture of Openness and the Lack of Privacy Primitives';
-const spII =
-  'Part II: Hooked on the Feed and the Commodification of Connection';
-const spIII =
-  'Part III: The Next Generation: Easing Children into the Digital World';
-const spIV =
-  'Part IV: The Automation of Outrage and Reclaiming the Human Network';
-const spV = 'Part V: The Corporate Guest in a Human Space';
-const spVI =
-  'Part VI: Law, Not Policy — Free Speech and Platform Responsibility';
-const spVII =
-  'Part VII: Lack of Accountability and Ethics in the Corporate Space';
-const spVIII = 'Part VIII: The Blueprint for a Private Web';
+
+const socialPaperParts = [
+  {
+    id: 'part-i',
+    part: 'Part I',
+    title: 'The Architecture of Openness and the Lack of Privacy Primitives',
+  },
+  {
+    id: 'part-ii',
+    part: 'Part II',
+    title: 'Hooked on the Feed and the Commodification of Connection',
+  },
+  {
+    id: 'part-iii',
+    part: 'Part III',
+    title: 'The Next Generation: Easing Children into the Digital World',
+  },
+  {
+    id: 'part-iv',
+    part: 'Part IV',
+    title: 'The Automation of Outrage and Reclaiming the Human Network',
+  },
+  {
+    id: 'part-v',
+    part: 'Part V',
+    title: 'The Corporate Guest in a Human Space',
+  },
+  {
+    id: 'part-vi',
+    part: 'Part VI',
+    title: 'Law, Not Policy — Free Speech and Platform Responsibility',
+  },
+  {
+    id: 'part-vii',
+    part: 'Part VII',
+    title: 'Lack of Accountability and Ethics in the Corporate Space',
+  },
+  {
+    id: 'part-viii',
+    part: 'Part VIII',
+    title: 'The Blueprint for a Private Web',
+  },
+];
+
+const spSection = (id: string) => {
+  const part = socialPaperParts.find((p) => p.id === id);
+  if (!part) throw new Error(`Unknown social paper part: ${id}`);
+  return `${part.part}: ${part.title}`;
+};
+
+const tpSection = (id: string) => {
+  const part = parts.find((p) => p.id === id);
+  if (!part) throw new Error(`Unknown technical paper part: ${id}`);
+  return `${part.part}: ${part.title}`;
+};
 ---
 
 <Layout size="large">
@@ -104,7 +143,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         trust boundaries, data flows, and standards-aligned design decisions.
       </p>
       <p>
-        <InternalLink href="/social-paper#part-vii" paper={sp} section={spVII} /> documents how for-profit platforms subordinate ethical duties to
+        <InternalLink href="/social-paper#part-vii" paper={sp} section={spSection('part-vii')} /> documents how for-profit platforms subordinate ethical duties to
         revenue and treat fines as operating cost. This paper's response is
         structural: open-source auditability, non-profit stewardship,
         privacy-by-architecture, and governance that does not depend on
@@ -127,7 +166,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
         exposes user-configurable settings — as described in <InternalLink
           href="/social-paper#part-ii-algorithmic-interventions"
           paper={sp}
-          section={spII}
+          section={spSection('part-ii')}
           heading="Algorithmic Interventions"
         />. The platform does not build persistent behavioral profiles or
         long-term interest graphs.
@@ -163,6 +202,10 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
             title: 'Verified Identity as a Structural Primitive',
           },
           {
+            id: 'part-i-one-human-one-account',
+            title: 'One Human, One Account',
+          },
+          {
             id: 'part-i-eudi-wallet-and-eidas',
             title: 'EUDI Wallet and eIDAS 2.0',
           },
@@ -171,138 +214,170 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
             title: 'Selective Disclosure and Zero-Knowledge Proofs',
           },
           {
+            id: 'part-i-professional-credential-verification',
+            title: 'Professional Credential Verification',
+          },
+          {
             id: 'part-i-pseudonym-separation',
             title: 'Pseudonym Separation',
           },
         ]}
       >
-      <H3 id="part-i-verified-identity-as-a-primitive"
-        >Verified Identity as a Structural Primitive</H3
-      >
-      <p>
-        The open Web has no native mechanism to distinguish a human from a bot.
-        As described in <InternalLink
-          href="/social-paper#part-iv-the-ease-of-creating-and-managing-bots"
-          paper={sp}
-          section={spIV}
-          heading="The Ease of Creating and Managing Bots"
-        />, this absence has enabled bot networks, social media farms, and
-        AI-driven synthetic accounts to dominate the digital town square. For a
-        platform whose mission is genuine human discourse, identity verification
-        is not a feature bolted on at the edge — it is a structural primitive of
-        the architecture.
-      </p>
-      <p>
-        Every user account must be linked to a verified digital identity. The
-        platform enforces a simple hierarchy: one human, one account. Bots,
-        automated agents, and unverified entities cannot hold user accounts.
-      </p>
+        <H3 id="part-i-verified-identity-as-a-primitive"
+          >Verified Identity as a Structural Primitive</H3
+        >
+        <p>
+          The open Web has no native mechanism to distinguish a human from a bot.
+          As described in <InternalLink
+            href="/social-paper#part-iv-the-ease-of-creating-and-managing-bots"
+            paper={sp}
+            section={spSection('part-iv')}
+            heading="The Ease of Creating and Managing Bots"
+          />, this absence has enabled bot networks, social media farms, and
+          AI-driven synthetic accounts to dominate the digital town square. For a
+          platform whose mission is genuine human discourse, identity verification
+          is not a feature bolted on at the edge — it is a structural primitive of
+          the architecture.
+        </p>
 
-      <H3 id="part-i-eudi-wallet-and-eidas">EUDI Wallet and eIDAS 2.0</H3>
-      <p>
-        Identity verification on the platform relies on the <ExternalLink href="https://commission.europa.eu/topics/digital-economy-and-society/european-digital-identity_en" label="European Digital Identity Wallet — European Commission" /> (<U>EUDI Wallet</U>), compliant with <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183" label="Regulation (EU) 2024/1183 (eIDAS 2.0)" /> (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183" label="Regulation (EU) 2024/1183 (eIDAS 2.0)" />). Users hold government-issued digital credentials locally in their wallet.
-        At registration, the platform receives only what the user explicitly chooses
-        to disclose — not full identity documents, and not more attributes than the
-        platform requires to operate.
-      </p>
-      <p>
-        This approach aligns identity assurance with data minimization: the
-        wallet is the user's agent, and the platform is a relying party that
-        requests the minimum proof necessary.
-      </p>
+        <H3 id="part-i-one-human-one-account">One Human, One Account</H3>
+        <p>
+          Every user account must be linked to a verified digital identity. The
+          platform enforces a simple hierarchy: one human, one account. Bots,
+          automated agents, and unverified entities cannot hold user accounts.
+        </p>
 
-      <EditorialQuestion>
-        When a user authenticates with their EUDI Wallet, how does the platform
-        determine whether they already have an account?
-      </EditorialQuestion>
+        <H3 id="part-i-eudi-wallet-and-eidas">EUDI Wallet and eIDAS 2.0</H3>
+        <p>
+          Identity verification on the platform relies on the <ExternalLink href="https://commission.europa.eu/topics/digital-economy-and-society/european-digital-identity_en" label="European Digital Identity Wallet — European Commission" /> (<U>EUDI Wallet</U>), compliant with <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183" label="Regulation (EU) 2024/1183 (eIDAS 2.0)" />. Users hold government-issued digital credentials locally in their wallet.
+          At registration, the platform receives only what the user explicitly chooses
+          to disclose — not full identity documents, and not more attributes than the
+          platform requires to operate.
+        </p>
+        <p>
+          This approach aligns identity assurance with data minimization: the
+          wallet is the user's agent, and the platform is a relying party that
+          requests the minimum proof necessary.
+        </p>
+        <p>
+          When a user authenticates with their EUDI Wallet, the platform checks
+          whether an account-binding token derived from the wallet proof already
+          exists. Only the minimum cryptographic material needed for one-human-one-account
+          enforcement is retained — not a reversible identity dump. If a binding
+          already exists, registration is rejected; the user must recover their
+          existing account instead of creating a duplicate.
+        </p>
 
-      <H3 id="part-i-selective-disclosure-and-zkp"
-        >Selective Disclosure and Zero-Knowledge Proofs</H3
-      >
-      <p>
-        Where technically feasible, the platform employs <U
-          >selective disclosure</U
-        > and <U>zero-knowledge proofs</U> so that users can prove specific claims
-        without revealing underlying personal data. For example:
-      </p>
-      <ul>
-        <ArticleListItem>
-          <U>Proof of natural person:</U> confirm the account holder is a real human
-          without transmitting a full identity document.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Proof of legal age:</U> confirm a user has attained eighteen (18) years
-          of age without revealing their precise date of birth — required for age-gated
-          features such as opt-in algorithmic feeds.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Proof of citizenship:</U> citizenship is disclosed from the EUDI Wallet
-          at account creation and shown on the account.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Validated legal name (optional):</U> users may choose to display a legal
-          or given name on their account. When they do, the platform validates it
-          against their EUDI Wallet — not a self-asserted string. If the user removes
-          it, the platform deletes it completely; adding it again requires fresh wallet
-          validation.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Proof of professional license (required for professional-advice mode):</U
-          > selectively disclose profession, issuing jurisdiction, and validity — e.g.
-          physician, lawyer, regulated financial adviser — via EUDI Wallet <U
-            >EAA</U
-          >/<U>QEAA</U> credentials without transmitting full license documents.
-        </ArticleListItem>
-      </ul>
-      <p>
-        For professional credentials, the platform acts as a relying party and the wallet
-        as the user's agent. Verification confirms credential existence and scope — not
-        the quality of any advice given. As <InternalLink
-          href="/social-paper#part-vi-professional-advice-and-verified-credentials"
-          paper={sp}
-          section={spVI}
-          heading="Professional Advice and Verified Credentials"
-        /> argues, that distinction keeps credential gating within architecture and law,
-        not corporate truth-policing.
-      </p>
-      <p>
-        The platform does not store raw identity credentials or full personal
-        identifiers beyond what is strictly necessary for verification purposes,
-        consistent with <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_5" label="GDPR Article 5 — Principles Relating to Processing of Personal Data" />, <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_25" label="GDPR Article 25 — Data Protection by Design and by Default" />, and <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_32" label="GDPR Article 32 — Security of Processing" /> of the <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679" label="General Data Protection Regulation (EU) 2016/679" />.
-      </p>
+        <H3 id="part-i-selective-disclosure-and-zkp"
+          >Selective Disclosure and Zero-Knowledge Proofs</H3
+        >
+        <p>
+          Where technically feasible, the platform employs <U
+            >selective disclosure</U
+          > and <U>zero-knowledge proofs</U> so that users can prove specific claims
+          without revealing underlying personal data. For example:
+        </p>
+        <ul>
+          <ArticleListItem>
+            <U>Proof of natural person:</U> confirm the account holder is a real human
+            without transmitting a full identity document.
+          </ArticleListItem>
+          <ArticleListItem>
+            <U>Proof of legal age:</U> confirm a user has attained eighteen (18) years
+            of age without revealing their precise date of birth — required for age-gated
+            features such as opt-in algorithmic feeds.
+          </ArticleListItem>
+          <ArticleListItem>
+            <U>Proof of citizenship:</U> citizenship is disclosed from the EUDI Wallet
+            at account creation and shown on the account.
+          </ArticleListItem>
+          <ArticleListItem>
+            <U>Validated legal name (optional):</U> users may choose to display a legal
+            or given name on their account. When they do, the platform validates it
+            against their EUDI Wallet — not a self-asserted string. If the user removes
+            it, the platform deletes it completely; adding it again requires fresh wallet
+            validation.
+          </ArticleListItem>
+        </ul>
+        <p>
+          The platform does not store raw identity credentials or full personal
+          identifiers beyond what is strictly necessary for verification purposes,
+          consistent with <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_5" label="GDPR Article 5 — Principles Relating to Processing of Personal Data" />, <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_25" label="GDPR Article 25 — Data Protection by Design and by Default" />, and <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_32" label="GDPR Article 32 — Security of Processing" /> of the <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679" label="General Data Protection Regulation (EU) 2016/679" />.
+        </p>
 
-      <H3 id="part-i-pseudonym-separation">Pseudonym Separation</H3>
-      <p>
-        Identity verification is required at registration, but users engage on
-        the platform under a chosen pseudonym or handle. Their citizenship is
-        always shown. Users may optionally display a validated legal or given
-        name on their account; when they do, it must be confirmed through their
-        EUDI Wallet. If they remove it, the platform deletes it completely —
-        restoring it requires re-validation. The link between a user's verified
-        identity and their on-platform activity is protected by strong technical
-        and organizational measures:
-      </p>
-      <ul>
-        <ArticleListItem>
-          Cryptographic separation between identity verification records and
-          social activity data.
-        </ArticleListItem>
-        <ArticleListItem>
-          Access controls ensuring the mapping between a verified identity and a
-          user account is accessible only under lawful process or explicit user
-          request.
-        </ArticleListItem>
-        <ArticleListItem>
-          The platform does not proactively link or publish a user's real
-          identity alongside their platform activity, except where required by a
-          valid legal obligation.
-        </ArticleListItem>
-      </ul>
+        <H3 id="part-i-professional-credential-verification"
+          >Professional Credential Verification</H3
+        >
+        <p>
+          Where users post directive medical, legal, or regulated financial advice,
+          the platform requires verified professional credentials via EUDI Wallet <U
+            >Electronic Attestations of Attributes</U
+          > (<U>EAA</U>) and <U>Qualified Electronic Attestations of Attributes</U> (<U
+            >QEAA</U
+          >). Users selectively disclose profession, issuing jurisdiction, and validity
+          — e.g. physician, lawyer, regulated financial adviser — without transmitting
+          full license documents.
+        </p>
+        <p>
+          The platform acts as a relying party and the wallet as the user's agent.
+          Verification confirms credential existence and scope — not the quality of any
+          advice given. As <InternalLink
+            href="/social-paper#part-vi-professional-advice-and-verified-credentials"
+            paper={sp}
+            section={spSection('part-vi')}
+            heading="Professional Advice and Verified Credentials"
+          /> argues, that distinction keeps credential gating within architecture and law,
+          not corporate truth-policing.
+        </p>
+        <ul>
+          <ArticleListItem>
+            <U>Default speech:</U> any verified human may post opinions and general
+            information without a professional credential.
+          </ArticleListItem>
+          <ArticleListItem>
+            <U>Professional advice mode:</U> posting directive medical, legal, or regulated
+            financial advice requires a verified credential. The account displays <em
+              >Verified physician — [jurisdiction]</em
+            > (or equivalent), not platform approval of the content.
+          </ArticleListItem>
+          <ArticleListItem>
+            <U>Public disclaimers:</U> professional posts on the public lane carry a default
+            notice that no doctor–patient, lawyer–client, or advisory relationship is created.
+          </ArticleListItem>
+        </ul>
 
-      <DiagramPlaceholder
-        title="Identity verification flow: EUDI Wallet to pseudonym separation"
-        description="EUDI Wallet (government credentials) → selective disclosure / ZKP → verified account → pseudonym separation."
-      />
+        <H3 id="part-i-pseudonym-separation">Pseudonym Separation</H3>
+        <p>
+          Identity verification is required at registration, but users engage on
+          the platform under a chosen pseudonym or handle. Their citizenship is
+          always shown. Users may optionally display a validated legal or given
+          name on their account; when they do, it must be confirmed through their
+          EUDI Wallet. If they remove it, the platform deletes it completely —
+          restoring it requires re-validation. The link between a user's verified
+          identity and their on-platform activity is protected by strong technical
+          and organizational measures:
+        </p>
+        <ul>
+          <ArticleListItem>
+            Cryptographic separation between identity verification records and
+            social activity data.
+          </ArticleListItem>
+          <ArticleListItem>
+            Access controls ensuring the mapping between a verified identity and a
+            user account is accessible only under lawful process or explicit user
+            request.
+          </ArticleListItem>
+          <ArticleListItem>
+            The platform does not proactively link or publish a user's real
+            identity alongside their platform activity, except where required by a
+            valid legal obligation.
+          </ArticleListItem>
+        </ul>
+
+        <DiagramPlaceholder
+          title="Identity verification flow: EUDI Wallet to pseudonym separation"
+          description="EUDI Wallet (government credentials) → selective disclosure / ZKP → verified account → pseudonym separation."
+        />
       </ArticleDetails>
 
       <DesignPrinciple id="principle-i" title="People First, Bots Never" printCenterPage>
@@ -336,12 +411,20 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
             title: 'Two Modes, One Platform',
           },
           {
-            id: 'part-ii-public-interaction',
-            title: 'Public Interaction',
+            id: 'part-ii-reverse-chronological-default',
+            title: 'Reverse-Chronological Default',
           },
           {
-            id: 'part-ii-private-interaction',
-            title: 'Private Interaction',
+            id: 'part-ii-public-lane-algorithmic-feed-pipeline',
+            title: 'Public Lane: Algorithmic Feed Pipeline',
+          },
+          {
+            id: 'part-ii-user-configurable-feed-settings',
+            title: 'User-Configurable Feed Settings',
+          },
+          {
+            id: 'part-ii-private-lane-signal-protocol-encryption',
+            title: 'Private Lane: Signal Protocol Encryption',
           },
           {
             id: 'part-ii-friend-graph-and-boundaries',
@@ -349,113 +432,159 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
           },
         ]}
       >
-      <H3 id="part-ii-two-modes-one-platform">Two Modes, One Platform</H3>
-      <p>
-        Every post on the platform is explicitly <U>public</U> or <U>private</U
-        >. Users choose visibility at publish time. The two lanes share identity
-        verification and account infrastructure, but their data paths are
-        architecturally separated.
-      </p>
-      <p>
-        Visibility is not always final. A <U>private</U> post may be made <U
-          >public</U
-        > at any time. A <U>public</U> post may be made <U>private</U> only within
-        a short grace window after publication — on the order of fifteen (15) minutes
-        — and only while it has received no reactions (likes, comments, or shares).
-        Once a public post has engagement, or the grace window has elapsed, it remains
-        public.
-      </p>
+        <H3 id="part-ii-two-modes-one-platform">Two Modes, One Platform</H3>
+        <p>
+          Every post on the platform is explicitly <U>public</U> or <U>private</U
+          >. Users choose visibility at publish time. The two lanes share identity
+          verification and account infrastructure, but their data paths are
+          architecturally separated.
+        </p>
+        <p>
+          Visibility is not always final. A <U>private</U> post may be made <U
+            >public</U
+          > at any time. A <U>public</U> post may be made <U>private</U> only within
+          a short grace window after publication — on the order of fifteen (15) minutes
+          — and only while it has received no reactions (likes, comments, or shares).
+          Once a public post has engagement, or the grace window has elapsed, it remains
+          public.
+        </p>
 
-      <H3 id="part-ii-public-interaction">Public Interaction</H3>
-      <p>
-        The public lane works like conventional social media for distribution
-        and discovery. Posts are stored on platform servers, indexed into a
-        vector database, and discoverable via public surfaces and <U>public</U> follow
-        relationships. They are also analyzed, grouped, and categorized. The follow
-        graph is secret. A user may choose to follow someone publicly. As <InternalLink
-          href="/social-paper#part-ii-algorithmic-interventions"
-          paper={sp}
-          section={spII}
-          heading="Algorithmic Interventions"
-        /> argues, the feed must serve users' benefit—not outrage optimized for
-        capital gains. The reverse-chronological feed is the default. Adults may
-        explicitly opt in to an algorithmic feed.
-      </p>
-      <p>
-        The algorithmic feed on the <U>public lane</U> follows a strict six-step
-        pipeline. Intent is <em>not</em> sent for ranking — it is sent to <U
-          >query the vector database</U
-        >. Ranking happens <em>after</em> seen-post filtering.
-      </p>
-      <ol
-        class:list={[
-          // layout
-          'mt-4 list-decimal space-y-3 pl-6',
-          // color
-          'text-zinc-700 dark:text-zinc-300',
-        ]}
-      >
-        <li>
-          The user's <U>intent vector</U> is computed <strong>locally</strong> on
-          the device from on-device signals.
-        </li>
-        <li>
-          The intent vector is sent to the <strong>server</strong>, together
-          with a compact probabilistic filter snapshot for seen-post
-          deduplication.
-        </li>
-        <li>
-          The server uses the intent vector to <strong
-            >query the vector database</strong
-          > where post vectors are stored, returning a <strong
-            >list of post IDs</strong
-          >.
-        </li>
-        <li>
-          The server passes that ID list through <strong
-            >probabilistic data structures</strong
-          > (Bloom, Cuckoo, and/or Quotient filters) to remove already-seen posts.
-        </li>
-        <li>
-          The server runs the <strong>ranking model</strong> on the filtered ID list.
-        </li>
-        <li>
-          The server <strong>returns the ranked feed list</strong> to the client.
-        </li>
-      </ol>
+        <H3 id="part-ii-reverse-chronological-default"
+          >Reverse-Chronological Default</H3
+        >
+        <p>
+          The public lane works like conventional social media for distribution
+          and discovery. Posts are stored on platform servers, indexed into a
+          vector database, and discoverable via public surfaces and <U>public</U> follow
+          relationships. They are also analyzed, grouped, and categorized. The follow
+          graph is secret. A user may choose to follow someone publicly.
+        </p>
+        <p>
+          As <InternalLink
+            href="/social-paper#part-ii-algorithmic-interventions"
+            paper={sp}
+            section={spSection('part-ii')}
+            heading="Algorithmic Interventions"
+          /> argues, the feed must serve users' benefit—not outrage optimized for
+          capital gains. The <U>reverse-chronological</U> feed is the default for all
+          users. Adults may explicitly opt in to an algorithmic feed; minors receive
+          a chronological feed unless a parent or guardian approves algorithmic
+          recommendations (<InternalLink href="#part-iii-guardrails-for-minor-accounts" section={tpSection('part-iii')} heading="Guardrails for Minor Accounts" />).
+        </p>
 
-      <DiagramPlaceholder
-        title="Public-lane algorithmic feed pipeline: query, filter, then rank"
-        description="Intent on device → send intent + filter snapshot → vector DB query → seen-post filters → ranking → ranked feed."
-      />
+        <H3 id="part-ii-public-lane-algorithmic-feed-pipeline"
+          >Public Lane: Algorithmic Feed Pipeline</H3
+        >
+        <p>
+          When an adult user explicitly opts in to an algorithmic feed on the <U
+            >public lane</U
+          >, retrieval follows a strict six-step pipeline. Intent is <em>not</em> sent
+          for ranking — it is sent to <U>query the vector database</U>. Ranking happens
+          <em>after</em> seen-post filtering.
+        </p>
+        <ol
+          class:list={[
+            // layout
+            'mt-4 list-decimal space-y-3 pl-6',
+            // color
+            'text-zinc-700 dark:text-zinc-300',
+          ]}
+        >
+          <li>
+            The user's <U>intent vector</U> is computed <strong>locally</strong> on
+            the device from on-device signals.
+          </li>
+          <li>
+            The intent vector is sent to the <strong>server</strong>, together
+            with a compact probabilistic filter snapshot for seen-post
+            deduplication.
+          </li>
+          <li>
+            The server uses the intent vector to <strong
+              >query the vector database</strong
+            > where post vectors are stored, returning a <strong
+              >list of post IDs</strong
+            >.
+          </li>
+          <li>
+            The server passes that ID list through <strong
+              >probabilistic data structures</strong
+            > (Bloom, Cuckoo, and/or Quotient filters) to remove already-seen posts.
+          </li>
+          <li>
+            The server runs the <strong>ranking model</strong> on the filtered ID list.
+          </li>
+          <li>
+            The server <strong>returns the ranked feed list</strong> to the client.
+          </li>
+        </ol>
 
-      <H3 id="part-ii-private-interaction">Private Interaction</H3>
-      <p>
-        When a user publishes privately, the post is encrypted on the client
-        before it leaves the device. It is delivered to all friends using Signal's
-        <ExternalLink href="https://signal.org/docs/" label="Signal Protocol Documentation" /> (<ExternalLink href="https://signal.org/docs/specifications/doubleratchet/" label="The Double Ratchet Algorithm — Signal Specifications" /> and <ExternalLink href="https://signal.org/docs/specifications/x3dh/" label="The X3DH Key Agreement Protocol — Signal Specifications" />). Friends decrypt on their own devices.
-      </p>
-      <p>
-        The private lane has no algorithmic pipeline. Friends' private posts
-        surface in two feeds: they are shown <strong>intertwined</strong> with public
-        posts in the default <U>reverse-chronological</U> feed, and in a <strong
-          >dedicated friends-only feed</strong
-        > where the user sees only their friends' posts. The server relays encrypted
-        payloads and holds no decryption keys; friends decrypt on their own devices.
-      </p>
+        <DiagramPlaceholder
+          title="Public-lane algorithmic feed pipeline: query, filter, then rank"
+          description="Intent on device → send intent + filter snapshot → vector DB query → seen-post filters → ranking → ranked feed."
+        />
 
-      <H3 id="part-ii-friend-graph-and-boundaries"
-        >Friend Graph and Cross-Lane Boundaries</H3
-      >
-      <p>
-        Private delivery requires an established friend relationship. Key
-        exchange and session management follow <ExternalLink href="https://signal.org/docs/" label="Signal Protocol Documentation" /> semantics. The public and private data paths never merge without user action.
-      </p>
+        <H3 id="part-ii-user-configurable-feed-settings"
+          >User-Configurable Feed Settings</H3
+        >
+        <p>
+          Algorithmic feeds are never imposed. When a user explicitly opts in, they
+          control how locally computed intent shapes what they see — as described in <InternalLink
+            href="/social-paper#part-ii-algorithmic-interventions"
+            paper={sp}
+            section={spSection('part-ii')}
+            heading="Algorithmic Interventions"
+          />. Settings remain on-device; the platform does not mine preference toggles
+          as behavioral data points.
+        </p>
+        <ul>
+          <ArticleListItem>
+            <U>User intent over engagement rewards:</U> the ranking model does not
+            optimize for clicks, likes, or watch time behind the user's back. Intent
+            is computed locally and sent per request without building a persistent
+            server-side profile.
+          </ArticleListItem>
+          <ArticleListItem>
+            <U>Exploration vs. exploitation:</U> users may dial up exploration — showing
+            content outside their established patterns — to break filter bubbles, rather
+            than relying on a platform-defined "balanced diet."
+          </ArticleListItem>
+          <ArticleListItem>
+            <U>Bridging-based ranking (optional):</U> users may enable ranking that
+            recognizes sentiment across diverse user clusters, elevating content that
+            finds common ground without over-indexing on outrage from any one side.
+          </ArticleListItem>
+        </ul>
 
-      <DiagramPlaceholder
-        title="Public and private interaction lanes"
-        description="Shared identity layer; public lane (publish → store/index → feeds); private lane (encrypt → relay → decrypt → device feeds)."
-      />
+        <H3 id="part-ii-private-lane-signal-protocol-encryption"
+          >Private Lane: Signal Protocol Encryption</H3
+        >
+        <p>
+          When a user publishes privately, the post is encrypted on the client
+          before it leaves the device. It is delivered to all friends using Signal's
+          <ExternalLink href="https://signal.org/docs/" label="Signal Protocol Documentation" /> (<ExternalLink href="https://signal.org/docs/specifications/doubleratchet/" label="The Double Ratchet Algorithm — Signal Specifications" /> and <ExternalLink href="https://signal.org/docs/specifications/x3dh/" label="The X3DH Key Agreement Protocol — Signal Specifications" />). Friends decrypt on their own devices.
+        </p>
+        <p>
+          The private lane has no algorithmic pipeline. Friends' private posts
+          surface in two feeds: they are shown <strong>intertwined</strong> with public
+          posts in the default <U>reverse-chronological</U> feed, and in a <strong
+            >dedicated friends-only feed</strong
+          > where the user sees only their friends' posts. The server relays encrypted
+          payloads and holds no decryption keys; friends decrypt on their own devices.
+        </p>
+
+        <H3 id="part-ii-friend-graph-and-boundaries"
+          >Friend Graph and Cross-Lane Boundaries</H3
+        >
+        <p>
+          Private delivery requires an established friend relationship. Key
+          exchange and session management follow <ExternalLink href="https://signal.org/docs/" label="Signal Protocol Documentation" /> semantics. The public and private data paths never merge without user action.
+        </p>
+
+        <DiagramPlaceholder
+          title="Public and private interaction lanes"
+          description="Shared identity layer; public lane (publish → store/index → feeds); private lane (encrypt → relay → decrypt → device feeds)."
+        />
       </ArticleDetails>
 
       <DesignPrinciple
@@ -465,10 +594,11 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       >
         <p>
           Users choose visibility at publish time, with transitions governed by
-          the rules above. The public lane may use an on-device intent vector to
-          query the vector store and run the filter-then-rank pipeline when
-          adults opt in to algorithmic feeds. Private posts are encrypted and
-          delivered to friends via the <ExternalLink href="https://signal.org/docs/" label="Signal Protocol Documentation" />; the server relays ciphertext only. Private feeds are assembled on the
+          the rules above. The reverse-chronological feed is the default; adults
+          who explicitly opt in may use an on-device intent vector to query the
+          vector store and run the filter-then-rank pipeline, with user-configurable
+          settings that stay on-device. Private posts are encrypted and delivered
+          to friends via the <ExternalLink href="https://signal.org/docs/" label="Signal Protocol Documentation" />; the server relays ciphertext only. Private feeds are assembled on the
           device — reverse-chronological and friends-only — with no server-side algorithmic
           pipeline. Two modes, one platform — architecturally separated.
         </p>
@@ -503,167 +633,203 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
             id: 'part-iii-local-state-and-sync',
             title: 'Local State and Cross-Device Synchronization',
           },
-          { id: 'part-iii-minor-accounts', title: 'Minor Accounts' },
+          {
+            id: 'part-iii-age-verification-for-minor-accounts',
+            title: 'Age Verification for Minor Accounts',
+          },
+          {
+            id: 'part-iii-minor-defaults-and-parental-gates',
+            title: 'Minor Defaults: Chronological Feed and Parental Gates',
+          },
+          {
+            id: 'part-iii-guardrails-for-minor-accounts',
+            title: 'Guardrails for Minor Accounts',
+          },
           {
             id: 'part-iii-what-we-do-not-collect',
             title: 'What the Platform Does Not Collect and Will Never Collect',
           },
         ]}
       >
-      <H3 id="part-iii-server-roles">Server Roles by Lane</H3>
-      <p>
-        As described in <InternalLink
-          href="/social-paper#part-i-the-new-dna-local-only-primitives"
-          paper={sp}
-          section={spI}
-          heading="The New DNA: Local-Only Primitives"
-        />, local-only primitives are implemented here as architectural constraints—not negotiable
-        settings. On the <U>public lane</U>, the server stores public posts, the
-        follow graph, and content vectors. Follow relationships are secret by default;
-        only follows a user chooses to make public are visible to others. It executes
-        vector database queries, seen-post filtering, and ranking per feed request.
-        It does not build persistent user profiling from intent vectors or filter snapshots
-        received during those requests.
-      </p>
-      <p>
-        On the <U>private lane</U>, the server is structurally incapable of
-        reading private content. It relays ciphertext between friends and holds no
-        decryption keys. It does not assemble, rank, or serve the private feed — that
-        happens on the user's device only.
-      </p>
+        <H3 id="part-iii-server-roles">Server Roles by Lane</H3>
+        <p>
+          As described in <InternalLink
+            href="/social-paper#part-i-the-new-dna-local-only-primitives"
+            paper={sp}
+            section={spSection('part-i')}
+            heading="The New DNA: Local-Only Primitives"
+          />, local-only primitives are implemented here as architectural constraints—not negotiable
+          settings. On the <U>public lane</U>, the server stores public posts, the
+          follow graph, and content vectors. Follow relationships are secret by default;
+          only follows a user chooses to make public are visible to others. It executes
+          vector database queries, seen-post filtering, and ranking per feed request.
+          It does not build persistent user profiling from intent vectors or filter snapshots
+          received during those requests.
+        </p>
+        <p>
+          On the <U>private lane</U>, the server is structurally incapable of
+          reading private content. It relays ciphertext between friends and holds no
+          decryption keys. It does not assemble, rank, or serve the private feed — that
+          happens on the user's device only.
+        </p>
 
-      <H3 id="part-iii-intent-computation-and-transmission"
-        >Intent Computation and Transmission</H3
-      >
-      <p>
-        For the <U>public lane</U> algorithmic feed, the device computes the intent
-        vector locally from on-device signals — the user controls what forms the query.
-        The vector is transmitted to the server <em>only</em> to query the public vector
-        database for that specific feed request. It is not a direct input to the ranking
-        model, and it is not retained to build a longitudinal interest graph. The intent
-        vector is <strong>never</strong> used for the private feed: the private feed exists
-        on the device only, not on the server.
-      </p>
-      <p>
-        This distinction matters: per-request intent transmission applies to public
-        algorithmic retrieval only. The private feed does not use server-side vector queries.
-        Persistent profiling is not.
-      </p>
+        <H3 id="part-iii-intent-computation-and-transmission"
+          >Intent Computation and Transmission</H3
+        >
+        <p>
+          For the <U>public lane</U> algorithmic feed, the device computes the intent
+          vector locally from on-device signals — the user controls what forms the query.
+          The vector is transmitted to the server <em>only</em> to query the public vector
+          database for that specific feed request. It is not a direct input to the ranking
+          model, and it is not retained to build a longitudinal interest graph. The intent
+          vector is <strong>never</strong> used for the private feed: the private feed exists
+          on the device only, not on the server.
+        </p>
+        <p>
+          This distinction matters: per-request intent transmission applies to public
+          algorithmic retrieval only. The private feed does not use server-side vector queries.
+          Persistent profiling is not.
+        </p>
 
-      <H3 id="part-iii-seen-post-filters"
-        >Seen-Post Filters: Probabilistic Data Structures</H3
-      >
-      <p>
-        To suppress already-viewed posts from the feed, the platform uses <U
-          >probabilistic data structures</U
-        > — such as <U>Bloom filters</U>, <U>Cuckoo filters</U>, and/or <U
-          >Quotient filters</U
-        >. The exact filter or combination is not yet finalized. These structures are
-        <strong>maintained on-device</strong>. A compact snapshot is sent with each public
-        algorithmic feed request so the server can apply them to the post ID list in step
-        four, <em>before</em> ranking.
-      </p>
-      <ul>
-        <ArticleListItem>
-          <U>Why probabilistic:</U> fixed-size structures trade a controlled false-positive
-          rate for orders-of-magnitude less storage than exact sets. A false positive
-          may occasionally hide a post the user has not seen; this is an acceptable
-          trade-off for feed deduplication at scale.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Candidates include:</U> Bloom filters for simple membership checks; Cuckoo
-          filters where deletion and eviction of stale entries matters; Quotient filters
-          as a space-efficient alternative with configurable false-positive bounds.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Cross-device sync:</U> filters are re-computed with synchronized information
-          from linked devices.
-        </ArticleListItem>
-      </ul>
+        <H3 id="part-iii-seen-post-filters"
+          >Seen-Post Filters: Probabilistic Data Structures</H3
+        >
+        <p>
+          To suppress already-viewed posts from the feed, the platform uses <U
+            >probabilistic data structures</U
+          > — such as <U>Bloom filters</U>, <U>Cuckoo filters</U>, and/or <U
+            >Quotient filters</U
+          >. The exact filter or combination is not yet finalized. These structures are
+          <strong>maintained on-device</strong>. A compact snapshot is sent with each public
+          algorithmic feed request so the server can apply them to the post ID list in step
+          four, <em>before</em> ranking.
+        </p>
+        <ul>
+          <ArticleListItem>
+            <U>Why probabilistic:</U> fixed-size structures trade a controlled false-positive
+            rate for orders-of-magnitude less storage than exact sets. A false positive
+            may occasionally hide a post the user has not seen; this is an acceptable
+            trade-off for feed deduplication at scale.
+          </ArticleListItem>
+          <ArticleListItem>
+            <U>Candidates include:</U> Bloom filters for simple membership checks; Cuckoo
+            filters where deletion and eviction of stale entries matters; Quotient filters
+            as a space-efficient alternative with configurable false-positive bounds.
+          </ArticleListItem>
+          <ArticleListItem>
+            <U>Cross-device sync:</U> filters are re-computed with synchronized information
+            from linked devices.
+          </ArticleListItem>
+        </ul>
 
-      <H3 id="part-iii-local-state-and-sync"
-        >Local State and Cross-Device Synchronization</H3
-      >
-      <p>
-        User preferences — blocks, filters, themes — and interaction history
-        remain on-device across both lanes. Personal state is synchronized
-        across the user's own devices via E2EE relays or direct peer-to-peer
-        connections. The platform's servers act as blind couriers for sync
-        traffic; they never hold decryption keys or the master copy of personal
-        data.
-      </p>
+        <H3 id="part-iii-local-state-and-sync"
+          >Local State and Cross-Device Synchronization</H3
+        >
+        <p>
+          User preferences — blocks, filters, themes — and interaction history
+          remain on-device across both lanes. Personal state is synchronized
+          across the user's own devices via E2EE relays or direct peer-to-peer
+          connections. The platform's servers act as blind couriers for sync
+          traffic; they never hold decryption keys or the master copy of personal
+          data.
+        </p>
 
-      <H3 id="part-iii-minor-accounts">Minor Accounts</H3>
-      <p>
-        Minor protection is governed by the principles in <InternalLink
-          href="/social-paper#part-iii-guardrails-for-minor-accounts"
-          paper={sp}
-          section={spIII}
-          heading="Guardrails for Minor Accounts"
-        />. Where age restrictions, parental-consent requirements, or other
-        minor-protection laws apply, the platform complies fully—regardless of
-        whether we agree with every policy choice behind them.
-      </p>
-      <p>
-        Users verified as minors receive a chronological feed by default.
-        Algorithmic recommendations are available only when approved by a parent
-        or guardian. Age is proven via selective disclosure or zero-knowledge
-        proof without revealing the user's precise date of birth.
-      </p>
-      <p>
-        Underage accounts operate under deliberate limitations on the social
-        graph—and those limitations sit in parents' hands. Public accounts
-        eligible for minor interaction must appear on <U>curated allowlists</U> vetted
-        against child-safety criteria. The allowlist defines what is eligible,
-        not what is automatic: parents still choose what their child may select
-        from those lists.
-      </p>
-      <p>
-        New connections—follows, direct messages, and other one-to-one or group
-        links—require explicit <U>validation from a verified parent or guardian</U
-        > before they take effect. Even when a public account is on the allowlist,
-        a parent must still approve each specific connection.
-      </p>
-      <p>
-        Guardrails on an underage account—connection rules, time limits, and
-        other restrictions parents may tighten or relax—are <U
-          >added and removed by parents</U
-        > within platform minimums. The platform provides safe defaults: a chronological
-        feed for minors, with algorithmic recommendations gated behind explicit parental
-        approval.
-      </p>
+        <H3 id="part-iii-age-verification-for-minor-accounts"
+          >Age Verification for Minor Accounts</H3
+        >
+        <p>
+          Minor protection is governed by the principles in <InternalLink
+            href="/social-paper#part-iii-guardrails-for-minor-accounts"
+            paper={sp}
+            section={spSection('part-iii')}
+            heading="Guardrails for Minor Accounts"
+          />. Where age restrictions, parental-consent requirements, or other
+          minor-protection laws apply, the platform complies fully—regardless of
+          whether we agree with every policy choice behind them.
+        </p>
+        <p>
+          Age is proven via selective disclosure or zero-knowledge proof without
+          revealing the user's precise date of birth. The identity layer distinguishes
+          minor accounts from adult accounts at registration; that classification
+          drives feed defaults, connection rules, and parental-gate requirements
+          described in the sections below.
+        </p>
 
-      <H3 id="part-iii-what-we-do-not-collect"
-        >What the Platform Does Not Collect and Will Never Collect</H3
-      >
-      <p>The platform does not — and will never — collect or retain:</p>
-      <ul>
-        <ArticleListItem>
-          Persistent behavioral profiles or cross-session interest graphs.
-        </ArticleListItem>
-        <ArticleListItem>
-          "Privacy toggle" mining — preferences used as psychological data
-          points.
-        </ArticleListItem>
-        <ArticleListItem>
-          Audience profiling dossiers derived from platform activity.
-        </ArticleListItem>
-        <ArticleListItem>Private post plaintext.</ArticleListItem>
-        <ArticleListItem>
-          Long-term server-side read-history logs.
-        </ArticleListItem>
-      </ul>
-      <p>
-        Minimal server-side data exists for platform function: public posts, the
-        follow graph (secret by default; public follows opt-in), verification tokens,
-        and encrypted private payloads as ciphertext — deleted from the server after
-        the client receives them and backs them up.
-      </p>
+        <H3 id="part-iii-minor-defaults-and-parental-gates"
+          >Minor Defaults: Chronological Feed and Parental Gates</H3
+        >
+        <p>
+          Users verified as minors receive a chronological feed by default.
+          Algorithmic recommendations are available only when approved by a parent
+          or guardian. The platform provides safe defaults: a chronological feed
+          for minors, with algorithmic recommendations gated behind explicit parental
+          approval.
+        </p>
+        <p>
+          Activity data from minor accounts is used solely to deliver core platform
+          functionality and safety enforcement — not to infer interests, build profiles,
+          or train recommendation models. Privacy settings default to the most
+          protective configuration.
+        </p>
 
-      <DiagramPlaceholder
-        title="Device-origin intent and filters versus ephemeral server-side processing"
-        description="User device (local intent, filters, settings) vs server (query → filter → rank → feed); per-request boundary only."
-      />
+        <H3 id="part-iii-guardrails-for-minor-accounts"
+          >Guardrails for Minor Accounts</H3
+        >
+        <p>
+          Underage accounts operate under deliberate limitations on the social
+          graph—and those limitations sit in parents' hands. Public accounts
+          eligible for minor interaction must appear on <U>curated allowlists</U> vetted
+          against child-safety criteria. The allowlist defines what is eligible,
+          not what is automatic: parents still choose what their child may select
+          from those lists.
+        </p>
+        <p>
+          New connections—follows, direct messages, and other one-to-one or group
+          links—require explicit <U>validation from a verified parent or guardian</U
+          > before they take effect. Even when a public account is on the allowlist,
+          a parent must still approve each specific connection.
+        </p>
+        <p>
+          Guardrails on an underage account—connection rules, time limits, and
+          other restrictions parents may tighten or relax—are <U
+            >added and removed by parents</U
+          > within platform minimums. Direct messaging from non-connected users is
+          restricted. Regular technical audits verify that algorithmic recommendation
+          pathways for minors require parental approval and are not accessible without
+          it through standard interfaces or APIs.
+        </p>
+
+        <H3 id="part-iii-what-we-do-not-collect"
+          >What the Platform Does Not Collect and Will Never Collect</H3
+        >
+        <p>The platform does not — and will never — collect or retain:</p>
+        <ul>
+          <ArticleListItem>
+            Persistent behavioral profiles or cross-session interest graphs.
+          </ArticleListItem>
+          <ArticleListItem>
+            "Privacy toggle" mining — preferences used as psychological data
+            points.
+          </ArticleListItem>
+          <ArticleListItem>
+            Audience profiling dossiers derived from platform activity.
+          </ArticleListItem>
+          <ArticleListItem>Private post plaintext.</ArticleListItem>
+          <ArticleListItem>
+            Long-term server-side read-history logs.
+          </ArticleListItem>
+        </ul>
+        <p>
+          Minimal server-side data exists for platform function: public posts, the
+          follow graph (secret by default; public follows opt-in), verification tokens,
+          and encrypted private payloads as ciphertext — deleted from the server after
+          the client receives them and backs them up.
+        </p>
+
+        <DiagramPlaceholder
+          title="Device-origin intent and filters versus ephemeral server-side processing"
+          description="User device (local intent, filters, settings) vs server (query → filter → rank → feed); per-request boundary only."
+        />
       </ArticleDetails>
 
       <DesignPrinciple
@@ -673,7 +839,7 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
       >
         <p>
           Privacy is woven into the architecture — not offered as a toggle
-          buried in settings, as <InternalLink href="/social-paper#part-vii" paper={sp} section={spVII} /> documents across commercial platforms. Intent is computed locally;
+          buried in settings, as <InternalLink href="/social-paper#part-vii" paper={sp} section={spSection('part-vii')} /> documents across commercial platforms. Intent is computed locally;
           filters are maintained on-device; the server processes feed requests
           ephemerally without building surveillance dossiers. The private lane
           is encrypted by protocol, not by policy.
@@ -705,95 +871,86 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
           },
         ]}
       >
-      <H3 id="part-iv-purpose">Purpose</H3>
-      <p>
-        The platform collects only coarse, anonymized metrics for operational
-        health: daily active users (DAU) and monthly active users (MAU) bands,
-        post volume trends, error rates, and infrastructure capacity. These
-        metrics exist to keep the platform running — not to profile individuals.
-      </p>
+        <H3 id="part-iv-purpose">Purpose</H3>
+        <p>
+          The platform collects only coarse, anonymized metrics for operational
+          health: daily active users (DAU) and monthly active users (MAU) bands,
+          post volume trends, error rates, and infrastructure capacity. These
+          metrics exist to keep the platform running — not to profile individuals.
+        </p>
 
-      <H3 id="part-iv-what-is-collected">What Is Collected</H3>
-      <p>Generalized counters only, for example:</p>
-      <ul>
-        <ArticleListItem>Public posts created today.</ArticleListItem>
-        <ArticleListItem>Active sessions only.</ArticleListItem>
-      </ul>
-      <p>
-        Only active sessions are counted. Once a session becomes inactive, it is
-        deleted after a period of inactivity; inactive sessions are purged
-        periodically.
-      </p>
-      <p>
-        No per-user behavioral dossiers are constructed from these aggregates.
-      </p>
-
-      <EditorialTodo title="Think about metrics">
-        <p class="m-0 font-medium">Platform feature usage (anonymised)</p>
-        <ul class="mt-1 list-disc space-y-1 pl-5">
-          <li>DAU / MAU bands and active sessions only.</li>
-          <li>Public vs private post volume.</li>
-          <li>Reverse-chronological vs algorithmic feed usage (adults).</li>
-          <li>Algorithmic opt-in rate; parent-approved minor algorithmic opt-ins.</li>
-          <li>Visibility transitions (private→public, public→private).</li>
-          <li>Friend connections and public vs secret follows (aggregate).</li>
-          <li>EUDI verification completions and failures.</li>
-          <li>API / feed error rates; latency and infrastructure capacity.</li>
+        <H3 id="part-iv-what-is-collected">What Is Collected</H3>
+        <p>
+          The platform collects only generalized counters — never per-user behavioral
+          dossiers. Metrics fall into two categories: platform feature usage and
+          post interaction on the public lane.
+        </p>
+        <p><U>Platform feature usage (anonymised):</U></p>
+        <ul>
+          <ArticleListItem>DAU / MAU bands and active sessions only.</ArticleListItem>
+          <ArticleListItem>Public vs private post volume.</ArticleListItem>
+          <ArticleListItem>Reverse-chronological vs algorithmic feed usage (adults).</ArticleListItem>
+          <ArticleListItem>Algorithmic opt-in rate; parent-approved minor algorithmic opt-ins.</ArticleListItem>
+          <ArticleListItem>Visibility transitions (private→public, public→private).</ArticleListItem>
+          <ArticleListItem>Friend connections and public vs secret follows (aggregate).</ArticleListItem>
+          <ArticleListItem>EUDI verification completions and failures.</ArticleListItem>
+          <ArticleListItem>API / feed error rates; latency and infrastructure capacity.</ArticleListItem>
         </ul>
-        <p class="m-0 font-medium">Post interaction (anonymised)</p>
-        <ul class="mt-1 list-disc space-y-1 pl-5">
-          <li>
+        <p><U>Post interaction (anonymised):</U></p>
+        <ul>
+          <ArticleListItem>
             Per-post on the public lane (for the author): views, reactions, comments,
             shares.
-          </li>
-          <li>
+          </ArticleListItem>
+          <ArticleListItem>
             Optional platform-wide rollups: total views, reactions, comments, shares
             per day.
-          </li>
+          </ArticleListItem>
         </ul>
-        <p class="m-0">
-          Per-post counts only — no author-level engagement scores or interest graphs.
-          No public-style statistics on private posts.
+        <p>
+          Only active sessions are counted. Once a session becomes inactive, it is
+          deleted after a period of inactivity; inactive sessions are purged
+          periodically. Per-post counts only — no author-level engagement scores
+          or interest graphs. No public-style statistics on private posts.
         </p>
-      </EditorialTodo>
 
-      <H3 id="part-iv-public-vs-private-metrics"
-        >Public vs Private Lane Implications</H3
-      >
-      <p>
-        On the public lane, metrics may include coarse content-volume counts. On
-        the private lane, no message content or per-recipient engagement graphs are
-        collected. Encrypted payload relay volume is not counted — ciphertext is deleted
-        from the server after the client receives it and backs it up.
-      </p>
+        <H3 id="part-iv-public-vs-private-metrics"
+          >Public vs Private Lane Implications</H3
+        >
+        <p>
+          On the public lane, metrics may include coarse content-volume counts. On
+          the private lane, no message content or per-recipient engagement graphs are
+          collected. Encrypted payload relay volume is not counted — ciphertext is deleted
+          from the server after the client receives it and backs it up.
+        </p>
 
-      <H3 id="part-iv-what-is-forbidden">What Is Forbidden</H3>
-      <ul>
-        <ArticleListItem>
-          Per-user engagement graphs and interest inference from aggregate data.
-        </ArticleListItem>
-        <ArticleListItem>
-          Re-identification of individuals from aggregated statistics.
-        </ArticleListItem>
-        <ArticleListItem>Third-party analytics SDKs.</ArticleListItem>
-        <ArticleListItem>
-          Mining private ciphertext metadata beyond delivery health.
-        </ArticleListItem>
-      </ul>
+        <H3 id="part-iv-what-is-forbidden">What Is Forbidden</H3>
+        <ul>
+          <ArticleListItem>
+            Per-user engagement graphs and interest inference from aggregate data.
+          </ArticleListItem>
+          <ArticleListItem>
+            Re-identification of individuals from aggregated statistics.
+          </ArticleListItem>
+          <ArticleListItem>Third-party analytics SDKs.</ArticleListItem>
+          <ArticleListItem>
+            Mining private ciphertext metadata beyond delivery health.
+          </ArticleListItem>
+        </ul>
 
-      <H3 id="part-iv-anonymization-and-transparency"
-        >Anonymization and Transparency</H3
-      >
-      <p>
-        Aggregation thresholds prevent fine-grained segmentation that could
-        deanonymize small groups. Users who explicitly opt in may contribute
-        broader anonymized data to help improve platform models — but only with
-        informed, affirmative consent.
-      </p>
-      <p>
-        Aggregate metrics are reported publicly. The platform publishes an
-        annual disclosure of its data practices.
-      </p>
+        <H3 id="part-iv-anonymization-and-transparency"
+          >Anonymization and Transparency</H3
+        >
+        <p>
+          Aggregation thresholds prevent fine-grained segmentation that could
+          deanonymize small groups. Users who explicitly opt in may contribute
+          broader anonymized data to help improve platform models — but only with
+          informed, affirmative consent.
+        </p>
+        <p>
+          Aggregate metrics are reported publicly. The platform publishes an
+          annual disclosure of its data practices.
+        </p>
       </ArticleDetails>
 
       <DesignPrinciple id="principle-iv" title="Metrics Without Surveillance" printCenterPage>
@@ -827,9 +984,173 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
             title: 'Synthesizing the Social Argument',
           },
           {
+            id: 'part-v-nonprofit-stewardship-and-open-governance',
+            title: 'Non-Profit Stewardship and Open Governance',
+          },
+          {
             id: 'part-v-open-source-and-auditability',
             title: 'Open Source and Auditability',
           },
+          { id: 'part-v-honest-limitations', title: 'Honest Limitations' },
+        ]}
+      >
+        <H3 id="part-v-component-overview">Component Overview</H3>
+        <p>
+          The architecture ties together identity verification, dual interaction
+          lanes, and anonymized metrics into a single coherent system. Every layer
+          enforces the same principle: serve users' benefit, protect privacy, verify
+          humanity.
+        </p>
+
+        <DiagramPlaceholder
+          title="Full platform architecture synthesis"
+          description="Identity layer → public lane → private lane → anonymized aggregate metrics."
+        />
+
+        <H3 id="part-v-synthesizing-the-social-argument"
+          >Synthesizing the Social Argument</H3
+        >
+        <p>
+          As <InternalLink
+            href="/social-paper#part-viii-synthesizing-the-vision"
+            paper={sp}
+            section={spSection('part-viii')}
+            heading="Synthesizing the Vision"
+          /> argues, repairing the digital town square requires addressing systemic
+          failures concurrently—not one fix at a time. The architecture below maps
+          each argument to a technical implementation:
+        </p>
+        <ul>
+          <ArticleListItem>
+            <InternalLink
+              href="/social-paper#part-i-the-new-dna-local-only-primitives"
+              paper={sp}
+              section={spSection('part-i')}
+              heading="The New DNA: Local-Only Primitives"
+            /> — on-device intent vectors, probabilistic seen-post filters, E2EE
+            cross-device sync, and a private lane encrypted by the <ExternalLink href="https://signal.org/docs/" label="Signal Protocol Documentation" /> (<InternalLink href="#part-iii" section={tpSection('part-iii')} />).
+          </ArticleListItem>
+          <ArticleListItem>
+            <InternalLink
+              href="/social-paper#part-ii-algorithmic-interventions"
+              paper={sp}
+              section={spSection('part-ii')}
+              heading="Algorithmic Interventions"
+            /> — reverse-chronological default, algorithmic feeds only by explicit
+            adult opt-in, local intent with no persistent server-side profiling (<InternalLink href="#part-ii" section={tpSection('part-ii')} />).
+          </ArticleListItem>
+          <ArticleListItem>
+            <InternalLink
+              href="/social-paper#part-iii-guardrails-for-minor-accounts"
+              paper={sp}
+              section={spSection('part-iii')}
+              heading="Guardrails for Minor Accounts"
+            /> — chronological default for minors, curated allowlists, parental
+            validation on every connection, and algorithmic recommendations only with
+            parental approval (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065" label="Digital Services Act (Regulation (EU) 2022/2065)" /> safeguards in <InternalLink
+              href="#part-v-compliance-dsa"
+              paper="Technical Paper"
+              section={tpSection('part-v')}
+              heading="Digital Services Act (DSA)"
+            />).
+          </ArticleListItem>
+          <ArticleListItem>
+            <InternalLink
+              href="/social-paper#part-iv-the-ease-of-creating-and-managing-bots"
+              paper={sp}
+              section={spSection('part-iv')}
+              heading="The Ease of Creating and Managing Bots"
+            /> — EUDI Wallet verification, selective disclosure, zero-knowledge
+            proofs, and one human, one account (<InternalLink href="#part-i" section={tpSection('part-i')} />).
+          </ArticleListItem>
+          <ArticleListItem>
+            <InternalLink
+              href="/social-paper#part-v-pure-capitalism-and-social-capitalism"
+              paper={sp}
+              section={spSection('part-v')}
+              heading="Pure Capitalism and Social Capitalism"
+            /> — a non-profit steward with no ad-driven feed ownership; brands
+            participate as guests, not architectural dictators.
+          </ArticleListItem>
+          <ArticleListItem>
+            <InternalLink
+              href="/social-paper#part-vi-professional-advice-and-verified-credentials"
+              paper={sp}
+              section={spSection('part-vi')}
+              heading="Professional Advice and Verified Credentials"
+            /> — speech governed by applicable law, with EUDI Wallet credentials required
+            for directive medical, legal, or regulated financial advice (<InternalLink href="#part-i" section={tpSection('part-i')} />).
+          </ArticleListItem>
+          <ArticleListItem>
+            <InternalLink href="/social-paper#part-vii" paper={sp} section={spSection('part-vii')} /> — open-source code, public audits, and non-profit governance that
+            bind obligations by inspectable architecture and institution design—not
+            revocable policy promises.
+          </ArticleListItem>
+        </ul>
+
+        <H3 id="part-v-nonprofit-stewardship-and-open-governance"
+          >Non-Profit Stewardship and Open Governance</H3
+        >
+        <p>
+          As <InternalLink
+            href="/social-paper#part-v-pure-capitalism-and-social-capitalism"
+            paper={sp}
+            section={spSection('part-v')}
+            heading="Pure Capitalism and Social Capitalism"
+          /> argues, for-profit stewardship structurally subordinates user welfare to
+          shareholder return. The platform's response is institutional: a public,
+          transparent non-profit organization whose sole mission is to build,
+          steward, and maintain the network for community welfare—not capital gains.
+        </p>
+        <p>
+          The steward is funded initially by donations and grants, never by venture
+          capital chasing a network-effects exit. Revenue from optional premium
+          features, sponsorships, or grants may fund operations, but that capital
+          does not own the architecture or the data layer. Brands and corporations
+          may participate in the conversation as contributing guests; they do not
+          architect the venue, own behavioral data, or decide by default what humans
+          see in their feeds.
+        </p>
+        <p>
+          Open-source code released under a license separate from this website permits
+          anyone to fork and operate a competing service. If the steward breaks its
+          obligations, users are not locked in: they can audit the code, depart, and
+          sustain the mission from a fork. Governance decisions—feed defaults, privacy
+          constraints, minor safeguards—are binding architectural choices, not
+          revocable policy promises.
+        </p>
+
+        <H3 id="part-v-open-source-and-auditability"
+          >Open Source and Auditability</H3
+        >
+        <p>
+          The platform's code, algorithms, and identity flows are open to public
+          scrutiny. Independent security audits, a public bug bounty program, and
+          transparent governance ensure the architecture described in this paper
+          matches the system users actually run. As <InternalLink href="/social-paper#part-vii" paper={sp} section={spSection('part-vii')} /> documents, commercial platforms can reverse privacy promises while
+          budgeting penalties as operating cost. Inspectable code and independent
+          audits are how users and regulators verify behavior without trusting
+          marketing copy.
+        </p>
+
+        <H3 id="part-v-honest-limitations">Honest Limitations</H3>
+        <p>
+          This paper states principles; the build will test them. Identity
+          frameworks outside the European Union will be integrated as they mature.
+          The local-first model requires capable client devices. Age verification
+          and cross-border identity interoperability remain active areas of work. A
+          sustainable funding model for the stewarding non-profit organization
+          must be proven in practice. That organization will initially be funded
+          by donations and grants—not venture capital chasing a network-effects
+          exit—because accountability and ethics cannot depend on shareholders
+          demanding capital gains above user benefit.
+        </p>
+      </ArticleDetails>
+
+      <ArticleDetails
+        summary="Compliance frameworks"
+        summaryOpen="Hide compliance frameworks"
+        headings={[
           { id: 'part-v-compliance', title: 'Compliance Framing' },
           {
             id: 'part-v-compliance-gdpr',
@@ -840,233 +1161,111 @@ const spVIII = 'Part VIII: The Blueprint for a Private Web';
             id: 'part-v-compliance-dsa',
             title: 'Digital Services Act (Regulation (EU) 2022/2065)',
           },
-          { id: 'part-v-honest-limitations', title: 'Honest Limitations' },
         ]}
       >
-      <H3 id="part-v-component-overview">Component Overview</H3>
-      <p>
-        The architecture ties together identity verification, dual interaction
-        lanes, and anonymized metrics into a single coherent system. Every layer
-        enforces the same principle: serve users' benefit, protect privacy, verify
-        humanity.
-      </p>
-
-      <DiagramPlaceholder
-        title="Full platform architecture synthesis"
-        description="Identity layer → public lane → private lane → anonymized aggregate metrics."
-      />
-
-      <H3 id="part-v-synthesizing-the-social-argument"
-        >Synthesizing the Social Argument</H3
-      >
-      <p>
-        As <InternalLink
-          href="/social-paper#part-viii-synthesizing-the-vision"
-          paper={sp}
-          section={spVIII}
-          heading="Synthesizing the Vision"
-        /> argues, repairing the digital town square requires addressing systemic
-        failures concurrently—not one fix at a time. The architecture below maps
-        each argument to a technical implementation:
-      </p>
-      <ul>
-        <ArticleListItem>
-          <InternalLink
-            href="/social-paper#part-i-the-new-dna-local-only-primitives"
+        <H3 id="part-v-compliance">Compliance Framing</H3>
+        <p>
+          The platform is designed in alignment with applicable law. As <InternalLink
+            href="/social-paper#part-i-the-scarcity-of-privacy-primitives"
             paper={sp}
-            section={spI}
-            heading="The New DNA: Local-Only Primitives"
-          /> — on-device intent vectors, probabilistic seen-post filters, E2EE
-          cross-device sync, and a private lane encrypted by the <ExternalLink href="https://signal.org/docs/" label="Signal Protocol Documentation" /> (Part III).
-        </ArticleListItem>
-        <ArticleListItem>
-          <InternalLink
-            href="/social-paper#part-ii-algorithmic-interventions"
+            section={spSection('part-i')}
+            heading="The Scarcity of Privacy Primitives"
+          /> argues, privacy obligations on the open web are imposed legally; the
+          architecture below is how compliant systems implement them. Legal
+          compliance is necessary but not sufficient: as <InternalLink
+            href="/social-paper#part-vii"
             paper={sp}
-            section={spII}
-            heading="Algorithmic Interventions"
-          /> — reverse-chronological default, algorithmic feeds only by explicit
-          adult opt-in, local intent with no persistent server-side profiling
-          (Part II).
-        </ArticleListItem>
-        <ArticleListItem>
-          <InternalLink
-            href="/social-paper#part-iii-guardrails-for-minor-accounts"
-            paper={sp}
-            section={spIII}
-            heading="Guardrails for Minor Accounts"
-          /> — chronological default for minors, curated allowlists, parental
-          validation on every connection, and algorithmic recommendations only with
-          parental approval (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065" label="Digital Services Act (Regulation (EU) 2022/2065)" /> safeguards in <InternalLink
-            href="#part-v-compliance-dsa"
-            paper="Technical Paper"
-            section="Part V: System Synthesis and Open Governance"
-            heading="Digital Services Act (DSA)"
-          />).
-        </ArticleListItem>
-        <ArticleListItem>
-          <InternalLink
-            href="/social-paper#part-iv-the-ease-of-creating-and-managing-bots"
-            paper={sp}
-            section={spIV}
-            heading="The Ease of Creating and Managing Bots"
-          /> — EUDI Wallet verification, selective disclosure, zero-knowledge
-          proofs, and one human, one account (Part I).
-        </ArticleListItem>
-        <ArticleListItem>
-          <InternalLink
+            section={spSection('part-vii')}
+          /> documents, fines and settlements do not bind the next product reversal. As
+          described in <InternalLink
             href="/social-paper#part-v-pure-capitalism-and-social-capitalism"
             paper={sp}
-            section={spV}
+            section={spSection('part-v')}
             heading="Pure Capitalism and Social Capitalism"
-          /> — a non-profit steward with no ad-driven feed ownership; brands
-          participate as guests, not architectural dictators.
-        </ArticleListItem>
-        <ArticleListItem>
-          <InternalLink
+          />, a non-profit steward, combined with architecture that enforces privacy and
+          safety by construction, aims to bind behavior—not by press release, but by
+          inspectable design. As <InternalLink
+            href="/social-paper#part-vi"
+            paper={sp}
+            section={spSection('part-vi')}
+          /> argues, speech on the platform is governed by applicable law—not by discretionary
+          Terms of Service or informal government flagging, with professional advice gated
+          by verified licenses as described in <InternalLink
             href="/social-paper#part-vi-professional-advice-and-verified-credentials"
             paper={sp}
-            section={spVI}
+            section={spSection('part-vi')}
             heading="Professional Advice and Verified Credentials"
-          /> — speech governed by applicable law, with EUDI Wallet credentials required
-          for directive medical, legal, or regulated financial advice (Part I).
-        </ArticleListItem>
-        <ArticleListItem>
-          <InternalLink href="/social-paper#part-vii" paper={sp} section={spVII} /> — open-source code, public audits, and non-profit governance that
-          bind obligations by inspectable architecture and institution design—not
-          revocable policy promises.
-        </ArticleListItem>
-      </ul>
+          />. The following frameworks inform its design — not as checkboxes, but as structural
+          constraints on how the system is built and operated.
+        </p>
 
-      <H3 id="part-v-open-source-and-auditability"
-        >Open Source and Auditability</H3
-      >
-      <p>
-        The platform's code, algorithms, and identity flows are open to public
-        scrutiny. Independent security audits, a public bug bounty program, and
-        transparent governance ensure the architecture described in this paper
-        matches the system users actually run. As <InternalLink href="/social-paper#part-vii" paper={sp} section={spVII} /> documents, commercial platforms can reverse privacy promises while
-        budgeting penalties as operating cost. Inspectable code and independent
-        audits are how users and regulators verify behavior without trusting
-        marketing copy.
-      </p>
+        <H3 id="part-v-compliance-gdpr">
+          <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679" label="General Data Protection Regulation (EU) 2016/679" />
+        </H3>
+        <ul>
+          <ArticleListItem>
+            <U>Privacy by design and by default</U> (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_25" label="GDPR Article 25 — Data Protection by Design and by Default" />) — protective settings are the default; personal data processing is limited
+            to what the architecture requires.
+          </ArticleListItem>
+          <ArticleListItem>
+            <U>Data minimization</U> (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_5" label="GDPR Article 5 — Principles Relating to Processing of Personal Data" />) — only data adequate, relevant, and necessary for stated purposes is processed.
+          </ArticleListItem>
+          <ArticleListItem>
+            <U>Data Protection Impact Assessments</U> (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_35" label="GDPR Article 35 — Data Protection Impact Assessment" />) — conducted for high-risk processing activities, including identity verification
+            and feed personalization.
+          </ArticleListItem>
+        </ul>
 
-      <H3 id="part-v-compliance">Compliance Framing</H3>
-      <p>
-        The platform is designed in alignment with applicable law. As <InternalLink
-          href="/social-paper#part-i-the-scarcity-of-privacy-primitives"
-          paper={sp}
-          section={spI}
-          heading="The Scarcity of Privacy Primitives"
-        /> argues, privacy obligations on the open web are imposed legally; the
-        architecture below is how compliant systems implement them. Legal
-        compliance is necessary but not sufficient: as <InternalLink
-          href="/social-paper#part-vii"
-          paper={sp}
-          section={spVII}
-        /> documents, fines and settlements do not bind the next product reversal. As
-        described in <InternalLink
-          href="/social-paper#part-v-pure-capitalism-and-social-capitalism"
-          paper={sp}
-          section={spV}
-          heading="Pure Capitalism and Social Capitalism"
-        />, a non-profit steward, combined with architecture that enforces privacy and
-        safety by construction, aims to bind behavior—not by press release, but by
-        inspectable design. As <InternalLink
-          href="/social-paper#part-vi"
-          paper={sp}
-          section={spVI}
-        /> argues, speech on the platform is governed by applicable law—not by discretionary
-        Terms of Service or informal government flagging, with professional advice gated
-        by verified licenses as described in <InternalLink
-          href="/social-paper#part-vi-professional-advice-and-verified-credentials"
-          paper={sp}
-          section={spVI}
-          heading="Professional Advice and Verified Credentials"
-        />. The following frameworks inform its design — not as checkboxes, but as structural
-        constraints on how the system is built and operated.
-      </p>
+        <H3 id="part-v-compliance-eidas">eIDAS 2.0</H3>
+        <p>
+          Digital identity verification follows <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183" label="Regulation (EU) 2024/1183 (eIDAS 2.0)" /> and the <ExternalLink href="https://commission.europa.eu/topics/digital-economy-and-society/european-digital-identity_en" label="European Digital Identity Wallet — European Commission" />: selective disclosure, zero-knowledge proofs where feasible, and no storage
+          of raw credentials beyond what verification requires.
+        </p>
 
-      <H3 id="part-v-compliance-gdpr">
-        <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679" label="General Data Protection Regulation (EU) 2016/679" />
-      </H3>
-      <ul>
-        <ArticleListItem>
-          <U>Privacy by design and by default</U> (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_25" label="GDPR Article 25 — Data Protection by Design and by Default" />) — protective settings are the default; personal data processing is limited
-          to what the architecture requires.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Data minimization</U> (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_5" label="GDPR Article 5 — Principles Relating to Processing of Personal Data" />) — only data adequate, relevant, and necessary for stated purposes is processed.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Data Protection Impact Assessments</U> (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504#art_35" label="GDPR Article 35 — Data Protection Impact Assessment" />) — conducted for high-risk processing activities, including identity verification
-          and feed personalization.
-        </ArticleListItem>
-      </ul>
-
-      <H3 id="part-v-compliance-eidas">eIDAS 2.0</H3>
-      <p>
-        Digital identity verification follows <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183" label="Regulation (EU) 2024/1183 (eIDAS 2.0)" /> (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183" label="Regulation (EU) 2024/1183 (eIDAS 2.0)" />) and the <ExternalLink href="https://commission.europa.eu/topics/digital-economy-and-society/european-digital-identity_en" label="European Digital Identity Wallet — European Commission" />: selective disclosure, zero-knowledge proofs where feasible, and no storage
-        of raw credentials beyond what verification requires.
-      </p>
-
-      <H3 id="part-v-compliance-dsa">
-        Digital Services Act (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065" label="Digital Services Act (Regulation (EU) 2022/2065)" />)
-      </H3>
-      <p>
-        Serving EU users as a very large online platform, it is designed with <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065" label="Digital Services Act (Regulation (EU) 2022/2065)" /> (the <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065" label="Digital Services Act (Regulation (EU) 2022/2065)" />) in mind — particularly its obligations around the protection of minors and
-        transparency of recommender systems.
-      </p>
-      <ul>
-        <ArticleListItem>
-          <U
-            ><ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32022R2065#art_28" label="DSA Article 28 — Online Interface Design and Organisation" /> — Protection of minors:</U
-          > the architecture enforces age verification through the identity layer
-          (selective disclosure or zero-knowledge proof of legal age). Accounts verified
-          as belonging to a minor receive a chronological feed by default; algorithmic
-          recommendations are available only when approved by a parent or guardian.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>No profiling of minors:</U> activity data from minor accounts is used
-          solely to deliver core platform functionality and safety enforcement — not
-          to infer interests, build profiles, or train recommendation models.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U
-            >Recommender system transparency (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32022R2065#art_27" label="DSA Article 27 — Recommender System Transparency" />):</U
-          > for adult users who explicitly opt in to algorithmic feeds, the platform
-          discloses what data drives recommendations, the purpose and logic of the system,
-          and how to deactivate the feature. The feed pipeline described in Part II —
-          vector query, seen-post filtering, ranking — is open to public audit.
-        </ArticleListItem>
-        <ArticleListItem>
-          <U>Additional minor safeguards:</U> curated allowlists gate which public
-          accounts minors may interact with; every new connection requires parent
-          validation; parents control guardrails within platform minimums; privacy
-          settings default to the most protective configuration; direct messaging
-          from non-connected users is restricted; and regular technical audits verify
-          that algorithmic recommendation pathways for minors require parental approval
-          and are not accessible without it through standard interfaces or APIs.
-        </ArticleListItem>
-      </ul>
-      <p>
-        <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065" label="Digital Services Act (Regulation (EU) 2022/2065)" /> compliance is not a layer applied after the fact. Chronological defaults,
-        parental approval for minor algorithmic recommendations, and verified identity
-        are architectural decisions that satisfy these obligations by construction.
-      </p>
-
-      <H3 id="part-v-honest-limitations">Honest Limitations</H3>
-      <p>
-        This paper states principles; the build will test them. Identity
-        frameworks outside the European Union will be integrated as they mature.
-        The local-first model requires capable client devices. Age verification
-        and cross-border identity interoperability remain active areas of work. A
-        sustainable funding model for the stewarding non-profit organization
-        must be proven in practice. That organization will initially be funded
-        by donations and grants—not venture capital chasing a network-effects
-        exit—because accountability and ethics cannot depend on shareholders
-        demanding capital gains above user benefit.
-      </p>
+        <H3 id="part-v-compliance-dsa">
+          Digital Services Act (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065" label="Digital Services Act (Regulation (EU) 2022/2065)" />)
+        </H3>
+        <p>
+          Serving EU users as a very large online platform, it is designed with <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065" label="Digital Services Act (Regulation (EU) 2022/2065)" /> in mind — particularly its obligations around the protection of minors and
+          transparency of recommender systems.
+        </p>
+        <ul>
+          <ArticleListItem>
+            <U
+              ><ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32022R2065#art_28" label="DSA Article 28 — Online Interface Design and Organisation" /> — Protection of minors:</U
+            > the architecture enforces age verification through the identity layer
+            (selective disclosure or zero-knowledge proof of legal age). Accounts verified
+            as belonging to a minor receive a chronological feed by default; algorithmic
+            recommendations are available only when approved by a parent or guardian.
+          </ArticleListItem>
+          <ArticleListItem>
+            <U>No profiling of minors:</U> activity data from minor accounts is used
+            solely to deliver core platform functionality and safety enforcement — not
+            to infer interests, build profiles, or train recommendation models.
+          </ArticleListItem>
+          <ArticleListItem>
+            <U
+              >Recommender system transparency (<ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32022R2065#art_27" label="DSA Article 27 — Recommender System Transparency" />):</U
+            > for adult users who explicitly opt in to algorithmic feeds, the platform
+            discloses what data drives recommendations, the purpose and logic of the system,
+            and how to deactivate the feature. The feed pipeline described in <InternalLink href="#part-ii" section={tpSection('part-ii')} /> —
+            vector query, seen-post filtering, ranking — is open to public audit.
+          </ArticleListItem>
+          <ArticleListItem>
+            <U>Additional minor safeguards:</U> curated allowlists gate which public
+            accounts minors may interact with; every new connection requires parent
+            validation; parents control guardrails within platform minimums; privacy
+            settings default to the most protective configuration; direct messaging
+            from non-connected users is restricted; and regular technical audits verify
+            that algorithmic recommendation pathways for minors require parental approval
+            and are not accessible without it through standard interfaces or APIs.
+          </ArticleListItem>
+        </ul>
+        <p>
+          <ExternalLink href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R2065" label="Digital Services Act (Regulation (EU) 2022/2065)" /> compliance is not a layer applied after the fact. Chronological defaults,
+          parental approval for minor algorithmic recommendations, and verified identity
+          are architectural decisions that satisfy these obligations by construction.
+        </p>
       </ArticleDetails>
 
       <DesignPrinciple id="principle-v" title="The Commitment to Build" final printCenterPage>
