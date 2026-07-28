@@ -1,18 +1,18 @@
 meta {
-  name: Unsubscribe
+  name: Confirm
   type: http
-  seq: 3
+  seq: 2
 }
 
-delete {
-  url: {{URL}}/unsubscribe
+post {
+  url: {{URL}}/confirm
   body: json
   auth: none
 }
 
 body:json {
   {
-    "id": "6029ae50-b345-4e43-8704-ff1ed7462899"
+    "code": "validation-code-from-email"
   }
 }
 

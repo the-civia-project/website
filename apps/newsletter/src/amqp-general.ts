@@ -1,7 +1,7 @@
 import amqp from '@the-civia-project/amqp';
 import { GracefulWorker, mapError } from '@the-civia-project/core';
 import {
-  getEmailAddresses,
+  getValidatedEmailAddresses,
   getNewsletterById,
   logProcessedNewsletterEmail,
   processNewsletterProgress,
@@ -31,7 +31,7 @@ await amqp.consumeProcessNewsletter(
       return;
     }
 
-    const email_addresses = getEmailAddresses(skip, take);
+    const email_addresses = getValidatedEmailAddresses(skip, take);
 
     let item: IteratorResult<{ uuid: string; address: string }, null>;
     while ((item = await email_addresses.next())) {

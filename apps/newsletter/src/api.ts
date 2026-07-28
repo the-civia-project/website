@@ -11,15 +11,18 @@ import {
   Result,
 } from '@the-civia-project/core';
 import {
+  confirmEmailAddressByCodeHash,
+  getEmailSubscription,
   getSentNewsletters,
-  getSubscriberCount,
-  isEmailAddressSubscribed,
+  getUnvalidatedSubscriberCount,
+  getValidatedSubscriberCount,
   isEmailAddressSubscribedById,
   registerNewsletter,
   subscribeEmailAddress,
   unSubscribeEmailAddress,
 } from '@the-civia-project/db';
 import main_logger from '@the-civia-project/logger';
+import { createHash, randomBytes } from 'node:crypto';
 import { Hono, type Context, type Env } from 'hono';
 import { cors } from 'hono/cors';
 import { requestId } from 'hono/request-id';
@@ -31,6 +34,14 @@ const http_logger = main_logger().child({ ctx: 'HTTP' });
 
 const queueProcessNewsletter = await amqp.queueProcessNewsletter();
 const queueSendEmail = await amqp.queueSendEmail();
+
+function createValidationCode() {
+  return randomBytes(32).toString('base64url');
+}
+
+function hashValidationCode(code: string) {
+  return createHash('sha256').update(code).digest('hex');
+}
 
 async function buildRequestLog(ctx: Context<Env, string, {}>) {
   return {
@@ -112,6 +123,10 @@ const uuidSchema = z.object({
   id: z.uuidv4(),
 });
 
+const confirmSchema = z.object({
+  code: z.string().min(1),
+});
+
 const invalidMiddleware = async (
   result: { success: boolean },
   ctx: Context<Env, string, {}>,
@@ -122,7 +137,7 @@ const invalidMiddleware = async (
         ...(await buildRequestLog(ctx)),
         result,
       },
-      'Invalid email address format',
+      'Invalid request body',
     );
 
     return ctx.body(null, 400);
@@ -137,21 +152,21 @@ const validateEmailAddressSchema = zValidator(
 
 const validUUIDSchema = zValidator('json', uuidSchema, invalidMiddleware);
 
+const validateConfirmSchema = zValidator(
+  'json',
+  confirmSchema,
+  invalidMiddleware,
+);
+
 app.post('/subscribe', validateEmailAddressSchema, async (ctx) => {
   const json = ctx.req.valid('json');
 
   ctx.var.logger.trace({ email: json.email }, 'Received subscription request');
 
   try {
-    if (await isEmailAddressSubscribed(json.email)) {
-      ctx.var.logger.warn(
-        {
-          ...(await buildRequestLog(ctx)),
-          email: json.email,
-        },
-        'Attempt to subscribe an already subscribed email address',
-      );
+    const existing = await getEmailSubscription(json.email);
 
+    if (existing) {
       //
       // SECURITY: INFORMATION DISCLOSURE MITIGATION
       //
@@ -164,10 +179,23 @@ app.post('/subscribe', validateEmailAddressSchema, async (ctx) => {
       // email address is already in our database or not.
       //
 
+      ctx.var.logger.warn(
+        {
+          ...(await buildRequestLog(ctx)),
+          email: json.email,
+        },
+        'Attempt to subscribe an already subscribed email address',
+      );
+
       return ctx.body(null, 201);
     }
 
-    const subscription = await subscribeEmailAddress(json.email);
+    const validation_code = createValidationCode();
+    const validation_code_hash = hashValidationCode(validation_code);
+    const subscription = await subscribeEmailAddress(
+      json.email,
+      validation_code_hash,
+    );
 
     if (!subscription?.inserted_uuid) {
       ctx.var.logger.error(
@@ -180,11 +208,73 @@ app.post('/subscribe', validateEmailAddressSchema, async (ctx) => {
 
     ctx.var.logger.trace(
       { email: json.email },
-      'Email address subscribed successfully',
+      'Email address subscribed successfully (pending validation)',
+    );
+
+    await prepared_emails.confirm_subscription.prerender();
+    const email = prepared_emails.confirm_subscription.render(
+      subscription.inserted_uuid,
+      validation_code,
+    );
+
+    if (!email.success) {
+      ctx.var.logger.error(
+        email.error,
+        'Failed to render the confirmation email',
+      );
+
+      return ctx.body(null, 500);
+    }
+
+    const result = queueSendEmail({
+      request_id: ctx.var.requestId,
+      to: json.email,
+      subject: prepared_emails.confirm_subscription.subject,
+      body: email.value.html,
+      text: email.value.text,
+    });
+
+    if (!result.success) {
+      ctx.var.logger.error(
+        result.error,
+        'Failed to queue the confirmation email',
+      );
+
+      return ctx.body(null, 500);
+    }
+  } catch (e) {
+    const error = mapError(e);
+    ctx.var.logger.fatal(error, 'Unexpected error');
+
+    return ctx.body(null, 500);
+  }
+
+  return ctx.body(null, 201);
+});
+
+app.post('/confirm', validateConfirmSchema, async (ctx) => {
+  const json = ctx.req.valid('json');
+
+  try {
+    const validation_code_hash = hashValidationCode(json.code);
+    const confirmed = await confirmEmailAddressByCodeHash(validation_code_hash);
+
+    if (!confirmed) {
+      ctx.var.logger.warn(
+        await buildRequestLog(ctx),
+        'Attempt to confirm with an invalid or already-used validation code',
+      );
+
+      return ctx.body(null, 404);
+    }
+
+    ctx.var.logger.trace(
+      { email: confirmed.email },
+      'Email address validated successfully',
     );
 
     await prepared_emails.subscribed.prerender();
-    const email = prepared_emails.subscribed.render(subscription.inserted_uuid);
+    const email = prepared_emails.subscribed.render(confirmed.uuid);
 
     if (!email.success) {
       ctx.var.logger.error(
@@ -197,7 +287,7 @@ app.post('/subscribe', validateEmailAddressSchema, async (ctx) => {
 
     const result = queueSendEmail({
       request_id: ctx.var.requestId,
-      to: json.email,
+      to: confirmed.email,
       subject: prepared_emails.subscribed.subject,
       body: email.value.html,
       text: email.value.text,
@@ -218,7 +308,7 @@ app.post('/subscribe', validateEmailAddressSchema, async (ctx) => {
     return ctx.body(null, 500);
   }
 
-  return ctx.body(null, 201);
+  return ctx.body(null, 204);
 });
 
 app.delete('/unsubscribe', validUUIDSchema, async (ctx) => {
@@ -314,7 +404,7 @@ app.post('/work/send-newsletters', async (ctx) => {
     return ctx.json({ status: 'failed', reason: 'nothing to send' }, 200);
   }
 
-  const number_of_subscribers = await getSubscriberCount();
+  const number_of_subscribers = await getValidatedSubscriberCount();
 
   if (number_of_subscribers === 0) {
     return ctx.json({ status: 'failed', reason: 'nobody subscribed' }, 200);
@@ -419,9 +509,12 @@ app.post('/work/send-newsletters', async (ctx) => {
 });
 
 app.get('/work/subscribers', async (ctx) => {
-  const count = await getSubscriberCount();
+  const [validated, unvalidated] = await Promise.all([
+    getValidatedSubscriberCount(),
+    getUnvalidatedSubscriberCount(),
+  ]);
 
-  return ctx.json({ count });
+  return ctx.json({ validated, unvalidated });
 });
 
 const server = serve(

@@ -33,6 +33,11 @@ const api = new GracefulWorkerParent(loader, {
   env: process.env,
 });
 
+const cleanup = new GracefulWorkerParent(loader, {
+  workerData: { script_path: './cron-cleanup-unvalidated.ts' },
+  env: process.env,
+});
+
 const amqp_workers = [
   new GracefulWorkerParent(loader, {
     workerData: { script_path: './amqp-general.ts' },
@@ -53,6 +58,7 @@ process.on('SIGTERM', async () => {
 
   await Promise.all([
     api.gracefulShutdown(),
+    cleanup.gracefulShutdown(),
     ...amqp_workers.map((worker) => worker.gracefulShutdown()),
   ]);
 
@@ -66,6 +72,7 @@ process.on('SIGINT', async () => {
 
   await Promise.all([
     api.gracefulShutdown(),
+    cleanup.gracefulShutdown(),
     ...amqp_workers.map((worker) => worker.gracefulShutdown()),
   ]);
 

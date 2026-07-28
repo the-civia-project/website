@@ -6,9 +6,25 @@ import main_logger from '@the-civia-project/logger';
 const logger = main_logger().child({ ctx: 'EMAILS' });
 
 const EMAIL_ID_TAG = '{{__EMAIL_ADDRESS_ID__}}';
+const VALIDATION_CODE_TAG = '{{__VALIDATION_CODE__}}';
 
 export function renderEmail(email: string, email_address_id: string) {
   const html = email.replaceAll(EMAIL_ID_TAG, email_address_id);
+
+  return {
+    html,
+    text: toPlainText(html),
+  };
+}
+
+export function renderConfirmEmail(
+  email: string,
+  email_address_id: string,
+  validation_code: string,
+) {
+  const html = email
+    .replaceAll(EMAIL_ID_TAG, email_address_id)
+    .replaceAll(VALIDATION_CODE_TAG, validation_code);
 
   return {
     html,
@@ -30,7 +46,58 @@ export type PreparedEmail = {
   render: (emailId: string) => Result<RenderedEmail, Error>;
 };
 
+export type PreparedConfirmEmail = {
+  html: string | null;
+
+  name: string;
+  subject: string;
+  prerender: () => Promise<void>;
+  render: (
+    emailId: string,
+    validationCode: string,
+  ) => Result<RenderedEmail, Error>;
+};
+
 async function prepareEmails() {
+  const confirm_subscription: PreparedConfirmEmail = {
+    html: null,
+    subject: EmailList.default.ConfirmSubscription.subject,
+    name: 'ConfirmSubscription',
+    async prerender() {
+      if (this.html) {
+        logger.trace(
+          { email: this.name },
+          'Email is already prerendered, skipping prerendering',
+        );
+        return;
+      }
+
+      logger.trace({ email: this.name }, 'Prerendering email');
+
+      this.html = await render(
+        await EmailList.default.ConfirmSubscription({
+          emailId: EMAIL_ID_TAG,
+          validationCode: VALIDATION_CODE_TAG,
+        }),
+      );
+    },
+    render(emailId: string, validationCode: string) {
+      if (!this.html) {
+        return {
+          success: false,
+          error: new Error(
+            `Email ${this.name} needs to be prerendered. Call the prerender method`,
+          ),
+        };
+      }
+
+      return {
+        success: true,
+        value: renderConfirmEmail(this.html, emailId, validationCode),
+      };
+    },
+  };
+
   const subscribed: PreparedEmail = {
     html: null,
     subject: EmailList.default.Subscribed.subject,
@@ -153,6 +220,7 @@ async function prepareEmails() {
   logger.trace(
     {
       emails: [
+        confirm_subscription.name,
         subscribed.name,
         unsubscribed.name,
         ...newsletters.map((n) => n.name),
@@ -161,7 +229,7 @@ async function prepareEmails() {
     'Prepared all emails',
   );
 
-  return { subscribed, unsubscribed, newsletters };
+  return { confirm_subscription, subscribed, unsubscribed, newsletters };
 }
 
 export default await prepareEmails();
