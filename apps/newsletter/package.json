@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "tsx watch --clear-screen=false src/index.ts",
     "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "start": "tsx src/index.ts"

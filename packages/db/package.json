@@ -9,6 +9,7 @@
   },
   "scripts": {
     "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
     "drizzle-kit": "drizzle-kit",
     "seed": "tsx ./src/seed.ts"
   },

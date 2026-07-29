@@ -75,10 +75,9 @@ const queue = new ProcessingQueue<
 
         await Promise.all(
           Object.values(newsletter_groups).map(async (group) => {
-            await queueNewsletterDatabaseUpdate({
+            queueNewsletterDatabaseUpdate({
               newsletter_id: group.newsletter_id,
               count: group.processed_emails.length,
-              processed_emails: group.processed_emails,
             });
           }),
         );

@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "format": "prettier --write .",
-    "dev": "turso dev --db-file=local.db"
+    "dev": "turso dev --db-file=local.db",
+    "typecheck": "pnpm -r --parallel --if-present run typecheck"
   },
   "devDependencies": {
     "@the-civia-project/prettier-config": "link:packages/prettier-config",

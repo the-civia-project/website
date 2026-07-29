@@ -1,7 +1,7 @@
 import pino, {
-  TransportMultiOptions,
-  TransportPipelineOptions,
-  TransportSingleOptions,
+  type TransportMultiOptions,
+  type TransportPipelineOptions,
+  type TransportSingleOptions,
 } from 'pino';
 import type { LokiOptions } from 'pino-loki';
 
