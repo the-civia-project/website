@@ -4,7 +4,9 @@
   "scripts": {
     "format": "prettier --write .",
     "dev": "turso dev --db-file=local.db",
-    "typecheck": "pnpm -r --parallel --if-present run typecheck"
+    "typecheck": "pnpm -r --parallel --if-present run typecheck",
+    "docker:build:newsletter": "docker buildx build --platform linux/amd64 -t aifrim/civia-newsletter:latest .",
+    "docker:push:newsletter": "docker push aifrim/civia-newsletter:latest"
   },
   "devDependencies": {
     "@the-civia-project/prettier-config": "link:packages/prettier-config",
