@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "amqplib": "^0.10.9",
-    "zod": "^4.3.6"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@the-civia-project/core": "link:../core",

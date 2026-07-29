@@ -19,3 +19,4 @@ overrides:
   '@the-civia-project/core': link:./packages/core
   '@the-civia-project/emails': link:./packages/emails
   'esbuild': 'npm:esbuild@0.25.10'
+  'zod': '^4.4.3'
