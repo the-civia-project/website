@@ -24,23 +24,23 @@ const outDir = join(
 async function main() {
   await mkdir(join(outDir, 'social'), { recursive: true });
 
-  const logoWebp = await rasterizeImage(
+  const logoPng = await rasterizeImage(
     join(srcDir, 'logo.svg'),
     EMAIL_LOGO_RASTER,
   );
-  await writeFile(join(outDir, 'logo.webp'), logoWebp);
+  await writeFile(join(outDir, 'logo.png'), logoPng);
 
   await Promise.all(
     SOCIAL_ICON_KEYS.map(async (key) => {
-      const webp = await rasterizeImage(
+      const png = await rasterizeImage(
         join(srcDir, 'social', `${key}.svg`),
         EMAIL_ICON_RASTER,
       );
-      await writeFile(join(outDir, 'social', `${key}.webp`), webp);
+      await writeFile(join(outDir, 'social', `${key}.png`), png);
     }),
   );
 
-  console.log(`Wrote email WEBPs to ${outDir}`);
+  console.log(`Wrote email PNGs to ${outDir}`);
 }
 
 main().catch((error) => {

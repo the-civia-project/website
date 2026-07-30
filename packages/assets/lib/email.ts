@@ -43,8 +43,8 @@ export const EMAIL_ICON_RASTER = {
 
 /** Public URL paths served from the website (`/email/...`). */
 export const EMAIL_ASSET_PATHS = {
-  logo: '/email/logo.webp',
+  logo: '/email/logo.png',
   social: Object.fromEntries(
-    SOCIAL_ICON_KEYS.map((key) => [key, `/email/social/${key}.webp`]),
+    SOCIAL_ICON_KEYS.map((key) => [key, `/email/social/${key}.png`]),
   ) as Record<SocialIconKey, string>,
 } as const;
