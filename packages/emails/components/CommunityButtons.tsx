@@ -1,4 +1,4 @@
-import { Section } from '@react-email/components';
+import { Section } from 'react-email';
 import * as React from 'react';
 import { Button } from './Button';
 

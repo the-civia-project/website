@@ -1,4 +1,4 @@
-import { Hr as ReactEmailHr } from '@react-email/components';
+import { Hr as ReactEmailHr } from 'react-email';
 import * as React from 'react';
 
 export const Hr = ({

@@ -110,14 +110,14 @@ export async function sendBulkEmail(
 
   // Sandbox Mode
   // https://developers.brevo.com/docs/using-sandbox-mode
-  if (process.env.NODE_ENV !== 'production') {
-    logger.trace(
-      'Running in non-production environment, enabling Brevo sandbox mode',
-    );
-    data.headers = {
-      'X-Sib-Sandbox': 'drop',
-    };
-  }
+  // if (process.env.NODE_ENV !== 'production') {
+  //   logger.trace(
+  //     'Running in non-production environment, enabling Brevo sandbox mode',
+  //   );
+  //   data.headers = {
+  //     'X-Sib-Sandbox': 'drop',
+  //   };
+  // }
 
   return axios
     .request({

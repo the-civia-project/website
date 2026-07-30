@@ -1,4 +1,4 @@
-import { Text as ReactEmailText } from '@react-email/components';
+import { Text as ReactEmailText } from 'react-email';
 import * as React from 'react';
 
 export const Text = ({

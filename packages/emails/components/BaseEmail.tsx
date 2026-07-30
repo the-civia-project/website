@@ -1,11 +1,4 @@
-import {
-  Body,
-  Container,
-  Head,
-  Html,
-  Preview,
-  Tailwind,
-} from '@react-email/components';
+import { Body, Container, Head, Html, Preview, Tailwind } from 'react-email';
 import * as React from 'react';
 import type { EmailAssets } from '../lib/asset-types';
 import { Header } from './Header';

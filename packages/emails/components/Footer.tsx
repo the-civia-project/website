@@ -1,4 +1,4 @@
-import { Column, Row, Section } from '@react-email/components';
+import { Column, Row, Section } from 'react-email';
 import * as React from 'react';
 import type { EmailAssets } from '../lib/asset-types';
 import { Hr } from './Hr';

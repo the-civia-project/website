@@ -1,4 +1,4 @@
-import { Img, Link, Section } from '@react-email/components';
+import { Img, Link, Section } from 'react-email';
 import * as React from 'react';
 import type { EmailAssets, SocialIconKey } from '../lib/asset-types';
 
