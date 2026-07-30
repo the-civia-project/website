@@ -65,6 +65,12 @@ type BrevoBulkEmail = {
     htmlContent: string;
     textContent: string;
     subject: string;
+    attachment?: Array<{
+      // Base64-encoded attachment data
+      content: string;
+      // Attachment filename.
+      name: string;
+    }>;
   }[];
   headers?: {
     [key: string]: string;
@@ -79,6 +85,10 @@ export type RateLimit = {
 
 export async function sendBulkEmail(
   email: SendEmail[],
+  attachment: Array<{
+    content: string;
+    name: string;
+  }> = [],
 ): Promise<Result<RateLimit, Error>> {
   const data: BrevoBulkEmail = {
     sender: {
@@ -94,19 +104,20 @@ export async function sendBulkEmail(
       htmlContent: e.body,
       textContent: e.text,
       subject: e.subject,
+      ...(attachment.length > 0 ? { attachment } : {}),
     })),
   };
 
   // Sandbox Mode
   // https://developers.brevo.com/docs/using-sandbox-mode
-  // if (process.env.NODE_ENV !== 'production') {
-  //   logger.trace(
-  //     'Running in non-production environment, enabling Brevo sandbox mode',
-  //   );
-  //   data.headers = {
-  //     'X-Sib-Sandbox': 'drop',
-  //   };
-  // }
+  if (process.env.NODE_ENV !== 'production') {
+    logger.trace(
+      'Running in non-production environment, enabling Brevo sandbox mode',
+    );
+    data.headers = {
+      'X-Sib-Sandbox': 'drop',
+    };
+  }
 
   return axios
     .request({

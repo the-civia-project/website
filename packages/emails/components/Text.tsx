@@ -6,5 +6,7 @@ export const Text = ({
 }: {
   children: React.ReactNode;
 }): React.ReactElement => (
-  <ReactEmailText className="leading-8">{children}</ReactEmailText>
+  <ReactEmailText className="email-text leading-8" style={{ color: '#000000' }}>
+    {children}
+  </ReactEmailText>
 );

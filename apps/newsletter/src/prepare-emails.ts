@@ -59,9 +59,12 @@ export type PreparedConfirmEmail = {
 };
 
 async function prepareEmails() {
+  const emails = EmailList.default ?? EmailList;
+  const assets = emails.getEmailAssets();
+
   const confirm_subscription: PreparedConfirmEmail = {
     html: null,
-    subject: EmailList.default.ConfirmSubscription.subject,
+    subject: emails.ConfirmSubscription.subject,
     name: 'ConfirmSubscription',
     async prerender() {
       if (this.html) {
@@ -75,9 +78,10 @@ async function prepareEmails() {
       logger.trace({ email: this.name }, 'Prerendering email');
 
       this.html = await render(
-        await EmailList.default.ConfirmSubscription({
+        emails.ConfirmSubscription({
           emailId: EMAIL_ID_TAG,
           validationCode: VALIDATION_CODE_TAG,
+          assets,
         }),
       );
     },
@@ -100,7 +104,7 @@ async function prepareEmails() {
 
   const subscribed: PreparedEmail = {
     html: null,
-    subject: EmailList.default.Subscribed.subject,
+    subject: emails.Subscribed.subject,
     name: 'Subscribed',
     async prerender() {
       if (this.html) {
@@ -114,7 +118,7 @@ async function prepareEmails() {
       logger.trace({ email: this.name }, 'Prerendering email');
 
       this.html = await render(
-        await EmailList.default.Subscribed({ emailId: EMAIL_ID_TAG }),
+        emails.Subscribed({ emailId: EMAIL_ID_TAG, assets }),
       );
     },
     render(emailId: string) {
@@ -136,7 +140,7 @@ async function prepareEmails() {
 
   const unsubscribed: PreparedEmail = {
     html: null,
-    subject: EmailList.default.Unsubscribed.subject,
+    subject: emails.Unsubscribed.subject,
     name: 'Unsubscribed',
     prerender: async function () {
       if (this.html) {
@@ -151,7 +155,7 @@ async function prepareEmails() {
       logger.trace({ email: this.name }, 'Prerendering email');
 
       this.html = await render(
-        await EmailList.default.Unsubscribed({ emailId: EMAIL_ID_TAG }),
+        emails.Unsubscribed({ emailId: EMAIL_ID_TAG, assets }),
       );
     },
     render: function (emailId: string) {
@@ -172,7 +176,7 @@ async function prepareEmails() {
   };
 
   const newsletters: PreparedEmail[] = await Promise.all(
-    Object.entries(EmailList.default.Emails).map(
+    Object.entries(emails.Emails).map(
       async ([name, email]: [string, Email]) => {
         if (!email.subject) {
           // Fail early if the email does not have a subject, as it's required to send the email
@@ -195,7 +199,9 @@ async function prepareEmails() {
 
             logger.trace({ email: this.name }, 'Prerendering email');
 
-            this.html = await render(await email({ emailId: EMAIL_ID_TAG }));
+            this.html = await render(
+              email({ emailId: EMAIL_ID_TAG, assets }),
+            );
           },
           render: function (emailId: string) {
             if (!this.html) {

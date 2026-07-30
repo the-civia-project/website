@@ -13,6 +13,7 @@ if (process.env.NODE_ENV !== 'production') {
 const EnvSchema = z.object({
   API_KEY: z.string().min(1),
   AMQP_URL: z.url(),
+  WEBSITE_URL: z.url(),
   // TURSO (used by the db package)
   TURSO_DATABASE_URL: z.url(),
   // Turso Database Auth Token is optional in development, required in production
