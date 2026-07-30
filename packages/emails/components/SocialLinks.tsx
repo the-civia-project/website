@@ -1,8 +1,7 @@
 import { Img, Link, Section } from 'react-email';
 import * as React from 'react';
 import type { EmailAssets, SocialIconKey } from '../lib/asset-types';
-
-const ICON_DISPLAY_SIZE = 24;
+import { EMAIL_ICON_DISPLAY } from '@the-civia-project/assets/email';
 
 const SOCIAL_LINKS: {
   key: SocialIconKey;
@@ -93,8 +92,8 @@ export const SocialLinks = ({
       >
         <Img
           src={social[key]}
-          width={ICON_DISPLAY_SIZE}
-          height={ICON_DISPLAY_SIZE}
+          width={EMAIL_ICON_DISPLAY.width}
+          height={EMAIL_ICON_DISPLAY.height}
           alt={title}
           style={{ display: 'block', border: 0 }}
         />

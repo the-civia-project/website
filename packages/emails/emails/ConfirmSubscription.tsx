@@ -9,6 +9,7 @@ import { U } from '../components/U';
 import { WasntYou } from '../components/WasntYou';
 import { getEmailAssets } from '../lib/assets';
 import { ConfirmSubscriptionProps } from './types';
+import { Hr } from '../components/Hr';
 
 export const ConfirmSubscription = ({
   emailId,
@@ -23,18 +24,21 @@ export const ConfirmSubscription = ({
       assets={assets}
     >
       <Text>
-        <strong>
-          <U>Confirm your subscription</U>
-        </strong>
+        <U>
+          <strong>Confirm your subscription</strong>
+        </U>
       </Text>
 
       <Text>
-        Thanks for signing up to The Civia Project Newsletter. Please confirm
-        your email address so we can start sending you updates.
+        Thanks for signing up to <U>The Civia Project Newsletter</U>. Please{' '}
+        <strong>confirm</strong> your email address so we can start sending you
+        updates.
       </Text>
 
-      <Section style={{ textAlign: 'center', margin: '24px 0' }}>
-        <Button href={confirmUrl}>Confirm my email address</Button>
+      <Section style={{ margin: '24px 0' }}>
+        <Button href={confirmUrl} fullWidth>
+          Confirm my email address
+        </Button>
       </Section>
 
       <Text>
@@ -42,7 +46,9 @@ export const ConfirmSubscription = ({
       </Text>
 
       <Text>
-        <span className="text-xs break-all">{confirmUrl}</span>
+        <span className="text-xs break-all text-blue-600 font-bold">
+          {confirmUrl}
+        </span>
       </Text>
 
       <Text>
@@ -51,6 +57,8 @@ export const ConfirmSubscription = ({
       </Text>
 
       <Signature />
+
+      <Hr />
 
       <WasntYou emailId={emailId} subscribed={true} />
 

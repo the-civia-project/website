@@ -7,6 +7,7 @@ import { U } from '../components/U';
 import { WasntYou } from '../components/WasntYou';
 import { getEmailAssets } from '../lib/assets';
 import { EmailProps } from './types';
+import { Hr } from '../components/Hr';
 
 export const Unsubscribed = ({
   emailId,
@@ -39,6 +40,8 @@ export const Unsubscribed = ({
       </Text>
 
       <Signature />
+
+      <Hr />
 
       <WasntYou emailId={emailId} subscribed={false} />
 

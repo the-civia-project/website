@@ -8,6 +8,7 @@ import { U } from '../components/U';
 import { WasntYou } from '../components/WasntYou';
 import { getEmailAssets } from '../lib/assets';
 import { EmailProps } from './types';
+import { Hr } from '../components/Hr';
 
 export const Subscribed = ({
   emailId,
@@ -35,16 +36,13 @@ export const Subscribed = ({
         hi, feel free to connect with us on Discord or Matrix.
       </Text>
 
-      <CommunityButtons
-        discordLabel="Join Discord"
-        matrixLabel="Join Matrix"
-      />
+      <CommunityButtons discordLabel="Join Discord" matrixLabel="Join Matrix" />
 
       <Signature />
 
-      <WasntYou emailId={emailId} subscribed={true} />
+      <Hr />
 
-      <Text>Or follow us on social media:</Text>
+      <WasntYou emailId={emailId} subscribed={true} />
 
       <Footer social={assets.social} />
     </BaseEmail>

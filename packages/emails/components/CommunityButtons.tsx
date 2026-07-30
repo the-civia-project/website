@@ -1,4 +1,4 @@
-import { Section } from 'react-email';
+import { Section, Row, Column } from 'react-email';
 import * as React from 'react';
 import { Button } from './Button';
 
@@ -11,10 +11,7 @@ type CommunityButtonsProps = {
 };
 
 const buttonSlotStyle: React.CSSProperties = {
-  display: 'inline-block',
   width: '48%',
-  minWidth: '160px',
-  maxWidth: '100%',
   boxSizing: 'border-box',
   verticalAlign: 'top',
 };
@@ -23,16 +20,16 @@ export const CommunityButtons = ({
   discordLabel = 'Join Discord',
   matrixLabel = 'Join Matrix',
 }: CommunityButtonsProps): React.ReactElement => (
-  <Section style={{ margin: '24px 0', textAlign: 'center', fontSize: 0 }}>
-    <span style={{ ...buttonSlotStyle, paddingRight: '16px' }}>
+  <Row style={{ margin: '24px 0', textAlign: 'center', fontSize: 0 }}>
+    <Column style={{ ...buttonSlotStyle, paddingRight: '16px' }}>
       <Button href={DISCORD_URL} fullWidth>
         {discordLabel}
       </Button>
-    </span>
-    <span style={{ ...buttonSlotStyle, paddingLeft: '16px' }}>
+    </Column>
+    <Column style={{ ...buttonSlotStyle, paddingLeft: '16px' }}>
       <Button href={MATRIX_URL} variant="secondary" fullWidth>
         {matrixLabel}
       </Button>
-    </span>
-  </Section>
+    </Column>
+  </Row>
 );
