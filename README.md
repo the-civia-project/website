@@ -4,7 +4,7 @@
 
 ## Structure
 
-- `apps/website/` - The Civia Project website, built with [Astro](https://astro.build/), [Solid.js](https://solidjs.com/) and [Tailwind CSS](https://tailwindcss.com/).
+- `apps/website/` - The Civia Project website, built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
 - `apps/newsletter/` - The Civia Project newsletter, built with [Hono](https://hono.dev/), [Drizzle ORM](https://orm.drizzle.team/), [amqplib](https://amqp-node.github.io/amqplib/), [React Email](https://react.email/), [LavinMQ](https://lavinmq.com/) and [Turso](https://turso.tech/).
 - `api-docs` - [Bruno](https://www.usebruno.com/) API Collection
 - `packages/amqp` - specific AMQP primitives and queue orchestration using [amqplib](https://amqp-node.github.io/amqplib/).

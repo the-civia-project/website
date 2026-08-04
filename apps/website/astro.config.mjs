@@ -1,5 +1,4 @@
 import sitemap from '@astrojs/sitemap';
-import solidJs from '@astrojs/solid-js';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField } from 'astro/config';
 import dotenv from 'dotenv';
@@ -26,7 +25,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [
-    solidJs(),
     sitemap({
       serialize(item) {
         return !hidden.find((h) => item.url.endsWith(h));
