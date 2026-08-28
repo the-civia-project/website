@@ -1,0 +1,32 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: class_list } = Astro.props;
+const has_icon = Astro.slots.has('icon');
+---
+
+<button
+  class:list={[
+    class_list,
+    'whitespace-pre',
+    'text-center inline-flex items-center justify-center',
+    has_icon && 'gap-2',
+    'py-2 px-4 md:px-12',
+    'uppercase underline underline-offset-8 decoration-transparent',
+    'ease-in-out duration-500 opacity-50 hover:opacity-100 focus:opacity-100',
+    'border border-white/50 rounded-md',
+    'text-white fill-white hover:bg-white focus:bg-white hover:text-black focus:text-black hover:fill-black focus:fill-black',
+    'transition-colors duration-500 cursor-pointer',
+  ]}
+>
+  {
+    has_icon && (
+      <span class="inline-flex shrink-0 items-center [&>svg]:size-5">
+        <slot name="icon" />
+      </span>
+    )
+  }
+  <slot />
+</button>

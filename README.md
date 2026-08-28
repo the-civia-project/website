@@ -1,50 +1,62 @@
-# Astro Starter Kit: Basics
+# The Civia Project Website & Newsletter
+
+> Make the world <strong>more resilient</strong> towards and <strong>better equipped</strong> against <u>fake news</u>, <u>propaganda</u>, <u>disinformation</u>, <u>misinformation</u> and <u>malinformation</u>.
+
+## Structure
+
+- `apps/website/` - The Civia Project website, built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+- `apps/newsletter/` - The Civia Project newsletter, built with [Hono](https://hono.dev/), [Drizzle ORM](https://orm.drizzle.team/), [amqplib](https://amqp-node.github.io/amqplib/), [React Email](https://react.email/), [LavinMQ](https://lavinmq.com/) and [Turso](https://turso.tech/).
+- `api-docs` - [Bruno](https://www.usebruno.com/) API Collection
+- `packages/amqp` - specific AMQP primitives and queue orchestration using [amqplib](https://amqp-node.github.io/amqplib/).
+- `packages/assets` - shared brand/media assets (website + rasterized email PNGs).
+- `packages/db` - database connection and queries, mutations, procedures and other primitives using [DrizzleORM](https://orm.drizzle.team/).
+- `packages/emails` - emails (subscribe, unsubscribe, newsletters), using [React Email](https://react.email/).
+- `packages/logger` - configured logger, using [Pino](https://pino.dev/).`pino-pretty` for local development and `pink-floki` for production.
+- `packages/prettier-config` - [Prettier](https://prettier.io/) configuration for the project.
+- `packages/core` - general utilities and types used across the project.
+
+## Getting started
+
+- [Node.js](https://nodejs.org/) v24
+- [pnpm](https://pnpm.io/) v10
+- [Docker](https://docker.com)
+- [Bruno](https://www.usebruno.com/)
+
+1. Setup a `.env` file
 
 ```sh
-npm create astro@latest -- --template basics
+LOG_LEVEL="info"
+
+AMQP_URL="amqp://localhost:5672"
+
+# Used by the frontend to subscribe & unsubscribe users
+API_URL="http://localhost:3000"
+# Used for the authorization layer on the `/work/*` endpoints
+API_KEY="some-api-key"
+
+# Website origin for email image URLs (and future absolute links).
+# Production: https://theciviaproject.org
+# Note: When testing emails, make sure to put production / preview because that is where the images live
+WEBSITE_URL="http://localhost:4321"
+
+# LibSQL `turso dev` Server URL
+TURSO_DATABASE_URL="http://127.0.0.1:8080"
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+2. Install the Node.js dependencies
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+```sh
+pnpm install
 ```
 
-To learn more about the folder structure of an Astro project, refer
-to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+3. Start up LavinMQ via docker
 
-## 🧞 Commands
+```sh
+docker compose up -d
+```
 
-All commands are run from the root of the project, from a terminal:
+4. Run `apps/website`, `apps/newsletter`, `packages/email` and `turso` in development mode.
 
-| Command                   | Action                                           |
-|:--------------------------|:-------------------------------------------------|
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into
-our [Discord server](https://astro.build/chat).
+```sh
+pnpm -r --parallel run dev
+```

@@ -1,0 +1,23 @@
+includeWorkspaceRoot: true
+
+packages:
+  - apps/*
+  - packages/*
+allowBuilds:
+  esbuild: true
+  sharp: true
+
+onlyBuiltDependencies:
+  - sharp
+  - esbuild
+
+overrides:
+  '@the-civia-project/prettier-config': link:./packages/prettier-config
+  '@the-civia-project/amqp': link:./packages/amqp
+  '@the-civia-project/logger': link:./packages/logger
+  '@the-civia-project/db': link:./packages/db
+  '@the-civia-project/core': link:./packages/core
+  '@the-civia-project/emails': link:./packages/emails
+  '@the-civia-project/assets': link:./packages/assets
+  'esbuild': 'npm:esbuild@0.28.1'
+  'zod': '^4.4.3'

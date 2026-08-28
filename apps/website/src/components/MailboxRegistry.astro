@@ -1,0 +1,231 @@
+---
+import Button from './Button.astro';
+import WarningIcon from '@the-civia-project/assets/icons/warning.svg';
+import OkIcon from '@the-civia-project/assets/icons/checks.svg';
+import LoadingIcon from '@the-civia-project/assets/icons/circle-notch.svg';
+---
+
+<civia-mailbox-registry>
+  <div class="wrapper flex flex-wrap md:flex-nowrap gap-4 justify-between">
+    <div
+      class:list={[
+        'input-wrapper',
+        'border-zinc-700 bg-zinc-900 hover:border-zinc-400 focus:border-zinc-400',
+        'grow transition-all border-2 rounded-md',
+        'flex grow items-center px-3',
+      ]}
+    >
+      <WarningIcon
+        class="warning fill-current opacity-50 w-0 transition-all duration-75"
+      />
+      <OkIcon
+        class="ok fill-current opacity-50 w-0 transition-all duration-75"
+      />
+      <input
+        name="email"
+        type="email"
+        autocomplete="email"
+        placeholder="your@email.address"
+        class="border-none outline-none grow py-2"
+      />
+    </div>
+    <Button class="button pointer-events-none">
+      <div class="flex items-center">
+        <LoadingIcon
+          class="loading fill-current w-0 transition-all duration-75 animate-spin"
+        />
+        <OkIcon
+          class="subscribed fill-current opacity-50 w-0 transition-all duration-75"
+        />
+        <WarningIcon
+          class="error fill-current opacity-50 w-0 transition-all duration-75"
+        />
+        <span class="text overflow-hidden">Subscribe</span>
+      </div>
+    </Button>
+  </div>
+  <div
+    class="error-message h-0 overflow-hidden p-0 opacity-25 flex gap-4 items-center justify-center"
+  >
+    <WarningIcon class="fill-current" />
+    <div>
+      There was an error while trying to subscribe you.<br />Please try again
+      later.
+    </div>
+  </div>
+</civia-mailbox-registry>
+
+<script>
+  import { API_URL } from 'astro:env/client';
+  import { z } from 'zod/mini';
+
+  class MailboxRegistry extends HTMLElement {
+    #wrapper!: HTMLDivElement;
+    #error_message!: HTMLDivElement;
+    #input_wrapper!: HTMLDivElement;
+    #input!: HTMLInputElement;
+    #ok_icon!: SVGElement;
+    #warning_icon!: SVGElement;
+    #button!: HTMLElement;
+    #loading_icon!: SVGElement;
+    #text!: HTMLSpanElement;
+    #subscribed_ok_icon!: SVGElement;
+    #subscribed_error_icon!: SVGElement;
+
+    connectedCallback() {
+      const wrapper = this.querySelector('div.wrapper');
+      const error_message = this.querySelector('div.error-message');
+      const input_wrapper = this.querySelector('div.input-wrapper');
+      const input = this.querySelector('input');
+      const warning_icon = this.querySelector('svg.warning');
+      const ok_icon = this.querySelector('svg.ok');
+      const button = this.querySelector('button');
+      const loading_icon = this.querySelector('svg.loading');
+      const text = this.querySelector('span.text');
+      const subscribed_ok_icon = this.querySelector('svg.subscribed');
+      const subscribed_error_icon = this.querySelector('svg.error');
+
+      if (!(wrapper instanceof HTMLDivElement)) {
+        throw new Error('Wrapper is not a HTMLDivElement');
+      }
+
+      if (!(error_message instanceof HTMLDivElement)) {
+        throw new Error('Error message wrapper is not a HTMLDivElement');
+      }
+
+      if (!(input instanceof HTMLInputElement)) {
+        throw new Error('Input is not a HTMLInputElement');
+      }
+
+      if (!(input_wrapper instanceof HTMLDivElement)) {
+        throw new Error('InputWrapper is not a HTMLDivElement');
+      }
+
+      if (!(warning_icon instanceof SVGElement)) {
+        throw new Error('WarningIcon is not a SVGElement');
+      }
+
+      if (!(ok_icon instanceof SVGElement)) {
+        throw new Error('OkIcon is not a SVGElement');
+      }
+
+      if (!(button instanceof HTMLElement)) {
+        throw new Error('Button is not a HTMLElement');
+      }
+
+      if (!(loading_icon instanceof SVGElement)) {
+        throw new Error('LoadingIcon is not a SVGElement');
+      }
+
+      if (!(text instanceof HTMLSpanElement)) {
+        throw new Error('LoadingIcon is not a SVGElement');
+      }
+
+      if (!(subscribed_ok_icon instanceof SVGElement)) {
+        throw new Error('SubscribedOkIcon is not a SVGElement');
+      }
+      if (!(subscribed_error_icon instanceof SVGElement)) {
+        throw new Error('SubscribedErrorIcon is not a SVGElement');
+      }
+
+      this.#wrapper = wrapper;
+      this.#error_message = error_message;
+      this.#input_wrapper = input_wrapper;
+      this.#input = input;
+      this.#warning_icon = warning_icon;
+      this.#ok_icon = ok_icon;
+      this.#button = button;
+      this.#loading_icon = loading_icon;
+      this.#text = text;
+      this.#subscribed_ok_icon = subscribed_ok_icon;
+      this.#subscribed_error_icon = subscribed_error_icon;
+
+      this.#input.addEventListener('focus', () => {
+        this.#text.classList.remove('w-0');
+        this.#subscribed_ok_icon.classList.remove('w-6');
+        this.#subscribed_error_icon.classList.remove('w-6');
+      });
+
+      this.#input.addEventListener('blur', this.validate.bind(this));
+      this.#button.addEventListener('click', this.subscribe.bind(this));
+    }
+
+    validate() {
+      const value = this.#input.value;
+
+      if (value === '') {
+        this.#input_wrapper.classList.remove('gap-2');
+
+        this.#warning_icon.classList.add('w-0');
+        this.#warning_icon.classList.remove('w-6');
+
+        this.#ok_icon.classList.add('w-0');
+        this.#ok_icon.classList.remove('w-6');
+
+        this.#button.classList.add('pointer-events-none');
+
+        this.#wrapper.classList.remove('hidden');
+        this.#error_message.classList.add('h-0');
+        return;
+      }
+
+      const result = z.email().safeParse(value);
+      this.#input_wrapper.classList.add('gap-2');
+
+      if (result.success) {
+        this.#warning_icon.classList.add('w-0');
+        this.#warning_icon.classList.remove('w-6');
+
+        this.#ok_icon.classList.remove('w-0');
+        this.#ok_icon.classList.add('w-6');
+
+        this.#button.classList.remove('pointer-events-none');
+      } else {
+        this.#warning_icon.classList.remove('w-0');
+        this.#warning_icon.classList.add('w-6');
+
+        this.#ok_icon.classList.add('w-0');
+        this.#ok_icon.classList.remove('w-6');
+
+        this.#button.classList.add('pointer-events-none');
+      }
+    }
+
+    subscribe() {
+      this.#button.classList.add('pointer-events-none');
+      this.#input.classList.add('pointer-events-none');
+
+      this.#loading_icon.classList.add('w-6');
+      this.#text.classList.remove('w-32');
+      this.#text.classList.add('w-0');
+
+      fetch(`${API_URL}/subscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: this.#input.value,
+        }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            this.#subscribed_ok_icon.classList.add('w-6');
+          } else {
+            this.#wrapper.classList.add('hidden');
+            this.#error_message.classList.remove('h-0');
+          }
+        })
+        .catch(() => {
+          this.#wrapper.classList.add('hidden');
+          this.#error_message.classList.remove('h-0');
+        })
+        .finally(() => {
+          this.#loading_icon.classList.remove('w-6');
+          this.#input.classList.remove('pointer-events-none');
+        });
+    }
+  }
+
+  customElements.define('civia-mailbox-registry', MailboxRegistry);
+</script>

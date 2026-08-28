@@ -1,0 +1,184 @@
+---
+import Image from '@the-civia-project/assets/og/privacy-policy.webp';
+import Strong from '../components/Strong.astro';
+import Layout from '../layouts/Layout.astro';
+
+const image_url = new URL(Image.src, Astro.site);
+
+const description =
+  'How we handle your email address, how we use it and other aspects related to our newsletter and mailing list.';
+
+const section =
+  'mt-10 border-t border-zinc-800 pt-10 [&_p]:mt-4 [&_p]:leading-relaxed [&_p]:text-zinc-300';
+const section_with_list = `${section} [&_ul]:mt-4 [&_ul]:space-y-3 [&_li]:border-l [&_li]:border-zinc-800 [&_li]:pl-4 [&_li]:leading-relaxed [&_li]:text-zinc-300`;
+---
+
+<Layout>
+  <Fragment slot="header">
+    <title>Privacy Policy &mdash; The Civia Project</title>
+
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image_url} />
+
+    <!-- X Card -->
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image_url} />
+  </Fragment>
+
+  <header>
+    <span class="block text-xs uppercase tracking-widest text-zinc-500"
+      >Privacy</span
+    >
+    <h1 class="mt-2 text-4xl font-bold tracking-tight md:text-5xl">
+      Privacy Policy
+    </h1>
+  </header>
+
+  <aside
+    class="mt-10 border-l-2 border-zinc-700 py-1 pl-6 [&_p]:mt-3 [&_p]:italic [&_p]:leading-relaxed [&_p]:text-zinc-300"
+  >
+    <span class="block text-xs uppercase tracking-widest text-zinc-500"
+      >Scope</span
+    >
+    <p>
+      This document pertains to our newsletter, how we will use your email
+      address and other aspects.
+    </p>
+  </aside>
+
+  <section class={section_with_list}>
+    <h2 class="text-2xl font-bold leading-snug text-white">tl;dr</h2>
+    <ul>
+      <li>We do not share it with anyone</li>
+      <li>We only use it to notify you</li>
+      <li>You can unsubscribe anytime</li>
+      <li>
+        We will <Strong>permanently delete</Strong> the list once we officially launch
+        the platform or when we close shop.
+      </li>
+      <li>
+        We can, on-demand, permanently delete any record we hold of your email
+        address.
+      </li>
+    </ul>
+  </section>
+
+  <section class={section}>
+    <h2 class="text-2xl font-bold leading-snug text-white">
+      1. Information we collect
+    </h2>
+    <p>
+      We collect <Strong>only your email address</Strong> when you voluntarily subscribe
+      to our mailing list.
+    </p>
+  </section>
+
+  <section class={section_with_list}>
+    <h2 class="text-2xl font-bold leading-snug text-white">
+      2. How we will use your email address
+    </h2>
+    <p>
+      Your email address will be used <Strong>exclusively</Strong> to send updates
+      related to our progress as it relates to our mission. Such as, but not limited
+      to:
+    </p>
+
+    <ul>
+      <li>Our online presence and milestones</li>
+      <li>Progress on our roadmap</li>
+      <li>Features and mentions in news publications</li>
+      <li>Other important project-related news</li>
+    </ul>
+
+    <p>
+      We <Strong>do not</Strong> share, sell, disclose or rent your email address
+      to third parties.
+    </p>
+  </section>
+
+  <section class={section}>
+    <h2 class="text-2xl font-bold leading-snug text-white">
+      3. Subscription & Unsubscription
+    </h2>
+    <p>
+      You can subscribe to our mailing list by providing your email address to
+      our sign-up form. We will send you a confirmation link to validate your
+      email address before adding you to the list. You can unsubscribe at any
+      time and your email address will be removed promptly.
+    </p>
+  </section>
+
+  <section class={section}>
+    <h2 class="text-2xl font-bold leading-snug text-white">4. Storage</h2>
+    <p>
+      Your email will be stored in a database deployed to a <a
+        class="underline underline-offset-4 hover:text-white"
+        href="https://turso.tech/">Turso</a
+      > Database in Europe until it will be removed either by unsubscribing, by
+      failing to confirm within 24 hours, or at
+      the end of our current data retention cycle.
+    </p>
+  </section>
+
+  <section class={section}>
+    <h2 class="text-2xl font-bold leading-snug text-white">5. Backups</h2>
+    <p>
+      <a class="underline underline-offset-4 hover:text-white" href="https://turso.tech/"
+        >Turso</a
+      > has <a
+        class="underline underline-offset-4 hover:text-white"
+        href="https://docs.turso.tech/features/point-in-time-recovery"
+        >PITR (Point-in-Time Recovery)</a
+      >
+    </p>
+  </section>
+
+  <section class={section}>
+    <h2 class="text-2xl font-bold leading-snug text-white">
+      6. Data Retention and Deletion
+    </h2>
+    <p>
+      We do not retain any other data, metadata except for your email address.
+    </p>
+    <p>
+      If you have unsubscribed until then, our email history will be kept (the
+      emails we have sent you via the newsletter) until they end of the project
+      &mdash; when we will release or close shop. At everything related to this
+      mailing list will be <Strong>permanently deleted</Strong>.
+    </p>
+    <p>
+      Per your request, we can also delete our mailing history with your email
+      address. Please contact us and let us know. Your request serves as an
+      electronic receipt and it will not be deleted.
+    </p>
+  </section>
+
+  <section class={section}>
+    <h2 class="text-2xl font-bold leading-snug text-white">8. API Logging</h2>
+    <p>
+      We do not retain any other data, metadata except for your email address.
+    </p>
+  </section>
+
+  <section class={section_with_list}>
+    <h2 class="text-2xl font-bold leading-snug text-white">8. Third-parties</h2>
+    <ul>
+      <li>
+        Your email address will be stored in a database deployed on a <a
+          class="underline underline-offset-4 hover:text-white"
+          href="https://turso.tech/">Turso</a
+        > Cloud Database.
+      </li>
+      <li>
+        Your email address will be sent to <a
+          class="underline underline-offset-4 hover:text-white"
+          href="https://www.brevo.com/"
+          target="_blank">Brevo</a
+        > as it is our transactional email provider.
+      </li>
+    </ul>
+  </section>
+</Layout>

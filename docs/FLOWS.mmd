@@ -1,0 +1,56 @@
+---
+config:
+    flowchart:
+        defaultRenderer: elk
+---
+flowchart TD
+    TURSO@{ shape: cylinder }
+    EMAIL@{ shape: rectangle }
+
+    SUBSCRIBE -->|Insert pending| TURSO
+    CONFIRM -->|Set validated_at| TURSO
+    UNSUBSCRIBE -->|Delete| TURSO
+    CLEANUP -->|Delete stale unvalidated| TURSO
+
+    SUBSCRIBE -->|Confirm Email| SEND_MAIL_QUEUE
+    CONFIRM -->|Thank-you Email| SEND_MAIL_QUEUE
+    UNSUBSCRIBE -->|Send Email| SEND_MAIL_QUEUE
+
+    SEND_MAIL_QUEUE --> SEND_MAIL -->|Newsletter| DB_UPDATE_QUEUE --> DB_UPDATE -->|Update| TURSO
+
+    NEWSLETTER -->|Process Newsletter| PROCESS_NEWSLETTER_QUEUE --> PROCESS_NEWSLETTER -->|Send Newsletter| SEND_MAIL_QUEUE
+
+    SEND_MAIL -->|Bulk| EMAIL
+
+    subgraph API
+      SUBSCRIBE
+      CONFIRM
+      UNSUBSCRIBE
+      NEWSLETTER
+    end
+
+    PROCESS_NEWSLETTER_QUEUE -->|Reject| PROCESS_NEWSLETTER_QUEUE_DL
+    SEND_MAIL_QUEUE -->|Reject| SEND_MAIL_QUEUE_DL
+    DB_UPDATE_QUEUE -->|Reject| DB_UPDATE_QUEUE_DL
+
+    subgraph QUEUES
+      PROCESS_NEWSLETTER_QUEUE
+      PROCESS_NEWSLETTER_QUEUE_DL
+
+      SEND_MAIL_QUEUE
+      SEND_MAIL_QUEUE_DL
+
+      DB_UPDATE_QUEUE
+      DB_UPDATE_QUEUE_DL
+
+      PROCESS_NEWSLETTER_QUEUE_DL -->|Manual| PROCESS_NEWSLETTER_QUEUE
+      SEND_MAIL_QUEUE_DL -->|Manual| SEND_MAIL_QUEUE
+      DB_UPDATE_QUEUE_DL -->|Manual| DB_UPDATE_QUEUE
+    end
+
+    subgraph WORKERS
+      PROCESS_NEWSLETTER
+      SEND_MAIL
+      DB_UPDATE
+      CLEANUP
+    end

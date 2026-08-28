@@ -1,0 +1,31 @@
+---
+import Image from '@the-civia-project/assets/og/social-paper.webp';
+import Layout from '../layouts/Layout.astro';
+
+const image_url = new URL(Image.src, Astro.site);
+
+const description = 'What we are all about';
+---
+
+<Layout>
+  <Fragment slot="header">
+    <title>Social Paper &mdash; The Civia Project</title>
+
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image_url} />
+
+    <!-- X Card -->
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image_url} />
+  </Fragment>
+  <div>
+    <h1 class="text-5xl">Social Paper</h1>
+
+    <hr class="opacity-25 my-10" />
+
+    <p>TODO</p>
+  </div>
+</Layout>

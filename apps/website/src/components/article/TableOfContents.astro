@@ -1,0 +1,36 @@
+---
+import Label from './Label.astro';
+
+export interface TocItem {
+  id: string;
+  part: string;
+  title: string;
+}
+
+interface Props {
+  items: TocItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav
+  aria-label="Table of contents"
+  class="mt-10 rounded-sm border border-zinc-800 bg-zinc-950 p-6"
+>
+  <Label>Contents</Label>
+  <ol class="mt-4 space-y-2 text-sm">
+    {
+      items.map(({ id, part, title }) => (
+        <li>
+          <a
+            href={`#${id}`}
+            class="text-zinc-400 transition-colors hover:text-white"
+          >
+            <span class="text-zinc-600">{part}</span> &mdash; {title}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>

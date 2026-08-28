@@ -1,0 +1,14 @@
+---
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<h3 class="scroll-mt-8 mt-8 text-lg font-semibold text-zinc-100" id={id}>
+  <a href={`#${id}`} class="group text-zinc-100 no-underline hover:text-zinc-200">
+    <span class="mr-1 text-zinc-600 group-hover:text-zinc-400">&sect;</span><slot
+    />
+  </a>
+</h3>

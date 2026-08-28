@@ -1,0 +1,22 @@
+meta {
+  name: Confirm
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{URL}}/confirm
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "code": "validation-code-from-email"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

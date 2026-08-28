@@ -1,0 +1,81 @@
+---
+import Label from './article/Label.astro';
+import Link from './Link.astro';
+import UsersIcon from '@the-civia-project/assets/icons/users-thress.svg';
+import WrenchIcon from '@the-civia-project/assets/icons/wrench.svg';
+import RocketIcon from '@the-civia-project/assets/icons/rocket-launch.svg';
+import DiscordIcon from '@the-civia-project/assets/social/discord.svg';
+import MatrixIcon from '@the-civia-project/assets/social/matrix.svg';
+
+interface Props {
+  current?: string;
+  class?: string;
+}
+
+const { current = Astro.url.pathname, class: className } = Astro.props;
+
+const normalize = (path: string) => path.replace(/\/$/, '') || '/';
+const current_path = normalize(current);
+
+const links = [
+  { path: '/social-paper', label: 'Social Paper', Icon: UsersIcon },
+  { path: '/technical-paper', label: 'Technical Paper', Icon: WrenchIcon },
+  {
+    path: 'https://demo.theciviaproject.org',
+    label: 'Check our demo',
+    Icon: RocketIcon,
+  },
+  {
+    path: 'https://discord.gg/pNTmzvd7pe',
+    label: 'Discord community',
+    Icon: DiscordIcon,
+  },
+  {
+    path: 'https://matrix.to/#/#the-civia-project:matrix.org',
+    label: 'Matrix community',
+    Icon: MatrixIcon,
+  },
+];
+
+const visible_links = links.filter(
+  ({ path }) => normalize(path) !== current_path,
+);
+---
+
+{
+  visible_links.length > 0 && (
+    <nav
+      aria-label="Explore"
+      class:list={[
+        'rounded-sm border border-zinc-800 bg-zinc-950 p-6',
+        className,
+      ]}
+    >
+      <Label>Explore</Label>
+      <div
+        class:list={[
+          'mt-4 grid gap-4',
+          visible_links.length > 1 ? 'grid-cols-2' : 'grid-cols-1',
+        ]}
+      >
+        {visible_links.map(({ path, label, Icon }, index) => (
+          <Link
+            path={path}
+            variant="secondary"
+            class={
+              visible_links.length === 5 &&
+              path === 'https://demo.theciviaproject.org'
+                ? 'col-span-2 w-full'
+                : visible_links.length === 3 && index === 0
+                  ? 'col-span-2 w-full'
+                  : ''
+            }
+          >
+            <Icon slot="icon" class="fill-current" />
+            {label}
+          </Link>
+        ))}
+      </div>
+    </nav>
+  )
+}

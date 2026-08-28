@@ -1,0 +1,28 @@
+{
+  "name": "@the-civia-project/amqp",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.9",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@the-civia-project/core": "link:../core",
+    "@the-civia-project/logger": "link:../../packages/logger",
+    "@the-civia-project/prettier-config": "link:../prettier-config",
+    "@types/amqplib": "^0.10.8",
+    "@types/node": "^20.19.33",
+    "prettier": "^3.8.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

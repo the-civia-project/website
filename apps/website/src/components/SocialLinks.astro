@@ -1,0 +1,91 @@
+---
+import BlueSky from '@the-civia-project/assets/social/bluesky.svg';
+import Discord from '@the-civia-project/assets/social/discord.svg';
+import Facebook from '@the-civia-project/assets/social/facebook.svg';
+import GitHub from '@the-civia-project/assets/social/github.svg';
+import Instagram from '@the-civia-project/assets/social/instagram.svg';
+import Mastodon from '@the-civia-project/assets/social/mastodon.svg';
+import Matrix from '@the-civia-project/assets/social/matrix.svg';
+import Proton from '@the-civia-project/assets/social/proton.svg';
+import Threads from '@the-civia-project/assets/social/threads.svg';
+import TikTok from '@the-civia-project/assets/social/tiktok.svg';
+import X from '@the-civia-project/assets/social/x.svg';
+import Youtube from '@the-civia-project/assets/social/youtube.svg';
+
+const ICON_SIZE = 16;
+
+const links = [
+  {
+    href: 'https://discord.gg/pNTmzvd7pe',
+    title: 'The Civia Project Discord Community',
+    Icon: Discord,
+  },
+  {
+    href: 'https://matrix.to/#/#the-civia-project:matrix.org',
+    title: 'The Civia Project Matrix Community',
+    Icon: Matrix,
+  },
+  {
+    href: 'https://www.youtube.com/@theciviaproject',
+    title: 'The Civia Project on Youtube',
+    Icon: Youtube,
+  },
+  {
+    href: 'https://x.com/theciviaproject',
+    title: 'The Civia Project on X',
+    Icon: X,
+  },
+  {
+    href: 'https://bsky.app/profile/theciviaproject.org',
+    title: 'The Civia Project on Bluesky',
+    Icon: BlueSky,
+  },
+  {
+    href: 'https://www.instagram.com/theciviaproject',
+    title: 'The Civia Project on Instagram',
+    Icon: Instagram,
+  },
+  {
+    href: 'https://www.facebook.com/theciviaproject',
+    title: 'The Civia Project on Facebook',
+    Icon: Facebook,
+  },
+  {
+    href: 'https://www.threads.com/@theciviaproject',
+    title: 'The Civia Project on Threads',
+    Icon: Threads,
+  },
+  {
+    href: 'https://mastodon.social/@theciviaproject',
+    title: 'The Civia Project on Mastodon',
+    Icon: Mastodon,
+  },
+  {
+    href: 'https://www.tiktok.com/@theciviaproject',
+    title: 'The Civia Project on TikTok',
+    Icon: TikTok,
+  },
+  {
+    href: 'https://github.com/the-civia-project',
+    title: 'The Civia Project on Github',
+    Icon: GitHub,
+  },
+  {
+    href: 'mailto:theciviaproject@protonmail.com',
+    title: 'theciviaproject@protonmail.com',
+    Icon: Proton,
+  },
+];
+---
+
+<div
+  class="flex flex-wrap gap-4 fill-white justify-center [&_a:visited]:fill-white"
+>
+  {
+    links.map(({ href, title, Icon }) => (
+      <a href={href} target="_blank" title={title}>
+        <Icon width={ICON_SIZE} height={ICON_SIZE} />
+      </a>
+    ))
+  }
+</div>

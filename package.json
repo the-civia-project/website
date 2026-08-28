@@ -1,23 +1,16 @@
 {
-    "name": "civia-presentation",
-    "type": "module",
-    "private": true,
-    "version": "0.0.1",
-    "scripts": {
-        "dev": "astro dev",
-        "build": "astro build",
-        "preview": "astro preview",
-        "astro": "astro"
-    },
-    "dependencies": {
-        "@astrojs/sitemap": "^3.6.0",
-        "@astrojs/solid-js": "^5.1.3",
-        "@fontsource-variable/montserrat": "^5.2.8",
-        "@fontsource/gabriela": "^5.2.8",
-        "@tailwindcss/vite": "^4.1.17",
-        "astro": "^5.16.3",
-        "prettier": "^3.7.3",
-        "solid-js": "^1.9.6",
-        "tailwindcss": "^4.1.17"
-    }
+  "name": "@the-civia-project/main",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write .",
+    "dev": "turso dev --db-file=local.db",
+    "typecheck": "pnpm -r --parallel --if-present run typecheck",
+    "docker:build:newsletter": "docker buildx build --platform linux/amd64 -t aifrim/civia-newsletter:latest .",
+    "docker:push:newsletter": "docker push aifrim/civia-newsletter:latest"
+  },
+  "devDependencies": {
+    "@the-civia-project/prettier-config": "link:packages/prettier-config",
+    "@types/node": "^20.19.43",
+    "prettier": "^3.8.4"
+  }
 }
