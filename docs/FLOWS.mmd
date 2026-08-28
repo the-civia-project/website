@@ -7,10 +7,13 @@ flowchart TD
     TURSO@{ shape: cylinder }
     EMAIL@{ shape: rectangle }
 
-    SUBSCRIBE -->|Insert| TURSO
+    SUBSCRIBE -->|Insert pending| TURSO
+    CONFIRM -->|Set validated_at| TURSO
     UNSUBSCRIBE -->|Delete| TURSO
+    CLEANUP -->|Delete stale unvalidated| TURSO
 
-    SUBSCRIBE -->|Send Email| SEND_MAIL_QUEUE
+    SUBSCRIBE -->|Confirm Email| SEND_MAIL_QUEUE
+    CONFIRM -->|Thank-you Email| SEND_MAIL_QUEUE
     UNSUBSCRIBE -->|Send Email| SEND_MAIL_QUEUE
 
     SEND_MAIL_QUEUE --> SEND_MAIL -->|Newsletter| DB_UPDATE_QUEUE --> DB_UPDATE -->|Update| TURSO
@@ -21,6 +24,7 @@ flowchart TD
 
     subgraph API
       SUBSCRIBE
+      CONFIRM
       UNSUBSCRIBE
       NEWSLETTER
     end
@@ -48,4 +52,5 @@ flowchart TD
       PROCESS_NEWSLETTER
       SEND_MAIL
       DB_UPDATE
+      CLEANUP
     end

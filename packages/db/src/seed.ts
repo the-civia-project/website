@@ -18,6 +18,7 @@ async function main() {
       columns: {
         uuid: f.uuid(),
         email: f.email(),
+        validation_code_hash: f.string(),
         created_at: f.datetime(),
       },
       count: 5,

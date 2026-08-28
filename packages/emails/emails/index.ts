@@ -1,19 +1,26 @@
-import * as React from 'react';
+import { getEmailAssets } from '../lib/assets';
 import Email_0001_ProjectLaunch from './0001_ProjectLaunch';
+import ConfirmSubscription from './ConfirmSubscription';
 import Subscribed from './Subscribed';
-import { EmailProps } from './types';
+import { ConfirmSubscriptionProps, EmailComponent, EmailProps } from './types';
 import Unsubscribed from './Unsubscribed';
 
-export type Email = React.FC<EmailProps> & {
-  subject: string;
-};
+export type { EmailAssets } from '../lib/asset-types';
+export { getEmailAssets } from '../lib/assets';
+export { civiaTheme } from '../lib/theme';
+
+export type Email = EmailComponent<EmailProps>;
+
+export type ConfirmEmail = EmailComponent<ConfirmSubscriptionProps>;
 
 const Emails: Record<string, Email> = {
   '0001_ProjectLaunch': Email_0001_ProjectLaunch,
 };
 
-export default { Emails, Subscribed, Unsubscribed } as {
-  Emails: Record<string, Email>;
-  Subscribed: Email;
-  Unsubscribed: Email;
+export default {
+  Emails,
+  ConfirmSubscription,
+  Subscribed,
+  Unsubscribed,
+  getEmailAssets,
 };

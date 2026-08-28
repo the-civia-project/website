@@ -7,6 +7,9 @@ secrets/
 # build output
 dist/
 
+# generated email PNGs (from @the-civia-project/assets rasterize:email)
+apps/website/public/email/
+
 # generated types
 .astro/
 

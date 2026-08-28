@@ -8,8 +8,9 @@
 - `apps/newsletter/` - The Civia Project newsletter, built with [Hono](https://hono.dev/), [Drizzle ORM](https://orm.drizzle.team/), [amqplib](https://amqp-node.github.io/amqplib/), [React Email](https://react.email/), [LavinMQ](https://lavinmq.com/) and [Turso](https://turso.tech/).
 - `api-docs` - [Bruno](https://www.usebruno.com/) API Collection
 - `packages/amqp` - specific AMQP primitives and queue orchestration using [amqplib](https://amqp-node.github.io/amqplib/).
+- `packages/assets` - shared brand/media assets (website + rasterized email PNGs).
 - `packages/db` - database connection and queries, mutations, procedures and other primitives using [DrizzleORM](https://orm.drizzle.team/).
-- `packages/email` - emails (subscribe, unsubscribe, newsletters), using [React Email](https://react.email/).
+- `packages/emails` - emails (subscribe, unsubscribe, newsletters), using [React Email](https://react.email/).
 - `packages/logger` - configured logger, using [Pino](https://pino.dev/).`pino-pretty` for local development and `pink-floki` for production.
 - `packages/prettier-config` - [Prettier](https://prettier.io/) configuration for the project.
 - `packages/core` - general utilities and types used across the project.
@@ -32,6 +33,11 @@ AMQP_URL="amqp://localhost:5672"
 API_URL="http://localhost:3000"
 # Used for the authorization layer on the `/work/*` endpoints
 API_KEY="some-api-key"
+
+# Website origin for email image URLs (and future absolute links).
+# Production: https://theciviaproject.org
+# Note: When testing emails, make sure to put production / preview because that is where the images live
+WEBSITE_URL="http://localhost:4321"
 
 # LibSQL `turso dev` Server URL
 TURSO_DATABASE_URL="http://127.0.0.1:8080"

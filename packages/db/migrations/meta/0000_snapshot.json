@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "3bace08b-7e38-46a9-a76c-8c7fe16fb518",
+  "id": "e71f6949-ae9c-44ac-bbe2-f4ccb71fef49",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "email_addresses": {
@@ -28,6 +28,20 @@
           "notNull": true,
           "autoincrement": false
         },
+        "validation_code_hash": {
+          "name": "validation_code_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "validated_at": {
+          "name": "validated_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "created_at": {
           "name": "created_at",
           "type": "text",
@@ -40,12 +54,77 @@
       "indexes": {
         "email_addresses_uuid_unique": {
           "name": "email_addresses_uuid_unique",
-          "columns": ["uuid"],
+          "columns": [
+            "uuid"
+          ],
           "isUnique": true
         },
         "email_addresses_email_unique": {
           "name": "email_addresses_email_unique",
-          "columns": ["email"],
+          "columns": [
+            "email"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "newsletter_processed_emails": {
+      "name": "newsletter_processed_emails",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "uuid": {
+          "name": "uuid",
+          "type": "text(36)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "newsletter_uuid": {
+          "name": "newsletter_uuid",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "request_id": {
+          "name": "request_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "processed_at": {
+          "name": "processed_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(current_timestamp)"
+        }
+      },
+      "indexes": {
+        "newsletter_processed_emails_uuid_unique": {
+          "name": "newsletter_processed_emails_uuid_unique",
+          "columns": [
+            "uuid"
+          ],
           "isUnique": true
         }
       },
@@ -133,17 +212,23 @@
       "indexes": {
         "newsletters_uuid_unique": {
           "name": "newsletters_uuid_unique",
-          "columns": ["uuid"],
+          "columns": [
+            "uuid"
+          ],
           "isUnique": true
         },
         "newsletters_name_unique": {
           "name": "newsletters_name_unique",
-          "columns": ["name"],
+          "columns": [
+            "name"
+          ],
           "isUnique": true
         },
         "newsletters_subject_unique": {
           "name": "newsletters_subject_unique",
-          "columns": ["subject"],
+          "columns": [
+            "subject"
+          ],
           "isUnique": true
         }
       },

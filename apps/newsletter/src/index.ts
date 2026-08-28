@@ -13,6 +13,7 @@ if (process.env.NODE_ENV !== 'production') {
 const EnvSchema = z.object({
   API_KEY: z.string().min(1),
   AMQP_URL: z.url(),
+  WEBSITE_URL: z.url(),
   // TURSO (used by the db package)
   TURSO_DATABASE_URL: z.url(),
   // Turso Database Auth Token is optional in development, required in production
@@ -30,6 +31,11 @@ const loader = './src/worker-loader.mjs';
 
 const api = new GracefulWorkerParent(loader, {
   workerData: { script_path: './api.ts' },
+  env: process.env,
+});
+
+const cleanup = new GracefulWorkerParent(loader, {
+  workerData: { script_path: './cron-cleanup-unvalidated.ts' },
   env: process.env,
 });
 
@@ -53,6 +59,7 @@ process.on('SIGTERM', async () => {
 
   await Promise.all([
     api.gracefulShutdown(),
+    cleanup.gracefulShutdown(),
     ...amqp_workers.map((worker) => worker.gracefulShutdown()),
   ]);
 
@@ -66,6 +73,7 @@ process.on('SIGINT', async () => {
 
   await Promise.all([
     api.gracefulShutdown(),
+    cleanup.gracefulShutdown(),
     ...amqp_workers.map((worker) => worker.gracefulShutdown()),
   ]);
 

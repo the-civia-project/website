@@ -6,9 +6,25 @@ import main_logger from '@the-civia-project/logger';
 const logger = main_logger().child({ ctx: 'EMAILS' });
 
 const EMAIL_ID_TAG = '{{__EMAIL_ADDRESS_ID__}}';
+const VALIDATION_CODE_TAG = '{{__VALIDATION_CODE__}}';
 
 export function renderEmail(email: string, email_address_id: string) {
   const html = email.replaceAll(EMAIL_ID_TAG, email_address_id);
+
+  return {
+    html,
+    text: toPlainText(html),
+  };
+}
+
+export function renderConfirmEmail(
+  email: string,
+  email_address_id: string,
+  validation_code: string,
+) {
+  const html = email
+    .replaceAll(EMAIL_ID_TAG, email_address_id)
+    .replaceAll(VALIDATION_CODE_TAG, validation_code);
 
   return {
     html,
@@ -30,10 +46,65 @@ export type PreparedEmail = {
   render: (emailId: string) => Result<RenderedEmail, Error>;
 };
 
+export type PreparedConfirmEmail = {
+  html: string | null;
+
+  name: string;
+  subject: string;
+  prerender: () => Promise<void>;
+  render: (
+    emailId: string,
+    validationCode: string,
+  ) => Result<RenderedEmail, Error>;
+};
+
 async function prepareEmails() {
+  const emails = EmailList.default ?? EmailList;
+  const assets = emails.getEmailAssets();
+
+  const confirm_subscription: PreparedConfirmEmail = {
+    html: null,
+    subject: emails.ConfirmSubscription.subject,
+    name: 'ConfirmSubscription',
+    async prerender() {
+      if (this.html) {
+        logger.trace(
+          { email: this.name },
+          'Email is already prerendered, skipping prerendering',
+        );
+        return;
+      }
+
+      logger.trace({ email: this.name }, 'Prerendering email');
+
+      this.html = await render(
+        emails.ConfirmSubscription({
+          emailId: EMAIL_ID_TAG,
+          validationCode: VALIDATION_CODE_TAG,
+          assets,
+        }),
+      );
+    },
+    render(emailId: string, validationCode: string) {
+      if (!this.html) {
+        return {
+          success: false,
+          error: new Error(
+            `Email ${this.name} needs to be prerendered. Call the prerender method`,
+          ),
+        };
+      }
+
+      return {
+        success: true,
+        value: renderConfirmEmail(this.html, emailId, validationCode),
+      };
+    },
+  };
+
   const subscribed: PreparedEmail = {
     html: null,
-    subject: EmailList.default.Subscribed.subject,
+    subject: emails.Subscribed.subject,
     name: 'Subscribed',
     async prerender() {
       if (this.html) {
@@ -47,7 +118,7 @@ async function prepareEmails() {
       logger.trace({ email: this.name }, 'Prerendering email');
 
       this.html = await render(
-        await EmailList.default.Subscribed({ emailId: EMAIL_ID_TAG }),
+        emails.Subscribed({ emailId: EMAIL_ID_TAG, assets }),
       );
     },
     render(emailId: string) {
@@ -69,7 +140,7 @@ async function prepareEmails() {
 
   const unsubscribed: PreparedEmail = {
     html: null,
-    subject: EmailList.default.Unsubscribed.subject,
+    subject: emails.Unsubscribed.subject,
     name: 'Unsubscribed',
     prerender: async function () {
       if (this.html) {
@@ -84,7 +155,7 @@ async function prepareEmails() {
       logger.trace({ email: this.name }, 'Prerendering email');
 
       this.html = await render(
-        await EmailList.default.Unsubscribed({ emailId: EMAIL_ID_TAG }),
+        emails.Unsubscribed({ emailId: EMAIL_ID_TAG, assets }),
       );
     },
     render: function (emailId: string) {
@@ -105,7 +176,7 @@ async function prepareEmails() {
   };
 
   const newsletters: PreparedEmail[] = await Promise.all(
-    Object.entries(EmailList.default.Emails).map(
+    Object.entries(emails.Emails).map(
       async ([name, email]: [string, Email]) => {
         if (!email.subject) {
           // Fail early if the email does not have a subject, as it's required to send the email
@@ -128,7 +199,9 @@ async function prepareEmails() {
 
             logger.trace({ email: this.name }, 'Prerendering email');
 
-            this.html = await render(await email({ emailId: EMAIL_ID_TAG }));
+            this.html = await render(
+              email({ emailId: EMAIL_ID_TAG, assets }),
+            );
           },
           render: function (emailId: string) {
             if (!this.html) {
@@ -153,6 +226,7 @@ async function prepareEmails() {
   logger.trace(
     {
       emails: [
+        confirm_subscription.name,
         subscribed.name,
         unsubscribed.name,
         ...newsletters.map((n) => n.name),
@@ -161,7 +235,7 @@ async function prepareEmails() {
     'Prepared all emails',
   );
 
-  return { subscribed, unsubscribed, newsletters };
+  return { confirm_subscription, subscribed, unsubscribed, newsletters };
 }
 
 export default await prepareEmails();

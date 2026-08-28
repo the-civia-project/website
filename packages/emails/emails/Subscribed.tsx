@@ -1,16 +1,24 @@
 import * as React from 'react';
 import { BaseEmail } from '../components/BaseEmail';
-import { Hr } from '../components/Hr';
-import { Link } from '../components/Link';
+import { CommunityButtons } from '../components/CommunityButtons';
+import { Footer } from '../components/Footer';
 import { Signature } from '../components/Signature';
 import { Text } from '../components/Text';
 import { U } from '../components/U';
 import { WasntYou } from '../components/WasntYou';
+import { getEmailAssets } from '../lib/assets';
 import { EmailProps } from './types';
+import { Hr } from '../components/Hr';
 
-export const Subscribed = ({ emailId }: EmailProps): React.ReactElement => {
+export const Subscribed = ({
+  emailId,
+  assets,
+}: EmailProps): React.ReactElement => {
   return (
-    <BaseEmail preview="Thank you for joining The Civia Project Newsletter!">
+    <BaseEmail
+      preview="Thank you for joining The Civia Project Newsletter!"
+      assets={assets}
+    >
       <Text>
         <strong>
           <U>Thank you!</U>
@@ -25,47 +33,10 @@ export const Subscribed = ({ emailId }: EmailProps): React.ReactElement => {
 
       <Text>
         Meanwhile, if you have any questions, suggestions, or just want to say
-        hi, feel you can connect with us on our{' '}
-        <Link href="https://discord.com/invite/pNTmzvd7pe">
-          discord community
-        </Link>
-        .
+        hi, feel free to connect with us on Discord or Matrix.
       </Text>
 
-      <Text>
-        Or, if you use any social media platforms, you can follow us on:
-      </Text>
-
-      <ul className="text-xs list-disc leading-6">
-        <li>
-          <Link href="https://www.youtube.com/@theciviaproject">Youtube</Link>
-        </li>
-        <li>
-          <Link href="https://x.com/theciviaproject">X (Twitter)</Link>
-        </li>
-        <li>
-          <Link href="https://bsky.app/profile/theciviaproject.org">
-            BlueSky
-          </Link>
-        </li>
-        <li>
-          <Link href="https://www.instagram.com/theciviaproject">
-            Instagram
-          </Link>
-        </li>
-        <li>
-          <Link href="https://www.facebook.com/theciviaproject">Facebook</Link>
-        </li>
-        <li>
-          <Link href="https://www.threads.com/@theciviaproject">Threads</Link>
-        </li>
-        <li>
-          <Link href="https://mastodon.social/@theciviaproject">Mastodon</Link>
-        </li>
-        <li>
-          <Link href="https://www.tiktok.com/@theciviaproject">TikTok</Link>
-        </li>
-      </ul>
+      <CommunityButtons discordLabel="Join Discord" matrixLabel="Join Matrix" />
 
       <Signature />
 
@@ -73,19 +44,14 @@ export const Subscribed = ({ emailId }: EmailProps): React.ReactElement => {
 
       <WasntYou emailId={emailId} subscribed={true} />
 
-      <Hr />
-
-      <Text>
-        <span className="text-xs">
-          <Link href="https://theciviaproject.org/privacy">Privacy Policy</Link>
-        </span>
-      </Text>
+      <Footer social={assets.social} />
     </BaseEmail>
   );
 };
 
 Subscribed.PreviewProps = {
   emailId: 'test',
+  assets: getEmailAssets(),
 } satisfies EmailProps;
 
 Subscribed.subject = 'Subscribed to The Civia Project Newsletter';

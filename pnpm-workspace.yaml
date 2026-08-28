@@ -18,5 +18,6 @@ overrides:
   '@the-civia-project/db': link:./packages/db
   '@the-civia-project/core': link:./packages/core
   '@the-civia-project/emails': link:./packages/emails
-  'esbuild': 'npm:esbuild@0.25.10'
+  '@the-civia-project/assets': link:./packages/assets
+  'esbuild': 'npm:esbuild@0.28.1'
   'zod': '^4.4.3'

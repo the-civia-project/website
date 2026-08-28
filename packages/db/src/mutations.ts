@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { and, eq, isNull, lt, sql } from 'drizzle-orm';
 import { db, type TransactionOrDatabase } from './drizzle.ts';
 import {
   email_addresses,
@@ -13,11 +13,12 @@ export type ProcessedNewsletterEmail = {
 
 export const subscribeEmailAddress = async (
   email: string,
+  validation_code_hash: string,
   tx_or_db: TransactionOrDatabase = db,
 ) => {
   const inserted = await tx_or_db
     .insert(email_addresses)
-    .values({ email })
+    .values({ email, validation_code_hash })
     //
     // SECURITY: INFORMATION DISCLOSURE MITIGATION
     //
@@ -26,7 +27,10 @@ export const subscribeEmailAddress = async (
     // is already subscribed or not
     //
     .onConflictDoNothing()
-    .returning({ inserted_uuid: email_addresses.uuid })
+    .returning({
+      inserted_uuid: email_addresses.uuid,
+      created_at: email_addresses.created_at,
+    })
     .then((r) => r[0]);
 
   if (inserted) {
@@ -34,7 +38,10 @@ export const subscribeEmailAddress = async (
   }
 
   const existing = await tx_or_db
-    .select({ inserted_uuid: email_addresses.uuid })
+    .select({
+      inserted_uuid: email_addresses.uuid,
+      created_at: email_addresses.created_at,
+    })
     .from(email_addresses)
     .where(eq(email_addresses.email, email))
     .limit(1)
@@ -45,6 +52,43 @@ export const subscribeEmailAddress = async (
   }
 
   return existing;
+};
+
+export const confirmEmailAddressByCodeHash = async (
+  validation_code_hash: string,
+  tx_or_db: TransactionOrDatabase = db,
+) => {
+  return tx_or_db
+    .update(email_addresses)
+    .set({
+      validated_at: sql`(current_timestamp)`,
+    })
+    .where(
+      and(
+        eq(email_addresses.validation_code_hash, validation_code_hash),
+        isNull(email_addresses.validated_at),
+      ),
+    )
+    .returning({
+      uuid: email_addresses.uuid,
+      email: email_addresses.email,
+    })
+    .then((r) => r[0]);
+};
+
+export const deleteStaleUnvalidatedEmailAddresses = (
+  tx_or_db: TransactionOrDatabase = db,
+) => {
+  return tx_or_db
+    .delete(email_addresses)
+    .where(
+      and(
+        isNull(email_addresses.validated_at),
+        lt(email_addresses.created_at, sql`datetime('now', '-24 hours')`),
+      ),
+    )
+    .returning({ id: email_addresses.id })
+    .then((deleted) => deleted.length);
 };
 
 export const unSubscribeEmailAddress = async (uuid: string) => {

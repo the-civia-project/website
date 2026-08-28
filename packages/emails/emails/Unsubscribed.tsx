@@ -1,16 +1,23 @@
 import * as React from 'react';
 import { BaseEmail } from '../components/BaseEmail';
-import { Hr } from '../components/Hr';
-import { Link } from '../components/Link';
+import { Footer } from '../components/Footer';
 import { Signature } from '../components/Signature';
 import { Text } from '../components/Text';
 import { U } from '../components/U';
 import { WasntYou } from '../components/WasntYou';
+import { getEmailAssets } from '../lib/assets';
 import { EmailProps } from './types';
+import { Hr } from '../components/Hr';
 
-export const Unsubscribed = ({ emailId }: EmailProps): React.ReactElement => {
+export const Unsubscribed = ({
+  emailId,
+  assets,
+}: EmailProps): React.ReactElement => {
   return (
-    <BaseEmail preview="You have unsubscribed from The Civia Project Newsletter!">
+    <BaseEmail
+      preview="You have unsubscribed from The Civia Project Newsletter!"
+      assets={assets}
+    >
       <Text>
         <strong>
           <U>Thank you!</U>
@@ -38,13 +45,7 @@ export const Unsubscribed = ({ emailId }: EmailProps): React.ReactElement => {
 
       <WasntYou emailId={emailId} subscribed={false} />
 
-      <Hr />
-
-      <Text>
-        <span className="text-xs">
-          <Link href="https://theciviaproject.org/privacy">Privacy Policy</Link>
-        </span>
-      </Text>
+      <Footer social={assets.social} />
     </BaseEmail>
   );
 };
@@ -53,6 +54,7 @@ Unsubscribed.subject = 'Unsubscribed from The Civia Project Newsletter';
 
 Unsubscribed.PreviewProps = {
   emailId: 'test',
+  assets: getEmailAssets(),
 } satisfies EmailProps;
 
 export default Unsubscribed;

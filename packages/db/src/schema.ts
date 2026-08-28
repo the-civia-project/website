@@ -8,6 +8,8 @@ export const email_addresses = sqliteTable('email_addresses', {
   id: integer('id').primaryKey(),
   uuid: uuid('uuid').unique().notNull(),
   email: text('email').notNull().unique(),
+  validation_code_hash: text('validation_code_hash').notNull(),
+  validated_at: text('validated_at'),
   created_at: text('created_at')
     .notNull()
     .default(sql`(current_timestamp)`),
