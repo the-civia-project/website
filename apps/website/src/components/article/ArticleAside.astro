@@ -4,14 +4,68 @@ import Label from './Label.astro';
 interface Props {
   label: string;
   italic?: boolean;
+  printCenterPage?: boolean;
 }
 
-const { label, italic = false } = Astro.props;
+const { label, italic = false, printCenterPage = false } = Astro.props;
 ---
 
-<aside class="mt-10 border-l-2 border-zinc-700 py-1 pl-6">
-  <Label>{label}</Label>
-  <div class:list={['mt-3 space-y-4 text-zinc-300', italic && 'italic']}>
-    <slot />
-  </div>
-</aside>
+<div
+  class:list={[
+    printCenterPage && [
+      // print — layout
+      'print:flex print:min-h-[100vh] print:flex-col',
+      'print:items-start print:justify-center',
+    ],
+  ]}
+>
+  <aside
+    class:list={[
+      // layout
+      'mt-10 py-1 pl-6',
+      printCenterPage && 'print:mt-0 print:py-0',
+      // border
+      'border-l-2 border-zinc-300 dark:border-zinc-700',
+      // print — layout
+      'print:py-2',
+      printCenterPage && 'print:max-w-prose print:pl-6',
+      // print — border and background
+      !printCenterPage && [
+        'print:border-0 print:border-l-2 print:border-l-zinc-950',
+        'dark:print:border-l-zinc-900 print:bg-transparent',
+      ],
+      printCenterPage && [
+        'print:border-0 print:border-l-4 print:border-l-zinc-950',
+        'dark:print:border-l-zinc-500 print:bg-transparent',
+      ],
+      // print — page breaks
+      !printCenterPage && 'print:break-inside-avoid',
+    ]}
+  >
+    <Label
+      class:list={[
+        printCenterPage && [
+          // print — layout
+          'print:mb-10',
+          // print — typography
+          'print:text-4xl print:font-bold print:normal-case print:tracking-tight',
+        ],
+      ]}
+    >
+      {label}
+    </Label>
+    <div
+      class:list={[
+        // layout
+        'mt-3 space-y-4',
+        printCenterPage && 'print:mt-0',
+        // typography
+        'text-zinc-700 dark:text-zinc-300',
+        italic && 'italic',
+        printCenterPage && 'print:text-base print:not-italic',
+      ]}
+    >
+      <slot />
+    </div>
+  </aside>
+</div>

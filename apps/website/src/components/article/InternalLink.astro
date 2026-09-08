@@ -1,0 +1,128 @@
+---
+type Variant = 'inline' | 'heading' | 'plain';
+
+import {
+  formatInternalLinkLabel,
+  registerPrintReference,
+} from '../../lib/print-references';
+
+interface Props {
+  href: string;
+  variant?: Variant;
+  class?: string;
+  /** Document title for breadcrumb labels, e.g. "Social Paper". */
+  paper?: string;
+  /** Part / H2 title. */
+  section?: string;
+  /** H3 title; omit when linking to a part only. */
+  heading?: string;
+}
+
+const { href, variant = 'inline', class: className, paper, section, heading } =
+  Astro.props;
+
+const has_breadcrumb = Boolean(paper || section);
+
+const ref = paper
+  ? registerPrintReference(
+      Astro.locals.printReferences,
+      href,
+      formatInternalLinkLabel(paper, section, heading),
+    )
+  : undefined;
+---
+
+<a
+  href={href}
+  class:list={[
+    // group
+    'group',
+    // layout
+    variant === 'inline' && 'inline',
+    variant === 'heading' && 'inline',
+    variant === 'plain' && 'inline',
+    // typography
+    variant === 'inline' &&
+      'text-zinc-950 underline dark:text-white print:underline',
+    variant === 'heading' && [
+      'text-zinc-950 no-underline hover:text-zinc-700 dark:text-white dark:hover:text-zinc-200 print:no-underline',
+    ],
+    variant === 'plain' && 'text-zinc-950 dark:text-white',
+    className,
+  ]}
+>
+  {
+    variant === 'heading' ? (
+      <>
+        <span
+          class:list={[
+            // layout
+            'mr-1',
+            // typography
+            'text-zinc-500 group-hover:text-zinc-700 dark:text-zinc-600 dark:group-hover:text-zinc-400',
+          ]}
+          aria-hidden="true"
+        >
+          &sect;
+        </span>
+        <slot />
+      </>
+    ) : (
+      <span
+        class:list={[
+          variant === 'inline' && [
+            // typography
+            'underline decoration-zinc-300 underline-offset-2 group-hover:decoration-zinc-950 dark:decoration-zinc-600 dark:group-hover:decoration-white',
+          ],
+        ]}
+      >
+        {
+          has_breadcrumb ? (
+            <>
+              {paper}
+              {section && (
+                <>
+                  {paper && (
+                    <>
+                      {' » '}
+                      <span aria-hidden="true">&sect;</span>{' '}
+                    </>
+                  )}
+                  {section}
+                  {heading && (
+                    <>
+                      {' » '}
+                      <span aria-hidden="true">&sect;</span> {heading}
+                    </>
+                  )}
+                </>
+              )}
+            </>
+          ) : (
+            <slot />
+          )
+        }
+      </span>
+    )
+  }
+</a>
+{
+  ref !== undefined && (
+    <sup
+      class:list={[
+        // layout
+        'hidden',
+        // print — layout
+        'print:inline',
+        // typography
+        'text-zinc-600 dark:text-zinc-400',
+        // print — typography
+        'print:text-xs print:font-normal',
+      ]}
+    >
+      <a href={`#ref-${ref}`} class="no-underline">
+        [{ref}]
+      </a>
+    </sup>
+  )
+}

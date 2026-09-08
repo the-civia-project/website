@@ -1,5 +1,30 @@
+---
+const content = await Astro.slots.render('default');
+const has_references = Astro.slots.has('references');
+const references = has_references ? await Astro.slots.render('references') : '';
+const has_back_page = Astro.slots.has('backPage');
+const back_page = has_back_page ? await Astro.slots.render('backPage') : '';
+---
+
 <article
-  class="[&_aside_p]:!mt-0 [&_section_em]:text-zinc-200 [&_section_p]:mt-4 [&_section_p]:leading-relaxed [&_section_p]:text-zinc-300 [&_section_strong]:font-semibold [&_section_strong]:text-white [&_section_ul]:mt-4 [&_section_ul]:space-y-4"
+  class:list={[
+    // screen — section content
+    '[&_aside_p]:!mt-0',
+    '[&_section_em]:text-zinc-700 dark:[&_section_em]:text-zinc-200',
+    '[&_section_p]:mt-4 [&_section_p]:leading-relaxed [&_section_p]:text-zinc-700 dark:[&_section_p]:text-zinc-300',
+    '[&_section_strong]:font-semibold [&_section_strong]:text-zinc-950 dark:[&_section_strong]:text-white',
+    '[&_section_ul]:mt-4 [&_section_ul]:space-y-4',
+    // print — typography
+    '[&_h1]:print:text-7xl [&_h1]:print:leading-tight',
+    '[&_h2]:print:text-4xl [&_h2]:print:font-bold',
+    '[&_.print-back-page_h2]:print:text-3xl [&_.print-back-page_h2]:print:tracking-tight',
+    '[&_h3]:print:text-2xl [&_h3]:print:font-semibold',
+    // print — page breaks
+    '[&_h2+p]:print:break-before-avoid-page [&_h2+p]:print:break-inside-avoid',
+    '[&_h3+p]:print:break-before-avoid-page [&_h3+p]:print:break-inside-avoid',
+  ]}
 >
-  <slot />
+  <Fragment set:html={content} />
+  {has_references && <Fragment set:html={references} />}
+  {has_back_page && <Fragment set:html={back_page} />}
 </article>

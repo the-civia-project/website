@@ -1,4 +1,5 @@
 ---
+import InternalLink from './InternalLink.astro';
 import Label from './Label.astro';
 
 interface Props {
@@ -11,16 +12,50 @@ const { id, part } = Astro.props;
 ---
 
 <h2
-  class="scroll-mt-8 mt-16 border-t border-zinc-800 pt-10 text-2xl font-bold leading-snug"
+  class:list={[
+    // layout
+    'scroll-mt-8 mt-16 pt-10',
+    // border
+    'border-t border-zinc-200 dark:border-zinc-800',
+    // typography
+    'text-2xl font-bold leading-snug text-zinc-950 dark:text-white',
+    // print — layout
+    'print:mt-0 print:pt-0',
+    // print — border
+    'print:border-0',
+    // print — page breaks
+    'print:break-inside-avoid print:break-after-avoid-page',
+  ]}
   id={id}
 >
   {
     part && (
-      <Label class="mb-2 block font-normal">{part}</Label>
+      <Label
+        class:list={[
+          // layout
+          'mb-2 block',
+          // typography
+          'font-normal',
+          // print — layout
+          'print:mb-3',
+          // print — typography
+          'print:text-xs print:font-medium print:uppercase print:tracking-widest',
+        ]}
+      >
+        {part}
+      </Label>
     )
   }
-  <a href={`#${id}`} class="group text-white no-underline hover:text-zinc-200">
-    <span class="mr-1 text-zinc-600 group-hover:text-zinc-400">&sect;</span><slot
-    />
-  </a>
+  <InternalLink
+    href={`#${id}`}
+    variant="heading"
+    class:list={[
+      // print — typography
+      'print:text-4xl print:font-bold print:leading-tight',
+      // print — descendants
+      'print:[&>span[aria-hidden]]:hidden',
+    ]}
+  >
+    <slot />
+  </InternalLink>
 </h2>

@@ -1,24 +1,157 @@
 ---
 import { format } from 'date-fns';
 import Label from './Label.astro';
+import PrintBranding from './PrintBranding.astro';
+import PrintCommunityLinks from './PrintCommunityLinks.astro';
+import PrintPdfButton from './PrintPdfButton.astro';
 
 interface Props {
   label?: string;
   title: string;
-  author: string;
+  authors: string[];
   date: Date | string;
+  draft?: boolean;
+  printCover?: boolean;
+  printDescription?: string;
 }
 
-const { label, title, author, date } = Astro.props;
+const {
+  label,
+  title,
+  authors,
+  date,
+  draft = false,
+  printCover = false,
+  printDescription,
+} = Astro.props;
+const authorLine = authors.join(', ');
 const published = format(new Date(date), 'dd/MM/yyyy');
 ---
 
-<header>
-  {label && <Label>{label}</Label>}
-  <h1 class="mt-2 text-4xl font-bold tracking-tight md:text-5xl">{title}</h1>
-  <p class="mt-4 text-sm text-zinc-300">
-    <span class="text-zinc-500">By</span> {author}
-    <span class="text-zinc-600"> · </span>
-    {published}
+<header
+  class:list={[
+    printCover && [
+      // print — layout
+      'print:flex print:min-h-[100vh] print:flex-col',
+      'print:items-start print:justify-center',
+      // print — page breaks
+      'print:break-inside-avoid print:break-after-page',
+    ],
+  ]}
+>
+  {printCover && <PrintBranding />}
+  <div
+    class:list={[
+      // layout
+      'flex items-start justify-between gap-4',
+    ]}
+  >
+    <div
+      class:list={[
+        // layout
+        'min-w-0 flex-1',
+      ]}
+    >
+      {
+        label && (
+          <Label class:list={[printCover && 'print:hidden']}>{label}</Label>
+        )
+      }
+      <h1
+        class:list={[
+          // layout
+          'mt-2',
+          printCover && 'print:mt-0',
+          // typography
+          'text-4xl font-bold tracking-tight text-zinc-950 dark:text-white md:text-5xl',
+          // print — typography
+          'print:text-7xl print:leading-tight',
+        ]}
+      >
+        {title}
+      </h1>
+    </div>
+
+    <div
+      class:list={[
+        // layout
+        'flex shrink-0 items-center gap-3',
+        // print — display
+        'print:hidden',
+      ]}
+    >
+      {
+        draft && (
+          <span
+            class:list={[
+              // display
+              'print:hidden',
+              // layout
+              'px-2.5 pt-1 pb-0.5',
+              // border and background
+              'rounded-full border border-amber-600/40 bg-amber-500/15 dark:border-amber-500/40',
+              // typography
+              'text-xs font-medium uppercase tracking-wide text-amber-900 dark:text-amber-200',
+            ]}
+          >
+            Draft
+          </span>
+        )
+      }
+      <PrintPdfButton />
+    </div>
+  </div>
+  {
+    printDescription && (
+      <p
+        class:list={[
+          // display
+          'hidden print:block',
+          // print — layout
+          'print:mt-6 print:max-w-prose',
+          // typography
+          'text-zinc-600 dark:text-zinc-400',
+          // print — typography
+          'print:text-base print:leading-relaxed',
+        ]}
+      >
+        {printDescription}
+      </p>
+    )
+  }
+  <p
+    class:list={[
+      // layout
+      'mt-4',
+      // typography
+      'text-sm text-zinc-700 dark:text-zinc-300',
+    ]}
+  >
+    <span class="text-zinc-500 dark:text-zinc-400">By</span>
+    {authorLine}
+    <span
+      class:list={[
+        // typography
+        'text-zinc-600 dark:text-zinc-500',
+        printCover && 'print:hidden',
+      ]}
+    >
+      {' '}·{' '}
+    </span>
+    <span class:list={[printCover && 'print:hidden']}>{published}</span>
   </p>
+  {
+    printCover && (
+      <div
+        class:list={[
+          // display
+          'hidden print:block',
+          // print — layout
+          'print:mt-8',
+        ]}
+      >
+        <PrintCommunityLinks />
+      </div>
+    )
+  }
 </header>

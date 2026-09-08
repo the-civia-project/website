@@ -1,0 +1,101 @@
+---
+import MoonIcon from '../assets/icons/moon.svg';
+import SunIcon from '../assets/icons/sun.svg';
+
+const labels = {
+  light: 'Light theme',
+  dark: 'Dark theme',
+} as const;
+---
+
+<button
+  type="button"
+  aria-label={labels.light}
+  data-theme-toggle
+  class:list={[
+    // layout
+    'inline-flex cursor-pointer items-center justify-center rounded-sm p-1.5',
+    // typography
+    'text-xs font-medium text-zinc-600 dark:text-zinc-400',
+    // interactive
+    'transition-colors',
+    'hover:text-zinc-950 dark:hover:text-white',
+    // print — display
+    'print:hidden',
+  ]}
+>
+  <SunIcon
+    data-theme-icon="light"
+    class:list={[
+      // layout
+      'pointer-events-none size-4 shrink-0',
+      // color
+      'fill-current',
+    ]}
+    aria-hidden="true"
+  />
+  <MoonIcon
+    data-theme-icon="dark"
+    class:list={[
+      // layout
+      'pointer-events-none size-4 shrink-0',
+      // color
+      'fill-current',
+      // display
+      'hidden',
+    ]}
+    aria-hidden="true"
+  />
+</button>
+
+<script>
+  import {
+    getNextThemePreference,
+    getStoredTheme,
+    setTheme,
+    type ThemePreference,
+  } from '../lib/theme';
+
+  const labels: Record<ThemePreference, string> = {
+    light: 'Light theme',
+    dark: 'Dark theme',
+  };
+
+  let toggleAbort: AbortController | null = null;
+
+  function syncThemeToggle(button: HTMLButtonElement) {
+    const preference = getStoredTheme();
+
+    button.setAttribute('aria-label', labels[preference]);
+    button.querySelectorAll('[data-theme-icon]').forEach((icon) => {
+      if (icon instanceof SVGElement) {
+        icon.classList.toggle('hidden', icon.dataset.themeIcon !== preference);
+      }
+    });
+  }
+
+  function bindThemeToggle(root: ParentNode = document) {
+    toggleAbort?.abort();
+    toggleAbort = new AbortController();
+    const { signal } = toggleAbort;
+
+    const button = root.querySelector('[data-theme-toggle]');
+    if (!(button instanceof HTMLButtonElement)) return;
+
+    syncThemeToggle(button);
+
+    button.addEventListener(
+      'click',
+      () => {
+        setTheme(getNextThemePreference());
+        syncThemeToggle(button);
+      },
+      { signal },
+    );
+  }
+
+  bindThemeToggle();
+  document.addEventListener('astro:page-load', () => {
+    bindThemeToggle();
+  });
+</script>

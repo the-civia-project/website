@@ -10,4 +10,9 @@ const { size = 'big' } = Astro.props;
 const size_px = size === 'big' ? 64 : 32;
 ---
 
-<LogoSVG width={size_px} height={size_px} />
+<img
+  src={LogoSVG.src}
+  alt="The Civia Project"
+  width={size_px}
+  height={size_px}
+/>

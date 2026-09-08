@@ -1,0 +1,39 @@
+---
+import H2 from './H2.astro';
+
+interface Props {
+  id: string;
+  part: string;
+  title: string;
+}
+
+const { id, part, title } = Astro.props;
+---
+
+<section
+  class:list={[
+    // print — page breaks
+    'print:break-before-page',
+  ]}
+>
+  <div
+    class:list={[
+      // print — layout
+      'print:flex print:min-h-[100vh] print:flex-col',
+      'print:items-start print:justify-center',
+      // print — page breaks
+      'print:break-inside-avoid',
+    ]}
+  >
+    <H2 id={id} part={part}>{title}</H2>
+    <slot name="lead" />
+  </div>
+  <div
+    class:list={[
+      // print — page breaks
+      'print:break-before-page',
+    ]}
+  >
+    <slot />
+  </div>
+</section>

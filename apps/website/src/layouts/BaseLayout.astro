@@ -33,11 +33,41 @@ const canonical_url = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:title" content="The Civia Project" />
     <meta name="twitter:site" content="@TheCiviaProject" />
 
+    <script is:inline>
+      (function () {
+        var key = 'theme';
+        var stored = localStorage.getItem(key);
+        var dark;
+        if (stored === 'dark') dark = true;
+        else if (stored === 'light') dark = false;
+        else dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (dark) document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      })();
+    </script>
+
     <slot name="header" />
 
     <ClientRouter />
   </head>
-  <body class="flex min-h-screen flex-col p-8 text-white bg-black md:p-8">
+  <body
+    class:list={[
+      // layout
+      'flex min-h-screen flex-col p-8 md:p-8',
+      // color
+      'bg-white text-zinc-950 dark:bg-black dark:text-white',
+      // print — layout
+      'print:min-h-0 print:block print:p-0',
+    ]}
+  >
     <slot />
+
+    <script>
+      import { initTheme } from '../lib/theme';
+
+      initTheme();
+      document.addEventListener('astro:page-load', initTheme);
+    </script>
   </body>
 </html>

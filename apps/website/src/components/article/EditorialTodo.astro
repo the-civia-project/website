@@ -1,0 +1,61 @@
+---
+import CheckCircleIcon from '../../assets/icons/check-circle.svg';
+
+// Temporary internal marker; remove when resolved.
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div
+  data-editorial-todo
+  class:list={[
+    // layout
+    'mt-4 px-4 py-3',
+    // border and background
+    'rounded border border-teal-600/40 bg-teal-500/10 dark:border-teal-500/40',
+    // typography
+    'text-teal-900 dark:text-teal-200',
+    // descendants
+    '[&_*]:!text-teal-900 dark:[&_*]:!text-teal-200',
+    // print — display
+    'print:hidden',
+  ]}
+>
+  <div
+    class:list={[
+      // layout
+      'flex items-center gap-2 leading-none',
+    ]}
+  >
+    <CheckCircleIcon
+      class:list={[
+        // layout
+        'size-5 shrink-0',
+        // color
+        'fill-current text-teal-900 dark:text-teal-200',
+      ]}
+      aria-hidden="true"
+    />
+    <span
+      class:list={[
+        // typography
+        'font-medium',
+      ]}
+    >
+      {title}
+    </span>
+  </div>
+  <div
+    class:list={[
+      // layout
+      'mt-3 space-y-3',
+      // typography
+      'text-sm',
+    ]}
+  >
+    <slot />
+  </div>
+</div>

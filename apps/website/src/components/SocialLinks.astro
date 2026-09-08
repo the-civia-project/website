@@ -79,7 +79,14 @@ const links = [
 ---
 
 <div
-  class="flex flex-wrap gap-4 fill-white justify-center [&_a:visited]:fill-white"
+  class:list={[
+    // layout
+    'flex flex-wrap gap-4 justify-center',
+    // color
+    'fill-zinc-950 dark:fill-white',
+    // descendants
+    '[&_a:visited]:fill-zinc-950 dark:[&_a:visited]:fill-white',
+  ]}
 >
   {
     links.map(({ href, title, Icon }) => (

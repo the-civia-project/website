@@ -1,13 +1,28 @@
 ---
 import Footer from '../components/Footer.astro';
 import Logo from '../components/Logo.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {
+  /** Vertically center page content on screen. */
   centered?: boolean;
+  /** Vertically center page content when printing. */
+  printCentered?: boolean;
+  /** Content column width on medium screens and up. */
+  size?: 'medium' | 'large';
+  /** Show the header logo and branding when printing. Hidden by default. */
+  printLogo?: boolean;
 }
 
-const { centered = false } = Astro.props;
+const {
+  centered = false,
+  printCentered = false,
+  size = 'medium',
+  printLogo = false,
+} = Astro.props;
+
+const size_class = size === 'medium' ? 'md:w-150' : 'md:w-175';
 ---
 
 <BaseLayout>
@@ -19,24 +34,89 @@ const { centered = false } = Astro.props;
     class:list={[
       'flex flex-1 justify-center',
       centered ? 'items-center' : 'items-start',
+      // print — layout
+      printCentered
+        ? 'print:flex print:min-h-[100vh] print:flex-col print:justify-center'
+        : 'print:block print:flex-none',
     ]}
     transition:name="content"
   >
-    <main class:list={['md:w-150 flex w-full flex-col', 'gap-8']}>
-      <a href="/" class="flex items-center gap-4">
-        <Logo />
-        <div>
-          <h1 class="text-xl md:text-3xl font-bold text-center">
-            The Civia Project
-          </h1>
-          <h2 class="text-xs opacity-50 italic">Real People. Real Talk.</h2>
-        </div>
-      </a>
-      <hr class="opacity-25" />
+    <main
+      class:list={[
+        // layout
+        'flex w-full flex-col gap-8',
+        size_class,
+        // print — layout
+        'print:w-full print:max-w-none',
+      ]}
+    >
+      <div
+        class:list={[
+          // layout
+          'flex items-center justify-between gap-4',
+          // print — display
+          !printLogo && 'print:hidden',
+          printLogo && 'print:mb-5 print:justify-start',
+        ]}
+      >
+        <a
+          href="/"
+          class:list={[
+            // layout
+            'flex min-w-0 items-center gap-4',
+          ]}
+        >
+          <Logo />
+          <div>
+            <h1
+              class:list={[
+                // typography
+                'text-center text-xl font-bold text-zinc-950 dark:text-white md:text-3xl',
+                printLogo && [
+                  // print — typography
+                  'print:m-0 print:text-left print:text-2xl print:leading-none',
+                ],
+              ]}
+            >
+              The Civia Project
+            </h1>
+            <h2
+              class:list={[
+                // typography
+                'text-xs italic text-zinc-500 opacity-50 dark:text-zinc-400',
+                printLogo && [
+                  // print — typography
+                  'print:m-0 print:text-left print:text-xs print:leading-none print:italic print:opacity-100',
+                ],
+              ]}
+            >
+              Real People. Real Talk.
+            </h2>
+          </div>
+        </a>
+
+        <ThemeToggle />
+      </div>
+
+      <hr
+        class:list={[
+          // opacity
+          'opacity-25',
+          // print — display
+          'print:hidden',
+        ]}
+      />
 
       <slot />
 
-      <div class="mt-10">
+      <div
+        class:list={[
+          // layout
+          'mt-10',
+          // print — display
+          'print:hidden',
+        ]}
+      >
         <Footer />
       </div>
     </main>

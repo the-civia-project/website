@@ -17,10 +17,10 @@ const { src, name, linkedin, description } = Astro.props;
 <div class="flex flex-col items-center gap-4">
   <TeamPicture src={src} alt={name} />
   <div class="flex items-center justify-center gap-1">
-    <span class="text-zinc-300">{name}</span>
+    <span class="text-zinc-700 dark:text-zinc-300">{name}</span>
     <a href={linkedin} target="_blank" class="opacity-70 transition-opacity hover:opacity-100">
       <Image width={16} height={16} src={LinkedIn} alt={`${name} on LinkedIn`} />
     </a>
   </div>
-  <p class="text-center text-sm leading-relaxed text-zinc-500">{description}</p>
+  <p class="text-center text-sm leading-relaxed text-zinc-600 dark:text-zinc-500">{description}</p>
 </div>

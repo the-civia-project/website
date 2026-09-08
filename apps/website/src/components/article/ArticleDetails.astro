@@ -1,0 +1,263 @@
+---
+import ArticleDetailsToc, {
+  type ArticleDetailsHeading,
+} from './ArticleDetailsToc.astro';
+import Label from './Label.astro';
+
+interface Props {
+  summary?: string;
+  summaryOpen?: string;
+  headings: ArticleDetailsHeading[];
+}
+
+const {
+  summary = 'Read full section',
+  summaryOpen = 'Hide section',
+  headings,
+} = Astro.props;
+
+const panelId = crypto.randomUUID();
+---
+
+<article-details>
+  <div
+    class:list={[
+      'article-details-root',
+      // group
+      'group',
+      // layout
+      'mt-8 overflow-hidden rounded-sm',
+      // border and background
+      'border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-black',
+      'group-data-[state=open]:border-zinc-300 dark:group-data-[state=open]:border-zinc-700',
+      // print — layout
+      'print:mt-0 print:overflow-visible',
+      // print — border and background
+      'print:border-0 print:bg-transparent',
+    ]}
+    data-state="closed"
+  >
+    <div
+      class:list={[
+        'article-details-trigger',
+        // interactive
+        'cursor-pointer transition-colors',
+        'hover:bg-zinc-100/80 dark:hover:bg-zinc-900/40',
+        'focus-visible:ring-2 focus-visible:ring-zinc-950/20 focus-visible:ring-inset focus-visible:outline-none dark:focus-visible:ring-white/20',
+        // print — display
+        'print:hidden',
+      ]}
+      role="button"
+      tabindex="0"
+      aria-expanded="false"
+      aria-controls={panelId}
+    >
+      {
+        headings.length > 0 && (
+          <div
+            class:list={[
+              // layout
+              'pointer-events-auto p-6 pb-0',
+              // open/closed state
+              'group-data-[state=open]:hidden',
+            ]}
+          >
+            <Label>In this section</Label>
+            <div
+              class:list={[
+                // layout
+                'my-4',
+                // border
+                'border-t border-zinc-200 dark:border-zinc-800',
+              ]}
+              aria-hidden="true"
+            />
+            <ArticleDetailsToc headings={headings} />
+            <div
+              class:list={[
+                // layout
+                'mt-4',
+                // border
+                'border-t border-zinc-200 dark:border-zinc-800',
+              ]}
+              aria-hidden="true"
+            />
+          </div>
+        )
+      }
+      <div
+        class:list={[
+          // layout
+          'flex items-center justify-between gap-4 p-6',
+        ]}
+      >
+        <span
+          class:list={[
+            // typography
+            'text-sm font-medium text-zinc-700 dark:text-zinc-300',
+            // open/closed state
+            'group-data-[state=open]:hidden',
+          ]}
+        >
+          {summary}
+        </span>
+        <span
+          class:list={[
+            // display
+            'hidden',
+            // typography
+            'text-sm font-medium text-zinc-700 dark:text-zinc-300',
+            // open/closed state
+            'group-data-[state=open]:inline',
+          ]}
+        >
+          {summaryOpen}
+        </span>
+        <svg
+          class:list={[
+            // layout
+            'size-4 shrink-0',
+            // color
+            'text-zinc-500 dark:text-zinc-400',
+            // transitions
+            'transition-transform duration-200',
+            // open/closed state
+            'group-data-[state=open]:rotate-180',
+          ]}
+          viewBox="0 0 16 16"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M4 6l4 4 4-4"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </div>
+    </div>
+
+    <div
+      id={panelId}
+      class:list={[
+        'article-details-panel',
+        // display
+        'hidden group-data-[state=open]:block',
+        // layout
+        'border-t border-zinc-200 px-6 pt-4 pb-6 dark:border-zinc-800',
+        '[&>h3:first-of-type]:mt-1',
+        // print — display
+        'print:block',
+        // print — layout
+        'print:px-0 print:pt-0 print:pb-0',
+        // print — border
+        'print:border-0',
+      ]}
+    >
+      <slot />
+    </div>
+  </div>
+</article-details>
+
+<script>
+  class ArticleDetails extends HTMLElement {
+    #onHashChange = () => {
+      if (this.#rescrolling) return;
+      this.#openIfHashInside();
+    };
+    #onClick = (event: Event) => {
+      if ((event.target as HTMLElement).closest('a')) return;
+      this.#toggle();
+    };
+    #onKeyDown = (event: Event) => {
+      if (!(event instanceof KeyboardEvent)) return;
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      this.#toggle();
+    };
+    #rescrolling = false;
+
+    connectedCallback() {
+      this.#openIfHashInside();
+      window.addEventListener('hashchange', this.#onHashChange);
+
+      const trigger = this.querySelector('.article-details-trigger');
+      trigger?.addEventListener('click', this.#onClick);
+      trigger?.addEventListener('keydown', this.#onKeyDown);
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('hashchange', this.#onHashChange);
+
+      const trigger = this.querySelector('.article-details-trigger');
+      trigger?.removeEventListener('click', this.#onClick);
+      trigger?.removeEventListener('keydown', this.#onKeyDown);
+    }
+
+    #getRoot() {
+      return this.querySelector('.article-details-root') as HTMLElement | null;
+    }
+
+    #getTrigger() {
+      return this.querySelector(
+        '.article-details-trigger',
+      ) as HTMLElement | null;
+    }
+
+    #isOpen() {
+      return this.#getRoot()?.dataset.state === 'open';
+    }
+
+    #setState(open: boolean) {
+      const root = this.#getRoot();
+      const trigger = this.#getTrigger();
+      if (!root) return;
+
+      root.dataset.state = open ? 'open' : 'closed';
+      trigger?.setAttribute('aria-expanded', String(open));
+    }
+
+    #toggle() {
+      this.#setState(!this.#isOpen());
+    }
+
+    #openIfHashInside() {
+      const hash = decodeURIComponent(window.location.hash.slice(1));
+      const root = this.#getRoot();
+      if (!root) return;
+
+      if (!hash) {
+        this.#setState(false);
+        return;
+      }
+
+      const target = document.getElementById(hash);
+      const shouldOpen = Boolean(target && this.contains(target));
+      const wasClosed = shouldOpen && !this.#isOpen();
+
+      this.#setState(shouldOpen);
+
+      if (shouldOpen && target && wasClosed) {
+        this.#rescrollToHash(hash, target);
+      }
+    }
+
+    #rescrollToHash(hash: string, target: HTMLElement) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this.#rescrolling = true;
+          const base = `${window.location.pathname}${window.location.search}`;
+          history.replaceState(null, '', base);
+          history.replaceState(null, '', `${base}#${hash}`);
+          target.scrollIntoView({ block: 'start' });
+          this.#rescrolling = false;
+        });
+      });
+    }
+  }
+
+  if (!customElements.get('article-details')) {
+    customElements.define('article-details', ArticleDetails);
+  }
+</script>

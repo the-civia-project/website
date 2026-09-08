@@ -1,0 +1,91 @@
+---
+import { defaultPrintBackPageCta } from '../../lib/ctas';
+import PrintCommunityLinks from './PrintCommunityLinks.astro';
+
+interface Props {
+  class?: string;
+  /** Center the CTA title, description, and links when printing. */
+  centered?: boolean;
+}
+
+const { class: className, centered = false } = Astro.props;
+
+const { title, description } = defaultPrintBackPageCta;
+---
+
+<div
+  class:list={[
+    'print-cta',
+    // display
+    'hidden',
+    // print — display
+    'print:block',
+    className,
+  ]}
+>
+  <h2
+    data-print-cta-title
+    class:list={[
+      // typography
+      'text-zinc-950 dark:text-white',
+      // print — layout
+      'print:mt-8',
+      centered && 'print:mt-10',
+      // print — typography
+      'print:text-3xl print:font-bold print:tracking-tight',
+      centered && 'print:text-center',
+    ]}
+  >
+    {title}
+  </h2>
+
+  <p
+    data-print-cta-description
+    class:list={[
+      // typography
+      'text-zinc-600 dark:text-zinc-400',
+      // print — layout
+      'print:mt-4 print:max-w-prose',
+      centered && 'print:mx-auto',
+      // print — typography
+      'print:text-base print:leading-relaxed',
+      centered && 'print:text-center',
+    ]}
+  >
+    {description}
+  </p>
+
+  <div
+    class:list={[
+      // print — layout
+      'print:mt-8',
+      centered && 'print:flex print:justify-center',
+    ]}
+  >
+    <PrintCommunityLinks />
+  </div>
+</div>
+
+<script>
+  import { printBackPageCtas } from '../../lib/ctas';
+
+  // SSR always renders defaultPrintBackPageCta for stable cached HTML.
+  // Swap to a random preset in the browser before the user prints.
+  document.querySelectorAll('.print-cta').forEach((root) => {
+    if (!(root instanceof HTMLElement)) return;
+
+    const cta =
+      printBackPageCtas[Math.floor(Math.random() * printBackPageCtas.length)]!;
+
+    const titleEl = root.querySelector('[data-print-cta-title]');
+    const descriptionEl = root.querySelector('[data-print-cta-description]');
+
+    if (titleEl) {
+      titleEl.textContent = cta.title;
+    }
+
+    if (descriptionEl) {
+      descriptionEl.textContent = cta.description;
+    }
+  });
+</script>

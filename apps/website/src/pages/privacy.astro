@@ -8,9 +8,20 @@ const image_url = new URL(Image.src, Astro.site);
 const description =
   'How we handle your email address, how we use it and other aspects related to our newsletter and mailing list.';
 
-const section =
-  'mt-10 border-t border-zinc-800 pt-10 [&_p]:mt-4 [&_p]:leading-relaxed [&_p]:text-zinc-300';
-const section_with_list = `${section} [&_ul]:mt-4 [&_ul]:space-y-3 [&_li]:border-l [&_li]:border-zinc-800 [&_li]:pl-4 [&_li]:leading-relaxed [&_li]:text-zinc-300`;
+const section = [
+  // layout
+  'mt-10 border-t border-zinc-200 pt-10 dark:border-zinc-800',
+  // descendants
+  '[&_p]:mt-4 [&_p]:leading-relaxed [&_p]:text-zinc-700 dark:[&_p]:text-zinc-300',
+].join(' ');
+const section_with_list = [
+  section,
+  // descendants
+  '[&_ul]:mt-4 [&_ul]:space-y-3',
+  '[&_li]:border-l [&_li]:border-zinc-200 [&_li]:pl-4 [&_li]:leading-relaxed [&_li]:text-zinc-700 dark:[&_li]:border-zinc-800 dark:[&_li]:text-zinc-300',
+].join(' ');
+const link_class =
+  'underline underline-offset-4 hover:text-zinc-950 dark:hover:text-white';
 ---
 
 <Layout>
@@ -29,7 +40,13 @@ const section_with_list = `${section} [&_ul]:mt-4 [&_ul]:space-y-3 [&_li]:border
   </Fragment>
 
   <header>
-    <span class="block text-xs uppercase tracking-widest text-zinc-500"
+    <span
+      class:list={[
+        // layout
+        'block',
+        // typography
+        'text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400',
+      ]}
       >Privacy</span
     >
     <h1 class="mt-2 text-4xl font-bold tracking-tight md:text-5xl">
@@ -38,9 +55,20 @@ const section_with_list = `${section} [&_ul]:mt-4 [&_ul]:space-y-3 [&_li]:border
   </header>
 
   <aside
-    class="mt-10 border-l-2 border-zinc-700 py-1 pl-6 [&_p]:mt-3 [&_p]:italic [&_p]:leading-relaxed [&_p]:text-zinc-300"
+    class:list={[
+      // layout
+      'mt-10 border-l-2 border-zinc-300 py-1 pl-6 dark:border-zinc-700',
+      // descendants
+      '[&_p]:mt-3 [&_p]:italic [&_p]:leading-relaxed [&_p]:text-zinc-700 dark:[&_p]:text-zinc-300',
+    ]}
   >
-    <span class="block text-xs uppercase tracking-widest text-zinc-500"
+    <span
+      class:list={[
+        // layout
+        'block',
+        // typography
+        'text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400',
+      ]}
       >Scope</span
     >
     <p>
@@ -50,7 +78,7 @@ const section_with_list = `${section} [&_ul]:mt-4 [&_ul]:space-y-3 [&_li]:border
   </aside>
 
   <section class={section_with_list}>
-    <h2 class="text-2xl font-bold leading-snug text-white">tl;dr</h2>
+    <h2 class="text-2xl font-bold leading-snug text-zinc-950 dark:text-white">tl;dr</h2>
     <ul>
       <li>We do not share it with anyone</li>
       <li>We only use it to notify you</li>
@@ -67,7 +95,7 @@ const section_with_list = `${section} [&_ul]:mt-4 [&_ul]:space-y-3 [&_li]:border
   </section>
 
   <section class={section}>
-    <h2 class="text-2xl font-bold leading-snug text-white">
+    <h2 class="text-2xl font-bold leading-snug text-zinc-950 dark:text-white">
       1. Information we collect
     </h2>
     <p>
@@ -77,7 +105,7 @@ const section_with_list = `${section} [&_ul]:mt-4 [&_ul]:space-y-3 [&_li]:border
   </section>
 
   <section class={section_with_list}>
-    <h2 class="text-2xl font-bold leading-snug text-white">
+    <h2 class="text-2xl font-bold leading-snug text-zinc-950 dark:text-white">
       2. How we will use your email address
     </h2>
     <p>
@@ -100,7 +128,7 @@ const section_with_list = `${section} [&_ul]:mt-4 [&_ul]:space-y-3 [&_li]:border
   </section>
 
   <section class={section}>
-    <h2 class="text-2xl font-bold leading-snug text-white">
+    <h2 class="text-2xl font-bold leading-snug text-zinc-950 dark:text-white">
       3. Subscription & Unsubscription
     </h2>
     <p>
@@ -112,10 +140,10 @@ const section_with_list = `${section} [&_ul]:mt-4 [&_ul]:space-y-3 [&_li]:border
   </section>
 
   <section class={section}>
-    <h2 class="text-2xl font-bold leading-snug text-white">4. Storage</h2>
+    <h2 class="text-2xl font-bold leading-snug text-zinc-950 dark:text-white">4. Storage</h2>
     <p>
       Your email will be stored in a database deployed to a <a
-        class="underline underline-offset-4 hover:text-white"
+        class={link_class}
         href="https://turso.tech/">Turso</a
       > Database in Europe until it will be removed either by unsubscribing, by
       failing to confirm within 24 hours, or at
@@ -124,12 +152,12 @@ const section_with_list = `${section} [&_ul]:mt-4 [&_ul]:space-y-3 [&_li]:border
   </section>
 
   <section class={section}>
-    <h2 class="text-2xl font-bold leading-snug text-white">5. Backups</h2>
+    <h2 class="text-2xl font-bold leading-snug text-zinc-950 dark:text-white">5. Backups</h2>
     <p>
-      <a class="underline underline-offset-4 hover:text-white" href="https://turso.tech/"
+      <a class={link_class} href="https://turso.tech/"
         >Turso</a
       > has <a
-        class="underline underline-offset-4 hover:text-white"
+        class={link_class}
         href="https://docs.turso.tech/features/point-in-time-recovery"
         >PITR (Point-in-Time Recovery)</a
       >
@@ -137,7 +165,7 @@ const section_with_list = `${section} [&_ul]:mt-4 [&_ul]:space-y-3 [&_li]:border
   </section>
 
   <section class={section}>
-    <h2 class="text-2xl font-bold leading-snug text-white">
+    <h2 class="text-2xl font-bold leading-snug text-zinc-950 dark:text-white">
       6. Data Retention and Deletion
     </h2>
     <p>
@@ -157,24 +185,24 @@ const section_with_list = `${section} [&_ul]:mt-4 [&_ul]:space-y-3 [&_li]:border
   </section>
 
   <section class={section}>
-    <h2 class="text-2xl font-bold leading-snug text-white">8. API Logging</h2>
+    <h2 class="text-2xl font-bold leading-snug text-zinc-950 dark:text-white">8. API Logging</h2>
     <p>
       We do not retain any other data, metadata except for your email address.
     </p>
   </section>
 
   <section class={section_with_list}>
-    <h2 class="text-2xl font-bold leading-snug text-white">8. Third-parties</h2>
+    <h2 class="text-2xl font-bold leading-snug text-zinc-950 dark:text-white">8. Third-parties</h2>
     <ul>
       <li>
         Your email address will be stored in a database deployed on a <a
-          class="underline underline-offset-4 hover:text-white"
+          class={link_class}
           href="https://turso.tech/">Turso</a
         > Cloud Database.
       </li>
       <li>
         Your email address will be sent to <a
-          class="underline underline-offset-4 hover:text-white"
+          class={link_class}
           href="https://www.brevo.com/"
           target="_blank">Brevo</a
         > as it is our transactional email provider.

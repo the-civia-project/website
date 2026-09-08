@@ -1,0 +1,35 @@
+---
+import { Image } from 'astro:assets';
+import HeroPhoto from '../../assets/Edwin_Andrade.unsplash.webp';
+import PrintBranding from './PrintBranding.astro';
+import PrintCta from './PrintCta.astro';
+
+---
+
+<div
+  class:list={[
+    'print-back-page',
+    // display
+    'hidden',
+    // print — layout
+    'print:flex print:min-h-[100vh] print:flex-col',
+    'print:items-start print:justify-center',
+    // print — page breaks
+    'print:break-before-page print:break-inside-avoid',
+  ]}
+>
+  <PrintBranding />
+
+  <Image
+    src={HeroPhoto}
+    alt="Many hands raised toward the sky"
+    class:list={[
+      // print — layout
+      'print:mt-6 print:w-full print:aspect-[16/9] print:object-cover print:object-bottom',
+      // print — border
+      'print:rounded-2xl',
+    ]}
+  />
+
+  <PrintCta />
+</div>

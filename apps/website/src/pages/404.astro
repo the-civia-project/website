@@ -26,21 +26,33 @@ const description = 'This is not the page you are looking for!';
   <header class="relative">
     <span
       aria-hidden="true"
-      class="pointer-events-none absolute -top-4 right-0 select-none text-7xl font-bold tabular-nums text-zinc-900 md:-top-8 md:text-9xl"
+      class:list={[
+        // layout
+        'pointer-events-none absolute -top-4 right-0 select-none md:-top-8',
+        // typography
+        'text-7xl font-bold tabular-nums md:text-9xl',
+        // color
+        'text-zinc-200 dark:text-zinc-900',
+      ]}
       >404</span
     >
     <Label>Error</Label>
     <h1 class="mt-2 text-4xl font-bold tracking-tight md:text-5xl">
       Page Not Found
     </h1>
-    <p class="mt-4 leading-relaxed text-zinc-300">
+    <p class="mt-4 leading-relaxed text-zinc-700 dark:text-zinc-300">
       The page you requested does not exist, may have moved, or the URL might
       be misspelled.
     </p>
   </header>
 
   <aside
-    class="border-l-2 border-zinc-700 py-1 pl-6 [&_p]:mt-3 [&_p]:italic [&_p]:leading-relaxed [&_p]:text-zinc-300"
+    class:list={[
+      // layout
+      'border-l-2 border-zinc-300 py-1 pl-6 dark:border-zinc-700',
+      // descendants
+      '[&_p]:mt-3 [&_p]:italic [&_p]:leading-relaxed [&_p]:text-zinc-700 dark:[&_p]:text-zinc-300',
+    ]}
   >
     <div class="flex items-center gap-2">
       <HandIcon class="w-5 shrink-0 animate-pulse" />

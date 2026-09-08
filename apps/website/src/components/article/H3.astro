@@ -1,4 +1,6 @@
 ---
+import InternalLink from './InternalLink.astro';
+
 interface Props {
   id: string;
 }
@@ -6,9 +8,29 @@ interface Props {
 const { id } = Astro.props;
 ---
 
-<h3 class="scroll-mt-8 mt-8 text-lg font-semibold text-zinc-100" id={id}>
-  <a href={`#${id}`} class="group text-zinc-100 no-underline hover:text-zinc-200">
-    <span class="mr-1 text-zinc-600 group-hover:text-zinc-400">&sect;</span><slot
-    />
-  </a>
+<h3
+  class:list={[
+    // layout
+    'scroll-mt-8 mt-8',
+    // typography
+    'text-lg font-semibold text-zinc-950 dark:text-zinc-100',
+    // print — typography
+    'print:text-2xl print:font-semibold',
+    // print — page breaks
+    'print:break-inside-avoid print:break-after-avoid-page',
+  ]}
+  id={id}
+>
+  <InternalLink
+    href={`#${id}`}
+    variant="heading"
+    class:list={[
+      // print — typography
+      'print:no-underline',
+      // print — descendants
+      'print:[&>span[aria-hidden]]:hidden',
+    ]}
+  >
+    <slot />
+  </InternalLink>
 </h3>

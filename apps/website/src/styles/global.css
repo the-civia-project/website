@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-display: 'Inter Variable', 'serif';
   --font-sans: 'Inter Variable', sans-serif;
@@ -7,13 +9,55 @@
   --breakpoint-xs: 25rem;
 
   --animate-wiggle: wiggle 1s ease-in-out infinite;
+
   @keyframes wiggle {
+
     0%,
     100% {
       transform: rotate(-5deg);
     }
+
     50% {
       transform: rotate(5deg);
     }
+  }
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+@media print {
+  @page {
+    margin: 2cm;
+    size: A4;
+    background: var(--color-white);
+  }
+
+  @page dark {
+    background: var(--color-black);
+  }
+
+  html.dark {
+    page: dark;
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  html {
+    background: var(--color-white);
+    color: var(--color-zinc-950);
+  }
+
+  body {
+    background: inherit;
+    color: inherit;
+  }
+
+  html,
+  body,
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }

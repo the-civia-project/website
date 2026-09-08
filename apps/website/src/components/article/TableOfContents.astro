@@ -14,23 +14,114 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<nav
-  aria-label="Table of contents"
-  class="mt-10 rounded-sm border border-zinc-800 bg-zinc-950 p-6"
+<section
+  class:list={[
+    // print — page breaks
+    'print:break-before-page',
+  ]}
 >
-  <Label>Contents</Label>
-  <ol class="mt-4 space-y-2 text-sm">
-    {
-      items.map(({ id, part, title }) => (
-        <li>
-          <a
-            href={`#${id}`}
-            class="text-zinc-400 transition-colors hover:text-white"
-          >
-            <span class="text-zinc-600">{part}</span> &mdash; {title}
-          </a>
-        </li>
-      ))
-    }
-  </ol>
-</nav>
+  <div
+    class:list={[
+      // print — layout
+      'print:flex print:min-h-[100vh] print:flex-col',
+      'print:items-start print:justify-center',
+      // print — page breaks
+      'print:break-inside-avoid',
+    ]}
+  >
+    <nav
+      aria-label="Table of contents"
+      class:list={[
+        // layout
+        'mt-10 p-6',
+        // border and background
+        'rounded-sm border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-black',
+        // print — layout
+        'print:mt-0 print:p-0',
+        // print — border and background
+        'print:border-0 print:bg-transparent',
+      ]}
+    >
+      <Label
+        class:list={[
+          // print — layout
+          'print:mb-10',
+          // print — typography
+          'print:text-2xl print:font-bold print:normal-case print:tracking-tight',
+        ]}
+      >
+        Contents
+      </Label>
+      <ol
+        class:list={[
+          // layout
+          'mt-4 space-y-2',
+          // typography
+          'text-sm',
+          // print — layout
+          'print:mt-0 print:space-y-0',
+          // print — typography
+          'print:text-base',
+        ]}
+      >
+        {
+          items.map(({ id, part, title }) => (
+            <li
+              class:list={[
+                // print — layout
+                'print:py-4',
+                // print — border
+                'print:border-b print:border-zinc-200 dark:print:border-zinc-800',
+                'print:last:border-b-0',
+              ]}
+            >
+              <a
+                href={`#${id}`}
+                class:list={[
+                  // typography
+                  'text-zinc-600 transition-colors hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white',
+                  // print — layout
+                  'print:block',
+                  // print — typography
+                  'print:text-inherit print:no-underline',
+                ]}
+              >
+                <span
+                  class:list={[
+                    // typography
+                    'text-zinc-500 dark:text-zinc-600',
+                    // print — layout
+                    'print:block',
+                    // print — typography
+                    'print:text-xs print:font-medium print:uppercase print:tracking-widest',
+                  ]}
+                >
+                  {part}
+                </span>
+                <span
+                  class:list={[
+                    // print — display
+                    'print:hidden',
+                  ]}
+                >
+                  {' '}
+                  &mdash;{' '}
+                </span>
+                <span
+                  class:list={[
+                    // print — layout
+                    'print:mt-1.5 print:block',
+                    // print — typography
+                    'print:text-base print:font-medium print:leading-snug',
+                  ]}
+                >
+                  {title}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+  </div>
+</section>

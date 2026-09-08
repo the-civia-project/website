@@ -1,0 +1,72 @@
+---
+import ArrowSquareOutIcon from '../../assets/icons/arrow-square-out.svg';
+import { registerPrintReference } from '../../lib/print-references';
+
+interface Props {
+  href: string;
+  label: string;
+  class?: string;
+}
+
+const { href, class: className, label } = Astro.props;
+
+const ref = registerPrintReference(Astro.locals.printReferences, href, label);
+---
+
+<a
+  href={href}
+  title={label}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={[
+    // group
+    'group',
+    // layout
+    'inline inline-flex items-baseline gap-1',
+    // typography
+    'text-zinc-950 underline dark:text-white print:underline',
+    className,
+  ]}
+>
+  <span
+    class:list={[
+      // typography
+      'underline decoration-zinc-300 underline-offset-2',
+      // interactive
+      'group-hover:decoration-zinc-950 dark:decoration-zinc-600 dark:group-hover:decoration-white',
+    ]}
+  >
+    {label}
+  </span>
+  <ArrowSquareOutIcon
+    class:list={[
+      // layout
+      'inline-block shrink-0 align-text-bottom',
+      // sizing
+      'size-4',
+      // color
+      'fill-current opacity-50',
+      // interactive
+      'transition-opacity group-hover:opacity-100',
+      // print — display
+      'print:hidden',
+    ]}
+    aria-hidden="true"
+  />
+</a>
+<sup
+  class:list={[
+    // layout
+    'hidden',
+    // print — layout
+    'print:inline',
+    // typography
+    'text-zinc-600 dark:text-zinc-400',
+    // print — typography
+    'print:text-xs print:font-normal',
+  ]}
+>
+  <a href={`#ref-${ref}`} class="no-underline">
+    [{ref}]
+  </a>
+</sup>

@@ -1,11 +1,11 @@
 ---
 import Label from './article/Label.astro';
-import Link from './Link.astro';
-import UsersIcon from '@the-civia-project/assets/icons/users-thress.svg';
-import WrenchIcon from '@the-civia-project/assets/icons/wrench.svg';
-import RocketIcon from '@the-civia-project/assets/icons/rocket-launch.svg';
-import DiscordIcon from '@the-civia-project/assets/social/discord.svg';
-import MatrixIcon from '@the-civia-project/assets/social/matrix.svg';
+import Button from './Button.astro';
+import UsersIcon from '../assets/icons/users-thress.svg';
+import WrenchIcon from '../assets/icons/wrench.svg';
+import RocketIcon from '../assets/icons/rocket-launch.svg';
+import DiscordIcon from '../assets/social/discord.svg';
+import MatrixIcon from '../assets/social/matrix.svg';
 
 interface Props {
   current?: string;
@@ -47,33 +47,34 @@ const visible_links = links.filter(
     <nav
       aria-label="Explore"
       class:list={[
-        'rounded-sm border border-zinc-800 bg-zinc-950 p-6',
+        // border and background
+        'rounded-sm border border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-800 dark:bg-zinc-950',
         className,
       ]}
     >
       <Label>Explore</Label>
       <div
         class:list={[
-          'mt-4 grid gap-4',
-          visible_links.length > 1 ? 'grid-cols-2' : 'grid-cols-1',
+          'mt-4 grid grid-cols-1 gap-4',
+          visible_links.length > 1 && 'sm:grid-cols-2',
         ]}
       >
         {visible_links.map(({ path, label, Icon }, index) => (
-          <Link
+          <Button
             path={path}
             variant="secondary"
             class={
               visible_links.length === 5 &&
               path === 'https://demo.theciviaproject.org'
-                ? 'col-span-2 w-full'
+                ? 'w-full sm:col-span-2'
                 : visible_links.length === 3 && index === 0
-                  ? 'col-span-2 w-full'
+                  ? 'w-full sm:col-span-2'
                   : ''
             }
           >
             <Icon slot="icon" class="fill-current" />
             {label}
-          </Link>
+          </Button>
         ))}
       </div>
     </nav>

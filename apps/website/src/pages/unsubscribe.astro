@@ -16,14 +16,19 @@ const description =
   <header>
     <Label>Newsletter</Label>
     <h1 class="mt-2 text-4xl font-bold tracking-tight md:text-5xl">Goodbye</h1>
-    <p class="mt-4 leading-relaxed text-zinc-300">
+    <p class="mt-4 leading-relaxed text-zinc-700 dark:text-zinc-300">
       You have been removed from our mailing list. We will not send you any
       further updates unless you choose to subscribe again.
     </p>
   </header>
 
   <aside
-    class="border-l-2 border-zinc-700 py-1 pl-6 [&_p]:mt-3 [&_p]:italic [&_p]:leading-relaxed [&_p]:text-zinc-300"
+    class:list={[
+      // layout
+      'border-l-2 border-zinc-300 py-1 pl-6 dark:border-zinc-700',
+      // descendants
+      '[&_p]:mt-3 [&_p]:italic [&_p]:leading-relaxed [&_p]:text-zinc-700 dark:[&_p]:text-zinc-300',
+    ]}
   >
     <div class="flex items-center gap-2">
       <HandWaving class="w-5 shrink-0 animate-wiggle" />
